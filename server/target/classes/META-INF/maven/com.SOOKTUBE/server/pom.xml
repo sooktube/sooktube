@@ -112,10 +112,10 @@
     <configuration>
         <archive>
             <manifest>
-                <mainClass>com.WRITEME.SpringBootWRITEMEApplication</mainClass>
+                <mainClass>com.SOOKTUBE.SpringBootSOOKTUBEApplication</mainClass>
                 <addClasspath>true</addClasspath>
                 <addExtensions>true</addExtensions>
-                <packageName>com.WRITME</packageName>
+                <packageName>com.SOOKTUBE</packageName>
             </manifest>
         </archive>
     </configuration>
