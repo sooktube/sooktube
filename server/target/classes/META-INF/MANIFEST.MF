@@ -55,8 +55,8 @@ spring-context-Implementation-Version: 5.1.3.RELEASE
 aspectjweaver-Implementation-Version: 1.9.2
 logback-core-Extension-Name: logback-core
 validation-api-Implementation-Version: 2.0.1.Final
-tomcat-embed-core-Extension-Name: tomcat-embed-core
 javax_persistence-api-Extension-Name: javax.persistence-api
+tomcat-embed-core-Extension-Name: tomcat-embed-core
 guava-jdk5-Implementation-Version: 17.0
 HikariCP-Extension-Name: HikariCP
 spring-boot-starter-aop-Extension-Name: spring-boot-starter-aop
@@ -109,36 +109,34 @@ Class-Path: spring-boot-starter-web-2.1.1.RELEASE.jar spring-boot-star
  ter-2.1.1.RELEASE.jar spring-boot-2.1.1.RELEASE.jar spring-boot-autoc
  onfigure-2.1.1.RELEASE.jar spring-boot-starter-logging-2.1.1.RELEASE.
  jar logback-classic-1.2.3.jar logback-core-1.2.3.jar log4j-to-slf4j-2
- .11.1.jar log4j-api-2.11.1.jar jul-to-slf4j-1.7.25.jar javax.annotati
- on-api-1.3.2.jar snakeyaml-1.23.jar spring-boot-starter-json-2.1.1.RE
- LEASE.jar jackson-datatype-jdk8-2.9.7.jar jackson-datatype-jsr310-2.9
- .7.jar jackson-module-parameter-names-2.9.7.jar spring-boot-starter-t
- omcat-2.1.1.RELEASE.jar tomcat-embed-core-9.0.13.jar tomcat-embed-el-
- 9.0.13.jar tomcat-embed-websocket-9.0.13.jar hibernate-validator-6.0.
- 13.Final.jar validation-api-2.0.1.Final.jar jboss-logging-3.3.2.Final
- .jar classmate-1.4.0.jar spring-web-5.1.3.RELEASE.jar spring-webmvc-5
- .1.3.RELEASE.jar spring-context-5.1.3.RELEASE.jar spring-expression-5
- .1.3.RELEASE.jar spring-boot-starter-security-2.1.1.RELEASE.jar sprin
- g-aop-5.1.3.RELEASE.jar spring-security-config-5.1.2.RELEASE.jar spri
- ng-security-core-5.1.2.RELEASE.jar spring-security-web-5.1.2.RELEASE.
- jar jjwt-0.9.1.jar jackson-databind-2.9.7.jar jackson-annotations-2.9
- .0.jar jackson-core-2.9.7.jar spring-boot-starter-data-jpa-2.1.1.RELE
- ASE.jar spring-boot-starter-aop-2.1.1.RELEASE.jar aspectjweaver-1.9.2
- .jar spring-boot-starter-jdbc-2.1.1.RELEASE.jar HikariCP-3.2.0.jar ja
- vax.transaction-api-1.3.jar jaxb-api-2.3.1.jar javax.activation-api-1
- .2.0.jar hibernate-core-5.3.7.Final.jar javax.persistence-api-2.2.jar
-  javassist-3.23.1-GA.jar byte-buddy-1.9.5.jar antlr-2.7.7.jar jandex-
- 2.0.5.Final.jar dom4j-2.1.1.jar hibernate-commons-annotations-5.0.4.F
- inal.jar spring-data-jpa-2.1.3.RELEASE.jar spring-data-commons-2.1.3.
- RELEASE.jar spring-orm-5.1.3.RELEASE.jar slf4j-api-1.7.25.jar spring-
- aspects-5.1.3.RELEASE.jar mysql-connector-java-8.0.13.jar mybatis-3.2
- .2.jar mybatis-spring-1.2.0.jar spring-jdbc-5.1.3.RELEASE.jar spring-
- beans-5.1.3.RELEASE.jar spring-core-5.1.3.RELEASE.jar spring-jcl-5.1.
- 3.RELEASE.jar spring-tx-5.1.3.RELEASE.jar commons-dbcp-1.4.jar common
- s-pool-1.6.jar google-api-client-1.23.0.jar google-oauth-client-1.23.
- 0.jar google-http-client-1.23.0.jar httpclient-4.5.6.jar httpcore-4.4
- .10.jar commons-codec-1.11.jar jsr305-1.3.9.jar google-http-client-ja
- ckson2-1.23.0.jar guava-jdk5-17.0.jar
+ .11.1.jar log4j-api-2.11.1.jar jul-to-slf4j-1.7.25.jar snakeyaml-1.23
+ .jar spring-boot-starter-json-2.1.1.RELEASE.jar jackson-datatype-jdk8
+ -2.9.7.jar jackson-datatype-jsr310-2.9.7.jar jackson-module-parameter
+ -names-2.9.7.jar hibernate-validator-6.0.13.Final.jar validation-api-
+ 2.0.1.Final.jar jboss-logging-3.3.2.Final.jar classmate-1.4.0.jar spr
+ ing-web-5.1.3.RELEASE.jar spring-webmvc-5.1.3.RELEASE.jar spring-cont
+ ext-5.1.3.RELEASE.jar spring-expression-5.1.3.RELEASE.jar spring-boot
+ -starter-security-2.1.1.RELEASE.jar spring-aop-5.1.3.RELEASE.jar spri
+ ng-security-config-5.1.2.RELEASE.jar spring-security-core-5.1.2.RELEA
+ SE.jar spring-security-web-5.1.2.RELEASE.jar jjwt-0.9.1.jar jackson-d
+ atabind-2.9.7.jar jackson-annotations-2.9.0.jar jackson-core-2.9.7.ja
+ r spring-boot-starter-data-jpa-2.1.1.RELEASE.jar spring-boot-starter-
+ aop-2.1.1.RELEASE.jar aspectjweaver-1.9.2.jar spring-boot-starter-jdb
+ c-2.1.1.RELEASE.jar HikariCP-3.2.0.jar javax.transaction-api-1.3.jar 
+ jaxb-api-2.3.1.jar javax.activation-api-1.2.0.jar hibernate-core-5.3.
+ 7.Final.jar javax.persistence-api-2.2.jar javassist-3.23.1-GA.jar byt
+ e-buddy-1.9.5.jar antlr-2.7.7.jar jandex-2.0.5.Final.jar dom4j-2.1.1.
+ jar hibernate-commons-annotations-5.0.4.Final.jar spring-data-jpa-2.1
+ .3.RELEASE.jar spring-data-commons-2.1.3.RELEASE.jar spring-orm-5.1.3
+ .RELEASE.jar slf4j-api-1.7.25.jar spring-aspects-5.1.3.RELEASE.jar my
+ sql-connector-java-8.0.13.jar javax.annotation-api-1.3.2.jar mybatis-
+ 3.2.2.jar mybatis-spring-1.2.0.jar spring-jdbc-5.1.3.RELEASE.jar spri
+ ng-beans-5.1.3.RELEASE.jar spring-core-5.1.3.RELEASE.jar spring-jcl-5
+ .1.3.RELEASE.jar spring-tx-5.1.3.RELEASE.jar commons-dbcp-1.4.jar com
+ mons-pool-1.6.jar google-api-client-1.23.0.jar google-oauth-client-1.
+ 23.0.jar google-http-client-1.23.0.jar httpclient-4.5.6.jar httpcore-
+ 4.4.10.jar commons-codec-1.11.jar jsr305-1.3.9.jar google-http-client
+ -jackson2-1.23.0.jar guava-jdk5-17.0.jar
 spring-aop-Extension-Name: spring-aop
 javax_persistence-api-Implementation-Version: 2.2
 spring-security-core-Implementation-Version: 5.1.2.RELEASE
@@ -155,8 +153,8 @@ Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/server
 tomcat-embed-el-Extension-Name: tomcat-embed-el
 tomcat-embed-websocket-Extension-Name: tomcat-embed-websocket
-tomcat-embed-core-Implementation-Version: 9.0.13
 spring-expression-Extension-Name: spring-expression
+tomcat-embed-core-Implementation-Version: 9.0.13
 spring-security-web-Implementation-Version: 5.1.2.RELEASE
 spring-boot-starter-Extension-Name: spring-boot-starter
 spring-boot-autoconfigure-Implementation-Version: 2.1.1.RELEASE
@@ -197,20 +195,20 @@ spring-boot-starter-web-Extension-Name: spring-boot-starter-web
 log4j-to-slf4j-Implementation-Version: 2.11.1
 Extension-List: spring-boot-starter-web spring-boot-starter spring-boo
  t spring-boot-autoconfigure spring-boot-starter-logging logback-class
- ic logback-core log4j-to-slf4j log4j-api jul-to-slf4j javax.annotatio
- n-api snakeyaml spring-boot-starter-json jackson-datatype-jdk8 jackso
- n-datatype-jsr310 jackson-module-parameter-names spring-boot-starter-
- tomcat tomcat-embed-core tomcat-embed-el tomcat-embed-websocket hiber
- nate-validator validation-api jboss-logging classmate spring-web spri
- ng-webmvc spring-context spring-expression spring-boot-starter-securi
- ty spring-aop spring-security-config spring-security-core spring-secu
- rity-web jjwt jackson-databind jackson-annotations jackson-core sprin
- g-boot-starter-data-jpa spring-boot-starter-aop aspectjweaver spring-
- boot-starter-jdbc HikariCP javax.transaction-api jaxb-api javax.activ
- ation-api hibernate-core javax.persistence-api javassist byte-buddy a
- ntlr jandex dom4j hibernate-commons-annotations spring-data-jpa sprin
- g-data-commons spring-orm slf4j-api spring-aspects mysql-connector-ja
- va mybatis mybatis-spring spring-jdbc spring-beans spring-core spring
+ ic logback-core log4j-to-slf4j log4j-api jul-to-slf4j snakeyaml sprin
+ g-boot-starter-json jackson-datatype-jdk8 jackson-datatype-jsr310 jac
+ kson-module-parameter-names hibernate-validator validation-api jboss-
+ logging classmate spring-web spring-webmvc spring-context spring-expr
+ ession spring-boot-starter-security spring-aop spring-security-config
+  spring-security-core spring-security-web jjwt jackson-databind jacks
+ on-annotations jackson-core spring-boot-starter-data-jpa spring-boot-
+ starter-aop aspectjweaver spring-boot-starter-jdbc HikariCP javax.tra
+ nsaction-api jaxb-api javax.activation-api hibernate-core javax.persi
+ stence-api javassist byte-buddy antlr jandex dom4j hibernate-commons-
+ annotations spring-data-jpa spring-data-commons spring-orm slf4j-api 
+ spring-aspects mysql-connector-java spring-boot-starter-tomcat javax.
+ annotation-api tomcat-embed-core tomcat-embed-el tomcat-embed-websock
+ et mybatis mybatis-spring spring-jdbc spring-beans spring-core spring
  -jcl spring-tx commons-dbcp commons-pool lombok google-api-client goo
  gle-oauth-client google-http-client httpclient httpcore commons-codec
   jsr305 google-http-client-jackson2 guava-jdk5
