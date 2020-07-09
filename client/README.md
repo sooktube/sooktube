@@ -1,1 +1,1 @@
-# 시종설 2020 READEME팀 frontend 페이지 
+# SOOKTUBE 2020  
