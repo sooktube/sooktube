@@ -1,23 +1,46 @@
 {
-  "name": "sooktube",
+  "name": "write-me",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@material-ui/core": "^4.10.2",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@types/node": "^14.0.20",
+    "axios": "^0.19.2",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.4.2",
+    "babel-loader": "^8.0.0",
+    "babel-plugin-macros": "^2.8.0",
+    "core-js": "^3.6.5",
+    "html-webpack-plugin": "latest",
+    "mini-css-extract-plugin": "latest",
+    "moment": "^2.26.0",
+    "node-sass": "^4.14.1",
+    "prop-types": "latest",
+    "querystring": "^0.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-icons": "^3.9.0",
+    "react-markdown": "^4.3.1",
+    "react-redux": "latest",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-logger": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.1.1",
+    "styled-components.macro": "^1.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,10 +55,35 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ],
+    "browsers": [
+      "last 2 versions"
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "axios": "^0.19.2",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-styled-components": "^1.10.7",
+    "babel-polyfill": "^6.26.0",
+    "config": "^3.3.1",
+    "emotion": "^10.0.27",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.2.0",
+    "path": "^0.12.7",
     "react-redux": "^7.2.0",
-    "react-router-dom": "^5.2.0"
+    "stylelint": "^13.6.1",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-custom-processor-loader": "^0.6.0",
+    "stylelint-processor-styled-components": "^1.10.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }
