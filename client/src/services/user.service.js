@@ -1,3 +1,4 @@
+import axios from "axios";
 export const userService = {
     login,
     logout,
@@ -57,31 +58,28 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`https://soktube.appspot.com/api/authenticate/api/register/local`, requestOptions).then(handleResponse);
+    return fetch(`https://soktube.appspot.com/api/register/local`, requestOptions).then(handleResponse);
 }
 
 function checkUsername(user) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-    };
-
-    return fetch(`https://soktube.appspot.com/api/register/idCheck`, requestOptions).then(handleResponse)
+    return axios.post('https://soktube.appspot.com/api/register/usernameCheck', user
+    ).then((response) => {
+        return response;
+    })
+    .catch(error => {
+        return error;
+    });
 }
 
-function checkUserID(userID, username, password) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userID, username, password })
-    };
 
-    return fetch(`https://soktube.appspot.com/api/register/usernameCheck`, requestOptions)
-        .then(handleResponse)
-        .then(response => {
-            console.log(response);
-        });
+function checkUserID(user) {
+    return axios.post('https://soktube.appspot.com/api/register/idCheck', user
+    ).then((response) => {
+        return response;
+    })
+    .catch(error => {
+        return error;
+    });
 }
 
 function handleResponse(response) {

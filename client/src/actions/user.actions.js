@@ -6,9 +6,7 @@ import { history } from '../helpers';
 export const userActions = {
     login,
     logout,
-    register,
-    checkUsername,
-    checkUserID
+    register
 };
 
 function login(user) {
@@ -44,9 +42,9 @@ function checkUserID(user) {
 
         userService.checkUserID(user)
             .then(
-                user => {
-                    dispatch(success(user));
-                    history.push('/');
+                response => {
+                    if (response.data === "OK") dispatch(success(user));
+                    else dispatch(failure(user));
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -61,11 +59,11 @@ function checkUserID(user) {
 function checkUsername(user) {
     return dispatch => {
         dispatch(request({ user }));
-        console.log(user);
         userService.checkUsername(user)
             .then(
-                user => {
-                    dispatch(success(user));
+                response => {
+                    if (response.data === "OK") dispatch(success(user));
+                    else dispatch(failure(user));
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -73,8 +71,8 @@ function checkUsername(user) {
             );
     };
     function request(user) { return { type: userConstants.CHECK_USERNAME_REQUEST, user } }
-    function success(user) { return { type: userConstants.CHECK_USERID_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.CHECK_USERID_FAILURE, error } }
+    function success(user) { return { type: userConstants.CHECK_USERNAME_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.CHECK_USERNAME_FAILURE, error } }
 }
 
 function register(user) {
