@@ -1,18 +1,21 @@
+import axios from "axios";
 export const userService = {
     login,
     logout,
     register,
-    getUsername
+    getUsername,
+    checkUserID,
+    checkUsername
 };
 
-function login(username, password) {
+function login(user) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify(user)
     };
-
-    return fetch(`https://readme-writeme.appspot.com/api/authenticate`, requestOptions)
+    console.log(user);
+    return fetch(`https://soktube.appspot.com/api/authenticate`, requestOptions)
         .then(handleResponse)
         .then(response => {
             if(response.token){
@@ -26,6 +29,7 @@ function getUsername() {
     let user = localStorage.getItem('user') !== "undefined" && typeof localStorage.getItem('user') !== "undefined"
         && JSON.stringify(localStorage.getItem('user'));
     if(!user) return;
+
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -33,11 +37,10 @@ function getUsername() {
             'authorization': user
         }
     };
-    return fetch(`https://readme-writeme.appspot.com/api/auth/me`, requestOptions)
+    return fetch(`https://soktube.appspot.com/api/auth/me`, requestOptions)
         .then(handleResponse)
         .then(response => {
             if (response) {
-                console.log(response);
                 return response;
             }
         });
@@ -55,7 +58,28 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`https://readme-writeme.appspot.com/api/register/local`, requestOptions).then(handleResponse);
+    return fetch(`https://soktube.appspot.com/api/register/local`, requestOptions).then(handleResponse);
+}
+
+function checkUsername(user) {
+    return axios.post('https://soktube.appspot.com/api/register/usernameCheck', user
+    ).then((response) => {
+        return response;
+    })
+    .catch(error => {
+        return error;
+    });
+}
+
+
+function checkUserID(user) {
+    return axios.post('https://soktube.appspot.com/api/register/idCheck', user
+    ).then((response) => {
+        return response;
+    })
+    .catch(error => {
+        return error;
+    });
 }
 
 function handleResponse(response) {
