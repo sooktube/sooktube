@@ -57,19 +57,21 @@ public class JwtAuthenticationController {
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 	
-	
+	@CrossOrigin
 	@RequestMapping(value = "/api/register/local", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
 		return ResponseEntity.ok(userDetailsService.save(user));
 	}
 	
 	//id 중복확인
+	@CrossOrigin
 	@RequestMapping(value = "/api/register/idCheck", method = RequestMethod.POST)
 	public ResponseEntity<?> idCheck(@RequestBody UserDTO user) throws Exception {
 		return ResponseEntity.ok(userDetailsService.idCheck(user));
 	}
 	
 	//username 중복확인
+	@CrossOrigin
 	@RequestMapping(value = "/api/register/usernameCheck", method = RequestMethod.POST)
 	public ResponseEntity<?> usernameCheck(@RequestBody UserDTO user) throws Exception {
 		return ResponseEntity.ok(userDetailsService.usernameCheck(user));

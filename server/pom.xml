@@ -89,11 +89,24 @@
     <version>1.23.0</version>
 </dependency>
 
+<!-- aws s3 -->
+<dependency>
+    <groupId>com.amazonaws</groupId>
+    <artifactId>aws-java-sdk</artifactId>
+    <version>1.11.820</version>
+</dependency>
 
-       
+<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-gcp-starter-storage -->
+<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-gcp-starter-storage -->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-gcp-starter-storage</artifactId>
+    <version>1.2.3.RELEASE</version>
+</dependency>
 
-		
+
 	</dependencies>
+
 
 
 <build>
