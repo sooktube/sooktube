@@ -1,0 +1,75 @@
+.registerlogo{
+  font-size: 26px;
+  width:400px; height:60px;
+  position:fixed;
+  top:22%; left:50%;
+
+  margin-top:-40px;
+  padding:0px;
+  color: rgb(90, 85, 85);
+}
+
+#rusername,#ruserID, #rpassword{
+  width:396px; height:44px;
+}
+
+.label_name{
+  font-size: 10pt;
+}
+
+.form-groupA{
+  position:absolute;
+  top:30%;
+  left:50%;
+  margin-left:-200px;
+  margin-top:-23px;
+  padding:0px;
+
+}
+.form-groupB{
+  position:absolute;
+  top:42%;
+  left:50%;
+  margin-left:-200px;
+  margin-top:-23px;
+  padding:0px;
+}
+.form-groupC{
+  position:absolute;
+  top:54%;
+  left:50%;
+  margin-left:-200px;
+  margin-top:-23px;
+  padding:0px;
+}
+
+.form-groupD{
+  position:absolute;
+  top:66%;
+  left:50%;
+  margin-left:-200px;
+  margin-top:-23px;
+  padding:0px;
+}
+
+.form-groupE{
+  position:absolute;
+  top:78%;
+  left:50%;
+  margin-left:-200px;
+  margin-top:-23px;
+  padding:0px;
+}
+
+#rsubmit{
+  width:400px; height:60px; position:absolute;
+  top:90%; left:50%; margin-left:0px; padding:0px;
+  background-color: rgb(90, 85, 85);
+  width:400px;
+  border: none;
+  color: white;
+}
+
+.invalid_feedback{
+  color: red;
+}

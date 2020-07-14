@@ -2,17 +2,19 @@ export const userService = {
     login,
     logout,
     register,
-    getUsername
+    getUsername,
+    checkUserID,
+    checkUsername
 };
 
-function login(username, password) {
+function login(userID, username, password) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ userID, username, password })
     };
 
-    return fetch(`https://readme-writeme.appspot.com/api/authenticate`, requestOptions)
+    return fetch(`https://soktube.appspot.com/api/authenticate`, requestOptions)
         .then(handleResponse)
         .then(response => {
             if(response.token){
@@ -26,6 +28,7 @@ function getUsername() {
     let user = localStorage.getItem('user') !== "undefined" && typeof localStorage.getItem('user') !== "undefined"
         && JSON.stringify(localStorage.getItem('user'));
     if(!user) return;
+
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -33,11 +36,10 @@ function getUsername() {
             'authorization': user
         }
     };
-    return fetch(`https://readme-writeme.appspot.com/api/auth/me`, requestOptions)
+    return fetch(`https://soktube.appspot.com/api/auth/me`, requestOptions)
         .then(handleResponse)
         .then(response => {
             if (response) {
-                console.log(response);
                 return response;
             }
         });
@@ -55,7 +57,31 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`https://readme-writeme.appspot.com/api/register/local`, requestOptions).then(handleResponse);
+    return fetch(`https://soktube.appspot.com/api/authenticate/api/register/local`, requestOptions).then(handleResponse);
+}
+
+function checkUsername(user) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+    };
+
+    return fetch(`https://soktube.appspot.com/api/register/idCheck`, requestOptions).then(handleResponse)
+}
+
+function checkUserID(userID, username, password) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userID, username, password })
+    };
+
+    return fetch(`https://soktube.appspot.com/api/register/usernameCheck`, requestOptions)
+        .then(handleResponse)
+        .then(response => {
+            console.log(response);
+        });
 }
 
 function handleResponse(response) {
