@@ -30,7 +30,7 @@ function Login() {
 
         setSubmitted(true);
         if (userID && password) {
-            dispatch(userActions.login(userID, password));
+            dispatch(userActions.login({userID, password}));
         }
     }
 
