@@ -19,6 +19,7 @@
     "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^2.8.0",
     "core-js": "^3.6.5",
+    "email-validator": "^2.0.4",
     "html-webpack-plugin": "latest",
     "mini-css-extract-plugin": "latest",
     "moment": "^2.26.0",

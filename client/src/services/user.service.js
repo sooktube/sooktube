@@ -8,13 +8,13 @@ export const userService = {
     checkUsername
 };
 
-function login(userID, username, password) {
+function login(user) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userID, username, password })
+        body: JSON.stringify(user)
     };
-
+    console.log(user);
     return fetch(`https://soktube.appspot.com/api/authenticate`, requestOptions)
         .then(handleResponse)
         .then(response => {

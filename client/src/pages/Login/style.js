@@ -1,7 +1,5 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom';
 import { MAIN } from '../Style/Main';
-
 
 export const LoginLogo = styled.div`
     font-size: 34px;
@@ -35,11 +33,16 @@ export const FormGroup2 = styled.div`
 
 export const FormGroup3 = styled.div`
     position:absolute;
-    top:52%;
+    top:70%;
     left:50%;
     margin-left:-200px;
     margin-top:-23px;
     padding:0px;
+`;
+
+export const InputA = styled.input`
+    width:396px; 
+    height:44px;
 `;
 
 export const InvalidFeedback = styled.div`
@@ -48,8 +51,8 @@ export const InvalidFeedback = styled.div`
 `;
 
 export const SubmitButton = styled.button`
-    width:400px; height:60px; position:absolute;
-    top:60%; left:50%; margin-left:-200px; margin-top:-30spx; padding:0px;
+    position:absolute;
+    top:60%; left:50%; margin-left:-200px; margin-top:-30px; padding:0px;
     background-color: #1864ab;
     width:400px;
     height:60px;
@@ -73,8 +76,4 @@ export const Regguide = styled.div`
     left:50%;
     margin-left:-155px;
     padding:0px;
-`;
-
-export const InputA = styled.input`
-    width:396px; height:44px;
 `;

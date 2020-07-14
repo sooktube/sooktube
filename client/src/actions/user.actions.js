@@ -56,25 +56,6 @@ function checkUserID(user) {
     function failure(error) { return { type: userConstants.CHECK_USERID_FAILURE, error } }
 }
 
-function checkUsername(user) {
-    return dispatch => {
-        dispatch(request({ user }));
-        userService.checkUsername(user)
-            .then(
-                response => {
-                    if (response.data === "OK") dispatch(success(user));
-                    else dispatch(failure(user));
-                },
-                error => {
-                    dispatch(failure(error.toString()));
-                }
-            );
-    };
-    function request(user) { return { type: userConstants.CHECK_USERNAME_REQUEST, user } }
-    function success(user) { return { type: userConstants.CHECK_USERNAME_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.CHECK_USERNAME_FAILURE, error } }
-}
-
 function register(user) {
     return dispatch => {
         dispatch(request(user));
