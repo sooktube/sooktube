@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../actions';
-import './Login.scss';
+import {LoginLogo, FormGroup1, FormGroup2, InvalidFeedback, SubmitButton, Regbutton, Regguide, InputA} from "./style";
+import styled from 'styled-components';
+
 
 function Login() {
     const [inputs, setInputs] = useState({
@@ -35,28 +37,27 @@ function Login() {
 
     return (
         <div className="login">
-            <h2> <p className="loginlogo"> SOOKTUBE </p> </h2>
+            <LoginLogo> SOOKTUBE </LoginLogo> 
             <form name="form" onSubmit={handleSubmit}>
-                <div className="form-group1">
-                    <input type="text" id="username" name="username" placeholder="아이디" value={username} onChange={handleChange} className={'form-control' + (submitted && !username ? ' is-invalid' : '')}
-                    />
+                <FormGroup1>
+                    <InputA type="text" placeholder="아이디" value={username} onChange={handleChange} className={'form-control' + (submitted && !username ? ' is-invalid' : '')}/>
                     {submitted && !username &&
-                    <div className="invalid-feedback">아이디를 입력해주세요</div>
+                    <InvalidFeedback>아이디를 입력해주세요</InvalidFeedback>
                     }
-                </div>
-                <div className="form-group2">
-                    <input type="password" id="password" name="password" placeholder="비밀번호" value={password} onChange={handleChange} className={'form-control' + (submitted && !password ? ' is-invalid' : '')} />
+                </FormGroup1>
+                <FormGroup2>
+                    <InputA type="password" placeholder="비밀번호" value={password} onChange={handleChange} className={'form-control' + (submitted && !password ? ' is-invalid' : '')} />
                     {submitted && !password &&
                     <div className="invalid-feedback">비밀번호를 입력해주세요</div>
                     }
-                </div>
+                </FormGroup2>
                 <div className="form-group3">
-                    <button className="btn btn-primary" id="submit">
+                    <SubmitButton>
                         로그인
                         {loggingIn && <span className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
-                    </button>
-                    <div id="regguide"> 아직 회원이 아니세요? </div>
-                    <Link to="/register" className="btn btn-link" id="regbutton">회원가입</Link>
+                    </SubmitButton>
+                    <Regguide>아직 회원이 아니세요? </Regguide>
+                    <Link to="/register"><Regbutton>회원가입</Regbutton></Link>
                 </div>
             </form>
         </div>
