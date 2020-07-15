@@ -1,3 +1,3 @@
 export const MAIN = {
-    BACKGROUND_COLOR: '#2c3e50'
+    BACKGROUND_COLOR: '#292a2d'
 };

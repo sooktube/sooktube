@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {userService} from "../../../services";
+import {Username, UsernameWrapper, UserIcon} from './style';
+import icon from '../../../../public/userIcon.png';
 
 function UserButton() {
     const [username, setUsername] = useState(null);
@@ -11,7 +13,9 @@ function UserButton() {
     }, []);
     return (
         <>
-            <div> {username} </div>
+            <UsernameWrapper>
+                <UserIcon src={icon} alt="user_icon"/> <Username> {username} </Username>
+            </UsernameWrapper>
         </>
     )
 }
