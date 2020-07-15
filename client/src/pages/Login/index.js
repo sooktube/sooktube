@@ -57,7 +57,7 @@ function Login() {
                         onChange={handleChange}
                         className={'form-control' + (submitted && !password ? ' is-invalid' : '')} />
                     {submitted && !password &&
-                    <div className="invalid-feedback">비밀번호를 입력해주세요</div>
+                    <InvalidFeedback>비밀번호를 입력해주세요</InvalidFeedback>
                     }
                 </FormGroup2>
                 <FormGroup3>

@@ -1,9 +1,11 @@
 import axios from "axios";
+
 export const userService = {
     login,
     logout,
     register,
     getUsername,
+    getUserID,
     checkUserID,
     checkUsername
 };
@@ -14,12 +16,11 @@ function login(user) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-    console.log(user);
     return fetch(`https://soktube.appspot.com/api/authenticate`, requestOptions)
         .then(handleResponse)
         .then(response => {
             if(response.token){
-                localStorage.setItem('user', JSON.stringify(response.token));
+                localStorage.setItem('user', response.token);
                 return response.token;
             }
         });
@@ -27,22 +28,37 @@ function login(user) {
 
 function getUsername() {
     let user = localStorage.getItem('user') !== "undefined" && typeof localStorage.getItem('user') !== "undefined"
-        && JSON.stringify(localStorage.getItem('user'));
-    if(!user) return;
-
-    const requestOptions = {
-        method: 'GET',
+        && localStorage.getItem('user');
+    return axios({
+        method: 'get',
+        url: 'https://soktube.appspot.com/api/auth/myName',
         headers: {
             'content-type': 'application/json',
-            'authorization': user
+            'Authorization': 'Bearer ' + user
         }
-    };
-    return fetch(`https://soktube.appspot.com/api/auth/me`, requestOptions)
-        .then(handleResponse)
-        .then(response => {
-            if (response) {
-                return response;
-            }
+    }).then((response) => {
+        return response.data;
+        })
+        .catch(error => {
+            return error;
+        });
+}
+
+function getUserID() {
+    let user = localStorage.getItem('user') !== "undefined" && typeof localStorage.getItem('user') !== "undefined"
+        && localStorage.getItem('user');
+    return axios({
+        method: 'get',
+        url: 'https://soktube.appspot.com/api/auth/myID',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + user
+        }
+    }).then((response) => {
+        return response.data;
+    })
+        .catch(error => {
+            return error;
         });
 }
 

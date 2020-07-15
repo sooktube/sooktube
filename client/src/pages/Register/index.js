@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Register.scss';
 import { userActions } from '../../actions';
-import {userService} from "../../services";
+import { userService } from "../../services";
 import EmailValidator from 'email-validator';
 
 function Register() {
@@ -28,6 +28,7 @@ function Register() {
     const [submitted, setSubmitted] = useState(false);
 
     const dispatch = useDispatch();
+    const registering = useSelector(state => state.registration.registering);
 
     useEffect(() => {
         dispatch(userActions.logout());
@@ -41,9 +42,7 @@ function Register() {
     function checkDuplicateUserID() {
         if (validate.userID === true){
             userService.checkUserID(user)
-                .then(
-                    response => {
-                        console.log(response);
+                .then(response => {
                         if (response.data === "OK") setIsDuplicate(isDuplicate => ({...isDuplicate, userID: false}));
                         else setIsDuplicate(isDuplicate => ({...isDuplicate, userID: true}));
                     },
@@ -57,9 +56,7 @@ function Register() {
     function checkDuplicateUsername() {
         if (validate.username === true){
             userService.checkUsername(user)
-                .then(
-                    response => {
-                        console.log(response);
+                .then(response => {
                         if (response.data === "OK") setIsDuplicate(isDuplicate => ({...isDuplicate, username: false}));
                         else setIsDuplicate(isDuplicate => ({...isDuplicate, username: true}));
                     },
@@ -191,6 +188,7 @@ function Register() {
                 <div className="form-groupE">
                     <button className="btn btn-primary" id="rsubmit">
                         가입하기
+                        {registering && <span className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
                     </button>
                 </div>
             </form>
