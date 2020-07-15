@@ -27,7 +27,7 @@ public class GCSController {
 
     @PostMapping("gcs/upload")
     public ResponseEntity localUploadToStorage(@RequestBody UploadReqDto uploadReqDto) throws IOException {
-        BlobInfo fileFromGCS = gcsService.uploadFileToGCS(uploadReqDto);
+        BlobInfo fileFromGCS = gcsService.uploadObject(uploadReqDto);
         return ResponseEntity.ok(fileFromGCS.toString());
     }
 }

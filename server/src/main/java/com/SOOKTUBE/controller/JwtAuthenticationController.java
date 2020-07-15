@@ -20,6 +20,7 @@ import com.SOOKTUBE.model.JwtRequest;
 import com.SOOKTUBE.model.JwtResponse;
 import com.SOOKTUBE.model.UserDTO;
 import com.SOOKTUBE.service.JwtUserDetailsService;
+import com.SOOKTUBE.dao.UserDao;
 
 
 
@@ -40,6 +41,9 @@ public class JwtAuthenticationController {
 
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
+	
+	@Autowired
+	private UserDao userDao;
 
 
 	
@@ -79,7 +83,7 @@ public class JwtAuthenticationController {
 
 	
 	@CrossOrigin
-	@RequestMapping(value = "/api/auth/me", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/auth/myID", method = RequestMethod.GET)
 	public ResponseEntity<?> getUsernameFromToken(@RequestHeader(value = "Authorization") String access_token)throws Exception{
 
 
@@ -90,6 +94,24 @@ public class JwtAuthenticationController {
 	    // Claims claims = jwtTokenUtil.getAllClaimsFromToken(access_token);
 
 	        return ResponseEntity.ok(jwtTokenUtil.getUsernameFromToken(access_token));
+
+	    }
+	
+	
+	@CrossOrigin
+	@RequestMapping(value = "/api/auth/myName", method = RequestMethod.GET)
+	public ResponseEntity<?> getUserIdFromToken(@RequestHeader(value = "Authorization") String access_token)throws Exception{
+		
+	    if (access_token.startsWith("Bearer")) {
+	        access_token = access_token.substring(7);
+	    }
+
+	    // Claims claims = jwtTokenUtil.getAllClaimsFromToken(access_token);
+	    String userId = jwtTokenUtil.getUsernameFromToken(access_token);
+	    String username = userDao.findByUserID(userId).getUsername();
+	   
+	   
+	        return ResponseEntity.ok(username);
 
 	    }
 	
