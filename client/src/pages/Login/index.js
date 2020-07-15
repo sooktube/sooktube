@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../actions';
-import {LoginLogo, FormGroup1, FormGroup2, InvalidFeedback, SubmitButton, Regbutton, Regguide, InputA} from "./style";
+import {LoginLogo, FormGroup1, FormGroup2, FormGroup3, InvalidFeedback, SubmitButton, Regbutton, Regguide, InputA} from "./style";
 import styled from 'styled-components';
 
 
@@ -51,14 +51,15 @@ function Login() {
                     <div className="invalid-feedback">비밀번호를 입력해주세요</div>
                     }
                 </FormGroup2>
-                <div className="form-group3">
-                    <SubmitButton>
+                <FormGroup3>
+                    <SubmitButton className="btn btn-primary">
                         로그인
-                        {loggingIn && <span className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
+                        {loggingIn && <span  className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
                     </SubmitButton>
-                    <Regguide>아직 회원이 아니세요? </Regguide>
-                    <Link to="/register"><Regbutton>회원가입</Regbutton></Link>
-                </div>
+                    </FormGroup3>
+                <Regguide>아직 회원이 아니세요? </Regguide>
+                <Link to="/register"><Regbutton>회원가입</Regbutton></Link>
+                
             </form>
         </div>
     );

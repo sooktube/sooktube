@@ -35,11 +35,12 @@ export const FormGroup2 = styled.div`
 
 export const FormGroup3 = styled.div`
     position:absolute;
-    top:52%;
+    top:60%;
     left:50%;
     margin-left:-200px;
     margin-top:-23px;
     padding:0px;
+    
 `;
 
 export const InvalidFeedback = styled.div`
@@ -49,29 +50,25 @@ export const InvalidFeedback = styled.div`
 
 export const SubmitButton = styled.button`
     width:400px; height:60px; position:absolute;
-    top:60%; left:50%; margin-left:-200px; margin-top:-30spx; padding:0px;
-    background-color: #1864ab;
-    width:400px;
-    height:60px;
+    top:90%; left:50%; margin-left:0px; padding:0px;
+    background-color: #1E3A79;
     border: none;
     color: white;
 `;
 
 
-export const Regbutton = styled.div`
+export const Regbutton = styled.span`
     position:absolute;
-    top:72.5%;
-    left:50%;
-    margin-left:95px;
+    top:70%;
+    left:54%;
     padding:0px;
 
 `;
   
-export const Regguide = styled.div`
+export const Regguide = styled.span`
     position:absolute;
-    top:73%;
-    left:50%;
-    margin-left:-155px;
+    top:70%;
+    left:40%;
     padding:0px;
 `;
 
