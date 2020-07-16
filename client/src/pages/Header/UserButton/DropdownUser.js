@@ -1,8 +1,9 @@
-import React, {useRef, useState} from 'react';
-import {ArrowDown, DropdownBtn, UserDropdownContent, UserDropdownMenu, StyledLink, UserIcon} from './style';
+import React, {useEffect, useRef, useState} from 'react';
+import {ArrowDown, DropdownUserBtn, UserDropdownContent, UserDropdownMenu, StyledLink, DropdownItem, UserIcon} from './style';
 import useDropdownOutsideClick from "../../../components/useDropdownOutsideClick";
+import {userService} from "../../../services";
 
-function DropdownUser() {
+function DropdownUser({username}) {
     const [userDropdownVisible, setUserDropdownVisible] = useState(false);
 
     const toggleDropdown = () => {
@@ -12,15 +13,16 @@ function DropdownUser() {
     const contentRef = useRef(null);
     useDropdownOutsideClick(contentRef, setUserDropdownVisible);
 
+
     return (
         <>
             <UserDropdownMenu>
-                <DropdownBtn onClick={toggleDropdown}>
+                <DropdownUserBtn onClick={toggleDropdown}>
                     <UserIcon/> <ArrowDown/>
-                </DropdownBtn>
+                </DropdownUserBtn>
                 {userDropdownVisible &&
                     <UserDropdownContent ref={contentRef}>
-                        <StyledLink to="/login"> 계정 </StyledLink>
+                        <DropdownItem> 로그인한 계정: {username}님 </DropdownItem>
                         <StyledLink to="/login"> 로그아웃 </StyledLink>
                     </UserDropdownContent>
                 }

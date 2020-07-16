@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { MAIN } from "../../Style/Main";
 
 export const UserButtonWrapper = styled.div`
-    font-size: 3vh;
     margin-right: 1vw;
     display: flex;
 `;
@@ -35,29 +34,33 @@ export const UserIcon = styled(FaRegUserCircle)`
 `;
 
 export const UserDropdownContent = styled.div`
+    position: absolute;
     background-color: #f9f9f9;
-    min-width: 10vw;
-    margin: 0;
-    border-radius: 5%;
-    border: 0.15em solid #e3e3e3;
+    min-width: 20vw;
+    margin-top: 0.3em;
+    right: 0; 
+    border-radius: 2%;
+    border: 0.1em solid ${MAIN.BORDER_COLOR};
     z-index: 1;
 `;
 
 export const CreateDropdownContent = styled.div`
+    position: absolute;
+    margin-top: 0.3em;
     background-color: #f9f9f9;
-    min-width: 10vw;
-    margin: 0;
-    border-radius: 5%;
-    border: 0.15em solid #e3e3e3;
+    right: 0;
+    min-width: 20vw;
+    border-radius: 2%;
+    border: 0.15em solid ${MAIN.BORDER_COLOR};
     z-index: 1;
 `;
 
 export const UserDropdownMenu = styled.div`
-    margin-right: 3vw;
     font-size: 3vh;
+    float: right;
+    position: relative;
     border: none;
     margin: 0;
-    float: right;
     padding: 0;
     cursor: pointer;
 `;
@@ -65,41 +68,45 @@ export const UserDropdownMenu = styled.div`
 export const CreateDropdownMenu = styled.div`
     margin-right: 1em;
     font-size: 3vh;
-    border: none;
     float: right;
-    padding: 0;
+    position: relative;
+    border: none;
     cursor: pointer;
 `;
 
-export const DropdownBtn  = styled.div`
+export const DropdownUserBtn  = styled.div`
     display: flex;
-    overflow: auto;
     top: 1vh;
     right: 1vw;
-    border: 0;
-    margin: 0;
-    padding: 0;
+    height: 6vh;
 `;
 
 export const DropdownPlusBtn  = styled.div`
     display: flex;
     top: 1vh;
-    border: 0;
-    margin: 0;
     color: white;
-    padding: 0;
+    height: 6vh;
 `;
 
 export const StyledLink = styled(NavLink)`
     color: black;
-    padding: 0.5em 0.5em 0.5em 0.5em;
-    margin: 0;
-    font-size: 0.8em;
+    padding: 1em 0.5em 1em 0.5em;
+    font-size: 2vh;
     text-decoration: none;
     display: block;
     &:hover {
         color: black;
         text-decoration: none;
-        background-color: #e3e3e3;
+        background-color: ${MAIN.DARK_ON_CLICK};
     }
+`;
+
+export const DropdownItem = styled.div`
+    color: black;
+    padding: 1em 0.5em 1em 0.5em;
+    font-size: 2vh;
+    min-height: 2vh;
+    text-decoration: none;
+    display: block;
+    border-bottom: 0.1em solid ${MAIN.BORDER_COLOR}
 `;
