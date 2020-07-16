@@ -13,7 +13,7 @@ function UserButton() {
                 setUsername(data);
             })
     }, []);
-    console.log(username);
+
     return (
         <>
             <UserButtonWrapper>
