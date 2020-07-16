@@ -31,14 +31,11 @@ export const UserIcon = styled(FaRegUserCircle)`
 export const DropdownContent = styled.div`
     display: none;
     background-color: #f9f9f9;
-    min-width: 7vw;
+    min-width: 10vw;
     margin: 2.5em 1em 0 0;
     border-radius: 5%;
     border: 0.15em solid #e3e3e3;
     z-index: 1;
-    &:hover {
-        background-color: #e3e3e3;
-    }
 `;
 
 export const DropdownMenu = styled.div`
@@ -51,12 +48,9 @@ export const DropdownMenu = styled.div`
     float: right;
     padding: 0;
     cursor: pointer;
-    &:hover ${DropdownContent} {
-        display: block;
-  }
 `;
 
-export const DropdownBtn  = styled.div`
+export const DropdownBtn  = styled.button`
     display: flex;
     position: absolute;
     top: 1vh;
@@ -86,5 +80,6 @@ export const StyledLink = styled(NavLink)`
     &:hover {
         color: black;
         text-decoration: none;
+        background-color: #e3e3e3;
     }
 `;

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {userService} from "../../../services";
+
 import {
     Username,
     UsernameWrapper,
@@ -12,6 +13,7 @@ import {
     PlusMenu,
     DropdownPlus
 } from './style';
+import DropdownUser from "./DropdownUser";
 
 
 function UserButton() {
@@ -34,15 +36,7 @@ function UserButton() {
                         <StyledLink to="/login"> 영상 만들기 </StyledLink>
                     </DropdownContent>
                 </DropdownMenu>
-                <DropdownMenu>
-                    <DropdownBtn>
-                        <UserIcon /> <ArrowDown/>
-                    </DropdownBtn>
-                    <DropdownContent>
-                        <StyledLink to="/login"> 로그아웃 </StyledLink>
-                    </DropdownContent>
-                </DropdownMenu>
-
+                <DropdownUser/>
             </UsernameWrapper>
         </>
     )
