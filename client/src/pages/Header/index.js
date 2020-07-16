@@ -7,7 +7,7 @@ function Header() {
     return (
         <HeaderWrapper>
             <HeaderLayout>
-                <HeaderLogo> SOOKTUBE </HeaderLogo>
+                <HeaderLogo > SOOKTUBE </HeaderLogo>
                 {localStorage.getItem('user')
                     ? <UserButton/>
                     : <UserLoginButton/>
