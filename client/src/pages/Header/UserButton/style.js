@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import {FaRegUserCircle, TiArrowSortedDown, FiPlus} from "react-icons/all";
 import { NavLink } from 'react-router-dom';
+import { MAIN } from "../../Style/Main";
 
-export const UsernameWrapper = styled.div`
+export const UserButtonWrapper = styled.div`
     font-size: 3vh;
+    margin-right: 1vw;
     display: flex;
 `;
 
@@ -15,12 +17,16 @@ export const Username = styled.div`
 export const ArrowDown = styled(TiArrowSortedDown)`
     margin: 0.5em 0 0 0.1em;
     color: white;
+    &:hover {
+        color: ${MAIN.DARK_ON_CLICK};
+    }
 `;
 
 export const PlusMenu = styled(FiPlus)`
     margin-top: 0.5em;
     color: white;
 `;
+
 export const UserIcon = styled(FaRegUserCircle)`
     height: 2em;
     width: 2em;
@@ -28,20 +34,26 @@ export const UserIcon = styled(FaRegUserCircle)`
     color: white;
 `;
 
-export const DropdownContent = styled.div`
-    display: none;
+export const UserDropdownContent = styled.div`
     background-color: #f9f9f9;
     min-width: 10vw;
-    margin: 2.5em 1em 0 0;
+    margin: 0;
     border-radius: 5%;
     border: 0.15em solid #e3e3e3;
     z-index: 1;
 `;
 
-export const DropdownMenu = styled.div`
-    position: absolute;
-    top: 2vh;
-    right: 3vw;
+export const CreateDropdownContent = styled.div`
+    background-color: #f9f9f9;
+    min-width: 10vw;
+    margin: 0;
+    border-radius: 5%;
+    border: 0.15em solid #e3e3e3;
+    z-index: 1;
+`;
+
+export const UserDropdownMenu = styled.div`
+    margin-right: 3vw;
     font-size: 3vh;
     border: none;
     margin: 0;
@@ -50,9 +62,18 @@ export const DropdownMenu = styled.div`
     cursor: pointer;
 `;
 
-export const DropdownBtn  = styled.button`
+export const CreateDropdownMenu = styled.div`
+    margin-right: 1em;
+    font-size: 3vh;
+    border: none;
+    float: right;
+    padding: 0;
+    cursor: pointer;
+`;
+
+export const DropdownBtn  = styled.div`
     display: flex;
-    position: absolute;
+    overflow: auto;
     top: 1vh;
     right: 1vw;
     border: 0;
@@ -60,13 +81,12 @@ export const DropdownBtn  = styled.button`
     padding: 0;
 `;
 
-export const DropdownPlus  = styled.div`
+export const DropdownPlusBtn  = styled.div`
     display: flex;
-    position: absolute;
     top: 1vh;
-    right: 7vw;
     border: 0;
     margin: 0;
+    color: white;
     padding: 0;
 `;
 

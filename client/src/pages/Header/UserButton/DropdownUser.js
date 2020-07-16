@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
-import {ArrowDown, DropdownBtn, DropdownContent, DropdownMenu, StyledLink, UserIcon} from './style';
+import React, {useRef, useState} from 'react';
+import {ArrowDown, DropdownBtn, UserDropdownContent, UserDropdownMenu, StyledLink, UserIcon} from './style';
+import useDropdownOutsideClick from "../../../components/useDropdownOutsideClick";
 
 function DropdownUser() {
     const [userDropdownVisible, setUserDropdownVisible] = useState(false);
@@ -7,19 +8,23 @@ function DropdownUser() {
     const toggleDropdown = () => {
         setUserDropdownVisible(!userDropdownVisible);
     };
+
+    const contentRef = useRef(null);
+    useDropdownOutsideClick(contentRef, setUserDropdownVisible);
+
     return (
         <>
-            <DropdownMenu>
+            <UserDropdownMenu>
                 <DropdownBtn onClick={toggleDropdown}>
                     <UserIcon/> <ArrowDown/>
                 </DropdownBtn>
                 {userDropdownVisible &&
-                    <DropdownContent>
+                    <UserDropdownContent ref={contentRef}>
                         <StyledLink to="/login"> 계정 </StyledLink>
                         <StyledLink to="/login"> 로그아웃 </StyledLink>
-                    </DropdownContent>
+                    </UserDropdownContent>
                 }
-            </DropdownMenu>
+            </UserDropdownMenu>
         </>
     )
 }

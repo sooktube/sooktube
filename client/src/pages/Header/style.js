@@ -4,6 +4,7 @@ import { MAIN } from '../Style/Main';
 
 export const HeaderWrapper = styled.div`
     width: 100vw;
+    height: 12vh;
     padding: 0;
     margin: 0;
     background-color: ${MAIN.DARK_UI_COLOR};

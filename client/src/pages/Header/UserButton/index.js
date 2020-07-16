@@ -1,19 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {userService} from "../../../services";
 
-import {
-    Username,
-    UsernameWrapper,
-    UserIcon,
-    StyledLink,
-    DropdownBtn,
-    DropdownContent,
-    DropdownMenu,
-    ArrowDown,
-    PlusMenu,
-    DropdownPlus
-} from './style';
+import {UserButtonWrapper} from './style';
 import DropdownUser from "./DropdownUser";
+import DropdownCreate from "./DropdownCreate";
 
 
 function UserButton() {
@@ -26,18 +16,10 @@ function UserButton() {
     }, []);
     return (
         <>
-            <UsernameWrapper>
-                <DropdownMenu>
-                    <DropdownPlus>
-                        <PlusMenu/> <ArrowDown/>
-                    </DropdownPlus>
-                    <DropdownContent>
-                        <StyledLink to="/login"> 재생목록 만들기 </StyledLink>
-                        <StyledLink to="/login"> 영상 만들기 </StyledLink>
-                    </DropdownContent>
-                </DropdownMenu>
+            <UserButtonWrapper>
+                <DropdownCreate/>
                 <DropdownUser/>
-            </UsernameWrapper>
+            </UserButtonWrapper>
         </>
     )
 }
