@@ -84,5 +84,5 @@ export const Rsubmit = styled.button`
 `;
 
 export const InvalidFeedback = styled.div`
-    color: red;
+    color:red;
 `;
