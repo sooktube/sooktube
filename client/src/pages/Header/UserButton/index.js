@@ -29,6 +29,10 @@ function UserButton() {
                     <DropdownPlus>
                         <PlusMenu/> <ArrowDown/>
                     </DropdownPlus>
+                    <DropdownContent>
+                        <StyledLink to="/login"> 재생목록 만들기 </StyledLink>
+                        <StyledLink to="/login"> 영상 만들기 </StyledLink>
+                    </DropdownContent>
                 </DropdownMenu>
                 <DropdownMenu>
                     <DropdownBtn>

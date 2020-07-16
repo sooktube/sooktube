@@ -48,6 +48,7 @@ export const DropdownMenu = styled.div`
     font-size: 3vh;
     border: none;
     margin: 0;
+    float: right;
     padding: 0;
     cursor: pointer;
     &:hover ${DropdownContent} {

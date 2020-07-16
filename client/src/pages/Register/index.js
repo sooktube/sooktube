@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../actions';
 import {userService} from "../../services";
-import {RegisterLogo, InputR, LabelName,LabelName2, FormGroupA, FormGroupB, FormGroupC,FormGroupD, FormGroupE, Rsubmit,InvalidFeedback} from "./style";
+import {RegisterLogo, InputR, LabelName,LabelName2, FormGroupA, FormGroupB, FormGroupC,FormGroupD, FormGroupE, Rsubmit,InvalidFeedback, RegisterForm} from "./style";
 import EmailValidator from 'email-validator';
 
 function Register() {
@@ -110,7 +110,7 @@ function Register() {
     }
 
     return (
-        <div className="register">
+        <RegisterForm className="register">
             <form name="form" onSubmit={handleSubmit}>
                 <RegisterLogo> SOOKTUBE </RegisterLogo> 
                 <FormGroupA>
@@ -192,7 +192,7 @@ function Register() {
                     </Rsubmit>
                 </FormGroupE>
             </form>
-        </div>
+        </RegisterForm>
     );
 }
 
