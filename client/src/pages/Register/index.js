@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../actions';
 import {userService} from "../../services";
-import {RegisterLogo, InputR, LabelName,LabelName2, FormGroupA, FormGroupB, FormGroupC,FormGroupD, FormGroupE, Rsubmit,InvalidFeedback} from "./style";
+import {RegisterLogo, InputR, LabelName,LabelName2, FormGroupA, FormGroupB, FormGroupC,FormGroupD, FormGroupE, Rsubmit,InvalidFeedback, RegisterForm} from "./style";
+import EmailValidator from 'email-validator';
 
 function Register() {
     const [user, setUser] = useState({
@@ -14,7 +15,9 @@ function Register() {
 
     const [validate, setValidate] = useState({
         userID: '',
-        username: ''
+        username: '',
+        password: '',
+        passwordChk: ''
     });
 
     const [isDuplicate, setIsDuplicate] = useState({
@@ -24,8 +27,8 @@ function Register() {
 
     const [submitted, setSubmitted] = useState(false);
 
-    const registration = useSelector(state => state.registration);
     const dispatch = useDispatch();
+    const registering = useSelector(state => state.registration.registering);
 
     useEffect(() => {
         dispatch(userActions.logout());
@@ -39,14 +42,12 @@ function Register() {
     function checkDuplicateUserID() {
         if (validate.userID === true){
             userService.checkUserID(user)
-                .then(
-                    response => {
-                        console.log(response);
-                        if (response.data === "OK") setIsDuplicate({...validate, userID: false});
-                        else setIsDuplicate({...validate, userID: true});
+                .then(response => {
+                        if (response.data === "OK") setIsDuplicate(isDuplicate => ({...isDuplicate, userID: false}));
+                        else setIsDuplicate(isDuplicate => ({...isDuplicate, userID: true}));
                     },
                     error => {
-                        setIsDuplicate({...validate, userID: true});
+                        setIsDuplicate(isDuplicate => ({...isDuplicate, userID: true}));
                     }
                 );
         }
@@ -55,13 +56,12 @@ function Register() {
     function checkDuplicateUsername() {
         if (validate.username === true){
             userService.checkUsername(user)
-                .then(
-                    response => {
-                        if (response.data === "OK") setIsDuplicate({...validate, username: false});
-                        else setIsDuplicate({...validate, username: true});
+                .then(response => {
+                        if (response.data === "OK") setIsDuplicate(isDuplicate => ({...isDuplicate, username: false}));
+                        else setIsDuplicate(isDuplicate => ({...isDuplicate, username: true}));
                     },
                     error => {
-                        setIsDuplicate({...validate, username: true});
+                        setIsDuplicate(isDuplicate => ({...isDuplicate, username: true}));
                     }
                 );
         }
@@ -71,7 +71,7 @@ function Register() {
         const { name, value } = e.target;
         setIsDuplicate(isDuplicate => ({...isDuplicate, [name]: false}));
         setUser(user => ({...user, [name]: value}));
-        if (value.length > 2 && value.length < 17){
+        if (EmailValidator.validate(value)){
             setValidate(validate => ({...validate, userID: true}));
         }
         else setValidate({...validate, userID: false});
@@ -87,19 +87,30 @@ function Register() {
         else setValidate({...validate, username: false});
     }
 
+    function validatePassword(e) {
+        const { name, value } = e.target;
+        setIsDuplicate(isDuplicate => ({...isDuplicate, [name]: false}));
+        setUser(user => ({...user, [name]: value}));
+        if (value.length > 7){
+            setValidate(validate => ({...validate, password: true}));
+        }
+        else setValidate({...validate, password: false});
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
         setSubmitted(true);
 
         const userSubmit = { userID: user.userID, username: user.username, password: user.password };
-
-        if ((user.username && user.userID && user.password) && (user.password === user.passwordChk)) {
+        if ((validate.username && validate.userID && validate.password)
+            && (user.password === user.passwordChk)
+            && (!isDuplicate.username && !isDuplicate.userID)){
             dispatch(userActions.register(userSubmit));
         }
     }
 
     return (
-        <div className="register">
+        <RegisterForm className="register">
             <form name="form" onSubmit={handleSubmit}>
                 <RegisterLogo> SOOKTUBE </RegisterLogo> 
                 <FormGroupA>
@@ -112,6 +123,9 @@ function Register() {
                            onChange={validateUserID}
                            onBlur={checkDuplicateUserID}
                            className={'form-control' + (validate.userID === false || isDuplicate.userID === true ? ' is-invalid' : '')}/>
+                    {(submitted && !user.userID) &&
+                    <div className="invalid_feedback">필수 정보입니다.</div>
+                    }
                     {validate.userID === false &&
                     <InvalidFeedback> 3자에서 16자 사이로 입력해주세요. </InvalidFeedback>
                     }
@@ -133,6 +147,9 @@ function Register() {
                     {submitted && !user.username &&
                     <InvalidFeedback>필수 정보입니다.</InvalidFeedback>
                     }
+                    {validate.username === false &&
+                    <div className="invalid_feedback"> 2자에서 16자 사이로 입력해주세요. </div>
+                    }
                     {isDuplicate.username === true &&
                     <InvalidFeedback> 사용 중인 별명입니다. </InvalidFeedback>
                     }
@@ -144,10 +161,13 @@ function Register() {
                            name="password"
                            id="rpassword"
                            value={user.password}
-                           onChange={handleChange}
+                           onChange={validatePassword}
                            className={'form-control' + (submitted && !user.password ? ' is-invalid' : '')}/>
                     {submitted && !user.password &&
                     <InvalidFeedback>필수 정보입니다.</InvalidFeedback>
+                    }
+                    {validate.password === false &&
+                    <div className="invalid_feedback"> 8자 이상 입력해주세요. </div>
                     }
                 </FormGroupC>
                 <FormGroupD>
@@ -168,10 +188,11 @@ function Register() {
                 <FormGroupE>
                     <Rsubmit className="btn btn-primary">
                         가입하기
+                        {registering && <span className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
                     </Rsubmit>
                 </FormGroupE>
             </form>
-        </div>
+        </RegisterForm>
     );
 }
 
