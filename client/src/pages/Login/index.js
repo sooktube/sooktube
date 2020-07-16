@@ -61,13 +61,13 @@ function Login() {
                     }
                 </FormGroup2>
                 <FormGroup3>
-                    <SubmitButton>
+                    <SubmitButton className="btn btn-primary">
                         로그인
-                        {loggingIn && <span className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
+                        {loggingIn && <span  className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
                     </SubmitButton>
-                    <Regguide>아직 회원이 아니세요? </Regguide>
-                    <Link to="/register"> <Regbutton> 회원가입 </Regbutton> </Link>
-                </FormGroup3>
+                    </FormGroup3>
+                <Regguide>아직 회원이 아니세요? </Regguide>
+                <Link to="/register"><Regbutton>회원가입</Regbutton></Link>
             </form>
         </>
     );

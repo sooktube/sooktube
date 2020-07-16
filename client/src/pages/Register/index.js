@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './Register.scss';
 import { userActions } from '../../actions';
-import { userService } from "../../services";
+import {userService} from "../../services";
+import {RegisterLogo, InputR, LabelName,LabelName2, FormGroupA, FormGroupB, FormGroupC,FormGroupD, FormGroupE, Rsubmit,InvalidFeedback} from "./style";
 import EmailValidator from 'email-validator';
 
 function Register() {
@@ -112,10 +112,11 @@ function Register() {
     return (
         <div className="register">
             <form name="form" onSubmit={handleSubmit}>
-                <h2> <p className="registerlogo"> SOOKTUBE </p> </h2>
-                <div className="form-groupA">
-                    <div className="label_name"> 이메일 </div>
-                    <input type="text"
+                <RegisterLogo> SOOKTUBE </RegisterLogo> 
+                <FormGroupA>
+                    <LabelName> 아이디 </LabelName>
+                    <LabelName2> 3자에서 16자 사이로 입력해주세요. </LabelName2>
+                    <InputR type="text"
                            name="userID"
                            id="ruserID"
                            value={user.userID}
@@ -126,16 +127,16 @@ function Register() {
                     <div className="invalid_feedback">필수 정보입니다.</div>
                     }
                     {validate.userID === false &&
-                    <div className="invalid_feedback"> 올바른 이메일 형식을 입력해주세요. </div>
+                    <InvalidFeedback> 3자에서 16자 사이로 입력해주세요. </InvalidFeedback>
                     }
                     {isDuplicate.userID === true &&
-                    <div className="invalid_feedback"> 사용 중인 ID입니다. </div>
+                    <InvalidFeedback> 사용 중인 ID입니다. </InvalidFeedback>
                     }
-                </div>
-                <div className="form-groupB">
-                    <div className="label_name"> 별명 </div>
-                    <div className="label_name"> 다른 유저와 중복되지 않는 별명으로 입력해주세요. (2자 ~ 16자) </div>
-                    <input
+                </FormGroupA>
+                <FormGroupB>
+                    <LabelName> 별명 </LabelName>
+                    <LabelName2> 다른 유저와 중복되지 않는 별명으로 입력해주세요. (2자 ~ 16자) </LabelName2>
+                    <InputR
                         type="text"
                         name="username"
                         id="rusername"
@@ -143,54 +144,53 @@ function Register() {
                         onChange={validateUsername}
                         onBlur={checkDuplicateUsername}
                         className={'form-control' + (validate.username === false || isDuplicate.username === true? ' is-invalid' : '')}/>
-                    {(submitted && !user.username) &&
-                    <div className="invalid_feedback">필수 정보입니다.</div>
+                    {submitted && !user.username &&
+                    <InvalidFeedback>필수 정보입니다.</InvalidFeedback>
                     }
                     {validate.username === false &&
                     <div className="invalid_feedback"> 2자에서 16자 사이로 입력해주세요. </div>
                     }
                     {isDuplicate.username === true &&
-                    <div className="invalid_feedback"> 사용 중인 별명입니다. </div>
+                    <InvalidFeedback> 사용 중인 별명입니다. </InvalidFeedback>
                     }
-                </div>
-                <div className="form-groupC">
-                    <div className="label_name">비밀번호</div>
-                    <div> 8자 이상 입력해주세요. </div>
-                    <input type="password"
+                </FormGroupB>
+                <FormGroupC>
+                    <LabelName>비밀번호</LabelName>
+                    <LabelName2> 8자 이상 입력해주세요. </LabelName2>
+                    <InputR type="password"
                            name="password"
                            id="rpassword"
                            value={user.password}
                            onChange={validatePassword}
                            className={'form-control' + (submitted && !user.password ? ' is-invalid' : '')}/>
-                    {(submitted && !user.password) &&
-                    <div className="invalid_feedback">필수 정보입니다.</div>
+                    {submitted && !user.password &&
+                    <InvalidFeedback>필수 정보입니다.</InvalidFeedback>
                     }
                     {validate.password === false &&
                     <div className="invalid_feedback"> 8자 이상 입력해주세요. </div>
                     }
-
-                </div>
-                <div className="form-groupD">
-                    <div className="label_name">비밀번호 확인</div>
-                    <input type="password"
+                </FormGroupC>
+                <FormGroupD>
+                    <LabelName>비밀번호 확인</LabelName>
+                    <InputR type="password"
                            name="passwordChk"
                            id="rpassword"
                            value={user.passwordChk}
                            onChange={handleChange}
                            className={'form-control' + (submitted && !user.passwordChk ? ' is-invalid' : '')}/>
-                    {(submitted && !user.passwordChk) &&
-                    <div className="invalid_feedback">필수 정보입니다.</div>
+                    {submitted && !user.passwordChk &&
+                    <InvalidFeedback>필수 정보입니다. </InvalidFeedback>
                     }
-                    {(user.passwordChk !== user.password) &&
-                    <div className="invalid_feedback"> 입력된 비밀번호와 다릅니다. </div>
+                    {submitted && (user.passwordChk !== user.password) &&
+                    <InvalidFeedback> 입력된 비밀번호와 다릅니다. </InvalidFeedback>
                     }
-                </div>
-                <div className="form-groupE">
-                    <button className="btn btn-primary" id="rsubmit">
+                </FormGroupD>
+                <FormGroupE>
+                    <Rsubmit className="btn btn-primary">
                         가입하기
                         {registering && <span className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
-                    </button>
-                </div>
+                    </Rsubmit>
+                </FormGroupE>
             </form>
         </div>
     );
