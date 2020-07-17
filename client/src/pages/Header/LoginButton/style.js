@@ -9,12 +9,12 @@ export const LoginButtonWrapper = styled.div`
 
 export const LoginButton = styled.span`
     font-size: 2.5vh;
-    margin: 0 0.5em 0 0;
+    margin: 0 1em 0 0;
     padding: 0 0 0.2em 0;
 `;
 
 export const RegisterButton = styled.span`
-    margin: 0 0 0 0.5em;
+    margin: 0 0 0 1em;
     font-size: 2.5vh;
 `;
 
