@@ -12,7 +12,7 @@ export const userActions = {
 function login(user) {
     return dispatch => {
         dispatch(request({ user }));
-
+        localStorage.clear();
         userService.login(user)
             .then(
                 user => { 
@@ -34,26 +34,6 @@ function login(user) {
 function logout() {
     userService.logout();
     return { type: userConstants.LOGOUT };
-}
-
-function checkUserID(user) {
-    return dispatch => {
-        dispatch(request({ user }));
-
-        userService.checkUserID(user)
-            .then(
-                response => {
-                    if (response.data === "OK") dispatch(success(user));
-                    else dispatch(failure(user));
-                },
-                error => {
-                    dispatch(failure(error.toString()));
-                }
-            );
-    };
-    function request(user) { return { type: userConstants.CHECK_USERID_REQUEST, user } }
-    function success(user) { return { type: userConstants.CHECK_USERID_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.CHECK_USERID_FAILURE, error } }
 }
 
 function register(user) {

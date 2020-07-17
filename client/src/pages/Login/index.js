@@ -57,17 +57,17 @@ function Login() {
                         onChange={handleChange}
                         className={'form-control' + (submitted && !password ? ' is-invalid' : '')} />
                     {submitted && !password &&
-                    <div className="invalid-feedback">비밀번호를 입력해주세요</div>
+                    <InvalidFeedback>비밀번호를 입력해주세요</InvalidFeedback>
                     }
                 </FormGroup2>
                 <FormGroup3>
-                    <SubmitButton>
+                    <SubmitButton className="btn btn-primary">
                         로그인
-                        {loggingIn && <span className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
+                        {loggingIn && <span  className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
                     </SubmitButton>
-                    <Regguide>아직 회원이 아니세요? </Regguide>
-                    <Link to="/register"> <Regbutton> 회원가입 </Regbutton> </Link>
-                </FormGroup3>
+                    </FormGroup3>
+                <Regguide>아직 회원이 아니세요? </Regguide>
+                <Link to="/register"><Regbutton>회원가입</Regbutton></Link>
             </form>
         </>
     );

@@ -1,16 +1,17 @@
 import React from 'react';
-import { HeaderLogo, HeaderWrapper, HeaderLayout, LoginButtonWrapper, LoginButton, RegisterButton, StyledLink } from "./style";
+import { HeaderLogo, HeaderWrapper, HeaderLayout } from "./style";
+import UserLoginButton from "./LoginButton";
+import UserButton from "./UserButton";
 
 function Header() {
     return (
         <HeaderWrapper>
             <HeaderLayout>
-                <HeaderLogo> SOOKTUBE </HeaderLogo>
-                <LoginButtonWrapper>
-                    <LoginButton> <StyledLink to='/login'> 로그인 </StyledLink> </LoginButton>
-                    <span> | </span>
-                    <RegisterButton> <StyledLink to='/Register'> 회원가입 </StyledLink> </RegisterButton>
-                </LoginButtonWrapper>
+                <HeaderLogo > SOOKTUBE </HeaderLogo>
+                {localStorage.getItem('user')
+                    ? <UserButton/>
+                    : <UserLoginButton/>
+                }
             </HeaderLayout>
         </HeaderWrapper>
     )
