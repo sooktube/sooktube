@@ -114,8 +114,7 @@ function Register() {
             <form name="form" onSubmit={handleSubmit}>
                 <RegisterLogo> SOOKTUBE </RegisterLogo> 
                 <FormGroupA>
-                    <LabelName> 아이디 </LabelName>
-                    <LabelName2> 3자에서 16자 사이로 입력해주세요. </LabelName2>
+                    <LabelName> 이메일 </LabelName>
                     <InputR type="text"
                            name="userID"
                            id="ruserID"
@@ -127,7 +126,7 @@ function Register() {
                     <div className="invalid_feedback">필수 정보입니다.</div>
                     }
                     {validate.userID === false &&
-                    <InvalidFeedback> 3자에서 16자 사이로 입력해주세요. </InvalidFeedback>
+                    <InvalidFeedback> 올바른 이메일 형식으로 입력해주세요. </InvalidFeedback>
                     }
                     {isDuplicate.userID === true &&
                     <InvalidFeedback> 사용 중인 ID입니다. </InvalidFeedback>
