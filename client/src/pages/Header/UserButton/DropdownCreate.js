@@ -20,8 +20,8 @@ function DropdownCreate() {
                 </DropdownPlusBtn>
                 {createDropdownVisible &&
                     <CreateDropdownContent ref={contentRef}>
-                        <StyledLink to="/"> 재생목록 만들기 </StyledLink>
-                        <StyledLink to="/"> 영상 만들기 </StyledLink>
+                        <StyledLink to="/create/playlist"> 재생목록 만들기 </StyledLink>
+                        <StyledLink to="/create/video"> 영상 업로드 </StyledLink>
                     </CreateDropdownContent>
                 }
             </CreateDropdownMenu>

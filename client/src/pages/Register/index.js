@@ -115,7 +115,6 @@ function Register() {
                 <RegisterLogo> SOOKTUBE </RegisterLogo> 
                 <FormGroupA>
                     <LabelName> 이메일 </LabelName>
-                    <LabelName2> 3자에서 16자 사이로 입력해주세요. </LabelName2>
                     <InputR type="text"
                            name="userID"
                            id="ruserID"
