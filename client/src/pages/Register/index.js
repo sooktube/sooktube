@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../actions';
 import {userService} from "../../services";
-import {RegisterLogo, InputR, LabelName,LabelName2, FormGroupA, FormGroupB, FormGroupC,FormGroupD, FormGroupE, Rsubmit,InvalidFeedback, RegisterForm} from "./style";
+import {RegisterLogo, MainBackground, InputR, LabelName,LabelName2, FormGroupA, FormGroupB, FormGroupC,FormGroupD, FormGroupE, Rsubmit,InvalidFeedback, RegisterForm} from "./style";
 import EmailValidator from 'email-validator';
 
 function Register() {
@@ -110,7 +110,8 @@ function Register() {
     }
 
     return (
-        <RegisterForm className="register">
+        <MainBackground>
+         <RegisterForm className="register">
             <form name="form" onSubmit={handleSubmit}>
                 <RegisterLogo> SOOKTUBE </RegisterLogo> 
                 <FormGroupA>
@@ -187,13 +188,14 @@ function Register() {
                     }
                 </FormGroupD>
                 <FormGroupE>
-                    <Rsubmit className="btn btn-primary">
+                    <Rsubmit>
                         가입하기
                         {registering && <span className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
                     </Rsubmit>
                 </FormGroupE>
             </form>
-        </RegisterForm>
+         </RegisterForm>
+        </MainBackground>
     );
 }
 

@@ -7,6 +7,7 @@ import Main from "./pages/Main";
 import Login from './pages/Login';
 import Register from "./pages/Register";
 import VideoPlayer from "./pages/VideoPlayer";
+import VideoUpload from "./pages/VideoUpload"
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path='/create/playlist' component={Login}/>
                 <Route path='/create/video' component={Register}/>
                 <Route path='/player' component={VideoPlayer}/>
+                <Route path='/videoUpload' component={VideoUpload}/>
                 <Redirect from="*" to="/" />
             </Switch>
         </Router>
