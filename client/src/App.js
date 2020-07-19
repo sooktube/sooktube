@@ -7,7 +7,7 @@ import Main from "./pages/Main";
 import Login from './pages/Login';
 import Register from "./pages/Register";
 import VideoPlayer from "./pages/VideoPlayer";
-import VideoUpload from "./pages/VideoUpload"
+import VideoUpload from "./pages/CreateVideo"
 
 function App() {
     return (

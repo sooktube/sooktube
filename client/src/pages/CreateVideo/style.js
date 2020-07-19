@@ -27,7 +27,7 @@ export const UploadForm = styled.div`
 	flex-direction: column;
 	margin: 10px auto;
 	transition: all 0.3s ease-in;
-    top:20%;
+    top:30%;
     width:40%;
     height:40%;
     margin-left:30%;
@@ -65,6 +65,19 @@ export const UploadInput = styled.input`
     overflow:hidden;
 `;
 
+export const TitleInput = styled.input`
+    position: relative;
+    height:5vh;
+    width:30vw;
+`;
+
+export const DescInput = styled.textarea`
+    position:absolute;
+    width:0;
+    height:0;
+    overflow:hidden;
+`;
+
 export const ButtonUpload = styled.button`
     padding: 6px 23px;
 	background: #3f4257;
@@ -79,7 +92,6 @@ export const ButtonUpload = styled.button`
 	border: none;
     position : absolute;
     top:45%;
-
 `;
 
 export const Label = styled.label`

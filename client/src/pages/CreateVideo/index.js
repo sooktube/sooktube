@@ -1,5 +1,5 @@
 import React from 'react';
-import {VideoUploadWrapper, FileInfo, UploadForm, UploadLogo, UploadInput,Label, fileInput,InputTitle,UploadVideo} from "./style";
+import {VideoUploadWrapper, FileInfo, UploadForm, ButtonUpload, UploadLogo, UploadInput, TitleInput, DescInput, Label, UploadVideo} from "./style";
 import { useState } from 'react';
 import Header from "../../components/Header";
 
@@ -11,7 +11,7 @@ function VideoUpload(){
         videoPath: ' 선택된 파일 없음',
         userID: ''
     });
-    
+
     function fileSelect(event){
         setInput({...input, videoPath: ' '+ event.target.files[0].name});
     }
@@ -27,8 +27,9 @@ function VideoUpload(){
                         </Label>
                         <FileInfo> {input.videoPath} </FileInfo>
                 </UploadVideo>
-                    <input type="text" placeholder="title" ></input>
-                    <input type="text" placeholder="description" ></input>
+                    <TitleInput type="text" placeholder="title" placeholder='제목'></TitleInput>
+                    <DescInput type="text" placeholder="description" placeholder='어떤 동영상인가요?'></DescInput>
+                <ButtonUpload> 업로드 </ButtonUpload>
             </VideoUploadWrapper>
         </>
     );
