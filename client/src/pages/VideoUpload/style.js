@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { MAIN } from '../Style/Main';
 
-export const MainBackground = styled.div`
+export const VideoUploadWrapper = styled.div`
     min-width: 100vw;
     min-height: 100vh;
     background: #fff;
@@ -9,6 +9,10 @@ export const MainBackground = styled.div`
 	justify-content: center;
 
 
+`;
+
+export const FileInfo = styled.span`
+    font-size: 2vh;
 `;
 
 export const UploadForm = styled.div`

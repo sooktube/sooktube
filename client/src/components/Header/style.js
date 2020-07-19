@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
-import { MAIN } from '../Style/Main';
+import { MAIN } from '../../pages/Style/Main';
 
 export const HeaderWrapper = styled.div`
     width: 100vw;

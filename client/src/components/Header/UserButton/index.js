@@ -3,16 +3,10 @@ import {UserButtonWrapper} from './style';
 import DropdownUser from "./DropdownUser";
 import DropdownCreate from "./DropdownCreate";
 import {userService} from "../../../services";
+import {useSelector} from "react-redux";
 
 function UserButton() {
-    const [username, setUsername] = useState(null);
-
-    useEffect(() => {
-        userService.getUsername()
-            .then(data => {
-                setUsername(data);
-            })
-    }, []);
+    const username = useSelector(state => state.authentication.username);
 
     return (
         <>

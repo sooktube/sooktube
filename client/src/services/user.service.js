@@ -27,8 +27,7 @@ function login(user) {
 }
 
 function getUsername() {
-    let user = localStorage.getItem('user') !== "undefined" && typeof localStorage.getItem('user') !== "undefined"
-        && localStorage.getItem('user');
+    let user = localStorage.getItem('user');
     return axios({
         method: 'get',
         url: 'https://soktube.appspot.com/api/auth/myName',
@@ -37,6 +36,7 @@ function getUsername() {
             'Authorization': 'Bearer ' + user
         }
     }).then((response) => {
+        localStorage.setItem('username', response.data);
         return response.data;
         })
         .catch(error => {

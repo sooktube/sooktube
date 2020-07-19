@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {ArrowDown, DropdownUserBtn, UserDropdownContent, UserDropdownMenu, StyledLink, DropdownItem, UserIcon} from './style';
-import useDropdownOutsideClick from "../../../components/useDropdownOutsideClick";
+import useDropdownOutsideClick from "../../useDropdownOutsideClick";
 import {userService} from "../../../services";
 
 function DropdownUser({username}) {
