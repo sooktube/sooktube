@@ -78,14 +78,16 @@ export const SubmitButton = styled.button`
 export const Regbutton = styled.span`
     position:absolute;
     top:70%;
-    left:54%;
+    left:55%;
     padding:0px;
+    font-size:2.7vh;
 `;
   
 export const Regguide = styled.span`
     color:#f1c40f;
     position:absolute;
     top:70%;
-    left:40%;
+    left:38%;
     padding:0px;
+    font-size:2.7vh;
 `;
