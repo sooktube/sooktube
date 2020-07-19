@@ -34,8 +34,8 @@ function getUsername() {
         headers: {
             'content-type': 'application/json',
             'Authorization': 'Bearer ' + user
-        }
-    }).then((response) => {
+        }})
+        .then((response) => {
         localStorage.setItem('username', response.data);
         return response.data;
         })

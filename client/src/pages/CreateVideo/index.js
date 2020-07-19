@@ -2,14 +2,20 @@ import React from 'react';
 import {VideoUploadWrapper, FileInfo, UploadForm, ButtonUpload, UploadLogo, UploadInput, TitleInput, DescInput, Label, UploadVideo} from "./style";
 import { useState } from 'react';
 import Header from "../../components/Header";
+import axios from "axios";
 
 function VideoUpload(){
-    const [input,setInput]=useState({
+    const [input,setInput] = useState({
         videoTitle: null,
         videoDesc: null,
         videoDate: null,
         videoPath: ' 선택된 파일 없음',
         userID: ''
+    });
+
+    const [state, setState] = useState({
+        file: null,
+        success: false,
     });
 
     function fileSelect(event){
@@ -27,8 +33,8 @@ function VideoUpload(){
                         </Label>
                         <FileInfo> {input.videoPath} </FileInfo>
                 </UploadVideo>
-                    <TitleInput type="text" placeholder="title" placeholder='제목'></TitleInput>
-                    <DescInput type="text" placeholder="description" placeholder='어떤 동영상인가요?'></DescInput>
+                    <TitleInput type="text" placeholder='제목'/>
+                    <DescInput type="text" placeholder='어떤 동영상인가요?'/>
                 <ButtonUpload> 업로드 </ButtonUpload>
             </VideoUploadWrapper>
         </>
