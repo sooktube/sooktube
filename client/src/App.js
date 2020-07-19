@@ -20,9 +20,8 @@ function App() {
                 <Route path='/login' component={Login}/>
                 <Route path='/register' component={Register}/>
                 <Route path='/create/playlist' component={Login}/>
-                <Route path='/create/video' component={Register}/>
+                <Route path='/create/video' component={VideoUpload}/>
                 <Route path='/player' component={VideoPlayer}/>
-                <Route path='/videoUpload' component={VideoUpload}/>
                 <Redirect from="*" to="/" />
             </Switch>
         </Router>

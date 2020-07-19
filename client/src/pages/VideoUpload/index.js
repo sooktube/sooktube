@@ -1,7 +1,8 @@
 import React from 'react';
-import {MainBackground, UploadForm, UploadLogo, UploadInput,Label, fileInput,InputTitle,UploadVideo} from "./style";
+import {MainBackground, UploadForm, UploadLogo, UploadInput,Label,InputTitle,UploadVideo,InputDesc,UploadButton,NameInput} from "./style";
 import { useState } from 'react';
-
+import { MAIN } from '../Style/Main';
+import Header from "../Header";
 
 
 function VideoUpload(){
@@ -13,7 +14,7 @@ function VideoUpload(){
     }
 
     const style={
-        border:0
+        border:0  ,
     }
 
 
@@ -22,20 +23,25 @@ function VideoUpload(){
 
 
     return(
+        
         <MainBackground>
-            <UploadLogo> Upload the Video </UploadLogo>
+            <Header></Header>
+            <UploadLogo> UPLOAD THE VIDEO </UploadLogo>
             <UploadVideo>
                     <Label>Choose video
                     <UploadInput id="inputId" type="file" onChange={fileSelect}/>
                     </Label>
-                    <input type="text" style={style} readonly="readonly" id="file_route" value={text}></input>
+                    <NameInput type="text" style={style} readonly="readonly" id="file_route" value={text}></NameInput>
             </UploadVideo>  
             
                 
-                <input type="text" placeholder="title" ></input>
-                <input type="text" placeholder="description" ></input>
+                <InputTitle type="text" placeholder="title" ></InputTitle>
+                <InputDesc cols="10" rows="5" placeholder="description" ></InputDesc>
+                <UploadButton>UPLOAD</UploadButton>
             
         </MainBackground>
+       
+        
     );
 
 }
