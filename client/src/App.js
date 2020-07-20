@@ -19,9 +19,9 @@ function App() {
                 <Route exact path='/' component={Main}/>
                 <Route path='/login' component={Login}/>
                 <Route path='/register' component={Register}/>
-                <Route path='/player' component={VideoPlayer}/>
-                <Route path='/create/video' component={VideoUpload}/>
                 <Route path='/create/playlist' component={VideoUpload}/>
+                <Route path='/create/video' component={VideoUpload}/>
+                <Route path='/player' component={VideoPlayer}/>
                 <Redirect from="*" to="/" />
             </Switch>
         </Router>

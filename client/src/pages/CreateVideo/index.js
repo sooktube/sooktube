@@ -1,15 +1,14 @@
-import React from 'react';
-import {VideoUploadWrapper, FileInfo, UploadForm, ButtonUpload, UploadLogo, UploadInput, TitleInput, DescInput, Label, UploadVideo} from "./style";
-import { useState } from 'react';
+import React, {useRef, useState, useEffect} from 'react';
+import {CreateVideoWrapper, UploadForm, UploadLogo, UploadInput,Label,InputTitle,UploadVideo,InputDesc,UploadButton, VideoName, ThumbnailWrapper, Thumbnail} from "./style";
 import Header from "../../components/Header";
-import axios from "axios";
 
 function VideoUpload(){
     const [input,setInput] = useState({
         videoTitle: null,
         videoDesc: null,
         videoDate: null,
-        videoPath: ' 선택된 파일 없음',
+        videoPath: null,
+        fileName: null,
         userID: ''
     });
 
@@ -22,22 +21,29 @@ function VideoUpload(){
         setInput({...input, videoPath: ' '+ event.target.files[0].name});
     }
 
+    const canvas = useRef(null);
+    const video = useRef(null);
+
     return(
-        <>
+        <CreateVideoWrapper>
             <Header/>
-            <VideoUploadWrapper>
-                <UploadLogo> Upload the Video </UploadLogo>
-                <UploadVideo>
-                        <Label>Choose video
-                            <UploadInput type="file" onChange={fileSelect}/>
-                        </Label>
-                        <FileInfo> {input.videoPath} </FileInfo>
-                </UploadVideo>
-                    <TitleInput type="text" placeholder='제목'/>
-                    <DescInput type="text" placeholder='어떤 동영상인가요?'/>
-                <ButtonUpload> 업로드 </ButtonUpload>
-            </VideoUploadWrapper>
-        </>
+            <UploadLogo> UPLOAD THE VIDEO </UploadLogo>
+            <UploadVideo>
+                <Label>Choose video
+                    <UploadInput useRef={video} type="file" onChange={fileSelect}/>
+                </Label>
+                {input.videoPath
+                    ? <VideoName> {input.videoPath}</VideoName>
+                    : <VideoName> 선택된 파일 없음 </VideoName>
+                }
+            </UploadVideo>
+            <InputTitle type="text" placeholder="title" />
+            <InputDesc cols="10" rows="5" placeholder="description" />
+            <UploadButton>UPLOAD</UploadButton>
+            <ThumbnailWrapper>
+                <Thumbnail ref={canvas}/>
+            </ThumbnailWrapper>
+        </CreateVideoWrapper>
     );
 
 }
