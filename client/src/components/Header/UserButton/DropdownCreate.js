@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import {StyledLink, DropdownPlusBtn, CreateDropdownContent, CreateDropdownMenu, ArrowDown, PlusMenu} from './style';
-import useDropdownOutsideClick from "../../useDropdownOutsideClick";
+import useDropdownOutsideClick from "../../../hooks/useDropdownOutsideClick";
 
 function DropdownCreate() {
     const [createDropdownVisible, setCreateDropdownVisible] = useState(false);
