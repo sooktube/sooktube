@@ -2,7 +2,7 @@ import React, {useRef, useState, useEffect} from 'react';
 import {CreateVideoWrapper, UploadForm, UploadLogo, UploadInput,Label,InputTitle,UploadVideo,InputDesc,UploadButton, VideoName, ThumbnailWrapper, Thumbnail} from "./style";
 import Header from "../../components/Header";
 
-function VideoUpload(){
+function CreateVideo(){
     const [input,setInput] = useState({
         videoTitle: null,
         videoDesc: null,
@@ -48,4 +48,4 @@ function VideoUpload(){
 
 }
 
-export default VideoUpload;
+export default CreateVideo;

@@ -7,7 +7,8 @@ import Main from "./pages/Main";
 import Login from './pages/Login';
 import Register from "./pages/Register";
 import VideoPlayer from "./pages/VideoPlayer";
-import VideoUpload from "./pages/CreateVideo"
+import CreatePlaylist from "./pages/CreatePlaylist";
+import CreateVideo from "./pages/CreateVideo";
 
 function App() {
     return (
@@ -19,8 +20,8 @@ function App() {
                 <Route exact path='/' component={Main}/>
                 <Route path='/login' component={Login}/>
                 <Route path='/register' component={Register}/>
-                <Route path='/create/playlist' component={VideoUpload}/>
-                <Route path='/create/video' component={VideoUpload}/>
+                <Route path='/create/playlist' component={CreatePlaylist}/>
+                <Route path='/create/video' component={CreateVideo}/>
                 <Route path='/player' component={VideoPlayer}/>
                 <Redirect from="*" to="/" />
             </Switch>
