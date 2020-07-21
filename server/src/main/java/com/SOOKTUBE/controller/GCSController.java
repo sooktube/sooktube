@@ -3,14 +3,14 @@ package com.SOOKTUBE.controller;
 
 import java.io.IOException;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SOOKTUBE.model.UploadReqDto;
 import com.SOOKTUBE.service.GCSService;
-import com.google.cloud.storage.BlobInfo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,35 +22,31 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class GCSController {
 
+// private final S3Service s3Service;
  private final GCSService gcsService;
 
- @PostMapping("gcs/upload")
- public ResponseEntity localUploadToStorage(@RequestBody UploadReqDto uploadReqDto) throws IOException {
+
+	@CrossOrigin
+	@RequestMapping(value = "/api/upload", method = RequestMethod.POST)
+	public String localUploadToStorage(@RequestBody UploadReqDto uploadReqDto) throws IOException {
+		
+		 
+		
+		
+		  String bucket = "soktube.appspot.com"; 
+		  String object = "sooktubeTest1.txt";
+		  
+		  String url = gcsService.generateV4GPutObjectSignedUrl(uploadReqDto);
+		 
 		
 		/*
-		 * String projectId = "soktube"; String bucketName =
-		 * uploadReqDto.getBucketName(); String objectName =
-		 * uploadReqDto.getUploadFileName(); String filePath =
-		 * uploadReqDto.getLocalFileLocation();
+		 * String objectKey = "test.txt";
+		 * 
+		 * String url = s3service.S3upload(objectKey);
 		 */
-		 
-			
-			 // BlobInfo fileFromGCS = gcsService.uploadFileToGCS(uploadReqDto); 
-	 String URL = gcsService.uploadFileToGCS(uploadReqDto);
-			//  return ResponseEntity.ok(fileFromGCS.toString());
-	 
-	 return ResponseEntity.ok(URL);
-			 
-		 
-		
-				/*
-				 * GCSService.uploadFileToGCS(projectId, bucketName, objectName, filePath);
-				 * return "done";
-				 */
-		 
-	 
-	// return ResponseEntity.ok(GCSService.uploadFileToGCS(projectId, bucketName, objectName, filePath));
+		return url;
  }
+	
 }
 
 
