@@ -1,33 +1,20 @@
 import React from 'react';
 import './card.scss';
-import {CardDate, CardDesc, CardLike, CardTitle, CardWrapper, UtilityInfo} from "./style";
 import {FaHeart} from "react-icons/all";
 
-function PlayListCard() {
+function PlaylistCard() {
 
     return (
-        <>
-            <CardWrapper>
-                <CardTitle>
-                    <h3>SPRING FEVER</h3>
-                    <hr/>
-                    <div className="intro">Yllamco laboris nisi ut aliquip ex ea commodo.</div>
-                </CardTitle>
-                <CardDesc>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim.
-                </CardDesc>
-                <UtilityInfo>
-                    <UtilityInfo>
-                        <CardDate> 2020.07.15 </CardDate>
-                        <CardLike> 3 <FaHeart/> </CardLike>
-                    </UtilityInfo>
-                </UtilityInfo>
-                <div className="gradient-overlay"></div>
-                <div className="color-overlay"></div>
-            </CardWrapper>
-        </>
+      <>
+          <div className="books">
+                <img src="https://graphics8.nytimes.com/images/2012/12/19/books/20favorite-book-covers-slide-ORTM/20favorite-book-covers-slide-ORTM-slide.jpg"/>
+                <img src="https://graphics8.nytimes.com/images/2012/12/19/books/20favorite-book-covers-slide-DQPY/20favorite-book-covers-slide-DQPY-slide.jpg"/>
+                <img src="https://graphics8.nytimes.com/images/2012/12/19/books/20favorite-book-covers-slide-QNUF/20favorite-book-covers-slide-QNUF-slide.jpg"/>
+                <img src="https://graphics8.nytimes.com/images/2012/12/19/books/20favorite-book-covers-slide-U60O/20favorite-book-covers-slide-U60O-slide.jpg"/>
+                <div className="shelf"></div>
+          </div>
+      </>
     );
 }
 
-export default PlayListCard;
+export default PlaylistCard;

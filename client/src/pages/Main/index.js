@@ -7,6 +7,7 @@ function Main() {
     return (
         <MainBackground>
             <Header/>
+            <PlayListCard/>
         </MainBackground>
     )
 }
