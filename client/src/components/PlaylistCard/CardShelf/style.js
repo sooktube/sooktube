@@ -14,7 +14,7 @@ export const CardWrapper = styled.div`
     position: relative;
     height: 32vh;
     width: 12vw;
-    margin: 0 1vw;
+    margin-left: -0.6vw;
     z-index: 2;
     transform: perspective(500px) rotateY(22deg);
     transition: all 0.2s ease;
