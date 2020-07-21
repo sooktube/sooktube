@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../actions';
 import {userService} from "../../services";
-import {RegisterLogo, InputR, LabelName,LabelName2, FormGroupA, FormGroupB, FormGroupC,FormGroupD, FormGroupE, Rsubmit,InvalidFeedback, RegisterForm} from "./style";
+import {RegisterLogo, MainBackground, InputR, LabelName,LabelName2, FormGroupA, FormGroupB, FormGroupC,FormGroupD, FormGroupE, Rsubmit,InvalidFeedback, RegisterForm} from "./style";
 import EmailValidator from 'email-validator';
 
 function Register() {
@@ -110,26 +110,28 @@ function Register() {
     }
 
     return (
-        <RegisterForm className="register">
+        <MainBackground>
+         <RegisterForm className="register">
             <form name="form" onSubmit={handleSubmit}>
                 <RegisterLogo> SOOKTUBE </RegisterLogo> 
                 <FormGroupA>
                     <LabelName> 이메일 </LabelName>
                     <InputR type="text"
-                           name="userID"
-                           id="ruserID"
-                           value={user.userID}
-                           onChange={validateUserID}
-                           onBlur={checkDuplicateUserID}
-                           className={'form-control' + (validate.userID === false || isDuplicate.userID === true ? ' is-invalid' : '')}/>
+                            name="userID"
+                            id="ruserID"
+                            value={user.userID}
+                            onChange={validateUserID}
+                            onBlur={checkDuplicateUserID}
+                            className={'form-control' + ((submitted && !user.userID) ||
+                            (user.userID && (!validate.userID || isDuplicate.userID)) ? ' is-invalid' : '')}/>
                     {(submitted && !user.userID) &&
-                    <div className="invalid_feedback">필수 정보입니다.</div>
+                    <InvalidFeedback> 필수 정보입니다. </InvalidFeedback>
                     }
                     {validate.userID === false &&
                     <InvalidFeedback> 올바른 이메일 형식으로 입력해주세요. </InvalidFeedback>
                     }
                     {isDuplicate.userID === true &&
-                    <InvalidFeedback> 사용 중인 ID입니다. </InvalidFeedback>
+                    <InvalidFeedback> 사용 중인 이메일입니다. </InvalidFeedback>
                     }
                 </FormGroupA>
                 <FormGroupB>
@@ -142,12 +144,13 @@ function Register() {
                         value={user.username}
                         onChange={validateUsername}
                         onBlur={checkDuplicateUsername}
-                        className={'form-control' + (validate.username === false || isDuplicate.username === true? ' is-invalid' : '')}/>
+                        className={'form-control' + ((submitted && !user.username) ||
+                            (user.username && (!validate.username || isDuplicate.username)) ? ' is-invalid' : '')}/>
                     {submitted && !user.username &&
                     <InvalidFeedback>필수 정보입니다.</InvalidFeedback>
                     }
                     {validate.username === false &&
-                    <div className="invalid_feedback"> 2자에서 16자 사이로 입력해주세요. </div>
+                    <InvalidFeedback> 2자에서 16자 사이로 입력해주세요. </InvalidFeedback>
                     }
                     {isDuplicate.username === true &&
                     <InvalidFeedback> 사용 중인 별명입니다. </InvalidFeedback>
@@ -166,7 +169,7 @@ function Register() {
                     <InvalidFeedback>필수 정보입니다.</InvalidFeedback>
                     }
                     {validate.password === false &&
-                    <div className="invalid_feedback"> 8자 이상 입력해주세요. </div>
+                    <InvalidFeedback> 8자 이상 입력해주세요. </InvalidFeedback>
                     }
                 </FormGroupC>
                 <FormGroupD>
@@ -185,13 +188,14 @@ function Register() {
                     }
                 </FormGroupD>
                 <FormGroupE>
-                    <Rsubmit className="btn btn-primary">
+                    <Rsubmit>
                         가입하기
                         {registering && <span className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
                     </Rsubmit>
                 </FormGroupE>
             </form>
-        </RegisterForm>
+         </RegisterForm>
+        </MainBackground>
     );
 }
 

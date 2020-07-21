@@ -1,9 +1,9 @@
 import { userConstants } from '../constants';
 
-let user = localStorage.getItem('user') !== "undefined" && typeof localStorage.getItem('user') !== "undefined"
-    && localStorage.getItem('user');
+let user = localStorage.getItem('user');
+let username  = localStorage.getItem('username');
 
-const initialState = user ? { loggedIn: true, user } : {};
+const initialState = user ? { loggedIn: true, user, username } : {};
 
 export function authentication(state = initialState, action) {
   switch (action.type) {
@@ -11,7 +11,6 @@ export function authentication(state = initialState, action) {
       return {
         loggingIn: true,
         user: action.user,
-        username: user
       };
     case userConstants.LOGIN_SUCCESS:
       return {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../actions';
-import {LoginLogo, FormGroup1, FormGroup2, FormGroup3, InvalidFeedback, SubmitButton, Regbutton, Regguide, InputA} from "./style";
+import {LoginLogo, MainBackground, FormGroup1, FormGroup2, FormGroup3, InvalidFeedback, SubmitButton, Regbutton, Regguide, InputA} from "./style";
 
 function Login() {
     const [inputs, setInputs] = useState({
@@ -33,9 +33,9 @@ function Login() {
             dispatch(userActions.login({userID, password}));
         }
     }
-
+    console.log('a');
     return (
-        <>
+        <MainBackground>
             <LoginLogo> SOOKTUBE </LoginLogo> 
             <form name="form" onSubmit={handleSubmit}>
                 <FormGroup1>
@@ -46,7 +46,7 @@ function Login() {
                         onChange={handleChange}
                         className={'form-control' + (submitted && !userID ? ' is-invalid' : '')}/>
                     {submitted && !userID &&
-                    <InvalidFeedback>아이디를 입력해주세요</InvalidFeedback>
+                    <InvalidFeedback>이메일을 입력해주세요</InvalidFeedback>
                     }
                 </FormGroup1>
                 <FormGroup2>
@@ -61,7 +61,7 @@ function Login() {
                     }
                 </FormGroup2>
                 <FormGroup3>
-                    <SubmitButton className="btn btn-primary">
+                    <SubmitButton>
                         로그인
                         {loggingIn && <span  className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
                     </SubmitButton>
@@ -69,7 +69,7 @@ function Login() {
                 <Regguide>아직 회원이 아니세요? </Regguide>
                 <Link to="/register"><Regbutton>회원가입</Regbutton></Link>
             </form>
-        </>
+        </MainBackground>
     );
 }
 

@@ -1,16 +1,23 @@
 import styled from 'styled-components'
 import { MAIN } from '../Style/Main';
 
+export const MainBackground = styled.div`
+    min-width: 100vw;
+    min-height: 100vh;
+    background: ${MAIN.BACKGROUND_COLOR};
+`;
+
 export const LoginLogo = styled.div`
-    font-size: 34px;
+    font-size: 35px;
     width:200px; height:40px;
     position:fixed;
     top:35%; left:50.5%;
     margin-left:-100px;
     margin-top:-40px;
     padding:0px;
-    color: ${MAIN.BACKGROUND_COLOR};
+    color: ${MAIN.DARK_UI_COLOR};
     font-weight:bold;
+    
 `;
 
 export const FormGroup1 = styled.div`
@@ -59,22 +66,28 @@ export const SubmitButton = styled.button`
     left:50%; 
     margin-left:0px; 
     padding:0px;
-    background-color: #1E3A79;
+    background-color: ${MAIN.DARK_UI_COLOR};
     border: none;
     color: white;
+    &:hover {
+    background-color: #d35400;
+  }
 `;
 
 
 export const Regbutton = styled.span`
     position:absolute;
     top:70%;
-    left:54%;
+    left:55%;
     padding:0px;
+    font-size:2.7vh;
 `;
   
 export const Regguide = styled.span`
+    color:#f1c40f;
     position:absolute;
     top:70%;
-    left:40%;
+    left:38%;
     padding:0px;
+    font-size:2.7vh;
 `;
