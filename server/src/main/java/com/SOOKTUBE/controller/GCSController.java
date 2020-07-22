@@ -27,25 +27,22 @@ public class GCSController {
 
 
 	@CrossOrigin
-	@RequestMapping(value = "/api/upload", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/video/upload", method = RequestMethod.POST)
 	public String localUploadToStorage(@RequestBody UploadReqDto uploadReqDto) throws IOException {
-		
-		 
-		
-		
-		  String bucket = "soktube.appspot.com"; 
-		  String object = "sooktubeTest1.txt";
-		  
+
 		  String url = gcsService.generateV4GPutObjectSignedUrl(uploadReqDto);
 		 
-		
-		/*
-		 * String objectKey = "test.txt";
-		 * 
-		 * String url = s3service.S3upload(objectKey);
-		 */
 		return url;
  }
+	
+	@CrossOrigin
+	@RequestMapping(value = "/api/video/getVideo", method = RequestMethod.POST)
+	public String getURLfromGCS(@RequestBody UploadReqDto uploadReqDto) throws IOException{
+		
+		String url = gcsService.generateV4GetObjectSignedUrl(uploadReqDto);
+		
+		return url;
+	}
 	
 }
 
