@@ -3,21 +3,17 @@
  
 <mapper namespace="com.SOOKTUBE.dao.VideoDAO">
  
-    <insert id="PostVideo"
+    <insert id="newVideo"
             parameterType="com.SOOKTUBE.model.VideoDTO">
-<!--             useGeneratedKeys="true"
-            keyProperty="videoID" -->
-        INSERT INTO VIDEO(`videoID`, `videoTitle`, `videoDesc`, `videoDate`, `videoPath`, `userID`)
-        VALUES (#{videoID}, #{videoTitle}, #{videoDesc}, #{videoDate}, #{videoPath}, #{userID})
+        INSERT INTO VIDEO(`videoID`, `videoTitle`, `videoDesc`, `videoDate`, `userID`)
+        VALUES (`videoID`, #{videoTitle}, #{videoDesc}, #{videoDate}, #{userID})
     </insert>
-    
-    <select id="getAllVideo" parameterType="Integer"
-    resultType="com.SOOKTUBE.model.VideoDTO">
-    
-    SELECT `videoID`, `videoTitle`, `videoDesc`, `videoDate`, `videoPath`, `userID`
-    FROM VIDEO
-    WHERE `videoID` = #{param}
-    
-    </select>
  
 </mapper>
+
+
+<!-- videoID int(11) PK 
+videoTitle varchar(20) 
+videoDesc text 
+videoDate date 
+userID varchar(50) -->
