@@ -7,7 +7,7 @@ export const HeaderWrapper = styled.div`
     height: 12vh;
     padding: 0;
     margin: 0;
-    background-color: ${MAIN.DARK_UI_COLOR};
+    background-color: transparent;
 `;
 
 export const HeaderLayout = styled.div`
@@ -19,10 +19,10 @@ export const HeaderLayout = styled.div`
 export const HeaderLogo = styled(NavLink)`
     position: relative;
     font-weight: bold;
-    font-size: 5vh;
+    font-size: 4vh;
     padding-bottom: 0.5em;
     letter-spacing: 0.2em;
-    color: white;
+    color: ${MAIN.TEXT_COLOR};
     width: 40vw;
     &:hover {
         text-decoration: none;

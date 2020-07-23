@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import VideoPlayer from "./pages/VideoPlayer";
 import CreatePlaylist from "./pages/CreatePlaylist";
 import CreateVideo from "./pages/CreateVideo";
+import Player from "./pages/Player";
 
 function App() {
     return (
@@ -22,7 +23,7 @@ function App() {
                 <Route path='/register' component={Register}/>
                 <Route path='/create/playlist' component={CreatePlaylist}/>
                 <Route path='/create/video' component={CreateVideo}/>
-                <Route path='/player' component={VideoPlayer}/>
+                <Route path='/player' component={Player}/>
                 <Redirect from="*" to="/" />
             </Switch>
         </Router>

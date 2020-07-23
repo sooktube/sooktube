@@ -43,6 +43,7 @@ function CreateVideo(){
             <ThumbnailWrapper>
                 <Thumbnail ref={canvas}/>
             </ThumbnailWrapper>
+            
         </CreateVideoWrapper>
     );
 

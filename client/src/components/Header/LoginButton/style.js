@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import { MAIN } from "../../../pages/Style/Main";
 
 export const LoginButtonWrapper = styled.div`
     margin: 0;
     padding: 1em 1em 0 0;
-    color: white;
+    color: ${MAIN.TEXT_COLOR};
 `;
 
 export const LoginButton = styled.span`
@@ -19,7 +21,7 @@ export const RegisterButton = styled.span`
 `;
 
 export const StyledLink = styled(Link)`
-    color: white;
+    color: ${MAIN.TEXT_COLOR};
     &:hover {
         text-decoration: none;
         color: white;

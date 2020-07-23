@@ -1,56 +1,86 @@
 import styled from 'styled-components'
 import { MAIN } from '../Style/Main';
+import img from '../Style/vid.jpg';
 
 export const MainBackground = styled.div`
     min-width: 100vw;
     min-height: 100vh;
-    background: ${MAIN.BACKGROUND_COLOR};
+    background-image : url(${img});
+    background-repeat: no-repeat;
+    background-size: 100%;
+`;
+
+export const LoginBox = styled.div`
+    position:absolute;
+    width:40%;
+    height:65%;
+    left:30%;
+    top:15%;
+  
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+    margin-bottom: 1em;
 `;
 
 export const LoginLogo = styled.div`
-    font-size: 35px;
-    width:200px; height:40px;
-    position:fixed;
-    top:35%; left:50.5%;
-    margin-left:-100px;
-    margin-top:-40px;
+    position:static;
+    font-size:5.2vh;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+    width:60%; 
     padding:0px;
-    color: ${MAIN.DARK_UI_COLOR};
+    color: #071b6a;
     font-weight:bold;
+    margin-top:1em;
     
 `;
 
 export const FormGroup1 = styled.div`
-    position:absolute;
-    top:40%;
-    left:50%;
-    margin-left:-200px;
-    margin-top:-23px;
+    position:static;
     padding:0px;
-`;
-
-export const FormGroup2 = styled.div`
-    position:absolute;
-    top:52%;
-    left:50%;
-    margin-left:-200px;
-    margin-top:-23px;
-    padding:0px;
-`;
-
-export const FormGroup3 = styled.div`
-    position:absolute;
-    top:60%;
-    left:50%;
-    margin-left:-200px;
-    margin-top:-23px;
-    padding:0px;
+    margin-top:2em;
+    margin-left:1em;
+    margin-right:1em;
     
 `;
 
+export const FormGroup2 = styled.div`
+    position:static;
+    padding:0px;
+    margin-top:2em;
+    margin-left:1em;
+    margin-right:1em;
+   
+`;
+
+export const FormGroup3 = styled.div`
+    position:static;
+    padding:0px;
+    margin-top:2em;
+    margin-bottom:1em;
+    margin-left:1em;
+    margin-right:1em;
+    
+`;
+
+export const FormGroup4 = styled.div`
+    position:static;
+    padding:0px;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+    margin-top:1em;
+    margin-bottom:1em;
+    margin-left:1em;
+    margin-right:1em;    
+`;
+
 export const InputA = styled.input`
-    width:396px; 
-    height:44px;
+    position: static;
 `;
 
 export const InvalidFeedback = styled.div`
@@ -59,35 +89,35 @@ export const InvalidFeedback = styled.div`
 `;
 
 export const SubmitButton = styled.button`
-    width:400px; 
-    height:60px; 
-    position:absolute;
-    top:90%; 
-    left:50%; 
+    width:100%; 
+    height:40px; 
+    position:static; 
     margin-left:0px; 
-    padding:0px;
-    background-color: ${MAIN.DARK_UI_COLOR};
+    padding: 0.5em 1em 0.5em 1em;
+    background-color: #071b6a;
     border: none;
     color: white;
+    border-radius:20px;
+    font-size:2.4vh;
     &:hover {
-    background-color: #d35400;
+    background-color: #0929a9;
   }
 `;
 
-
-export const Regbutton = styled.span`
-    position:absolute;
-    top:70%;
-    left:55%;
-    padding:0px;
-    font-size:2.7vh;
-`;
-  
 export const Regguide = styled.span`
     color:#f1c40f;
-    position:absolute;
-    top:70%;
-    left:38%;
+    color:white;
     padding:0px;
-    font-size:2.7vh;
+    font-size:2.5vh;
+    margin-right:1em;
+    margin-left:1em;
 `;
+
+export const Regbutton = styled.span`
+    padding:0px;
+    font-size:2.5vh;
+    margin-left:1em;
+    margin-right:1em;
+`;
+  
+
