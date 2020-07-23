@@ -10,10 +10,12 @@ import VideoPlayer from "./pages/VideoPlayer";
 import CreatePlaylist from "./pages/CreatePlaylist";
 import CreateVideo from "./pages/CreateVideo";
 import Player from "./pages/Player";
+import StyleReset from "./components/Style/StyleReset";
 
 function App() {
     return (
         <Router history={history}>
+            <StyleReset/>
             {alert.message &&
                 <div className={`alert ${alert.type}`}>{alert.message}</div>
             }

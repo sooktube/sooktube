@@ -1,15 +1,18 @@
 import styled from 'styled-components'
 import { MAIN } from '../../components/Style/Main';
-import img from '../../components/Style/vid.jpg';
+import img from '../../../public/vid.jpg';
 
 export const CreateVideoWrapper = styled.div`
+    display: flex;
     min-width: 100vw;
     min-height: 100vh;
-	align-items: center;
-	justify-content: center;
 	background-image : url(${img});
     background-repeat: no-repeat;
     background-size: 100%;
+`;
+
+export const InputVideoWrapper = styled.div`
+    margin: 0 0 0 3vw;
 `;
 
 export const FileInfo = styled.span`

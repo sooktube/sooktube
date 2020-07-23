@@ -37,7 +37,6 @@ function CardShelf() {
 
     ];
     return (
-        <>
         <ShelfWrapper>
             {playlists.map(list => (
                 <CardWrapper>
@@ -51,7 +50,6 @@ function CardShelf() {
             <Shelf/>
             <ShelfBottom/>
         </ShelfWrapper>
-        </>
     );
 }
 
