@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import img from '../Style/vid.jpg';
+import img from '../../components/Style/vid.jpg';
 
 export const MainBackground = styled.div`
     min-width: 100vw;

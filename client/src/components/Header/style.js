@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom';
-import { MAIN } from '../../pages/Style/Main';
+import { MAIN } from '../Style/Main';
 
 export const HeaderWrapper = styled.div`
     width: 100vw;

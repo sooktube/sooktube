@@ -1,7 +1,7 @@
 import React from 'react';
 import {MainBackground,PlaylistBox , VideoBackground, UploadForm,IsVideo, UploadLogo, UploadInput,Label,InputTitle,UploadVideo,InputDesc,UploadButton,NameInput,VideoAdd} from "./style";
 import { useState } from 'react';
-import { MAIN } from '../Style/Main';
+import { MAIN } from '../../components/Style/Main';
 import Header from "../../components/Header";
 
 

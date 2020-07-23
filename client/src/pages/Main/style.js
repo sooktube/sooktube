@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { MAIN } from '../Style/Main';
-import img from '../Style/vid.jpg';
+import { MAIN } from '../../components/Style/Main';
+import img from '../../components/Style/vid.jpg';
 
 export const MainBackground = styled.div`
     background-image : url(${img});

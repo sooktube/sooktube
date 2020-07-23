@@ -12,9 +12,9 @@ export const ShelfWrapper = styled.div`
 export const CardWrapper = styled.div`
     display: inline-block;
     position: relative;
-    height: 32vh;
+    height: 34vh;
     width: 12vw;
-    margin-left: -0.6vw;
+    margin-left: -0.2em;
     z-index: 2;
     transform: perspective(500px) rotateY(22deg);
     transition: all 0.2s ease;
@@ -36,6 +36,7 @@ export const CardImg = styled.img`
     width: inherit;
     margin: 0;
     display: inline-block;
+    border: 0.4em solid #fff;
 `;
 
 export const CardInfo = styled.div`

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {FaRegUserCircle, TiArrowSortedDown, FiPlus} from "react-icons/all";
 import { NavLink } from 'react-router-dom';
-import { MAIN } from "../../../pages/Style/Main";
+import { MAIN } from "../../Style/Main";
 
 export const UserButtonWrapper = styled.div`
     margin-right: 1vw;
