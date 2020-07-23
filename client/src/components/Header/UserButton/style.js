@@ -44,7 +44,7 @@ export const UserDropdownContent = styled.div`
     margin-top: 0.3em;
     right: 0; 
     border-radius: 2%;
-    z-index: 1;
+    z-index: 200;
 `;
 
 export const CreateDropdownContent = styled.div`
@@ -54,7 +54,7 @@ export const CreateDropdownContent = styled.div`
     right: 0;
     min-width: 20vw;
     border-radius: 2%;
-    z-index: 1;
+    z-index: 200;
 `;
 
 export const UserDropdownMenu = styled.div`

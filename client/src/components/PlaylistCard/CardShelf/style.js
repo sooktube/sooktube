@@ -61,7 +61,7 @@ export const Shelf = styled.div`
 
 export const ShelfBottom = styled.div`
     width: 100%;
-    height: 5vh;
+    height: 6vh;
     z-index: 3;
     background-color: #e5e5e5;
 `;
