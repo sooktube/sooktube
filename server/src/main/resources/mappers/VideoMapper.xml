@@ -4,11 +4,34 @@
 <mapper namespace="com.SOOKTUBE.dao.VideoDAO">
  
     <insert id="newVideo"
-            parameterType="com.SOOKTUBE.model.VideoDTO">
-        INSERT INTO VIDEO(`videoID`, `videoTitle`, `videoDesc`, `videoDate`, `userID`)
-        VALUES (`videoID`, #{videoTitle}, #{videoDesc}, #{videoDate}, #{userID})
+            parameterType="com.SOOKTUBE.model.VideoDTO"
+            useGeneratedKeys="true"
+            keyProperty="videoID">
+        INSERT INTO VIDEO(`videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`)
+        VALUES (#{videoTitle}, #{videoDesc}, #{videoDate}, #{username}, #{uploadFileName})
     </insert>
- 
+    
+    <select id="getURLfromVideoID" 
+    		parameterType="Integer" 
+    		resultType="String">
+    		
+    		SELECT `uploadFileName`
+    		FROM VIDEO
+    		WHERE `videoID` = #{videoID}
+    		
+    		</select>
+    		
+        <select id="getURLfromUsername" 
+    		parameterType="Integer" 
+    		resultType="String">
+    		
+    		SELECT `uploadFileName`
+    		FROM VIDEO
+    		WHERE `username` = #{username}
+    		
+    		</select>
+    
+
 </mapper>
 
 

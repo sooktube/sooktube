@@ -1,7 +1,7 @@
 package com.SOOKTUBE.service;
 
-import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -13,7 +13,6 @@ import com.google.appengine.api.appidentity.AppIdentityService;
 import com.google.appengine.api.appidentity.AppIdentityServiceFactory;
 import com.google.auth.Credentials;
 import com.google.auth.appengine.AppEngineCredentials;
-import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.HttpMethod;
@@ -21,17 +20,24 @@ import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageException;
 import com.google.cloud.storage.StorageOptions;
 
+import lombok.RequiredArgsConstructor;
+
 //GCSService.java
 
 @Service
+@RequiredArgsConstructor
 public class GCSService {
 	
-	  public String generateV4GPutObjectSignedUrl(
-			  UploadReqDto uploadReqDto) throws StorageException, IOException {
+	
+	  public String[] generateV4GPutObjectSignedUrl(
+			  UploadReqDto uploadReqDto) throws Exception {
 		    // String projectId = "my-project-id";
 		    // String bucketName = "my-bucket";
 		    // String objectName = "my-object";
 		  
+		  String[] res = new String[2];
+		  
+
 		  
 		  AppIdentityService appIdentityService = AppIdentityServiceFactory.getAppIdentityService();
 
@@ -41,13 +47,25 @@ public class GCSService {
 		          .build();
 
 		  String projectId = "soktube";
+		  String bucketName = "soktube.appspot.com";
+		  
+		  //업로드 날짜 저장
+		  long time = System.currentTimeMillis ( );
+		  String fileName = uploadReqDto.getUsername() + String.valueOf(time) + uploadReqDto.getUploadFileName();
+		  System.out.println(fileName);
+		  
+		  res[0] = fileName;
+		  
+		  
+		  
+		  
 		  //GoogleCredentials credentials = AppEngineCredentials.getApplicationDefault();
 		  //Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
 
 		   Storage storage = StorageOptions.newBuilder().setProjectId(projectId).setCredentials(credentials).build().getService();
 
 		    // Define Resource
-		    BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of(uploadReqDto.getBucketName(), uploadReqDto.getUploadFileName())).build();
+		    BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of(bucketName, fileName)).build();
 
 		    // Generate Signed URL
 		    Map<String, String> extensionHeaders = new HashMap<>();
@@ -62,7 +80,10 @@ public class GCSService {
 		            Storage.SignUrlOption.withExtHeaders(extensionHeaders),
 		            Storage.SignUrlOption.withV4Signature());
 		    
-		    return url.toString();
+		    
+		    res[1] = url.toString();
+		    
+		    return res;
  }
 	  
 
@@ -79,13 +100,43 @@ public class GCSService {
 			          .build();
 			  
 			  String projectId = "soktube";
+			  String bucketName = "soktube.appspot.com";
 			  
 			  Storage storage = StorageOptions.newBuilder().setProjectId(projectId).setCredentials(credentials).build().getService();
 
 		    //Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
 
 		    // Define resource
-		    BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of(uploadReqDto.getBucketName(), uploadReqDto.getUploadFileName())).build();
+		    BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of(bucketName, uploadReqDto.getUploadFileName())).build();
+
+		    URL url =
+		        storage.signUrl(blobInfo, 15, TimeUnit.MINUTES, Storage.SignUrlOption.withV4Signature());
+
+		    
+		    return url.toString();
+		  }
+		  
+		  public String getVideobyVIDEOtable(
+				  String fileName) throws StorageException {
+		    // String projectId = "my-project-id";
+		    // String bucketName = "my-bucket";
+		    // String objectName = "my-object";
+			  AppIdentityService appIdentityService = AppIdentityServiceFactory.getAppIdentityService();
+
+			  Credentials credentials =
+			      AppEngineCredentials.newBuilder()
+			          .setAppIdentityService(appIdentityService)
+			          .build();
+			  
+			  String projectId = "soktube";
+			  String bucketName = "soktube.appspot.com";
+			  
+			  Storage storage = StorageOptions.newBuilder().setProjectId(projectId).setCredentials(credentials).build().getService();
+
+		    //Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
+
+		    // Define resource
+		    BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of(bucketName, fileName)).build();
 
 		    URL url =
 		        storage.signUrl(blobInfo, 15, TimeUnit.MINUTES, Storage.SignUrlOption.withV4Signature());
