@@ -1,4 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
+import axios from "axios";
+
 import {
     InputVideoWrapper,
     UploadForm,
@@ -15,7 +17,7 @@ import {
     CreateVideoWrapper
 } from "./style";
 import Header from "../../components/Header";
-import {Player} from "video-react";
+import {useSelector} from "react-redux";
 
 function CreateVideo(){
     const [input,setInput] = useState({
@@ -23,9 +25,11 @@ function CreateVideo(){
         videoDesc: null,
         videoDate: null,
         videoPath: null,
-        fileName: null,
-        userID: ''
+        uploadFileName: null,
+        username: ''
     });
+
+    const username = useSelector(state => state.authentication.username);
 
     const [state, setState] = useState({
         file: null,
@@ -36,8 +40,34 @@ function CreateVideo(){
         setInput({...input, videoPath: ' '+ event.target.files[0].name});
     }
 
-    const canvas = useRef(null);
-    const video = useRef(null);
+    useEffect(() => {
+        const time = new Date().getTime().toString();
+        setInput({...input, uploadFileName: time, username: username});
+    }, []);
+
+    useEffect(() => {
+        if(input.videoPath){
+            axios({
+                method: 'POST',
+                url: 'https://soktube.appspot.com/api/video/createURL',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: JSON.stringify({
+                    "bucketName": "soktube.appspot.com",
+                    "uploadFileName": input.uploadFileName,
+                    "username": input.username
+                })}).then((response) => {
+                    const uploadURL = response.data;
+                    
+                return response.data;
+                })
+                .catch(error => {
+                    return error;
+                });
+        }
+
+    }, [input.videoPath]);
 
     return(
         <>
@@ -47,7 +77,7 @@ function CreateVideo(){
                     <UploadLogo> UPLOAD THE VIDEO </UploadLogo>
                     <UploadVideo>
                         <Label>Choose video
-                            <UploadInput useRef={video} type="file" onChange={fileSelect}/>
+                            <UploadInput type="file" onChange={fileSelect}/>
                         </Label>
                         {input.videoPath
                             ? <VideoName> {input.videoPath}</VideoName>
@@ -58,13 +88,9 @@ function CreateVideo(){
                     <InputDesc cols="10" rows="5" placeholder="description" />
                     <UploadButton>UPLOAD</UploadButton>
                     <ThumbnailWrapper>
-                        <Thumbnail ref={canvas}/>
                     </ThumbnailWrapper>
                 </InputVideoWrapper>
-                <Player
-                    playsInline
-                    src="https://storage.googleapis.com/soktube.appspot.com/README%ED%8C%80_%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81.mp4"
-                />
+
             </CreateVideoWrapper>
             </>
     );
