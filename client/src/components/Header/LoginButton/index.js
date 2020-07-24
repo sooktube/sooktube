@@ -4,9 +4,9 @@ import { LoginButtonWrapper, LoginButton, RegisterButton, StyledLink } from "./s
 function UserLoginButton() {
     return (
         <LoginButtonWrapper>
-            <LoginButton> <StyledLink to='/login'> 로그인 </StyledLink> </LoginButton>
+            <LoginButton> <StyledLink to='/login'> Login </StyledLink> </LoginButton>
             <span> | </span>
-            <RegisterButton> <StyledLink to='/Register'> 회원가입 </StyledLink> </RegisterButton>
+            <RegisterButton> <StyledLink to='/Register'> Sign up </StyledLink> </RegisterButton>
         </LoginButtonWrapper>
     )
 }

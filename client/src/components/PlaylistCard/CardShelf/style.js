@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {FiHeart} from "react-icons/all";
+import {CARD} from "../../Style/Playlist";
 
 export const ShelfWrapper = styled.div`
     padding-top: 4vh;
@@ -12,9 +13,9 @@ export const ShelfWrapper = styled.div`
 export const CardWrapper = styled.div`
     display: inline-block;
     position: relative;
-    height: 32vh;
+    height: 34vh;
     width: 12vw;
-    margin-left: -0.6vw;
+    margin-left: -0.2em;
     z-index: 2;
     transform: perspective(500px) rotateY(22deg);
     transition: all 0.2s ease;
@@ -36,6 +37,7 @@ export const CardImg = styled.img`
     width: inherit;
     margin: 0;
     display: inline-block;
+    border: 0.4em solid #fff;
 `;
 
 export const CardInfo = styled.div`
@@ -53,16 +55,16 @@ export const CardHeart = styled(FiHeart)`
 `;
 
 export const Shelf = styled.div`
-    height: 14vh;
+    height: 15.5vh;
     margin-top: -15vh;
     transform: perspective(5em) rotateX(20deg);
-    background-color: #f2f2f2; 
+    background-color: ${CARD.CARD_SHELF_COLOR}; 
 `;
 
 export const ShelfBottom = styled.div`
     width: 100%;
-    height: 5vh;
+    height: 6vh;
     z-index: 3;
-    background-color: #e5e5e5;
+    background-color: ${CARD.CARD_SHELF_BTMCOLOR};
 `;
 

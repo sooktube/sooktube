@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {FaRegUserCircle, TiArrowSortedDown, FiPlus} from "react-icons/all";
 import { NavLink } from 'react-router-dom';
-import { MAIN } from "../../../pages/Style/Main";
+import { MAIN } from "../../Style/Main";
 
 export const UserButtonWrapper = styled.div`
     margin-right: 1vw;
@@ -9,28 +9,28 @@ export const UserButtonWrapper = styled.div`
 `;
 
 export const Username = styled.div`
-    color: white;
+    color: ${MAIN.TEXT_COLOR};
     padding: 0.5em 0 0 0.2em;
 `;
 
 export const ArrowDown = styled(TiArrowSortedDown)`
     margin: 0.5em 0 0 0.1em;
-    color: white;
+    color: ${MAIN.MAIN_THEME_COLOR};
     &:hover {
-        color: ${MAIN.DARK_ON_CLICK};
+        color: ${MAIN.DARK_ON_HOVER};
     }
 `;
 
 export const PlusMenu = styled(FiPlus)`
     margin-top: 0.5em;
-    color: white;
+    color: ${MAIN.MAIN_THEME_COLOR};
 `;
 
 export const UserIcon = styled(FaRegUserCircle)`
     height: 2em;
     width: 2em;
     margin: 0 0.2em 0 0;
-    color: white;
+    color: ${MAIN.MAIN_THEME_COLOR};
 `;
 
 export const UserDropdownContent = styled.div`
@@ -40,7 +40,6 @@ export const UserDropdownContent = styled.div`
     margin-top: 0.3em;
     right: 0; 
     border-radius: 2%;
-    border: 0.1em solid ${MAIN.BORDER_COLOR};
     z-index: 200;
 `;
 
@@ -51,7 +50,6 @@ export const CreateDropdownContent = styled.div`
     right: 0;
     min-width: 20vw;
     border-radius: 2%;
-    border: 0.15em solid ${MAIN.BORDER_COLOR};
     z-index: 200;
 `;
 
@@ -89,24 +87,28 @@ export const DropdownPlusBtn  = styled.div`
 `;
 
 export const StyledLink = styled(NavLink)`
-    color: black;
+    color: ${MAIN.TEXT_COLOR};
     padding: 1em 0.5em 1em 0.5em;
     font-size: 2vh;
+    font-weight:bold;
     text-decoration: none;
     display: block;
+    background-color: #83bee0;
     &:hover {
-        color: black;
+        color: white;
         text-decoration: none;
-        background-color: ${MAIN.DARK_ON_CLICK};
+        background-color: #94d1f4;
     }
 `;
 
 export const DropdownItem = styled.div`
-    color: black;
+    color: ${MAIN.TEXT_COLOR};
     padding: 1em 0.5em 1em 0.5em;
     font-size: 2vh;
+    font-weight:bold;
     min-height: 2vh;
     text-decoration: none;
     display: block;
-    border-bottom: 0.1em solid ${MAIN.BORDER_COLOR}
+    background-color:#94d1f4;
+    /*border-bottom: 0.1em solid ${MAIN.BORDER_COLOR}*/
 `;

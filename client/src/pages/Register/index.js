@@ -115,7 +115,7 @@ function Register() {
             <form name="form" onSubmit={handleSubmit}>
                 <RegisterLogo> SOOKTUBE </RegisterLogo> 
                 <FormGroupA>
-                    <LabelName> 이메일 </LabelName>
+                    <LabelName> Email </LabelName>
                     <InputR type="text"
                             name="userID"
                             id="ruserID"
@@ -135,7 +135,7 @@ function Register() {
                     }
                 </FormGroupA>
                 <FormGroupB>
-                    <LabelName> 별명 </LabelName>
+                    <LabelName> Nickname </LabelName>
                     <LabelName2> 다른 유저와 중복되지 않는 별명으로 입력해주세요. (2자 ~ 16자) </LabelName2>
                     <InputR
                         type="text"
@@ -157,7 +157,7 @@ function Register() {
                     }
                 </FormGroupB>
                 <FormGroupC>
-                    <LabelName>비밀번호</LabelName>
+                    <LabelName>Password</LabelName>
                     <LabelName2> 8자 이상 입력해주세요. </LabelName2>
                     <InputR type="password"
                            name="password"
@@ -173,7 +173,7 @@ function Register() {
                     }
                 </FormGroupC>
                 <FormGroupD>
-                    <LabelName>비밀번호 확인</LabelName>
+                    <LabelName>Re Enter the Password</LabelName>
                     <InputR type="password"
                            name="passwordChk"
                            id="rpassword"
@@ -189,7 +189,7 @@ function Register() {
                 </FormGroupD>
                 <FormGroupE>
                     <Rsubmit>
-                        가입하기
+                        SIGN UP
                         {registering && <span className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
                     </Rsubmit>
                 </FormGroupE>

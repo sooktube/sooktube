@@ -1,12 +1,18 @@
 import styled from 'styled-components'
-import { MAIN } from '../Style/Main';
+import { MAIN } from '../../components/Style/Main';
+import img from '../../../public/vid.jpg';
 
 export const CreateVideoWrapper = styled.div`
+    display: flex;
     min-width: 100vw;
     min-height: 100vh;
-    background: #fff;
-	align-items: center;
-	justify-content: center;
+	background-image : url(${img});
+    background-repeat: no-repeat;
+    background-size: 100%;
+`;
+
+export const InputVideoWrapper = styled.div`
+    margin: 0 0 0 3vw;
 `;
 
 export const FileInfo = styled.span`
@@ -32,24 +38,22 @@ export const UploadForm = styled.div`
 `;
 
 export const UploadLogo = styled.div`
-    font-size:4vh;
-    height:20%;
-    position:absolute; 
-    top:17%; 
-    margin-top:3%;
-    margin-left:31%;
-    margin-bottom:3%;
-    padding:0px;
+    font-size: 4vh;
+    height: 20%;
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-bottom: 3%;
+    padding: 0;
 	color: #3f4257;
-	color:${MAIN.DARK_UI_COLOR};
+	color:black;
 	font-weight:bold;
 `;
 
 export const UploadVideo = styled.div`
 	position:absolute; 
-	top:22%; 
+	top:24%; 
 	margin-top:3%;
-    margin-left:31%;
+    margin-left:10%;
     margin-bottom:3%;
     padding:2px;
 	height:8%;
@@ -63,20 +67,17 @@ export const UploadInput = styled.input`
     overflow:hidden;
 `;
 
-export const VideoName = styled.div`
+export const VideoName = styled.span`
 	border:none;
 	font-weight:bold;
-	position:absolute;
-	left:37%;
-	top:32%;
 	font-size:2.5vh;
-	height:54%;
+	margin-left: 1em;
 `;
 
 export const InputTitle = styled.input`
 	position:absolute;
-	margin-left:30%;
-	top:37%;
+	margin-left:10%;
+	top:45%;
 	padding:4px;
 	width:30%;
 	height:6%;
@@ -87,8 +88,8 @@ export const InputTitle = styled.input`
 
 export const InputDesc = styled.textarea`
 	position:absolute;
-	margin-left:30%;
-	top:44%;
+	margin-left:10%;
+	top:52%;
 	width:30%;
 	height:20%;
 	padding:5px;
@@ -100,40 +101,33 @@ export const InputDesc = styled.textarea`
 
 export const Label = styled.label`
     padding: 0.5em 1em 0.5em 1em;
+    margin-top: 0.7em;
 	background: #3f4257;
-	background: ${MAIN.DARK_UI_COLOR};
 	border-radius: 30px;
 	color: white;
 	font-weight: 300;
 	font-size: 2.4vh;
-	
 	transition: all 0.2s ease-in;
 	cursor: pointer;
 	outline: none;
 	border: none;
-	position:absolute;
-	top:23%;
-	left:0%;
-	height:65%;
-	width:35%;
 	&:hover {
-        background-color: #d35400;
+        background-color: #535875;
   }
 `;
 
 export const UploadButton = styled.button`
-	background:${MAIN.DARK_UI_COLOR};
+	background:#3f4257;
 	border-radius:3px;
 	color:white;
 	position:absolute;
-	top:56%;
-	left:62%;
-	width:6%;
-	height:8%;
-	font-size: 10px;
+	top:74.5%;
+	left:33.5%;
+	padding: 1.2em 1em 1.2em 1em;
+	font-size: 2.3vh;
 	border:none;
 	&:hover {
-    background-color: #d35400;
+    background-color: #535875;
   }
 `;
 
