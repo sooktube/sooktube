@@ -1,4 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {videoActions} from "../../actions";
 import axios from "axios";
 
 import {
@@ -17,27 +19,23 @@ import {
     CreateVideoWrapper
 } from "./style";
 import Header from "../../components/Header";
-import {useSelector} from "react-redux";
 
 function CreateVideo(){
+    const dispatch = useDispatch();
+
     const [input,setInput] = useState({
         videoTitle: null,
         videoDesc: null,
         videoDate: null,
-        videoPath: null,
+        videoFile: null,
         uploadFileName: null,
         username: ''
     });
 
     const username = useSelector(state => state.authentication.username);
 
-    const [state, setState] = useState({
-        file: null,
-        success: false,
-    });
-
     function fileSelect(event){
-        setInput({...input, videoPath: ' '+ event.target.files[0].name});
+        setInput({...input, videoFile: ' '+ event.target.files[0].name});
     }
 
     useEffect(() => {
@@ -46,29 +44,30 @@ function CreateVideo(){
     }, []);
 
     useEffect(() => {
-        if(input.videoPath){
-            axios({
-                method: 'POST',
-                url: 'https://soktube.appspot.com/api/video/createURL',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                data: JSON.stringify({
-                    "bucketName": "soktube.appspot.com",
-                    "uploadFileName": input.uploadFileName,
-                    "username": input.username
-                })}).then((response) => {
-                    const uploadURL = response.data;
-                    
-                return response.data;
-                })
-                .catch(error => {
-                    return error;
-                });
+        if(input.videoFile) {
+            dispatch(videoActions.uploadVideoFile({
+                uploadFileName: input.uploadFileName,
+                username: input.username,
+                videoFile: input.videoFile
+            }));
         }
+    }, [input.videoFile]);
+    
+    function handleClick(e) {
+        e.preventDefault();
+        if (!input.videoTitle) {
+            return alert("제목을 입력해주세요.");
+        }
+        if (!input.videoDesc) {
+            return alert("영상에 대한 설명을 입력해주세요.");
+        }
+        if (!input.videoFile) {
+            return alert("영상을 업로드해주세요.");
+        }
+        if (input.videoTitle && input.videoDesc && input.videoFile) {
 
-    }, [input.videoPath]);
-
+        }
+    }
     return(
         <>
             <Header/>
@@ -79,8 +78,8 @@ function CreateVideo(){
                         <Label>Choose video
                             <UploadInput type="file" onChange={fileSelect}/>
                         </Label>
-                        {input.videoPath
-                            ? <VideoName> {input.videoPath}</VideoName>
+                        {input.videoFile
+                            ? <VideoName> {input.videoFile}</VideoName>
                             : <VideoName> 선택된 파일 없음 </VideoName>
                         }
                     </UploadVideo>
