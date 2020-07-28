@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {FiHeart} from "react-icons/all";
-import {CARD} from "../../Style/Playlist";
+import {CARD} from "../../../style/Playlist";
 
 export const ShelfWrapper = styled.div`
     padding-top: 4vh;
@@ -54,16 +54,11 @@ export const CardHeart = styled(FiHeart)`
 `;
 
 export const Shelf = styled.div`
-    height: 15.5vh;
-    margin-top: -15vh;
-    transform: perspective(10em) rotateX(3deg);
-    background-color: ${CARD.CARD_SHELF_COLOR}; 
-`;
-
-export const ShelfBottom = styled.div`
     width: 100%;
+    margin-top: 0.3em;
     height: 3vh;
     z-index: 3;
     background-color: ${CARD.CARD_SHELF_COLOR};
 `;
+
 

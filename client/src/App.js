@@ -5,12 +5,12 @@ import { history } from './helpers';
 import Main from "./pages/Main";
 import Login from './pages/Login';
 import Register from "./pages/Register";
-import PrivateRoute from "./components/PrivateRoute";
-import GlobalLayoutStyle from "./components/Style/GlobalLayout";
+import PrivateRoute from "./components/common/PrivateRoute";
+import GlobalLayoutStyle from "./components/style/GlobalLayout";
 import CreatePlaylist from "./pages/CreatePlaylist";
 import CreateVideo from "./pages/CreateVideo";
 import Player from "./pages/Player";
-import StyleReset from "./components/Style/StyleReset";
+import StyleReset from "./components/style/StyleReset";
 
 function App() {
     return (
@@ -24,8 +24,8 @@ function App() {
                 <Route exact path='/' component={Main}/>
                 <Route path='/login' component={Login}/>
                 <Route path='/register' component={Register}/>
-                <PrivateRoute path='/create/playlist' component={CreatePlaylist}/>
-                <PrivateRoute path='/create/video' component={CreateVideo}/>
+                <Route path='/create/playlist' component={CreatePlaylist}/>
+                <Route path='/create/video' component={CreateVideo}/>
                 <Route path='/player' component={Player}/>
                 <Redirect from="*" to="/" />
             </Switch>

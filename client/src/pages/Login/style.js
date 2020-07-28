@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import { MAIN } from '../../components/Style/Main';
+import { MAIN } from '../../components/style/Main';
 import img from '../../../public/vid.jpg';
 
 export const MainBackground = styled.div`
     margin: 20px auto;
+    height: 300px;
 `;
 
 export const LoginBox = styled.div`

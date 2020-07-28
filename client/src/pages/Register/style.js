@@ -1,26 +1,19 @@
 import styled from 'styled-components'
-import img from '../../../public/vid.jpg';
+import {MAIN} from "../../components/style/Main";
 
 export const MainBackground = styled.div`
-    min-width: 100vw;
-    min-height: 100vh;
-    background-image : url(${img});
-    background-repeat: no-repeat;
-    background-size: 100%;
+    height: 450px;
 `;
 
 
 export const RegisterForm = styled.div`
-    position:absolute;
-    top:8%;
-    width:66%;
-    height:80%;
-    left:17%;
+    top:50%;
+    left: 50%;
     display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-    
+    margin-top: 5em;
 `;
 
 export const RegisterLogo = styled.div`
@@ -29,10 +22,12 @@ export const RegisterLogo = styled.div`
     display: flex;
 	align-items: center;
 	justify-content: center; 
-    padding:0px;
-    color: #071b6a;
+    padding: 0;
+    color: ${MAIN.MAIN_THEME_COLOR};
+    letter-spacing: 0.1em;
     font-weight:bold;
-    margin-top:1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 `;
 
 export const InputR = styled.input`
@@ -42,13 +37,13 @@ export const InputR = styled.input`
 export const LabelName = styled.div`
     font-size:2vh;
     font-weight:bold;
-    color: #071b6a;
+    color: #212529;
     margin-bottom:5px;
     margin-top:5px;
 `;
 
 export const LabelName2 = styled.div`
-    color: #071b6a;
+    color: #212529;
     font-size: 1.5vh;
     margin-bottom:5.2px;
 `;
@@ -90,7 +85,7 @@ export const Rsubmit = styled.button`
     position:static; 
     margin-left:0px; 
     padding:0px;
-    background-color: #071b6a;
+    background-color: ${MAIN.MAIN_THEME_COLOR};
     border: none;
     color: white;
     &:hover {

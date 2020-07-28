@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../actions';
 import {LoginLogo, MainBackground, FormGroup1, FormGroup4, LoginBox, FormGroup2, FormGroup3, InvalidFeedback, SubmitButton, Regbutton, Regguide, InputA} from "./style";
-import Modal from "../../components/common/Modal";
+import Modal from "../../components/common/Modal/Modal";
 
 function Login() {
     const [inputs, setInputs] = useState({

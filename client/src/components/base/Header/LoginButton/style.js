@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import { NavLink } from 'react-router-dom';
-import { MAIN } from "../../Style/Main";
+import { MAIN } from "../../../style/Main";
 
 export const LoginButtonWrapper = styled.div`
     margin: 0;
