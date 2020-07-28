@@ -1,13 +1,12 @@
 import React from 'react';
 import {Router, Route, Switch, Redirect } from 'react-router-dom';
 import { history } from './helpers';
-import './reset.css';
 
 import Main from "./pages/Main";
 import Login from './pages/Login';
 import Register from "./pages/Register";
 import PrivateRoute from "./components/PrivateRoute";
-import VideoPlayer from "./pages/VideoPlayer";
+import GlobalLayoutStyle from "./components/Style/GlobalLayout";
 import CreatePlaylist from "./pages/CreatePlaylist";
 import CreateVideo from "./pages/CreateVideo";
 import Player from "./pages/Player";
@@ -16,6 +15,7 @@ import StyleReset from "./components/Style/StyleReset";
 function App() {
     return (
         <Router history={history}>
+            <GlobalLayoutStyle>
             <StyleReset/>
             {alert.message &&
                 <div className={`alert ${alert.type}`}>{alert.message}</div>
@@ -29,6 +29,7 @@ function App() {
                 <Route path='/player' component={Player}/>
                 <Redirect from="*" to="/" />
             </Switch>
+            </GlobalLayoutStyle>
         </Router>
     );
 }

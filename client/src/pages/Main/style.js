@@ -1,10 +1,7 @@
 import styled from 'styled-components'
 import img from '../../../public/vid.jpg';
+import {MAIN} from "../../components/Style/Main";
 
 export const MainBackground = styled.div`
-    background-image : url(${img});
-    background-repeat: no-repeat;
-    background-size: 100%;
-    min-width: 100vw;
-    min-height: 100vh;
+    width: inherit;
 `;

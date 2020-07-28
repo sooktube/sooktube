@@ -1,19 +1,19 @@
 import React from 'react';
-import { HeaderLogo, HeaderWrapper, HeaderLayout } from "./style";
+import * as S from "./style";
 import UserLoginButton from "./LoginButton";
 import UserButton from "./UserButton";
 
 function Header() {
     return (
-        <HeaderWrapper>
-            <HeaderLayout>
-                <HeaderLogo to='/'> SOOKTUBE </HeaderLogo>
+        <S.HeaderWrapper>
+            <S.HeaderLayout>
+                <S.HeaderLogo to='/'> SOOKTUBE </S.HeaderLogo>
                 {localStorage.getItem('user')
                     ? <UserButton/>
                     : <UserLoginButton/>
                 }
-            </HeaderLayout>
-        </HeaderWrapper>
+            </S.HeaderLayout>
+        </S.HeaderWrapper>
     )
 }
 

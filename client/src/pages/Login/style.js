@@ -3,20 +3,11 @@ import { MAIN } from '../../components/Style/Main';
 import img from '../../../public/vid.jpg';
 
 export const MainBackground = styled.div`
-    min-width: 100vw;
-    min-height: 100vh;
-    background-image : url(${img});
-    background-repeat: no-repeat;
-    background-size: 100%;
+    margin: 20px auto;
 `;
 
 export const LoginBox = styled.div`
-    position:absolute;
-    width:40%;
-    height:65%;
-    left:30%;
-    top:15%;
-  
+    margin: 0;
     display: flex;
 	align-items: center;
 	justify-content: center;

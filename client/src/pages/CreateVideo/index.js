@@ -1,7 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {videoActions} from "../../actions";
-import axios from "axios";
 
 import {
     InputVideoWrapper,
@@ -89,7 +88,6 @@ function CreateVideo(){
                     <ThumbnailWrapper>
                     </ThumbnailWrapper>
                 </InputVideoWrapper>
-
             </CreateVideoWrapper>
             </>
     );
