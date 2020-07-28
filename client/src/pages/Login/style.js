@@ -1,6 +1,4 @@
 import styled from 'styled-components'
-import { MAIN } from '../../components/style/Main';
-import img from '../../../public/vid.jpg';
 
 export const MainBackground = styled.div`
     margin: 20px auto;
@@ -8,7 +6,6 @@ export const MainBackground = styled.div`
 `;
 
 export const LoginBox = styled.div`
-    margin: 0;
     display: flex;
 	align-items: center;
 	justify-content: center;
@@ -51,10 +48,7 @@ export const FormGroup2 = styled.div`
 export const FormGroup3 = styled.div`
     position:static;
     padding:0px;
-    margin-top:2em;
-    margin-bottom:1em;
-    margin-left:1em;
-    margin-right:1em;
+    margin: 2em 1em 1em;
     
 `;
 
@@ -65,10 +59,7 @@ export const FormGroup4 = styled.div`
 	align-items: center;
 	justify-content: center;
 	flex-direction: row;
-    margin-top:1em;
-    margin-bottom:1em;
-    margin-left:1em;
-    margin-right:1em;    
+    margin: 1em;    
 `;
 
 export const InputA = styled.input`
@@ -84,7 +75,7 @@ export const SubmitButton = styled.button`
     width:100%; 
     height:40px; 
     position:static; 
-    margin-left:0px; 
+    margin: 0;
     padding: 0.5em 1em 0.5em 1em;
     background-color: #071b6a;
     border: none;
@@ -97,16 +88,15 @@ export const SubmitButton = styled.button`
 `;
 
 export const Regguide = styled.span`
-    color:#f1c40f;
     color:white;
-    padding:0px;
+    padding:0;
     font-size:2.5vh;
     margin-right:1em;
     margin-left:1em;
 `;
 
 export const Regbutton = styled.span`
-    padding:0px;
+    padding:0;
     font-size:2.5vh;
     margin-left:1em;
     margin-right:1em;

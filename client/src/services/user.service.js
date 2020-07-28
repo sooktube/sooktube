@@ -1,4 +1,5 @@
 import axios from "axios";
+import { history } from '../helpers';
 
 export const userService = {
     login,
@@ -57,9 +58,9 @@ function getUserID() {
     }).then((response) => {
         return response.data;
     })
-        .catch(error => {
-            return error;
-        });
+    .catch(error => {
+        return error;
+    });
 }
 
 function logout() {

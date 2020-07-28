@@ -13,6 +13,7 @@ export const LoginButton = styled.span`
     font-size: 2.5vh;
     margin: 0 1em 0 0;
     padding: 0 0 0.2em 0;
+    cursor: pointer;
 `;
 
 export const RegisterButton = styled.span`

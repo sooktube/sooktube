@@ -4,22 +4,22 @@ import Modal from "../../../common/Modal/Modal";
 import Login from "../../../../pages/Login";
 
 function UserLoginButton() {
-    const [loginModalVisible, setLoginModalVisible] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
 
     const openLoginModal = () => {
-        setLoginModalVisible(true)
+        setModalVisible(true)
     };
     const closeLoginModal = () => {
-        setLoginModalVisible(false)
+        setModalVisible(false)
     };
 
     return (
         <LoginButtonWrapper>
             <LoginButton onClick={openLoginModal}> Login </LoginButton>
             <span> | </span>
-            <RegisterButton> <StyledLink to='/Register'> Sign up </StyledLink> </RegisterButton>
-            {loginModalVisible &&
-            <Modal visible={loginModalVisible}
+            <RegisterButton> <StyledLink to='/register'> Sign up </StyledLink> </RegisterButton>
+            {modalVisible &&
+            <Modal visible={modalVisible}
                    onClose={closeLoginModal}>
                 <Login/>
             </Modal>

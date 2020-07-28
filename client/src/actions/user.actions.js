@@ -18,6 +18,7 @@ function login(user) {
                 user => { userService.getUsername().then(
                     username => {
                         dispatch(success({ user: user, username: username }));
+                        history.push('/');
                     })
                 },
                 error => {

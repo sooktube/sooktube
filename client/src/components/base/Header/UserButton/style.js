@@ -112,3 +112,19 @@ export const DropdownItem = styled.div`
     background-color:#94d1f4;
     /*border-bottom: 0.1em solid ${MAIN.BORDER_COLOR}*/
 `;
+
+export const DropdownButton = styled.div`
+    color: ${MAIN.TEXT_COLOR};
+    padding: 1em 0.5em 1em 0.5em;
+    font-size: 2vh;
+    font-weight:bold;
+    min-height: 2vh;
+    text-decoration: none;
+    display: block;
+    background-color: #83bee0;
+    &:hover {
+        color: white;
+        text-decoration: none;
+        background-color: #94d1f4;
+    }
+`;

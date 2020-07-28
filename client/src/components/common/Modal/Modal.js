@@ -15,8 +15,8 @@ function Modal({ onClose, visible, children}) {
     };
 
     useEffect(() => {
-        if (visible) document.body.style.overflow = 'hidden';
-        return () => document.body.style.overflow = 'unset';
+        if (visible) document.body.style.overflowY = 'hidden';
+        return () => document.body.style.overflowY = 'auto';
     }, [visible]);
 
     return (

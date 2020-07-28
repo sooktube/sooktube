@@ -1,7 +1,6 @@
-import styled from 'styled-components'
-import img from '../../../public/vid.jpg';
-import {MAIN} from "../../components/style/Main";
+import styled from 'styled-components';
 
 export const MainBackground = styled.div`
-    width: inherit;
+  width: 100%;
+  height: 100%;
 `;

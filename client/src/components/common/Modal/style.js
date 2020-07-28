@@ -31,8 +31,8 @@ export const ModalInner = styled.div`
     position: relative;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    width: 400px;
-    
+    width: 360px;
+    max-width: 480px;
     top: 50%;
     transform: translateY(-50%);
     margin: 0 auto;
