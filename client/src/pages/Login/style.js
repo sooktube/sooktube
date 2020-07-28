@@ -4,6 +4,7 @@ import img from '../../../public/vid.jpg';
 
 export const MainBackground = styled.div`
     margin: 20px auto;
+    height: 300px;
 `;
 
 export const LoginBox = styled.div`

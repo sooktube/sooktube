@@ -18,7 +18,6 @@ function login(user) {
                 user => { userService.getUsername().then(
                     username => {
                         dispatch(success({ user: user, username: username }));
-                        history.push('/');
                     })
                 },
                 error => {
@@ -46,7 +45,6 @@ function register(user) {
             .then(
                 user => {
                     dispatch(success());
-                    history.push('/user/login');
                     dispatch(alertActions.success('Registration successful'));
                 },
                 error => {
