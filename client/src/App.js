@@ -24,8 +24,8 @@ function App() {
                 <Route exact path='/' component={Main}/>
                 <Route path='/login' component={Login}/>
                 <Route path='/register' component={Register}/>
-                <PrivateRoute path='/create/playlist' component={CreatePlaylist}/>
-                <PrivateRoute path='/create/video' component={CreateVideo}/>
+                <Route path='/create/playlist' component={CreatePlaylist}/>
+                <Route path='/create/video' component={CreateVideo}/>
                 <Route path='/player' component={Player}/>
                 <Redirect from="*" to="/" />
             </Switch>

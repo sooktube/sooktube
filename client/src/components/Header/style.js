@@ -11,7 +11,6 @@ export const HeaderWrapper = styled.div`
 export const HeaderLayout = styled.div`
     display: flex; 
     justify-content: space-between;
-    margin: 0 3vw 0 3vw;
     padding: 2vh 0 0 0;
 `;
 export const HeaderLogo = styled(NavLink)`
