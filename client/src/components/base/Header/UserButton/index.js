@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {UserButtonWrapper} from './style';
 import DropdownUser from "./DropdownUser";
 import DropdownCreate from "./DropdownCreate";
-import {userService} from "../../../services";
 import {useSelector} from "react-redux";
 
 function UserButton() {

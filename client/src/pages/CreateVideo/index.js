@@ -2,22 +2,8 @@ import React, {useRef, useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {videoActions} from "../../actions";
 
-import {
-    InputVideoWrapper,
-    UploadForm,
-    UploadLogo,
-    UploadInput,
-    Label,
-    InputTitle,
-    UploadVideo,
-    InputDesc,
-    UploadButton,
-    VideoName,
-    ThumbnailWrapper,
-    Thumbnail,
-    CreateVideoWrapper
-} from "./style";
-import Header from "../../components/Header";
+import * as S from "./style";
+import Header from "../../components/base/Header";
 
 function CreateVideo(){
     const dispatch = useDispatch();
@@ -70,25 +56,25 @@ function CreateVideo(){
     return(
         <>
             <Header/>
-            <CreateVideoWrapper>
-                <InputVideoWrapper>
-                    <UploadLogo> UPLOAD THE VIDEO </UploadLogo>
-                    <UploadVideo>
-                        <Label>Choose video
-                            <UploadInput type="file" onChange={fileSelect}/>
-                        </Label>
+            <S.CreateVideoWrapper>
+                <S.InputVideoWrapper>
+                    <S.UploadLogo> UPLOAD THE VIDEO </S.UploadLogo>
+                    <S.UploadVideo>
+                        <S.Label>Choose video
+                            <S.UploadInput type="file" onChange={fileSelect}/>
+                        </S.Label>
                         {input.videoFile
-                            ? <VideoName> {input.videoFile}</VideoName>
-                            : <VideoName> 선택된 파일 없음 </VideoName>
+                            ? <S.VideoName> {input.videoFile}</S.VideoName>
+                            : <S.VideoName> 선택된 파일 없음 </S.VideoName>
                         }
-                    </UploadVideo>
-                    <InputTitle type="text" placeholder="title" />
-                    <InputDesc cols="10" rows="5" placeholder="description" />
-                    <UploadButton>UPLOAD</UploadButton>
-                    <ThumbnailWrapper>
-                    </ThumbnailWrapper>
-                </InputVideoWrapper>
-            </CreateVideoWrapper>
+                    </S.UploadVideo>
+                    <S.InputTitle type="text" placeholder="title" />
+                    <S.InputDesc cols="10" rows="5" placeholder="description" />
+                    <S.UploadButton>UPLOAD</S.UploadButton>
+                    <S.ThumbnailWrapper>
+                    </S.ThumbnailWrapper>
+                </S.InputVideoWrapper>
+            </S.CreateVideoWrapper>
             </>
     );
 

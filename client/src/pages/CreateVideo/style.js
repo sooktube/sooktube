@@ -1,70 +1,31 @@
 import styled from 'styled-components'
-import { MAIN } from '../../components/Style/Main';
-import img from '../../../public/vid.jpg';
+import { MAIN } from '../../components/style/Main';
 
 export const CreateVideoWrapper = styled.div`
     display: flex;
-    min-width: 100vw;
-    min-height: 100vh;
-	background-image : url(${img});
-    background-repeat: no-repeat;
-    background-size: 100%;
 `;
 
 export const InputVideoWrapper = styled.div`
-    margin: 0 0 0 3vw;
-`;
-
-export const FileInfo = styled.span`
-    font-size: 2vh;
-`;
-
-export const UploadForm = styled.div`
-    background: #fff;
-	box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.05);
-	position: absolute;
-	border-radius: 10px;
-	padding: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	margin: 10px auto;
-	transition: all 0.3s ease-in;
-    top:30%;
-    width:40%;
-    height:40%;
-    margin-left:30%;
+    margin: 0;
+    padding: 0;
 `;
 
 export const UploadLogo = styled.div`
-    font-size: 4vh;
-    height: 20%;
+    font-size: 20px;
     margin-top: 5%;
-    margin-left: 10%;
-    margin-bottom: 3%;
     padding: 0;
-	color: #3f4257;
-	color:black;
+	color: ${MAIN.MAIN_THEME_COLOR};
 	font-weight:bold;
 `;
 
 export const UploadVideo = styled.div`
-	position:absolute; 
-	top:24%; 
-	margin-top:3%;
-    margin-left:10%;
-    margin-bottom:3%;
-    padding:2px;
-	height:8%;
-	width:30%;
+	margin-top: 1em;
 `;
 
 export const UploadInput = styled.input`
-    position:absolute;
     width:0;
     height:0;
-    overflow:hidden;
+    background-color: ${MAIN.MAIN_THEME_COLOR};
 `;
 
 export const VideoName = styled.span`
@@ -75,34 +36,30 @@ export const VideoName = styled.span`
 `;
 
 export const InputTitle = styled.input`
-	position:absolute;
-	margin-left:10%;
-	top:45%;
 	padding:4px;
-	width:30%;
-	height:6%;
+	margin-top: 1em;
+	width: 100%;
 	border:1px solid #ced4da;
 	&:focus {
-	outline:1px solid ${MAIN.DARK_UI_COLOR};}
+	    outline: 1px solid #ced4da;
+    }
 `;
 
 export const InputDesc = styled.textarea`
-	position:absolute;
-	margin-left:10%;
-	top:52%;
-	width:30%;
-	height:20%;
-	padding:5px;
+	width: 100%;
+	height: 200px;
+	margin-top: 1em;
 	border:1px solid #ced4da; 
 	&:focus {
-	outline:1px solid ${MAIN.DARK_UI_COLOR};}
+	    outline: 1px solid #ced4da;
+    }
 `;
 
 
 export const Label = styled.label`
     padding: 0.5em 1em 0.5em 1em;
     margin-top: 0.7em;
-	background: #3f4257;
+	background-color: ${MAIN.MAIN_THEME_COLOR};
 	border-radius: 30px;
 	color: white;
 	font-weight: 300;
@@ -112,23 +69,23 @@ export const Label = styled.label`
 	outline: none;
 	border: none;
 	&:hover {
-        background-color: #535875;
-  }
+      background-color: ${MAIN.BRIGHT_ON_HOVER};
+    }
 `;
 
 export const UploadButton = styled.button`
-	background:#3f4257;
-	border-radius:3px;
+	background: ${MAIN.MAIN_THEME_COLOR};
+	width: 80px;
+	height: 25px;
+	border-radius:30px;
+	float: right;
+	margin-top: 1em;
 	color:white;
-	position:absolute;
-	top:74.5%;
-	left:33.5%;
-	padding: 1.2em 1em 1.2em 1em;
 	font-size: 2.3vh;
 	border:none;
 	&:hover {
-    background-color: #535875;
-  }
+      background-color: ${MAIN.BRIGHT_ON_HOVER};
+    }
 `;
 
 export const ThumbnailWrapper = styled.div`

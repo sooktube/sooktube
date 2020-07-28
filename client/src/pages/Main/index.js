@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from "../../components/Header";
+import Header from "../../components/base/Header";
 import { MainBackground } from "./style";
-import PlaylistCard from "../../components/PlaylistCard";
+import PlaylistCard from "../../components/playlist/PlaylistCard";
 
 
 function Main() {

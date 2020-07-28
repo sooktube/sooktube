@@ -1,6 +1,6 @@
 import React from 'react';
 import { MainBackground, VideoBox , CommentBox, CommentTitle,CommentContainer} from "./style";
-import Header from "../../components/Header";
+import Header from "../../components/base/Header";
 import Comment from "./comment";
 
 function Player(){

@@ -1,5 +1,5 @@
 import React from 'react';
-import {ShelfWrapper, CardWrapper, Shelf, CardImg, CardInfo, CardTitle, CardHeart, ShelfBottom} from "./style";
+import {ShelfWrapper, CardWrapper, Shelf, CardImg, CardInfo, CardTitle, CardHeart} from "./style";
 
 function CardShelf() {
     const playlists = [
@@ -47,8 +47,7 @@ function CardShelf() {
                     <CardHeart/>
                 </CardWrapper>
             ))}
-
-            <ShelfBottom/>
+            <Shelf/>
         </ShelfWrapper>
     );
 }

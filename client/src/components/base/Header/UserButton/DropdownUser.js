@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {ArrowDown, DropdownUserBtn, UserDropdownContent, UserDropdownMenu, StyledLink, DropdownItem, UserIcon} from './style';
-import useDropdownOutsideClick from "../../../hooks/useDropdownOutsideClick";
-import {userService} from "../../../services";
+import useDropdownOutsideClick from "../../../../hooks/useDropdownOutsideClick";
+import {userService} from "../../../../services";
 
 function DropdownUser({username}) {
     const [userDropdownVisible, setUserDropdownVisible] = useState(false);
