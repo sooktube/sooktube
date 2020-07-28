@@ -5,7 +5,6 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import { store } from './helpers';
 import App  from './App.js';
-import './reset.css';
 
 render((
     <BrowserRouter>

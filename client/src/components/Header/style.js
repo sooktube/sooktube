@@ -3,11 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { MAIN } from '../Style/Main';
 
 export const HeaderWrapper = styled.div`
-    width: 100vw;
     height: 10vh;
     padding: 0;
     margin: 0;
-    background-color: white;
 `;
 
 export const HeaderLayout = styled.div`

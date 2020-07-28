@@ -47,7 +47,7 @@ function CardShelf() {
                     <CardHeart/>
                 </CardWrapper>
             ))}
-            <Shelf/>
+
             <ShelfBottom/>
         </ShelfWrapper>
     );
