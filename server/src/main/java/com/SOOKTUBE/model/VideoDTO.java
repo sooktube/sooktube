@@ -20,7 +20,9 @@ public class VideoDTO {
 	private String videoDesc;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date videoDate;
-	private String userID;
+	private String username;
+	private String uploadFileName;
+	private String videoPath;
 
 }
 

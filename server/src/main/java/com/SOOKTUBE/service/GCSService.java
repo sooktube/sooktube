@@ -1,7 +1,6 @@
 package com.SOOKTUBE.service;
 
 import java.net.URL;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -50,8 +49,7 @@ public class GCSService {
 		  String bucketName = "soktube.appspot.com";
 		  
 		  //업로드 날짜 저장
-		  long time = System.currentTimeMillis ( );
-		  String fileName = uploadReqDto.getUsername() + String.valueOf(time) + uploadReqDto.getUploadFileName();
+		  String fileName = uploadReqDto.getUsername() + uploadReqDto.getUploadFileName();
 		  System.out.println(fileName);
 		  
 		  res[0] = fileName;
@@ -144,6 +142,28 @@ public class GCSService {
 		    
 		    return url.toString();
 		  }
+
+			  public String deleteObject(String fileName) {
+			    // The ID of your GCP project
+			    // String projectId = "your-project-id";
+
+			    // The ID of your GCS bucket
+			    // String bucketName = "your-unique-bucket-name";
+
+			    // The ID of your GCS object
+			    // String objectName = "your-object-name";
+				  
+				  String projectId = "soktube";
+				  String bucketName = "soktube.appspot.com";
+
+			    Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
+			    storage.delete(bucketName, fileName);
+
+			    System.out.println("Object " + fileName + " was deleted from " + bucketName);
+			    
+			    return "deleted";
+			  }
+		
 	  
 	  
  
