@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactPlayer from 'react-player'
 
-
 function VideoPlayer({url}){
+    console.log(url);
     return (
         <ReactPlayer
-            playsInline
+            controls={true}
             url={url}
         />
     );

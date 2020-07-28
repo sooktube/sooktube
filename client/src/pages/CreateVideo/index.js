@@ -80,7 +80,7 @@ function CreateVideo(){
                     <S.UploadButton>UPLOAD</S.UploadButton>
                 </S.InputVideoWrapper>
                 {
-                    <VideoPlayer url="https://www.youtube.com/watch?v=byZiwIzFEPE"/>
+                    <VideoPlayer url={videoURL}/>
                 }
             </S.CreateVideoWrapper>
             </>
