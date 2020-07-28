@@ -5,7 +5,11 @@ export function video(state = {}, action) {
         case videoConstants.VIDEO_UPLOAD_REQUEST:
             return { uploading : true };
         case videoConstants.VIDEO_UPLOAD_SUCCESS:
-            return { isUploaded: true };
+            return {
+                isUploaded: true,
+                uploadFileName: action.uploadFileName,
+                videoURL: action.videoURL
+            };
         case videoConstants.VIDEO_UPLOAD_FAILURE:
             return {};
         default:

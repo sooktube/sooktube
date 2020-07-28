@@ -1,6 +1,7 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {videoActions} from "../../actions";
+import VideoPlayer from "../../components/common/VideoPlayer";
 
 import * as S from "./style";
 import Header from "../../components/base/Header";
@@ -13,14 +14,17 @@ function CreateVideo(){
         videoDesc: null,
         videoDate: null,
         videoFile: null,
+        videoFileName: null,
         uploadFileName: null,
         username: ''
     });
 
     const username = useSelector(state => state.authentication.username);
+    const videoURL = useSelector(state => state.video.videoURL);
+    const isUploaded = useSelector(state => state.video.isUploaded);
 
     function fileSelect(event){
-        setInput({...input, videoFile: ' '+ event.target.files[0].name});
+        setInput({...input, videoFileName : event.target.files[0].name, videoFile: event.target.files[0]});
     }
 
     useEffect(() => {
@@ -34,10 +38,13 @@ function CreateVideo(){
                 uploadFileName: input.uploadFileName,
                 username: input.username,
                 videoFile: input.videoFile
-            }));
+            }))
         }
     }, [input.videoFile]);
-    
+
+    useEffect(() => {
+        console.log(videoURL);
+    }, [input.videoURL]);
     function handleClick(e) {
         e.preventDefault();
         if (!input.videoTitle) {
@@ -64,16 +71,17 @@ function CreateVideo(){
                             <S.UploadInput type="file" onChange={fileSelect}/>
                         </S.Label>
                         {input.videoFile
-                            ? <S.VideoName> {input.videoFile}</S.VideoName>
+                            ? <S.VideoName> {input.videoFileName}</S.VideoName>
                             : <S.VideoName> 선택된 파일 없음 </S.VideoName>
                         }
                     </S.UploadVideo>
                     <S.InputTitle type="text" placeholder="title" />
                     <S.InputDesc cols="10" rows="5" placeholder="description" />
                     <S.UploadButton>UPLOAD</S.UploadButton>
-                    <S.ThumbnailWrapper>
-                    </S.ThumbnailWrapper>
                 </S.InputVideoWrapper>
+                {
+                    <VideoPlayer url="https://www.youtube.com/watch?v=byZiwIzFEPE"/>
+                }
             </S.CreateVideoWrapper>
             </>
     );

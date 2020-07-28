@@ -6,7 +6,7 @@ export const CreateVideoWrapper = styled.div`
 `;
 
 export const InputVideoWrapper = styled.div`
-    margin: 0;
+    margin-top: 2em;
     padding: 0;
 `;
 

@@ -3,7 +3,8 @@ import axios from "axios";
 export const videoService = {
     getVideoUploadURL,
     UploadVideoFile,
-    UploadVideoInfo
+    UploadVideoInfo,
+    getVideoFile
 };
 
 function getVideoUploadURL(input) {
@@ -55,4 +56,17 @@ function UploadVideoInfo(input) {
         .catch(error => {
         return error;
     })
+}
+
+function getVideoFile(uploadFileName) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.appspot.com/api/video/getVideobyFile/${uploadFileName}`,
+    })
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return error;
+        })
 }

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Player } from 'video-react';
+import ReactPlayer from 'react-player'
 
-function VideoPlayer(url){
+
+function VideoPlayer({url}){
     return (
-        <Player
+        <ReactPlayer
             playsInline
-            src={url}
+            url={url}
         />
     );
 }

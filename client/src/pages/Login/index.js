@@ -34,7 +34,7 @@ function Login() {
             dispatch(userActions.login({userID, password}));
         }
     }
-    console.log('a');
+
     return (
         <MainBackground>
             <LoginBox>

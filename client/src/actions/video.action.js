@@ -6,6 +6,7 @@ export const videoActions = {
 };
 
 function uploadVideoFile(input) {
+    let uploadFileName, uploadURL, videoURL;
     return dispatch => {
         dispatch(request());
         videoService.getVideoUploadURL({
@@ -13,21 +14,26 @@ function uploadVideoFile(input) {
             username: input.username
         })
         .then(response => {
-            const uploadFileName = response[0];
-            const uploadURL = response[1];
-            dispatch(success(uploadFileName));
-            console.log(uploadFileName);
-            return videoService.UploadVideoFile(uploadURL, uploadFileName)
+            uploadFileName = response[0];
+            uploadURL = response[1];
+            return videoService.UploadVideoFile(uploadURL, input.videoFile)
+        })
+        .then(() => {
+            return videoService.getVideoFile(uploadFileName)
         })
         .then(response => {
-            return response;
+            videoURL = response.data;
+            dispatch(success(uploadFileName, String(videoURL)));
+            console.log(videoURL);
+            return response.data;
         },
         error => {
             dispatch(failure(error.toString()));
         })
+
     };
 
     function request() { return { type: videoConstants.VIDEO_UPLOAD_REQUEST} }
-    function success(uploadFileName) { return { type: userConstants.LOGIN_SUCCESS, uploadFileName } }
-    function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
+    function success(uploadFileName, videoURL) { return { type: videoConstants.VIDEO_UPLOAD_SUCCESS, uploadFileName, videoURL } }
+    function failure(error) { return { type: videoConstants.VIDEO_UPLOAD_FAILURE, error } }
 }
