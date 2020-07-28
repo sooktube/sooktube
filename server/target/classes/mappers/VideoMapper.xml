@@ -88,6 +88,11 @@
     	DELETE FROM VIDEO
     	WHERE videoID = #{videoID}
     </delete>
+    
+    <delete id="deleteVideobyFileName">
+    	DELETE FROM VIDEO
+    	WHERE uploadFileName = #{uploadFileName}
+    </delete>
 
     
 

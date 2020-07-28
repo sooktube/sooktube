@@ -104,7 +104,7 @@ public class GCSController {
 		return url;
 	}
 	
-	
+	//delete videos by videoID
 	@CrossOrigin
 	@RequestMapping(value = "/api/video/deletebyID/{videoID}", method = RequestMethod.DELETE)
 	public String deleteVideobyID(@PathVariable("videoID") final int videoID) throws Exception {
@@ -122,6 +122,30 @@ public class GCSController {
 		}
 		
 		videoDAO.deleteVideobyID(videoID);
+		
+		return res;
+		
+	}
+	
+	
+	//delete videos by FileName
+	@CrossOrigin
+	@RequestMapping(value = "/api/video/delete/fileName/{uploadFileName}", method = RequestMethod.DELETE)
+	public String deleteVideobyFileName(@PathVariable("uploadFileName") final String uploadFileName) throws Exception {
+		
+		String res = "";
+		
+		String fileName = videoDAO.getURLfromFilename(uploadFileName);
+		
+		if (fileName != null) {
+			res = gcsService.deleteObject(fileName);
+		}
+		
+		else {
+			res = "cannot delete file from bucket.";
+		}
+		
+		videoDAO.deleteVideobyFileName(fileName);
 		
 		return res;
 		
