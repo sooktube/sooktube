@@ -11,6 +11,28 @@
         VALUES (#{videoTitle}, #{videoDesc}, #{videoDate}, #{username}, #{uploadFileName})
     </insert>
     
+        <select id="getDescbyVideoID" 
+    		parameterType="Integer" 
+    		resultType="com.SOOKTUBE.model.VideoDTO">
+    		
+    		SELECT `videoID`, `videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`, `videoPath`
+    		FROM VIDEO
+    		WHERE `videoID` = #{videoID}
+    		
+    		</select>
+    		
+        <select id="getDescbyUser" 
+    		parameterType="Integer" 
+    		resultType="com.SOOKTUBE.model.VideoDTO">
+    		
+    		SELECT `videoID`, `videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`, `videoPath`
+    		FROM VIDEO
+    		WHERE `username` = #{username}
+    		
+    		</select>
+    		
+    	    		
+    
     <select id="getURLfromVideoID" 
     		parameterType="Integer" 
     		resultType="String">
@@ -30,6 +52,43 @@
     		WHERE `username` = #{username}
     		
     		</select>
+    		
+    		
+    	<select id="getURLfromFilename"
+    			parameterType="Integer"
+    			resultType="String">
+    			
+    			SELECT `uploadFileName`
+    			FROM VIDEO
+    			WHERE `uploadFileName` = #{uploadFileName}
+    			
+    			</select>
+    			
+<!--     	 <select id="getVideoPath"
+    			parameterType="Integer"
+    			resultType="String">
+    			
+    			SELECT `videoPath`
+    			FROM VIDEO
+    			WHERE `uploadFileName` = #{uploadFileName}
+    			
+    			</select>	 -->	
+    			
+    			
+    	    <update id="editVideo" parameterType="com.SOOKTUBE.model.VideoDTO">
+        UPDATE VIDEO
+           SET `videoTitle` = #{videoTitle}
+             , `videoDesc` = #{videoDesc}
+             , `videoDate` = #{videoDate}
+         WHERE `videoID` = #{videoID}
+    </update>
+    
+    
+    <delete id="deleteVideobyID"> 
+    	DELETE FROM VIDEO
+    	WHERE videoID = #{videoID}
+    </delete>
+
     
 
 </mapper>

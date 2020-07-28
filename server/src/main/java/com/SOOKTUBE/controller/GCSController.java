@@ -90,6 +90,42 @@ public class GCSController {
 		
 		return res;
 	}
+	
+	//get videos by fileName
+	@CrossOrigin
+	@RequestMapping(value = "/api/video/getVideobyFile/{uploadFileName}", method = RequestMethod.GET)
+	public String getURLfromGCSbyFileName(@PathVariable("uploadFileName") final String uploadFileName) throws Exception {
+		
+		String fileName = videoDAO.getURLfromFilename(uploadFileName);
+
+		
+		String url = gcsService.getVideobyVIDEOtable(fileName);
+		
+		return url;
+	}
+	
+	
+	@CrossOrigin
+	@RequestMapping(value = "/api/video/deletebyID/{videoID}", method = RequestMethod.DELETE)
+	public String deleteVideobyID(@PathVariable("videoID") final int videoID) throws Exception {
+		
+		String res = "";
+		
+		String fileName = videoDAO.getURLfromVideoID(videoID);
+		
+		if (fileName != null) {
+			res = gcsService.deleteObject(fileName);
+		}
+		
+		else {
+			res = "cannot delete file from bucket.";
+		}
+		
+		videoDAO.deleteVideobyID(videoID);
+		
+		return res;
+		
+	}
 
 
 	
