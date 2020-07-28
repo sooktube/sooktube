@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.SOOKTUBE.dao.VideoListDAO">
+
+
+	
+		    
+		    <select id="getVideoList"
+		    resultType="com.SOOKTUBE.model.VideoListDTO">
+    		
+			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, videoList.`username`, `isPublic`
+			FROM videoList, listInfo, user
+			WHERE videoList.`listID` = listInfo.`listID`
+				AND
+					videoList.`username` = user.`username`
+    		
+    		</select>
+    		
+    		<select id="getVideoListbyID"
+    		parameterType="Integer"
+		    resultType="com.SOOKTUBE.model.VideoListDTO">
+    		
+			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, videoList.`username`, `isPublic`
+			FROM videoList, listInfo, user
+			WHERE videoList.`listID` = listInfo.`listID`
+				AND
+					videoList.`username` = user.`username`
+    		
+    		</select>
+    		
+    		<select id="getFileNamebylistID"
+    		parameterType="Integer"
+		    resultType="String">
+    		
+			SELECT `uploadFileName`
+			FROM videoList, VIDEO
+			WHERE `listID` = #{listID}
+				AND
+					videoList.`videoID` = VIDEO.`videoID`
+    		
+    		</select>
+
+
+
+
+</mapper>
