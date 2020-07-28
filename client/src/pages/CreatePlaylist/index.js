@@ -1,5 +1,5 @@
 import React from 'react';
-import {MainBackground,PlaylistBox , VideoBackground, UploadForm,IsVideo, UploadLogo, UploadInput,Label,InputTitle,UploadVideo,InputDesc,UploadButton,NameInput,VideoAdd} from "./style";
+import * as S from "./style";
 import { useState } from 'react';
 import { MAIN } from '../../components/style/Main';
 import Header from "../../components/base/Header";
@@ -20,25 +20,29 @@ function CreatePlaylist(){
 
     return(
         
-        <MainBackground>
+        <S.MainBackground>
             <Header></Header>
-            <UploadLogo> CREATE THE PLAYLIST </UploadLogo>
-            <UploadVideo>
-                    <Label>Input the Preview Image
-                    <UploadInput id="inputId" type="file" onChange={fileSelect}/>
-                    </Label>
-                    <NameInput type="text" style={style} readonly="readonly" id="file_route" value={text}></NameInput>
-            </UploadVideo>  
+            <S.UploadForm>
+            <S.UploadLogo> CREATE THE PLAYLIST </S.UploadLogo>
+            <S.UploadVideo>
+                    <S.Label>Input the Preview Image
+                    <S.UploadInput id="inputId" type="file" onChange={fileSelect}/>
+                    </S.Label>
+                    <S.NameInput type="text" style={style} readonly="readonly" id="file_route" value={text}></S.NameInput>
+            </S.UploadVideo>  
                
-                <IsVideo>아직 재생목록에 동영상이 없습니다</IsVideo>
+                <S.IsVideo>아직 재생목록에 동영상이 없습니다</S.IsVideo>
             
                 
-                <InputTitle type="text" placeholder="title" ></InputTitle>
-                <InputDesc cols="10" rows="5" placeholder="description" ></InputDesc>
-                <UploadButton>CREATE</UploadButton>
-                <VideoAdd> + Add Videos</VideoAdd>
+                <S.InputTitle type="text" placeholder="title" ></S.InputTitle>
+                <S.InputDesc cols="10" rows="5" placeholder="description" ></S.InputDesc>
+            <S.UploadBox>
+                <S.UploadButton>CREATE</S.UploadButton>
+                <S.VideoAdd> + Add Videos</S.VideoAdd>
+            </S.UploadBox>    
+            </S.UploadForm>
             
-        </MainBackground>
+        </S.MainBackground>
        
         
     );
