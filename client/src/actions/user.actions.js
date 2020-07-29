@@ -35,6 +35,7 @@ function login(user) {
 
 function logout() {
     userService.logout();
+    history.push('/');
     return { type: userConstants.LOGOUT };
 }
 

@@ -33,6 +33,7 @@ export const ModalInner = styled.div`
     background-color: #fff;
     width: 360px;
     max-width: 480px;
+    border-radius: 10px;
     top: 50%;
     transform: translateY(-50%);
     margin: 0 auto;

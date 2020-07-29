@@ -69,6 +69,7 @@ export const InputA = styled.input`
 
 export const InvalidFeedback = styled.div`
     color: red;
+    margin-top: 0.5em;
     font-size: 10px;
 `;
 
@@ -84,8 +85,11 @@ export const SubmitButton = styled.button`
     border-radius:20px;
     font-size:2.4vh;
     &:hover {
-    background-color: #83c4eb;
-  }
+      background-color: #83c4eb;
+    }
+    &:focus {
+      outline: none;
+    }
 `;
 
 export const Regguide = styled.span`

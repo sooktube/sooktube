@@ -90,9 +90,13 @@ export const Rsubmit = styled.button`
     &:hover {
       background-color: ${MAIN.BRIGHT_ON_HOVER};
     }
+    &:focus {
+      outline: none;
+    }
 `;
 
 export const InvalidFeedback = styled.div`
     color: red;
-    font-size:2vh;
+    font-size: 1.5vh;
+    margin-top: 0.2em;
 `;
