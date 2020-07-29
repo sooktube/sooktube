@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import * as S from './style';
 import useDropdownOutsideClick from "../../../../hooks/useDropdownOutsideClick";
 import {userService} from "../../../../services";
+import {history} from "../../../../helpers";
 
 function DropdownUser({username}) {
     const [userDropdownVisible, setUserDropdownVisible] = useState(false);
@@ -13,6 +14,11 @@ function DropdownUser({username}) {
     const contentRef = useRef(null);
     useDropdownOutsideClick(contentRef, setUserDropdownVisible);
 
+    function handleClick() {
+        userService.logout();
+        history.push('/');
+    }
+
     return (
         <>
             <S.UserDropdownMenu>
@@ -22,7 +28,7 @@ function DropdownUser({username}) {
                 {userDropdownVisible &&
                     <S.UserDropdownContent ref={contentRef}>
                         <S.DropdownItem> 로그인한 계정: {username}님 </S.DropdownItem>
-                        <S.DropdownButton onClick={userService.logout}> 로그아웃 </S.DropdownButton>
+                        <S.DropdownButton onClick={handleClick}> 로그아웃 </S.DropdownButton>
                     </S.UserDropdownContent>
                 }
             </S.UserDropdownMenu>

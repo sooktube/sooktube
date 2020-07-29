@@ -31,7 +31,7 @@ function Register() {
     const registering = useSelector(state => state.registration.registering);
 
     useEffect(() => {
-        localStorage.clear();
+        userService.logout();
     }, []);
 
     function handleChange(e) {
