@@ -47,11 +47,11 @@ function UploadVideoFile(uploadURL, videoFile) {
 function UploadVideoInfo(input) {
     return axios({
         method: 'POST',
-        url: 'https://soktube.appspot.com/api/video/uploadL',
+        url: 'https://soktube.appspot.com/api/video/upload',
         data: input
         })
         .then(response => {
-        return response.data;
+        return response;
         })
         .catch(error => {
         return error;

@@ -22,7 +22,7 @@
     "core-js": "^3.6.5",
     "html-webpack-plugin": "latest",
     "mini-css-extract-plugin": "latest",
-    "moment": "^2.26.0",
+    "moment": "^2.27.0",
     "node-sass": "^4.14.1",
     "prop-types": "latest",
     "querystring": "^0.2.0",

@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {videoActions} from "../../actions";
-import VideoPlayer from "../../components/common/VideoPlayer";
-import Loader from "../../components/common/Loader";
+import moment from "moment";
 
 import * as S from "./style";
 import Header from "../../components/base/Header";
+import VideoPlayer from "../../components/common/VideoPlayer";
+import Loader from "../../components/common/Loader";
+import {videoService} from "../../services";
 
 function CreateVideo(){
     const dispatch = useDispatch();
@@ -22,15 +24,21 @@ function CreateVideo(){
 
     const username = useSelector(state => state.authentication.username);
     const videoURL = useSelector(state => state.video.videoURL);
+    const uploadFileName = useSelector(state => state.video.uploadFileName);
     const isUploaded = useSelector(state => state.video.isUploaded);
 
     function fileSelect(event){
         setInput({...input, videoFileName : event.target.files[0].name, videoFile: event.target.files[0]});
     }
 
+    function handleChange(e) {
+        const { name, value } = e.target;
+        setInput({ ...input, [name]: value });
+    }
+
     useEffect(() => {
         const time = new Date().getTime().toString();
-        setInput({...input, uploadFileName: time, username: username});
+        setInput({...input, uploadFileName: time, username: username, videoDate: moment().format().substr(0,10)});
     }, []);
 
     useEffect(() => {
@@ -38,7 +46,7 @@ function CreateVideo(){
             dispatch(videoActions.uploadVideoFile({
                 uploadFileName: input.uploadFileName,
                 username: input.username,
-                videoFile: input.videoFile
+                videoFile: input.videoFile,
             }))
         }
     }, [input.videoFile]);
@@ -55,7 +63,15 @@ function CreateVideo(){
             return alert("영상을 업로드해주세요.");
         }
         if (input.videoTitle && input.videoDesc && input.videoFile) {
-
+            videoService.UploadVideoInfo({
+                videoTitle: input.videoTitle,
+                videoDesc: input.videoDesc,
+                videoDate: input.videoDate,
+                username: input.username,
+                uploadFileName: uploadFileName
+            }).then(response => {
+                console.log(response);
+            })
         }
     }
 
@@ -74,23 +90,27 @@ function CreateVideo(){
                             : <S.VideoName> 선택된 파일 없음 </S.VideoName>
                         }
                     </S.UploadVideo>
-                    <S.InputTitle type="text" placeholder="Title" />
-                    <S.InputDesc cols="10" rows="5" placeholder="Description" />
-                    <S.UploadButton>UPLOAD</S.UploadButton>
+                    <S.InputTitle onChange={handleChange}
+                                  type="text"
+                                  name="videoTitle"
+                                  placeholder="Title" />
+
+                    <S.InputDesc onChange={handleChange}
+                                 name="videoDesc"
+                                 cols="10"
+                                 rows="5"
+                                 placeholder="Description" />
+                    <S.UploadButton onClick={handleClick}> UPLOAD </S.UploadButton>
                 </S.InputVideoWrapper>
                 <S.VideoWrapper>
                     <S.UploadCheckWrapper>
                         {isUploaded && input.videoFile &&
-                            <>
-                                <S.Check/>
-                                <S.VideoUploadLoading> 업로드 완료 </S.VideoUploadLoading>
-                            </>
+                            <> <S.Check/>
+                            <S.VideoUploadLoading> 업로드 완료 </S.VideoUploadLoading> </>
                         }
                         {!isUploaded && input.videoFile &&
-                            <>
-                                <Loader/>
-                                <S.VideoUploadLoading> 업로드 하는 중... </S.VideoUploadLoading>
-                            </>
+                            <> <Loader/>
+                            <S.VideoUploadLoading> 업로드 하는 중... </S.VideoUploadLoading> </>
                         }
                     </S.UploadCheckWrapper>
                     <VideoPlayer url={videoURL} width="480px" height="251px"/>
