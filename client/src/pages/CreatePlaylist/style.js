@@ -20,7 +20,7 @@ export const UploadLogo = styled.div`
 
 export const UploadVideo = styled.div`
 	position:static;
-	margin-top:7vh;
+	margin-top:4vh;
     padding:2px;
 	height:15%;
 	width:30%;
@@ -46,7 +46,7 @@ export const NameInput=styled.input`
 
 export const InputTitle = styled.input`
 	position:static;
-	margin-top:8vh;
+	margin-top:9vh;
 	width:30vw;
 	height:6%;
 	padding:5px;
@@ -69,17 +69,14 @@ export const InputDesc = styled.textarea`
 export const Label = styled.label`
     padding: 0.5em 1em 0.5em 1em;
 	background:  ${MAIN.MAIN_THEME_COLOR};
-	
 	border-radius: 30px;
 	color: white;
 	font-weight: 300;
 	font-size: 2.4vh;
-	
 	transition: all 0.2s ease-in;
 	cursor: pointer;
 	outline: none;
 	border: none;
-	
 	&:hover {
     background-color: #80c2ea;
   }
@@ -90,7 +87,6 @@ export const Label = styled.label`
 export const UploadBox = styled.div`
     position:relative;
 	margin-top:2vh;
-	padding:1vh;
 	width:30vw;
 `;
 
@@ -98,6 +94,7 @@ export const UploadBox = styled.div`
 export const VideoAdd = styled.button`
 	position:static;
 	border:none;
+	margin-top:0.5em;
 	background:transparent;
 `;
 
@@ -105,8 +102,7 @@ export const UploadButton = styled.button`
 	background:  ${MAIN.MAIN_THEME_COLOR};
 	border-radius:3px;
 	color:white;
-	position:absolute;
-    right:0.2vw;
+	float:right;
 	padding: 1em 1em 1em 1em;
 	font-size: 2.3vh;
 	border:none;

@@ -34,8 +34,8 @@ function CreatePlaylist(){
                 <S.IsVideo>아직 재생목록에 동영상이 없습니다</S.IsVideo>
             
                 
-                <S.InputTitle type="text" placeholder="title" ></S.InputTitle>
-                <S.InputDesc cols="10" rows="5" placeholder="description" ></S.InputDesc>
+                <S.InputTitle type="text" placeholder="Title" ></S.InputTitle>
+                <S.InputDesc cols="10" rows="5" placeholder="Description" ></S.InputDesc>
             <S.UploadBox>
                 <S.UploadButton>CREATE</S.UploadButton>
                 <S.VideoAdd> + Add Videos</S.VideoAdd>

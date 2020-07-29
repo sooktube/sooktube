@@ -60,6 +60,8 @@ function CreateVideo(){
 
         }
     }
+
+
     return(
         <>
             <Header/>
@@ -75,13 +77,13 @@ function CreateVideo(){
                             : <S.VideoName> 선택된 파일 없음 </S.VideoName>
                         }
                     </S.UploadVideo>
-                    <S.InputTitle type="text" placeholder="title" />
-                    <S.InputDesc cols="10" rows="5" placeholder="description" />
+                    <S.InputTitle type="text" placeholder="Title" />
+                    <S.InputDesc cols="10" rows="5" placeholder="Description" />
                     <S.UploadButton>UPLOAD</S.UploadButton>
                 </S.InputVideoWrapper>
-                {
-                    <VideoPlayer url={videoURL}/>
-                }
+                <S.VideoWrapper>{
+                    <VideoPlayer url={videoURL} width="30vw"/>
+                }</S.VideoWrapper>
             </S.CreateVideoWrapper>
             </>
     );

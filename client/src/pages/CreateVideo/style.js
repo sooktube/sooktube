@@ -2,19 +2,31 @@ import styled from 'styled-components'
 import { MAIN } from '../../components/style/Main';
 
 export const CreateVideoWrapper = styled.div`
-    display: flex;
+	background:#ffffff;
+	display:inline-block;
+	width:100%;
+	
 `;
 
 export const InputVideoWrapper = styled.div`
-    margin-top: 2em;
     padding: 0;
+	width: 30vw;
+	display:inline-block;
+	
+
+`;
+
+export const VideoWrapper = styled.div`
+	width:20vw;
+	padding:0.1px;
+	margin-left:3em;
+	display:inline-block;
 `;
 
 export const UploadLogo = styled.div`
-    font-size: 20px;
-    margin-top: 5%;
+    font-size:4vh;
+    margin-top:9.9vh;
     padding: 0;
-	color: ${MAIN.MAIN_THEME_COLOR};
 	font-weight:bold;
 `;
 
@@ -37,8 +49,9 @@ export const VideoName = styled.span`
 
 export const InputTitle = styled.input`
 	padding:4px;
-	margin-top: 1em;
+	margin-top: 1.5em;
 	width: 100%;
+	padding:5px;
 	border:1px solid #ced4da;
 	&:focus {
 	    outline: 1px solid #ced4da;
@@ -49,6 +62,7 @@ export const InputDesc = styled.textarea`
 	width: 100%;
 	height: 200px;
 	margin-top: 1em;
+	padding:5px;
 	border:1px solid #ced4da; 
 	&:focus {
 	    outline: 1px solid #ced4da;
@@ -57,9 +71,8 @@ export const InputDesc = styled.textarea`
 
 
 export const Label = styled.label`
-    padding: 0.5em 1em 0.5em 1em;
-    margin-top: 0.7em;
-	background-color: ${MAIN.MAIN_THEME_COLOR};
+    padding: 0.3em 1em 0.5em 1em;
+	background:  ${MAIN.MAIN_THEME_COLOR};
 	border-radius: 30px;
 	color: white;
 	font-weight: 300;
@@ -69,19 +82,18 @@ export const Label = styled.label`
 	outline: none;
 	border: none;
 	&:hover {
-      background-color: ${MAIN.BRIGHT_ON_HOVER};
-    }
+    background-color: ${MAIN.BRIGHT_ON_HOVER};
+  }
 `;
 
 export const UploadButton = styled.button`
 	background: ${MAIN.MAIN_THEME_COLOR};
-	width: 80px;
-	height: 25px;
-	border-radius:30px;
 	float: right;
 	margin-top: 1em;
 	color:white;
+	border-radius:3px;
 	font-size: 2.3vh;
+	padding: 0.8em 1em 0.8em 1em;
 	border:none;
 	&:hover {
       background-color: ${MAIN.BRIGHT_ON_HOVER};

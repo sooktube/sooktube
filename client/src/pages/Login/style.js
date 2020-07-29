@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {MAIN} from "../../components/style/Main";
 
 export const MainBackground = styled.div`
     margin: 20px auto;
@@ -20,8 +21,8 @@ export const LoginLogo = styled.div`
 	align-items: center;
 	justify-content: center;
     width:60%; 
-    padding:0px;
-    color: #071b6a;
+    padding:0;
+    color: ${MAIN.MAIN_THEME_COLOR};
     font-weight:bold;
     margin-top:1em;
     
@@ -38,7 +39,7 @@ export const FormGroup1 = styled.div`
 
 export const FormGroup2 = styled.div`
     position:static;
-    padding:0px;
+    padding:0;
     margin-top:2em;
     margin-left:1em;
     margin-right:1em;
@@ -47,14 +48,14 @@ export const FormGroup2 = styled.div`
 
 export const FormGroup3 = styled.div`
     position:static;
-    padding:0px;
+    padding: 0;
     margin: 2em 1em 1em;
     
 `;
 
 export const FormGroup4 = styled.div`
     position:static;
-    padding:0px;
+    padding:0;
     display: flex;
 	align-items: center;
 	justify-content: center;
@@ -77,13 +78,13 @@ export const SubmitButton = styled.button`
     position:static; 
     margin: 0;
     padding: 0.5em 1em 0.5em 1em;
-    background-color: #071b6a;
+    background-color: ${MAIN.MAIN_THEME_COLOR};
     border: none;
     color: white;
     border-radius:20px;
     font-size:2.4vh;
     &:hover {
-    background-color: #0929a9;
+    background-color: #83c4eb;
   }
 `;
 
@@ -97,6 +98,7 @@ export const Regguide = styled.span`
 
 export const Regbutton = styled.span`
     padding:0;
+    color: #071b6a;
     font-size:2.5vh;
     margin-left:1em;
     margin-right:1em;

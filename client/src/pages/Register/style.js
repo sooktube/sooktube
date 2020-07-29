@@ -5,7 +5,6 @@ export const MainBackground = styled.div`
     height: 450px;
 `;
 
-
 export const RegisterForm = styled.div`
     top:50%;
     left: 50%;
@@ -83,14 +82,14 @@ export const Rsubmit = styled.button`
     height:40px; 
     border-radius:20px;
     position:static; 
-    margin-left:0px; 
-    padding:0px;
+    margin: 0; 
+    padding: 0;
     background-color: ${MAIN.MAIN_THEME_COLOR};
     border: none;
     color: white;
     &:hover {
-    background-color: ${MAIN.BRIGHT_ON_HOVER};
-  }
+      background-color: ${MAIN.BRIGHT_ON_HOVER};
+    }
 `;
 
 export const InvalidFeedback = styled.div`
