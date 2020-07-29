@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {videoActions} from "../../actions";
 import VideoPlayer from "../../components/common/VideoPlayer";
+import Loader from "../../components/common/Loader";
 
 import * as S from "./style";
 import Header from "../../components/base/Header";
@@ -42,9 +43,6 @@ function CreateVideo(){
         }
     }, [input.videoFile]);
 
-    useEffect(() => {
-        console.log(videoURL);
-    }, [input.videoURL]);
     function handleClick(e) {
         e.preventDefault();
         if (!input.videoTitle) {
@@ -60,7 +58,6 @@ function CreateVideo(){
 
         }
     }
-
 
     return(
         <>
@@ -81,9 +78,23 @@ function CreateVideo(){
                     <S.InputDesc cols="10" rows="5" placeholder="Description" />
                     <S.UploadButton>UPLOAD</S.UploadButton>
                 </S.InputVideoWrapper>
-                <S.VideoWrapper>{
-                    <VideoPlayer url={videoURL} width="30vw"/>
-                }</S.VideoWrapper>
+                <S.VideoWrapper>
+                    <S.UploadCheckWrapper>
+                        {isUploaded && input.videoFile &&
+                            <>
+                                <S.Check/>
+                                <S.VideoUploadLoading> 업로드 완료 </S.VideoUploadLoading>
+                            </>
+                        }
+                        {!isUploaded && input.videoFile &&
+                            <>
+                                <Loader/>
+                                <S.VideoUploadLoading> 업로드 하는 중... </S.VideoUploadLoading>
+                            </>
+                        }
+                    </S.UploadCheckWrapper>
+                    <VideoPlayer url={videoURL} width="480px" height="251px"/>
+                </S.VideoWrapper>
             </S.CreateVideoWrapper>
             </>
     );

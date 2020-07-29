@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactPlayer from 'react-player'
 
-function VideoPlayer({url, width}){
-    console.log(url);
+function VideoPlayer({url, width, height}){
     return (
         <ReactPlayer
             controls={true}
-            url={url}
+            url={url ? url : '/'}
             width={width}
+            height={height}
         />
     );
 }
