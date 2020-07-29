@@ -25,7 +25,7 @@ function App() {
                 <Route path='/register' component={Register}/>
                 <Route path='/create/playlist' component={CreatePlaylist}/>
                 <Route path='/create/video' component={CreateVideo}/>
-                <Route path='/player' component={Player}/>
+                <Route path='/video/:videoID' component={Player}/>
                 <Redirect from="*" to="/" />
             </Switch>
             </GlobalLayoutStyle>

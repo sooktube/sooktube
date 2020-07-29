@@ -4,7 +4,8 @@ export const videoService = {
     getVideoUploadURL,
     UploadVideoFile,
     UploadVideoInfo,
-    getVideoFile
+    getVideoFile,
+    getVideoInfoByVideoID
 };
 
 function getVideoUploadURL(input) {
@@ -65,6 +66,19 @@ function getVideoFile(uploadFileName) {
     })
         .then(response => {
             return response;
+        })
+        .catch(error => {
+            return error;
+        })
+}
+
+function getVideoInfoByVideoID(videoID) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.appspot.com//api/video/desc/{videoID}`,
+    })
+        .then(response => {
+            return response.data;
         })
         .catch(error => {
             return error;

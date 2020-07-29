@@ -1,9 +1,8 @@
 import React from 'react';
 import * as S from "./style";
 import Header from "../../components/base/Header";
-import Comment from "./comment";
 import VideoPlayer from "../../components/common/VideoPlayer";
-import ReactPlayer from 'react-player';
+import CommentBox from "./Comments";
 
 function Player(){
 
@@ -21,22 +20,12 @@ function Player(){
         <S.MainBackground>
             <Header/>
             <S.VideoBox>
-            <VideoPlayer width="47vw" url="https://storage.googleapis.com/sttbucket2020/dog1.mp4"/>
+                <VideoPlayer width="47vw" url="https://storage.googleapis.com/sttbucket2020/dog1.mp4"/>
             </S.VideoBox>
             <S.VideoTitle>{title}</S.VideoTitle>
             <S.VideoDesc>{desc}</S.VideoDesc>
             <hr/>
-
-            <S.CommentBox>
-            <S.CommentTitle>Comments  {comments.length}</S.CommentTitle>
-                {comments.map(
-                    (comment,index) => (<Comment 
-                    username={comment.username}
-                    text={comment.text}
-                    photo={comment.photo}/>)
-                )}
-                
-            </S.CommentBox>
+            <CommentBox/>
         </S.MainBackground>
     );
 }
