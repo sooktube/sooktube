@@ -1,13 +1,16 @@
 import React from 'react';
-import {CommentContainer, Username,Text} from "./style";
+import * as S from "./style";
 
 
-function Comment({username, text}){
+function Comment({username, text, photo}){
     return(
-        <CommentContainer>
-            <Username>{username}</Username>
-            <Text>{text}</Text>
-        </CommentContainer>
+        <S.CommentContainer>
+            <S.Photo src={photo}></S.Photo>
+            <S.TextBox>
+            <S.Username>{username}</S.Username>
+            <S.Text>{text}</S.Text>
+            </S.TextBox>
+        </S.CommentContainer>
     );
 }
 

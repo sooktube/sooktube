@@ -24,7 +24,7 @@ export const LoginLogo = styled.div`
 	justify-content: center;
     width:60%; 
     padding:0px;
-    color: #071b6a;
+    color: ${MAIN.MAIN_THEME_COLOR};
     font-weight:bold;
     margin-top:1em;
     
@@ -86,19 +86,18 @@ export const SubmitButton = styled.button`
     position:static; 
     margin-left:0px; 
     padding: 0.5em 1em 0.5em 1em;
-    background-color: #071b6a;
+    background-color:  ${MAIN.MAIN_THEME_COLOR};
     border: none;
     color: white;
     border-radius:20px;
     font-size:2.4vh;
     &:hover {
-    background-color: #0929a9;
+    background-color: #83c4eb;
   }
 `;
 
 export const Regguide = styled.span`
-    color:#f1c40f;
-    color:white;
+    color:#ffd43b;
     padding:0px;
     font-size:2.5vh;
     margin-right:1em;
@@ -106,6 +105,7 @@ export const Regguide = styled.span`
 `;
 
 export const Regbutton = styled.span`
+    color: #071b6a;
     padding:0px;
     font-size:2.5vh;
     margin-left:1em;
