@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { MAIN } from "../../../style/Main";
 
 export const UserButtonWrapper = styled.div`
-    margin-right: 1vw;
     display: flex;
 `;
 

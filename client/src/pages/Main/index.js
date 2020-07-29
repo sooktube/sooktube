@@ -5,10 +5,10 @@ import PlaylistCard from "../../components/playlist/PlaylistCard";
 
 function Main() {
     return (
-        <MainBackground>
+        <>
             <Header/>
             <PlaylistCard/>
-        </MainBackground>
+        </>
     )
 }
 

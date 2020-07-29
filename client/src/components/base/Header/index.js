@@ -6,13 +6,11 @@ import UserButton from "./UserButton";
 function Header() {
     return (
         <S.HeaderWrapper>
-            <S.HeaderLayout>
-                <S.HeaderLogo to='/'> SOOKTUBE </S.HeaderLogo>
-                {localStorage.getItem('user')
-                    ? <UserButton/>
-                    : <UserLoginButton/>
-                }
-            </S.HeaderLayout>
+            <S.HeaderLogo to='/'> SOOKTUBE </S.HeaderLogo>
+            {localStorage.getItem('user')
+                ? <UserButton/>
+                : <UserLoginButton/>
+            }
         </S.HeaderWrapper>
     )
 }
