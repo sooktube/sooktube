@@ -1,21 +1,34 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {useParams} from "react-router-dom";
 import * as S from "./style";
 import Header from "../../components/base/Header";
 import VideoPlayer from "../../components/common/VideoPlayer";
 import CommentBox from "./Comments";
+import {videoService} from "../../services";
 
 function Player(){
+    let { videoID } = useParams();
 
-    const comments=[
-        {username:'hyerin',text:'I hope you think of me high',photo:'https://storage.googleapis.com/sttbucket2020/sunset.jpg'},
-        {username:'hajung',text:'when you are with someone else',photo:'https://storage.googleapis.com/sttbucket2020/sunset.jpg'},
-        {username:'jua',text:'today i called to tell you that im changing',photo:'https://storage.googleapis.com/sttbucket2020/sunset.jpg'}
-    ];
+    const [videoInfo, setVideoInfo] = useState({
+        videoTitle: null,
+        videoDesc: null,
+        videoPath: null
+        }
+    );
 
-    const title="The Cutest Seven Retriever Puppy Siblings!";
-    const desc="this is a video of a puppy. how big are they now? where's your mother?";
+    const title= "The Cutest Seven Retriever Puppy Siblings!";
+    const desc= "this is a video of a puppy. how big are they now? where's your mother?";
 
-
+    useEffect(() => {
+        videoService.getVideoInfoByVideoID(videoID)
+            .then(response =>
+                setVideoInfo({
+                    videoTitle: response.videoTitle,
+                    videoDesc: response.videoDesc,
+                    videoPath: response.videoPath
+                })
+            )
+    },[])
     return(
         <S.MainBackground>
             <Header/>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import qs from 'querystring';
 
 export const videoService = {
     getVideoUploadURL,
@@ -46,16 +47,21 @@ function UploadVideoFile(uploadURL, videoFile) {
 }
 
 function UploadVideoInfo(input) {
+    console.log(input);
     return axios({
         method: 'POST',
-        url: 'https://soktube.appspot.com/api/video/upload',
-        data: input
+        url: 'https://soktube.uc.r.appspot.com/api/video/upload',
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: qs.stringify(input),
         })
         .then(response => {
-        return response;
+            console.log(response);
+            return response;
         })
         .catch(error => {
-        return error;
+            return error;
     })
 }
 
@@ -75,9 +81,17 @@ function getVideoFile(uploadFileName) {
 function getVideoInfoByVideoID(videoID) {
     return axios({
         method: 'GET',
-        url: `https://soktube.appspot.com//api/video/desc/{videoID}`,
+        url: `https://soktube.appspot.com/api/video/desc/${videoID}`,
     })
         .then(response => {
+            let videoPath;
+            if (response.data.videoPath === null){
+               return getVideoFile(response.data.uploadFileName)
+                   .then(response => {
+                       videoPath = response.data;
+                       return response.data;
+                   })
+            }
             return response.data;
         })
         .catch(error => {

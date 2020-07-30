@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {videoActions} from "../../actions";
-import moment from "moment";
 
 import * as S from "./style";
 import Header from "../../components/base/Header";
@@ -38,7 +37,7 @@ function CreateVideo(){
 
     useEffect(() => {
         const time = new Date().getTime().toString();
-        setInput({...input, uploadFileName: time, username: username, videoDate: moment().format().substr(0,10)});
+        setInput({...input, uploadFileName: time, username: username});
     }, []);
 
     useEffect(() => {
@@ -62,11 +61,10 @@ function CreateVideo(){
         if (!input.videoFile) {
             return alert("영상을 업로드해주세요.");
         }
-        if (input.videoTitle && input.videoDesc && input.videoFile) {
+        if (input.videoTitle && input.videoDesc && input.videoFile && isUploaded) {
             videoService.UploadVideoInfo({
                 videoTitle: input.videoTitle,
                 videoDesc: input.videoDesc,
-                videoDate: input.videoDate,
                 username: input.username,
                 uploadFileName: uploadFileName
             }).then(response => {
@@ -113,7 +111,7 @@ function CreateVideo(){
                             <S.VideoUploadLoading> 업로드 하는 중... </S.VideoUploadLoading> </>
                         }
                     </S.UploadCheckWrapper>
-                    <VideoPlayer url={videoURL} width="480px" height="251px"/>
+                        <VideoPlayer url={videoURL}/>
                 </S.VideoWrapper>
             </S.CreateVideoWrapper>
             </>
