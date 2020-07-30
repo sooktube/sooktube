@@ -61,6 +61,9 @@ function CreateVideo(){
         if (!input.videoFile) {
             return alert("영상을 업로드해주세요.");
         }
+        if(input.videoFile && !isUploaded) {
+            return alert("영상이 아직 업로드되지 않았습니다.")
+        }
         if (input.videoTitle && input.videoDesc && input.videoFile && isUploaded) {
             videoService.UploadVideoInfo({
                 videoTitle: input.videoTitle,

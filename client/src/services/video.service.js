@@ -47,7 +47,6 @@ function UploadVideoFile(uploadURL, videoFile) {
 }
 
 function UploadVideoInfo(input) {
-    console.log(input);
     return axios({
         method: 'POST',
         url: 'https://soktube.uc.r.appspot.com/api/video/upload',
