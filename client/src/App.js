@@ -13,6 +13,7 @@ import Player from "./pages/Player";
 import StyleReset from "./components/style/StyleReset";
 import Playlist from "./pages/Playlist";
 
+
 function App() {
     return (
         <Router history={history}>
