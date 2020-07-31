@@ -11,6 +11,7 @@ import CreatePlaylist from "./pages/CreatePlaylist";
 import CreateVideo from "./pages/CreateVideo";
 import Player from "./pages/Player";
 import StyleReset from "./components/style/StyleReset";
+import Playlist from "./pages/Playlist";
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                 <Route path='/create/playlist' component={CreatePlaylist}/>
                 <Route path='/create/video' component={CreateVideo}/>
                 <Route path='/video/:videoID' component={Player}/>
+                <Route path='/playlist/:listID' component={Playlist}/>
                 <Redirect from="*" to="/" />
             </Switch>
             </GlobalLayoutStyle>
