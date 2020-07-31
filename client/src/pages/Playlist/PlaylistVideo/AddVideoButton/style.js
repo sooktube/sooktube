@@ -3,13 +3,11 @@ import {FiPlusCircle} from "react-icons/all";
 import {MAIN} from "../../../../components/style/Main";
 
 export const AddVideoButtonWrapper = styled.div`
-    width: 100%;
     margin: 0;
     padding-left: 2rem;
-    display: flex;
-    div {
+    span {
        font-size: 1.5rem;
-       margin-left: 1em;
+       margin-left: 0.5em;
     }
 `;
 

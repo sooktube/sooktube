@@ -3,11 +3,11 @@ import {MAIN} from "../../../components/style/Main";
 import search from "../../../../public/search.png";
 
 export const AddVideoWrapper = styled.div`
-    margin: 20px auto;
+    padding: 0;
 	justify-content: center;
 `;
 
-export const AddButton = styled.button`
+export const SearchButton = styled.button`
 	margin-left:0.8em;
 	background-color : ${MAIN.MAIN_THEME_COLOR};
 	color:white;
@@ -20,18 +20,16 @@ export const AddButton = styled.button`
     }
 `;
 
-export const SearchBox=styled.div`
-	margin:20px auto;
-	height:300px;
-`;
 
 export const SearchInput = styled.input`
-	width:280px;
-	font-size:2.5vh;
-	background-image: url(${search});
-	background-position: 2.15vh 2.15vh;
-	background-size: 10px;
-    background-repeat: no-repeat;
-	padding:0.5em 0.5em 0.5em 30px;
+	width: 70%;
+	font-size: 1em;
+	padding:0.5em 0.5em 0.5em 2em;
 	border:1px solid gray;
+	&, &:focus, &:after {
+	  background-image: url(${search});
+	  background-position: 0.5em 0.5em;
+      background-size: 1em;
+      background-repeat: no-repeat;  
+	}
 `;
