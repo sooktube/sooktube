@@ -10,5 +10,9 @@ public interface VideoListDAO {
 	VideoListDTO[] getVideoListbyID(int listID) throws Exception;
 	
 	List<String> getFileNamebylistID(int listID) throws Exception;
+	
+	//insert new videoList
+	int newList(VideoListDTO list) throws Exception;
+	int newListInfo(VideoListDTO list) throws Exception;
 
 }
