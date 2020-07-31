@@ -5,24 +5,25 @@ import {FaCheck} from "react-icons/all";
 export const CreateVideoWrapper = styled.div`
 	display:flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content:flex-start;
 	width:100%;
 `;
 
 export const InputVideoWrapper = styled.div`
-    padding: 0;
-	width: 400px;
 	align-self: center;
 	display:inline-block;
+	flex-direction: column;
+	width:450px;
 `;
 
 export const VideoWrapper = styled.div`
+    margin-left:40px;
 	padding: 0;
 `;
 
 export const UploadLogo = styled.div`
     font-size: 1.7rem;
-    margin-top: 1em;
+    margin-top: 9vh;
     padding: 0;
 	font-weight:bold;
 `;
@@ -66,9 +67,9 @@ export const UploadCheckWrapper = styled.div`
 `;
 
 export const InputTitle = styled.input`
-	padding: 1em;
-	margin-top: 1.5em;
-	width: 100%;
+	margin-top:33px;
+	width:450px;
+	padding:7px;
 	border:1px solid #ced4da;
 	&:focus {
 	    outline: 1px solid #ced4da;
@@ -76,10 +77,10 @@ export const InputTitle = styled.input`
 `;
 
 export const InputDesc = styled.textarea`
-	width: 100%;
-	height: 200px;
-	margin-top: 1em;
-	padding:5px;
+	margin-top:2vh;
+	width:450px;
+	height:25vh;
+	padding:7px;
 	border:1px solid #ced4da; 
 	&:focus {
 	    outline: 1px solid #ced4da;

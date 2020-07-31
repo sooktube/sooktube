@@ -1,14 +1,18 @@
 import styled from 'styled-components'
 import { MAIN } from '../../components/style/Main';
+import search from "../../../public/search.png"
 
 export const MainBackground = styled.div`
-    background: #fff;
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:flex-start;
+	width:100%;
 `;
 
 export const UploadForm = styled.div`
-    display:flex;
-	justify-content: center;
+    display:inline-block;
 	flex-direction: column;
+	width:450px;
 `;
 
 export const UploadLogo = styled.div`
@@ -22,34 +26,31 @@ export const UploadVideo = styled.div`
 	position:static;
 	margin-top:4vh;
     padding:2px;
-	height:15%;
-	width:30%;
+	height:50px;
+	width:100%;
 `;
 
 export const UploadInput = styled.input`
-    position:absolute;
+    position:static;
     width:0;
     height:0;
     overflow:hidden;
 `;
 
-export const NameInput=styled.input`
+export const NameInput=styled.span`
+    display:inline;
+    position:static;
 	border:none;
 	font-weight:bold;
-	position:absolute;
-	left:60%;
-	top:23%;
 	font-size:2.5vh;
-	height:54%;
-	background:transparent;
+	margin-left:1em;
 `;
 
 export const InputTitle = styled.input`
 	position:static;
-	margin-top:9vh;
-	width:30vw;
-	height:6%;
-	padding:5px;
+	margin-top:20px;
+	width: 415px;
+	padding:7px;
 	border:1px solid #ced4da;
 	&:focus {
 	outline:1px solid ${MAIN.DARK_UI_COLOR};}
@@ -58,17 +59,19 @@ export const InputTitle = styled.input`
 export const InputDesc = styled.textarea`
 	position:static;
 	margin-top:2vh;
-	width:30vw;
+	width:415px;
 	height:25vh;
-	padding:5px;
+	padding:7px;
 	border:1px solid #ced4da; 
 	&:focus {
 	outline:1px solid ${MAIN.DARK_UI_COLOR};}
 `;
 
 export const Label = styled.label`
+	position:static;
     padding: 0.5em 1em 0.5em 1em;
 	background:  ${MAIN.MAIN_THEME_COLOR};
+	display:inline;
 	border-radius: 30px;
 	color: white;
 	font-weight: 300;
@@ -86,9 +89,18 @@ export const Label = styled.label`
 
 export const UploadBox = styled.div`
     position:relative;
+	display:block;
 	margin-top:2vh;
-	width:30vw;
+	width:415px;
 `;
+
+export const UploadBox2 = styled.div`
+    position:relative;
+	display:block;
+	margin-top:0.5vh;
+	width:330px;
+`;
+
 
 
 export const VideoAdd = styled.button`
@@ -96,6 +108,9 @@ export const VideoAdd = styled.button`
 	border:none;
 	margin-top:0.5em;
 	background:transparent;
+	float:left;
+	font-size:2.7vh;
+	margin-bottom:0.5em;
 `;
 
 export const UploadButton = styled.button`
@@ -114,16 +129,61 @@ export const UploadButton = styled.button`
 
 
 export const IsVideo = styled.div`
-	position : absolute;
+	position : static;
+	margin-top:9.9vh;
+	margin-left:8vw;
 	color:#495057;
-	top:23%;
-	left:58%;
+	display:inline-block;
+	top:20%;
 `;
 
-export const VideoBackground = styled.div`
-	position : absolute;
-	background-color: #f1f1f1;
-	left:43%;
-	width:57%;
+export const VideoList = styled.div`
+	display:inline-block;
+	width:650px;
 	height:100%;
+	margin-left:27px;
+	margin-top:40px;
+	overflow-y:auto;
+`;
+
+
+export const AddBox = styled.div`
+	margin: 20px auto;
+    height: 50px;
+`;
+
+export const LinkInput = styled.input`
+	width:280px;
+	padding:0.5em;
+	font-size:2.5vh;
+	border:1px solid gray;
+`;
+
+export const AddButton = styled.button`
+	margin-left:0.8em;
+	background-color : ${MAIN.MAIN_THEME_COLOR};
+	color:white;
+	border:none;
+	font-size:2.5vh;
+	padding:0.7em 0.5em 0.7em 0.5em;
+	border-radius:3px;
+	&:hover {
+    background-color: #80c2ea;
+  }
+`;
+
+export const SearchBox=styled.div`
+	margin:20px auto;
+	height:300px;
+`;
+
+export const SearchInput = styled.input`
+	width:280px;
+	font-size:2.5vh;
+	background-image: url(${search});
+	background-position: 2.15vh 2.15vh;
+	background-size: 10px;
+    background-repeat: no-repeat;
+	padding:0.5em 0.5em 0.5em 30px;
+	border:1px solid gray;
 `;

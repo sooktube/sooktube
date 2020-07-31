@@ -8,8 +8,8 @@ const GlobalLayoutStyle = styled.div`
   @media (max-width: 1919px) {
     width: 1376px;
   }
-  @media (max-width: 1440px) {
-    width: 1280px;
+  @media (max-width: 1536px) {
+    width: 1200px;
   }
   @media (max-width: 1312px) {
     width: 912px;

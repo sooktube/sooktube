@@ -3,7 +3,7 @@ import {MAIN} from "../../components/style/Main";
 
 export const MainBackground = styled.div`
     margin: 20px auto;
-    height: 300px;
+    height: 340px;
 `;
 
 export const LoginBox = styled.div`
@@ -93,7 +93,7 @@ export const SubmitButton = styled.button`
 `;
 
 export const Regguide = styled.span`
-    color:white;
+    color:#ffd43b;
     padding:0;
     font-size:2.5vh;
     margin-right:1em;

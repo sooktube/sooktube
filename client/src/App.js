@@ -12,6 +12,7 @@ import CreateVideo from "./pages/CreateVideo";
 import Player from "./pages/Player";
 import StyleReset from "./components/style/StyleReset";
 
+
 function App() {
     return (
         <Router history={history}>
