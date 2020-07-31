@@ -10,11 +10,13 @@ function Playlist() {
     const { listID } = useParams();
 
     return (
-      <S.PlaylistWrapper>
-          <Header/>
-          <PlaylistInfo listID={listID}/>
-          <PlaylistVideo listID={listID}/>
-      </S.PlaylistWrapper>
+        <>
+            <Header/>
+            <S.PlaylistWrapper>
+              <PlaylistInfo listID={listID}/>
+              <PlaylistVideo listID={listID}/>
+            </S.PlaylistWrapper>
+        </>
     );
 }
 

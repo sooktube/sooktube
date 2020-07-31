@@ -3,7 +3,7 @@ import * as S from "./style";
 import { useState, createContext, useContext } from 'react';
 import { MAIN } from '../../components/style/Main';
 import Header from "../../components/base/Header";
-import Modal from "../../components/common/Modal/Modal";
+import Modal from "../../components/common/Modal";
 import YoutubeSearch from "./YoutubeSearch";
 import VideoSearch from "./VideoSearch";
 import Video from "./Video/Video"
@@ -73,7 +73,8 @@ function CreatePlaylist(){
                 <S.VideoAdd onClick ={openYoutubeModal}> + Add Youtube Videos</S.VideoAdd>
                 {youtubeModalVisible &&
                     <Modal visible={youtubeModalVisible}
-                        onClose={closeYoutubeModal}>
+                           onClose={closeYoutubeModal}
+                           width="420px">
                         <YoutubeSearch/>
                     </Modal>
                 }
@@ -81,7 +82,8 @@ function CreatePlaylist(){
             <S.UploadBox2><S.VideoAdd onClick={openSearchModal}> + Add Videos in this Website</S.VideoAdd></S.UploadBox2>
             {searchModalVisible &&
                     <Modal visible={searchModalVisible}
-                        onClose={closeSearchModal}>
+                           onClose={closeSearchModal}
+                           width="420px">
                         <VideoSearch/>
                     </Modal>
                 }
