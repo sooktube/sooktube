@@ -53,6 +53,17 @@
     		
     		</select>
     		
+    	<select id="searchListbyTitle"
+    			parameterType="String"
+    			resultType="com.SOOKTUBE.model.VideoListDTO">
+    			
+    			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, videoList.`username`, `isPublic`
+    			FROM videoList, listInfo
+    			WHERE `listName` LIKE CONCAT('%',#{listName},'%')
+
+    			
+    			</select>    		
+    		
     		
 <!--     		<insert id="newVideo"
             parameterType="com.SOOKTUBE.model.VideoDTO"
@@ -61,8 +72,21 @@
 		        INSERT INTO videoList(`videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`)
 		        VALUES (#{videoTitle}, #{videoDesc}, #{videoDate}, #{username}, #{uploadFileName})
 		    </insert> -->
+		    
+		    
+    	    <update id="editLike" parameterType="int">
+		        UPDATE videoList
+		           SET `like` = `like` + 1
+		         WHERE `listID` = #{listID}
+		         AND `videoID` = #{videoID}
+		    </update>
 
-
+    	    <update id="editDislike" parameterType="int">
+		        UPDATE videoList
+		           SET `dislike` = `dislike` - 1
+		         WHERE `listID` = #{listID}
+		         AND `videoID` = #{videoID}
+		    </update>
 
 
 </mapper>

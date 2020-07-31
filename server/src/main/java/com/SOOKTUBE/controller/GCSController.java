@@ -1,4 +1,4 @@
-// GCSController.java
+
 package com.SOOKTUBE.controller;
 
 import java.io.IOException;
@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SOOKTUBE.dao.VideoDAO;
+import com.SOOKTUBE.dao.VideoListDAO;
 import com.SOOKTUBE.model.UploadReqDto;
 import com.SOOKTUBE.service.GCSService;
 
 import lombok.RequiredArgsConstructor;
 
-//GCSController.java
 
-//GCSController.java
 
 @RestController
+@CrossOrigin
 @RequiredArgsConstructor
 @EnableAutoConfiguration
 public class GCSController {
@@ -35,11 +35,14 @@ public class GCSController {
  
  @Autowired
  private VideoDAO videoDAO;
+ 
+ @Autowired
+ private VideoListDAO videoListDAO;
 
 
 
 //GSC 접근 URL 생성
-	@CrossOrigin
+ 	@CrossOrigin("*")
 	@RequestMapping(value = "/api/video/createURL", method = RequestMethod.POST)
 	public String[] localUploadToStorage(@RequestBody UploadReqDto uploadReqDto) throws Exception {
 
@@ -49,7 +52,7 @@ public class GCSController {
  }
 	
 //GCS 파일 보기 URL 생성	
-	@CrossOrigin
+    @CrossOrigin("*")
 	@RequestMapping(value = "/api/video/getVideo", method = RequestMethod.POST)
 	public String getURLfromGCS(@RequestBody UploadReqDto uploadReqDto) throws IOException{
 		
@@ -60,7 +63,7 @@ public class GCSController {
 	
 	
 	//get videos by videoID
-	@CrossOrigin
+    @CrossOrigin("*")
 	@RequestMapping(value = "/api/video/getVideobyID/{videoID}", method = RequestMethod.GET)
 	public String getURLfromGCSbyVideoID(@PathVariable("videoID") final int videoID) throws Exception {
 		
@@ -74,7 +77,7 @@ public class GCSController {
 	
 	
 	//get videos by username
-	@CrossOrigin
+    @CrossOrigin("*")
 	@RequestMapping(value = "/api/video/getVideobyUser/{username}", method = RequestMethod.GET)
 	public List<String> getURLfromGCSbyUsername(@PathVariable("username") final String username) throws Exception{
 		
@@ -92,20 +95,17 @@ public class GCSController {
 	}
 	
 	//get videos by fileName
-	@CrossOrigin
+    @CrossOrigin("*")
 	@RequestMapping(value = "/api/video/getVideobyFile/{uploadFileName}", method = RequestMethod.GET)
 	public String getURLfromGCSbyFileName(@PathVariable("uploadFileName") final String uploadFileName) throws Exception {
-		
-		String fileName = videoDAO.getURLfromFilename(uploadFileName);
 
-		
-		String url = gcsService.getVideobyVIDEOtable(fileName);
+		String url = gcsService.getVideobyVIDEOtable(uploadFileName);
 		
 		return url;
 	}
 	
 	//delete videos by videoID
-	@CrossOrigin
+    @CrossOrigin("*")
 	@RequestMapping(value = "/api/video/deletebyID/{videoID}", method = RequestMethod.DELETE)
 	public String deleteVideobyID(@PathVariable("videoID") final int videoID) throws Exception {
 		
@@ -128,8 +128,8 @@ public class GCSController {
 	}
 	
 	
-	//delete videos by FileName
-	@CrossOrigin
+	//delete videos by FileName(delete from gcs and DB)
+    @CrossOrigin("*")
 	@RequestMapping(value = "/api/video/delete/fileName/{uploadFileName}", method = RequestMethod.DELETE)
 	public String deleteVideobyFileName(@PathVariable("uploadFileName") final String uploadFileName) throws Exception {
 		
@@ -150,6 +150,40 @@ public class GCSController {
 		return res;
 		
 	}
+    
+    
+    //get videoURL in a videoList
+    @CrossOrigin
+    @RequestMapping(value = "/api/video/list/URL/{listID}", method = RequestMethod.GET)
+    public List<String> getURLfromGCSbylistID(@PathVariable("listID") final int listID) throws Exception{
+    	
+    	List<String> fileName = videoListDAO.getFileNamebylistID(listID);
+    	
+		List<String> res = new ArrayList<>();
+		
+		for(int i = 0; i < fileName.size(); i++) {
+			
+			res.add(gcsService.getVideobyVIDEOtable(fileName.get(i)));
+		}
+		
+		return res;
+    	
+    }
+    
+    
+    
+    
+	
+	  //insert thumbnail image for video list to gcs bucket
+	  @CrossOrigin
+	  @RequestMapping(value = "api/videolist/add/thumbnail", method = RequestMethod.POST)
+	  public String[] thumbnailtoStorage(@RequestBody UploadReqDto uploadReqDto) throws Exception {
+
+			String[] res = gcsService.generateURLforThumbnailImg(uploadReqDto);
+			
+			return res;
+	 }
+	 
 
 
 	
