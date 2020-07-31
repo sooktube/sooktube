@@ -59,5 +59,16 @@ public class VideoListController {
 	}
 	
 	
+	//search video list by its title
+	@CrossOrigin
+	@RequestMapping(value = "/api/video/list/search/name/{listName}", method = RequestMethod.GET)
+	public VideoListDTO[] searchListbyName(@PathVariable("listName") final String listName) throws Exception {
+		
+		VideoListDTO[] searchRes = videoListDAO.searchListbyTitle(listName);
+		
+		return searchRes;
+	}
+	
+	
 
 }

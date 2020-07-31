@@ -53,6 +53,17 @@
     		
     		</select>
     		
+    	<select id="searchListbyTitle"
+    			parameterType="String"
+    			resultType="com.SOOKTUBE.model.VideoListDTO">
+    			
+    			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, videoList.`username`, `isPublic`
+    			FROM videoList, listInfo
+    			WHERE `listName` LIKE CONCAT('%',#{listName},'%')
+
+    			
+    			</select>    		
+    		
     		
 <!--     		<insert id="newVideo"
             parameterType="com.SOOKTUBE.model.VideoDTO"
