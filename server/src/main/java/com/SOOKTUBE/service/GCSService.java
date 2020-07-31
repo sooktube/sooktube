@@ -53,12 +53,7 @@ public class GCSService {
 		  System.out.println(fileName);
 		  
 		  res[0] = fileName;
-		  
-		  
-		  
-		  
-		  //GoogleCredentials credentials = AppEngineCredentials.getApplicationDefault();
-		  //Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+
 
 		   Storage storage = StorageOptions.newBuilder().setProjectId(projectId).setCredentials(credentials).build().getService();
 
@@ -163,6 +158,59 @@ public class GCSService {
 			    
 			    return "deleted";
 			  }
+			  
+			  
+			  
+			  public String[] generateURLforThumbnailImg(
+					  UploadReqDto uploadReqDto) throws Exception {
+				    // String projectId = "my-project-id";
+				    // String bucketName = "my-bucket";
+				    // String objectName = "my-object";
+				  
+				  String[] res = new String[2];
+				  
+
+				  
+				  AppIdentityService appIdentityService = AppIdentityServiceFactory.getAppIdentityService();
+
+				  Credentials credentials =
+				      AppEngineCredentials.newBuilder()
+				          .setAppIdentityService(appIdentityService)
+				          .build();
+
+				  String projectId = "soktube";
+				  String bucketName = "soktube.appspot.com";
+				  
+				  //업로드 날짜 저장
+				  String fileName = uploadReqDto.getUsername() + uploadReqDto.getUploadFileName();
+				  System.out.println(fileName);
+				  
+				  res[0] = fileName;
+
+
+				   Storage storage = StorageOptions.newBuilder().setProjectId(projectId).setCredentials(credentials).build().getService();
+
+				    // Define Resource
+				    BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of(bucketName, fileName)).build();
+
+				    // Generate Signed URL
+				    Map<String, String> extensionHeaders = new HashMap<>();
+				    extensionHeaders.put("Content-Type", "image/jpeg");
+
+				    URL url =
+				        storage.signUrl(
+				            blobInfo,
+				            15,
+				            TimeUnit.MINUTES,
+				            Storage.SignUrlOption.httpMethod(HttpMethod.PUT),
+				            Storage.SignUrlOption.withExtHeaders(extensionHeaders),
+				            Storage.SignUrlOption.withV4Signature());
+				    
+				    
+				    res[1] = url.toString();
+				    
+				    return res;
+		 }
 		
 	  
 	  
