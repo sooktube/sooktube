@@ -41,5 +41,23 @@ public class VideoListController {
 	}
 	
 	
+	//create new videoList
+	@CrossOrigin
+	@RequestMapping(value = "/api/video/list/newList", method = RequestMethod.POST)
+	public VideoListDTO newVideoList(VideoListDTO list) throws Exception {
+		videoListDAO.newList(list);
+		
+		return list;
+	}
+	
+	//create new videoList Information
+	@CrossOrigin
+	@RequestMapping(value = "/api/video/list/newList/info", method = RequestMethod.POST)
+	public VideoListDTO newVideoListInfo(VideoListDTO list) throws Exception {
+		videoListDAO.newListInfo(list);
+		return list;
+	}
+	
+	
 
 }

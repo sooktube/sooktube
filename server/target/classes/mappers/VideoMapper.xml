@@ -8,8 +8,9 @@
             useGeneratedKeys="true"
             keyProperty="videoID">
         INSERT INTO VIDEO(`videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`)
-        VALUES (#{videoTitle}, #{videoDesc}, #{videoDate}, #{username}, #{uploadFileName})
+        VALUES (#{videoTitle}, #{videoDesc}, CURRENT_TIMESTAMP, #{username}, #{uploadFileName})
     </insert>
+
     
         <select id="getDescbyVideoID" 
     		parameterType="Integer" 
@@ -18,6 +19,7 @@
     		SELECT `videoID`, `videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`, `videoPath`
     		FROM VIDEO
     		WHERE `videoID` = #{videoID}
+    		
     		
     		</select>
     		
@@ -61,6 +63,18 @@
     			SELECT `uploadFileName`
     			FROM VIDEO
     			WHERE `uploadFileName` = #{uploadFileName}
+    			
+    			</select>
+    			
+    			
+    	<select id="searchVideobyTitle"
+    			parameterType="String"
+    			resultType="com.SOOKTUBE.model.VideoDTO">
+    			
+    			SELECT `videoID`, `videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`
+    			FROM VIDEO
+    			WHERE `videoTitle` LIKE CONCAT('%',#{videoTitle},'%')
+
     			
     			</select>
     			

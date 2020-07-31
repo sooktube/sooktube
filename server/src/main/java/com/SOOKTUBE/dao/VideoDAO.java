@@ -7,7 +7,7 @@ import com.SOOKTUBE.model.VideoDTO;
 public interface VideoDAO {
 	
 	//insert
-	int newVideo(VideoDTO param) throws Exception;
+	int newVideo(VideoDTO video) throws Exception;
 	
 	//select
 	String getURLfromVideoID(int videoID) throws Exception;
@@ -20,6 +20,10 @@ public interface VideoDAO {
 	//delete
 	int deleteVideobyID(int videoID) throws Exception;
 	int deleteVideobyFileName(String uploadFileName) throws Exception;
+	
+	
+	//search
+	VideoDTO[] searchVideobyTitle(String search) throws Exception;
 	
 
 }

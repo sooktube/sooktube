@@ -17,7 +17,7 @@ import com.SOOKTUBE.model.VideoDTO;
  
 @RestController
 @EnableAutoConfiguration
-
+@CrossOrigin
 @MapperScan(basePackages = "com.SOOKTUBE.dao")
 public class VideoController {
 	
@@ -25,10 +25,9 @@ public class VideoController {
     private VideoDAO videoDAO;
 
     //insert video descriptions to DB
-    @CrossOrigin
+    @CrossOrigin("http://localhost:9000")
     @RequestMapping(value = "/api/video/upload", method = RequestMethod.POST)
     public VideoDTO postVideo(VideoDTO video) throws Exception {
-        videoDAO.newVideo(video);
         return video;
     }
     
@@ -42,7 +41,7 @@ public class VideoController {
     }
     
     //select video desc by username
-    @CrossOrigin
+    @CrossOrigin("*")
     @RequestMapping(value = "/api/video/desc/user/{username}", method = RequestMethod.GET)
     public VideoDTO[] getVideoDescbyUser(@PathVariable("username") final String username) throws Exception {
     	
@@ -54,8 +53,8 @@ public class VideoController {
     
     
     //update video descriptions by videoID
-    @CrossOrigin
-    @RequestMapping(value = "api/video/update/{videoID}", method = RequestMethod.PUT)
+    @CrossOrigin("*")
+    @RequestMapping(value = "/api/video/update/{videoID}", method = RequestMethod.PUT)
     public ResponseEntity<VideoDTO> editVideobyID(@PathVariable("videoID") final int videoID, VideoDTO videoDTO) throws Exception {
         if ((videoDTO.getVideoTitle() == null) || (videoDTO.getVideoDesc() == null) || (videoDTO.getUsername() == null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -74,6 +73,17 @@ public class VideoController {
 
  
         return new ResponseEntity<>(video, HttpStatus.OK);
+    }
+    
+    //search Videos by its title
+    @CrossOrigin
+    @RequestMapping(value = "/api/video/search/title/{videoTitle}", method = RequestMethod.GET)
+    public VideoDTO[] searchbyTitle(@PathVariable("videoTitle") final String videoTitle) throws Exception {
+    	
+    	VideoDTO[] searchRes = videoDAO.searchVideobyTitle(videoTitle);
+    	
+    	return searchRes;
+    	
     }
 
 }

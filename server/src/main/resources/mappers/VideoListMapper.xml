@@ -4,6 +4,18 @@
 <mapper namespace="com.SOOKTUBE.dao.VideoListDAO">
 
 
+
+			<insert id="newList"
+		            parameterType="com.SOOKTUBE.model.VideoListDTO">
+		        INSERT INTO videoList(`listID`, `videoID`, `username`)
+		        VALUES (#{listID}, #{videoID}, #{username})
+		    </insert>
+		    
+		    <insert id="newListInfo"
+		            parameterType="com.SOOKTUBE.model.VideoListDTO">
+		        INSERT INTO listInfo(`listID`, `listName`, `listDesc`, `isPublic`)
+		        VALUES (#{listID}, #{listName}, #{listDesc}, #{isPublic})
+		    </insert>
 	
 		    
 		    <select id="getVideoList"
@@ -40,6 +52,15 @@
 					videoList.`videoID` = VIDEO.`videoID`
     		
     		</select>
+    		
+    		
+<!--     		<insert id="newVideo"
+            parameterType="com.SOOKTUBE.model.VideoDTO"
+            useGeneratedKeys="true"
+            keyProperty="videoID">
+		        INSERT INTO videoList(`videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`)
+		        VALUES (#{videoTitle}, #{videoDesc}, #{videoDate}, #{username}, #{uploadFileName})
+		    </insert> -->
 
 
 
