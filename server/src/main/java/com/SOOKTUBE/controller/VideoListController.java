@@ -70,5 +70,37 @@ public class VideoListController {
 	}
 	
 	
-
+	//user likes a videoList
+	@CrossOrigin
+	@RequestMapping(value = "/api/video/list/like/{listID}/{videoID}", method = RequestMethod.PUT)
+	public int[] likeaList(@PathVariable("listID") final int listID, @PathVariable("videoID") final int videoID, VideoListDTO videolist) throws Exception {
+		
+		videoListDAO.editLike(videolist);
+		
+		int[] res = new int[2];
+		
+		//return count(like) and count(like+dislike)
+		res[0] = videolist.getLike();
+		res[0] = videolist.getLike() + videolist.getDislike();
+		
+		return res;
+	}
+	
+	//user dislikes a videoList
+	@CrossOrigin
+	@RequestMapping(value = "/api/video/list/like/{listID}/{videoID}", method = RequestMethod.PUT)
+	public int[] dislikeaList(@PathVariable("listID") final int listID, @PathVariable("videoID") final int videoID, VideoListDTO videolist) throws Exception {
+		
+		videoListDAO.editDislike(videolist);
+		
+		int[] res = new int[2];
+		
+		//return count(like) and count(like+dislike)
+		res[0] = videolist.getLike();
+		res[0] = videolist.getLike() + videolist.getDislike();
+		
+		return res;
+	}
+	
+	
 }

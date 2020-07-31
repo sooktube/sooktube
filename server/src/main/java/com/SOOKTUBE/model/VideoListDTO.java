@@ -21,6 +21,10 @@ public class VideoListDTO {
 	private String listDesc;
 	private String username;
 	private int isPublic;
+	
+	
+	private int like;
+	private int dislike;
 
 
 }

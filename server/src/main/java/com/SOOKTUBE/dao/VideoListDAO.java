@@ -17,5 +17,9 @@ public interface VideoListDAO {
 	
 	//search
 	VideoListDTO[] searchListbyTitle(String listName) throws Exception;
+	
+	//like&dislike
+	int editLike(VideoListDTO list) throws Exception;
+	int editDislike(VideoListDTO list) throws Exception;
 
 }
