@@ -1,6 +1,19 @@
 import styled from 'styled-components'
 
 
+export const VideoButton = styled.button`
+    background:transparent;
+    display:block;
+    border:2px solid;
+    border-color:${props => props.color};
+    width:100%;
+    &:focus {
+      outline: none;
+    }
+    
+
+`;
+
 export const VideoWrapper = styled.div`
     width:100%;
     padding:5px;

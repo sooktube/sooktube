@@ -8,6 +8,7 @@ import YoutubeSearch from "./YoutubeSearch";
 import VideoSearch from "./VideoSearch";
 import {VideoProvider} from "./VideoListContext";
 import ShowVideoList from "./ShowVideoList";
+import Video from "./Video/VIdeo";
 
 const videoList = createContext([{url:"https://storage.googleapis.com/sttbucket2020/dog1.mp4",title:"title"},
     {url:"https://storage.googleapis.com/sttbucket2020/dog1.mp4",title:"title"},
@@ -49,6 +50,8 @@ function CreatePlaylist(){
         setSearchModalVisible(false)
     };
 
+    const af =false;
+
 
 
     /*const videoList6 = useContext(videoList);*/
@@ -84,7 +87,10 @@ function CreatePlaylist(){
             </S.UploadBox>    
             <S.UploadBox2></S.UploadBox2>
             </S.UploadForm>
-            <ShowVideoList></ShowVideoList>
+            {af && <Video></Video>}
+            <ShowVideoList>
+                
+            </ShowVideoList>
             </S.MainBackground>
             
        

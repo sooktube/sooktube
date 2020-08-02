@@ -1,23 +1,35 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import * as S from "./style";
 import VideoThumbnail from '../../../components/common/Videoplayer/VideoThumbnail';
+import {useCheckState, useCheckDispatch} from "../VIdeoSearch";
 
-function Video({url,title}){
+function Video({v_url,v_title}){
 
-    /*const [style,setStyle] = useState({
-        width:'100%',
-        padding:'5px',
-        border:'1px solid #ced4da 0 1px solid #ced4da 0',
-        display:'flex',
-        border:'none'});
+    const [style,setStyle] = useState("transparent");
+    const video = {url:v_url, title:v_title};
+    console.log(video);
+    const a = useCheckState();
+    console.log(a);
 
-    bcolor ? true : setStyle({border:'2px solid blue'});*/
+        
+    function VideoClick(){
+        setStyle("#1864ab");
+        
+        
+        dispatch({type:'ADD',video});
+        console.log('aaaaaa');
+        
+    }
+
+
     
     return(
+        <S.VideoButton color={style} onClick={VideoClick}>
         <S.VideoWrapper>
-            <VideoThumbnail url={url} width="80px" height="45px"/>
-            <S.VideoTitle>{title}</S.VideoTitle>
+            <VideoThumbnail url={v_url} width="80px" height="45px"/>
+            <S.VideoTitle>{v_title}</S.VideoTitle>
         </S.VideoWrapper>
+        </S.VideoButton>
 
     );
 

@@ -1,9 +1,24 @@
-import React,{useRef,useState} from 'react';
+import React,{useRef,useState,createContext,useReducer,useContext} from 'react';
 import * as S from "./style";
 import {searchService} from "../../services/search.service";
 import {videoService} from "../../services/video.service";
 import Video from "./VideoChoose/Video";
 import {useVideoState} from "./VideoListContext";
+
+
+const checkVideoList = [{aaaa:'aa'}];
+    function checkReducer(state, action) {
+        switch (action.type) {
+        case 'ADD':
+            return state.concat(action.video);
+        }
+    }
+    
+    
+
+const CheckStateContext = createContext();
+const CheckDispatchContext = createContext();
+
 
 function VideoSearch(){
 
@@ -14,8 +29,9 @@ function VideoSearch(){
 
     const nameInput = useRef(null);
     const videoState = useVideoState();
-   
-    
+
+    /*const [state, dispatch] = useReducer(checkReducer, checkVideoList);*/
+
 
 
     function SearchVideo(){
@@ -52,11 +68,10 @@ function VideoSearch(){
         
     }
 
-    function VideoClick(){
-        setVideoClick(true);
-    }
+
 
     return(
+        
 
         <S.SearchBox>
             <S.SearchInput ref={nameInput} placeholder="동영상 제목을 입력하세요"></S.SearchInput>
@@ -65,16 +80,29 @@ function VideoSearch(){
                 {!videoVisible && <S.IsVideo>검색 결과가 없습니다</S.IsVideo>}
                 {console.log(videoList)}
                 
+                
                 {true && videoList.map(
-                (video,index) => (<Video
-                    url={urlList[videoList.indexOf(video)]}
-                    title={video.videoTitle}/>)
+                (video,index) => (<CheckStateContext.Provider value={checkVideoList}>
+                  <Video
+                    v_url={urlList[videoList.indexOf(video)]}
+                    v_title={video.videoTitle}/></CheckStateContext.Provider>)
                 )}
             </S.VideoList2>
             <S.AddButton>Add Videos</S.AddButton>
         </S.SearchBox>
+       
 
     );
 }
 
+
+export function useCheckState() {
+    return useContext(CheckStateContext);
+  }
+  
+  export function useCheckDispatch() {
+    return useContext(CheckDispatchContext);
+  }
+
 export default VideoSearch;
+

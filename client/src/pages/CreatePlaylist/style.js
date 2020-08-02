@@ -217,3 +217,62 @@ export const AddButton = styled.button`
   }
 `;
 
+
+export const VideoWrapper = styled.div`
+    width:100%;
+    padding:14px;
+    border-bottom:1px solid #ced4da;
+    border-top:1px solid #ced4da;
+    display:flex;
+
+`;
+
+export const Video = styled.video`
+    width:112px;
+    height:63px;
+    display:inline-block;
+`;
+
+
+export const VideoTitle = styled.div`
+    font-weight:bold;
+    margin-left:7px;
+    margin-top:4px;
+    font-size:3vh;
+`;
+
+export const S_VideoButton = styled.button`
+    background:transparent;
+    display:block;
+    border:2px solid;
+    border-color:${props => props.color};
+    width:100%;
+    &:focus {
+      outline: none;
+    }
+    
+
+`;
+
+export const S_VideoWrapper = styled.div`
+    width:100%;
+    padding:5px;
+    border-bottom:1px solid #ced4da;
+    border-top:1px solid #ced4da;
+    display:flex;
+
+`;
+
+export const S_VideoImage = styled.video`
+    width:80px;
+    height:45px;
+    display:inline-block;
+`;
+
+
+export const S_VideoTitle = styled.div`
+    font-weight:bold;
+    margin-left:7px;
+    margin-top:4px;
+    font-size:2vh;
+`;
