@@ -111,6 +111,9 @@ export const VideoAdd = styled.button`
 	float:left;
 	font-size:2.7vh;
 	margin-bottom:0.5em;
+	&:focus {
+      outline: none;
+    }
 `;
 
 export const UploadButton = styled.button`
@@ -146,6 +149,15 @@ export const VideoList = styled.div`
 	overflow-y:auto;
 `;
 
+export const VideoList2 = styled.div`
+	display:inline-block;
+	width:550px;
+	height:250px;
+	margin-top:13px;
+	overflow-y:auto;
+`;
+
+
 
 export const AddBox = styled.div`
 	margin: 20px auto;
@@ -159,31 +171,49 @@ export const LinkInput = styled.input`
 	border:1px solid gray;
 `;
 
-export const AddButton = styled.button`
+export const SearchBox=styled.div`
+	margin:20px auto;
+	height:340px;
+`;
+
+export const SearchInput = styled.input`
+	width:300px;
+	font-size:17px;
+	background-image: url(${search});
+	background-position: 2.15vh 2.15vh;
+	background-size: 10px;
+    background-repeat: no-repeat;
+	padding:0.5em 0.5em 10px 34px;
+	border:1px solid gray;
+`;
+
+export const SearchButton = styled.button`
 	margin-left:0.8em;
 	background-color : ${MAIN.MAIN_THEME_COLOR};
 	color:white;
 	border:none;
-	font-size:2.5vh;
+	font-size:18px;
 	padding:0.7em 0.5em 0.7em 0.5em;
 	border-radius:3px;
+	margin-bottom:19px;
+
 	&:hover {
     background-color: #80c2ea;
   }
 `;
 
-export const SearchBox=styled.div`
-	margin:20px auto;
-	height:300px;
+export const AddButton = styled.button`
+	margin-left:0.8em;
+	background-color : ${MAIN.MAIN_THEME_COLOR};
+	color:white;
+	border:none;
+	font-size:15px;
+	padding:0.7em 0.5em 0.7em 0.5em;
+	border-radius:3px;
+	margin-top:5px;
+
+	&:hover {
+    background-color: #80c2ea;
+  }
 `;
 
-export const SearchInput = styled.input`
-	width:280px;
-	font-size:2.5vh;
-	background-image: url(${search});
-	background-position: 2.15vh 2.15vh;
-	background-size: 10px;
-    background-repeat: no-repeat;
-	padding:0.5em 0.5em 0.5em 30px;
-	border:1px solid gray;
-`;

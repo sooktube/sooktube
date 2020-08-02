@@ -24,7 +24,9 @@ function CreateVideo(){
 
     const username = useSelector(state => state.authentication.username);
     const videoURL = useSelector(state => state.video.videoURL);
+    console.log(videoURL);
     const uploadFileName = useSelector(state => state.video.uploadFileName);
+    console.log(uploadFileName);
     const isUploaded = useSelector(state => state.video.isUploaded);
 
     function fileSelect(event){
@@ -63,12 +65,9 @@ function CreateVideo(){
             return alert("영상을 업로드해주세요.");
         }
         if (input.videoTitle && input.videoDesc && input.videoFile) {
+            console.log(input.videoTitle);
             videoService.UploadVideoInfo({
-                videoTitle: input.videoTitle,
-                videoDesc: input.videoDesc,
-                videoDate: input.videoDate,
-                username: input.username,
-                uploadFileName: uploadFileName
+                input,uploadFileName
             }).then(response => {
                 console.log(response);
             })

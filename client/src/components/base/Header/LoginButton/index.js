@@ -20,7 +20,8 @@ function UserLoginButton() {
             <RegisterButton> <StyledLink to='/register'> Sign up </StyledLink> </RegisterButton>
             {modalVisible &&
             <Modal visible={modalVisible}
-                   onClose={closeLoginModal}>
+                   onClose={closeLoginModal}
+                   width="420px">
                 <Login/>
             </Modal>
             }
