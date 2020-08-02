@@ -12,9 +12,8 @@ function Player(){
     const [videoInfo, setVideoInfo] = useState({
         videoTitle: null,
         videoDesc: null,
-        videoPath: null
-        }
-    );
+        videoURL: null
+    });
 
     const title= "The Cutest Seven Retriever Puppy Siblings!";
     const desc= "this is a video of a puppy. how big are they now? where's your mother?";
@@ -23,20 +22,28 @@ function Player(){
         videoService.getVideoInfoByVideoID(videoID)
             .then(response =>
                 setVideoInfo({
+                    ...videoInfo,
                     videoTitle: response.videoTitle,
-                    videoDesc: response.videoDesc,
-                    videoPath: response.videoPath
+                    videoDesc: response.videoDesc
+                })
+            )
+        videoService.getVideoURLByVideoID(videoID)
+            .then(response =>
+                setVideoInfo({
+                    ...videoInfo,
+                    videoURL: response.videoURL
                 })
             )
     },[])
+
     return(
         <S.MainBackground>
             <Header/>
             <S.VideoBox>
-                <VideoPlayer width="47vw" url="https://storage.googleapis.com/sttbucket2020/dog1.mp4"/>
+                <VideoPlayer width="47vw" url={videoInfo.videoURL}/>
             </S.VideoBox>
-            <S.VideoTitle>{title}</S.VideoTitle>
-            <S.VideoDesc>{desc}</S.VideoDesc>
+            <S.VideoTitle> {videoInfo.videoTitle} </S.VideoTitle>
+            <S.VideoDesc> {videoInfo.videoDesc} </S.VideoDesc>
             <hr/>
             <CommentBox/>
         </S.MainBackground>

@@ -29,6 +29,7 @@ function DropdownUser({username}) {
                     <S.UserDropdownContent ref={contentRef}>
                         <S.DropdownItem> 로그인한 계정: {username}님 </S.DropdownItem>
                         <S.DropdownButton onClick={handleClick}> 로그아웃 </S.DropdownButton>
+                        <S.StyledLink to={`/@${username}/video`}> 내가 업로드한 영상 </S.StyledLink>
                     </S.UserDropdownContent>
                 }
             </S.UserDropdownMenu>

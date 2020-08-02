@@ -1,18 +1,12 @@
 import styled from 'styled-components'
 
-export const VideoWrapper = styled.div`
+export const VideoInfoWrapper = styled.div`
     width:100%;
     padding:14px;
     border-bottom:1px solid #ced4da;
     border-top:1px solid #ced4da;
     display:flex;
 
-`;
-
-export const Thumnail = styled.img`
-    width:112px;
-    height:63px;
-    display:inline-block;
 `;
 
 

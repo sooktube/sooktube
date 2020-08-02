@@ -3,7 +3,6 @@ import {Router, Route, Switch, Redirect } from 'react-router-dom';
 import { history } from './helpers';
 
 import Main from "./pages/Main";
-import Login from './pages/Login';
 import Register from "./pages/Register";
 import PrivateRoute from "./components/common/PrivateRoute";
 import GlobalLayoutStyle from "./components/style/GlobalLayout";
@@ -12,7 +11,7 @@ import CreateVideo from "./pages/CreateVideo";
 import Player from "./pages/Player";
 import StyleReset from "./components/style/StyleReset";
 import Playlist from "./pages/Playlist";
-
+import UserVideoList from "./pages/User/UserVideoList";
 
 function App() {
     return (
@@ -25,10 +24,11 @@ function App() {
             <Switch>
                 <Route exact path='/' component={Main}/>
                 <Route path='/register' component={Register}/>
-                <Route path='/create/playlist' component={CreatePlaylist}/>
-                <Route path='/create/video' component={CreateVideo}/>
+                <PrivateRoute path='/create/playlist' component={CreatePlaylist}/>
+                <PrivateRoute path='/create/video' component={CreateVideo}/>
                 <Route path='/video/:videoID' component={Player}/>
                 <Route path='/playlist/:listID' component={Playlist}/>
+                <Route path='/:username/video' component={UserVideoList}/>
                 <Redirect from="*" to="/" />
             </Switch>
             </GlobalLayoutStyle>

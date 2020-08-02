@@ -7,6 +7,9 @@ export const videoService = {
     UploadVideoInfo,
     getVideoFile,
     getVideoInfoByVideoID,
+    getVideoURLByVideoID,
+    getVideoInfoByUsername,
+    getVideoURLByUsername,
     searchVideoByTitle
 };
 
@@ -84,15 +87,56 @@ function getVideoInfoByVideoID(videoID) {
         url: `https://soktube.appspot.com/api/video/desc/${videoID}`,
     })
         .then(response => {
-            let videoPath;
-            if (response.data.videoPath === null){
-               return getVideoFile(response.data.uploadFileName)
-                   .then(response => {
-                       videoPath = response.data;
-                       return response.data;
-                   })
-            }
             return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}
+
+function getVideoURLByVideoID(videoID) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.appspot.com/api/video/getVideobyID/${videoID}`,
+    })
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return error;
+        })
+}
+
+function getVideoInfoByUsername(username) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.uc.r.appspot.com/api/video/desc/user/${username}`,
+    })
+        .then(response => {
+            let videoInfo = response.data;
+            return axios({
+                method: 'GET',
+                url: `https://soktube.uc.r.appspot.com/api/video/getVideobyUser/${username}`
+            }).then(response => {
+                const videoList = [];
+                for(let i = 0; i<videoInfo.size(); i++){
+                    videoList.push(videoInfo[i], response[i]);
+                }
+                return videoList;
+            })
+        })
+        .catch(error => {
+            return error;
+        })
+}
+
+function getVideoURLByUsername(username) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.appspot.com/api/video/getVideobyUser/${username}`,
+    })
+        .then(response => {
+            return response;
         })
         .catch(error => {
             return error;
