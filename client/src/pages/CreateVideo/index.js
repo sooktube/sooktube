@@ -23,9 +23,7 @@ function CreateVideo(){
 
     const username = useSelector(state => state.authentication.username);
     const videoURL = useSelector(state => state.video.videoURL);
-    console.log(videoURL);
     const uploadFileName = useSelector(state => state.video.uploadFileName);
-    console.log(uploadFileName);
     const isUploaded = useSelector(state => state.video.isUploaded);
 
     function fileSelect(event){

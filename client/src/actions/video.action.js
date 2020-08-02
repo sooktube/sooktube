@@ -24,7 +24,6 @@ function uploadVideoFile(input) {
         .then(response => {
             videoURL = response.data;
             dispatch(success(uploadFileName, String(videoURL)));
-            console.log(videoURL);
             return response;
         },
         error => {

@@ -8,14 +8,10 @@ export const videoService = {
     UploadVideoInfo,
     getVideoFile,
     getVideoInfoByVideoID,
-<<<<<<< HEAD
     getVideoURLByVideoID,
     getVideoInfoByUsername,
     getVideoURLByUsername,
     searchVideoByTitle
-=======
-    makeURL
->>>>>>> origin/feature/createPlaylist
 };
 
 function getVideoUploadURL(input) {
@@ -55,12 +51,7 @@ function UploadVideoFile(uploadURL, videoFile) {
         });
 }
 
-function UploadVideoInfo(input,uploadFileName) {
-    const qs= require('qs');
-    console.log('aa');
-    console.log(input.input.videoTitle);
-    console.log('bb');
-    console.log(input.uploadFileName);
+function UploadVideoInfo(input) {
     return axios({
         method: 'POST',
         url: 'https://soktube.uc.r.appspot.com/api/video/upload',
@@ -170,25 +161,3 @@ function searchVideoByTitle(keyword) {
 
 
 
-function makeURL(uploadFileName) {
-    const qs= require('qs');
-    console.log('aa');
-    console.log(uploadFileName);
-    return axios({
-        method: 'POST',
-        url: 'https://soktube.appspot.com/api/video/getVideo',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        data: JSON.stringify({
-            "bucketName": "soktube.appspot.com",
-            "uploadFileName": uploadFileName
-        })})
-        .then(response => {
-        console.log(response);
-        return response;
-        })
-        .catch(error => {
-        return error;
-        })
-}
