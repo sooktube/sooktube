@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './style';
-import VideoList from "../../../components/video/VideoList";
+import VideoList from "../../../components/playlist/VideoList";
 import AddVideoButton from "./AddVideoButton";
 
 function PlaylistVideo({ listID }) {

@@ -3,7 +3,7 @@ export const MAIN = {
     BRIGHT_ON_HOVER: '#80c2ea',
     BORDER_COLOR: '#d4d4d4',
     BACKGROUND_COLOR: '#ffffff',
-    DARK_TEXT_COLOR :'#071b6a',
+    DARK_TEXT_COLOR :'#343a40',
     TEXT_COLOR : '#ffffff',
     MAIN_THEME_COLOR: '#71A6C6'
 };

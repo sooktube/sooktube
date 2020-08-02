@@ -1,7 +1,6 @@
 import axios from "axios";
 import qs from 'querystring';
 
-
 export const videoService = {
     getVideoUploadURL,
     UploadVideoFile,

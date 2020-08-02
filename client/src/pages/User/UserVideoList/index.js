@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import VideoList from "../../../components/video/VideoList";
 import {videoService} from "../../../services";
 import {useSelector} from "react-redux";
 
@@ -17,9 +16,6 @@ function UserVideoList() {
 
     return(
       <>
-          {videoInfo &&
-            <VideoList videoList={videoInfo}/>
-          }
       </>
     );
 }

@@ -7,7 +7,6 @@ function VideoListItem({title}){
             <S.VideoTitle> {title} </S.VideoTitle>
         </S.VideoInfoWrapper>
     );
-
 }
 
 export default VideoListItem;

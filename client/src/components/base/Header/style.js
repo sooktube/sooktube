@@ -5,7 +5,7 @@ import { MAIN } from '../../style/Main';
 export const HeaderWrapper = styled.div`
     height: 10vh;
     width: 100%;
-    background-color: white;
+    background-color: #f1f1f1;
     display: flex;
     justify-content: space-between;
     padding: 2vh 0 0 0;

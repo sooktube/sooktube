@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
 export const PlaylistVideoWrapper = styled.div`
-    width: 70%;
+   width: 50%;
+   position: static;
 `;
