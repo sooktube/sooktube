@@ -6,15 +6,17 @@ import Header from "../../components/base/Header";
 import Modal from "../../components/common/Modal";
 import YoutubeSearch from "./YoutubeSearch";
 import VideoSearch from "./VideoSearch";
-import Video from "./Video/Video"
+import {VideoProvider} from "./VideoListContext";
+import ShowVideoList from "./ShowVideoList";
 
-const videoList = createContext([{url:"https://storage.googleapis.com/sttbucket2020/sunset.jpg",title:"title"},
-{url:"https://storage.googleapis.com/sttbucket2020/sunset.jpg",title:"title"},
-{url:"https://storage.googleapis.com/sttbucket2020/sunset.jpg",title:"title"},
-{url:"https://storage.googleapis.com/sttbucket2020/sunset.jpg",title:"title"},
-{url:"https://storage.googleapis.com/sttbucket2020/sunset.jpg",title:"title"},
-{url:"https://storage.googleapis.com/sttbucket2020/sunset.jpg",title:"title"}
+const videoList = createContext([{url:"https://storage.googleapis.com/sttbucket2020/dog1.mp4",title:"title"},
+    {url:"https://storage.googleapis.com/sttbucket2020/dog1.mp4",title:"title"},
+    {url:"https://storage.googleapis.com/sttbucket2020/dog1.mp4",title:"title"},
+    {url:"https://storage.googleapis.com/sttbucket2020/dog1.mp4",title:"title"},
+    {url:"https://storage.googleapis.com/sttbucket2020/dog1.mp4",title:"title"},
+    {url:"https://storage.googleapis.com/sttbucket2020/dog1.mp4",title:"title"}
 ]);
+
 
 
 
@@ -49,15 +51,16 @@ function CreatePlaylist(){
 
 
 
-    const videoList1 = useContext(videoList);
+    /*const videoList6 = useContext(videoList);*/
 
 
     
 
     return(
-        <>    
+        <VideoProvider>   
             <Header></Header>
             <S.MainBackground>
+            
             <S.UploadForm>
             <S.UploadLogo> CREATE THE PLAYLIST </S.UploadLogo>
             <S.UploadVideo>
@@ -70,38 +73,22 @@ function CreatePlaylist(){
                 <S.InputDesc cols="10" rows="5" placeholder="Description" ></S.InputDesc>
             <S.UploadBox>
                 <S.UploadButton >CREATE</S.UploadButton>
-                <S.VideoAdd onClick ={openYoutubeModal}> + Add Youtube Videos</S.VideoAdd>
-                {youtubeModalVisible &&
-                    <Modal visible={youtubeModalVisible}
-                           onClose={closeYoutubeModal}
-                           width="420px">
-                        <YoutubeSearch/>
-                    </Modal>
-                }
-            </S.UploadBox>    
-            <S.UploadBox2><S.VideoAdd onClick={openSearchModal}> + Add Videos in this Website</S.VideoAdd></S.UploadBox2>
-            {searchModalVisible &&
+                <S.VideoAdd onClick={openSearchModal}> + Add Videos</S.VideoAdd>
+                {searchModalVisible &&
                     <Modal visible={searchModalVisible}
-                           onClose={closeSearchModal}
-                           width="420px">
+                        onClose={closeSearchModal}
+                        width="600px">
                         <VideoSearch/>
                     </Modal>
                 }
+            </S.UploadBox>    
+            <S.UploadBox2></S.UploadBox2>
             </S.UploadForm>
-            <S.VideoList>
-
-            {false && <S.IsVideo>아직 재생목록에 동영상이 없습니다</S.IsVideo>}
-
-            {videoList1.map(
-                (video,index) => (<Video
-                    url={video.url}
-                    title={video.title}/>)
-            )}
-            </S.VideoList>
+            <ShowVideoList></ShowVideoList>
             </S.MainBackground>
             
        
-       </>
+        </VideoProvider> 
     );
 
 }
