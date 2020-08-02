@@ -22,7 +22,7 @@ function AddVideoButton() {
                 <AddVideo/>
             </Modal>
             }
-            <span> 재생목록에 추가하고 싶은 영상이 있나요? </span>
+            <S.AddVideoComment> 재생목록에 추가하고 싶은 영상이 있나요? </S.AddVideoComment>
         </S.AddVideoButtonWrapper>
     );
 }

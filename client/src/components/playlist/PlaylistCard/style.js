@@ -8,7 +8,7 @@ export const CardWrapper = styled.div`
     display: flex;
     border-radius: 15px;
     background-color: white;
-    box-shadow:  15px 15px 20px #e1e1e3, -15px -15px 27px #ffffff;
+    box-shadow:  10px 10px 20px #d3d3d9, -12px -12px 20px #ffffff;
 `;
 
 export const CardImage = styled.img`
@@ -24,7 +24,7 @@ export const CardInfo = styled.div`
 
 export const CardTitle = styled.div`
     margin-top: 1.5em;
-    padding: 1em;
+    padding: 1.5em 1em 2em 1em;
     height: 3rem;
     font-size: 1.3rem;
     width: 100%;
@@ -36,12 +36,13 @@ export const CardTitle = styled.div`
 export const CardDesc = styled.div`
     font-size: 1rem;
     margin-top: 1rem;
+    height: 13.5rem;
     padding: 1em;
     line-height: 1.5em;
 `;
 
 export const Seperator = styled.div`
-    margin: 2em auto 1em auto;
+    margin: 1em auto 1em auto;
     height: 0.2em;
     width: 5em;
     background-color: ${MAIN.MAIN_THEME_COLOR}

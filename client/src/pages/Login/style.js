@@ -8,9 +8,9 @@ export const MainBackground = styled.div`
 
 export const LoginBox = styled.div`
     display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     margin-bottom: 1em;
 `;
 
@@ -18,8 +18,8 @@ export const LoginLogo = styled.div`
     position:static;
     font-size:5.2vh;
     display: flex;
-	align-items: center;
-	justify-content: center;
+    align-items: center;
+    justify-content: center;
     width:60%; 
     padding:0;
     color: ${MAIN.MAIN_THEME_COLOR};

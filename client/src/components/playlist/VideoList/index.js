@@ -9,7 +9,7 @@ function VideoList() {
     const {videoList} = useSelector(state => state.playlist);
 
     return (
-        <S.VideoList>
+        <S.VideoListWrapper>
             {!videoList
                 ? <S.IsVideo> 재생목록이 비어있군요🤔 </S.IsVideo>
                 : videoList.map((video, index) =>
@@ -19,7 +19,7 @@ function VideoList() {
                         title={video.title}/>
                 )
             }
-        </S.VideoList>
+        </S.VideoListWrapper>
     );
 }
 
