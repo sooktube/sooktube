@@ -26,9 +26,9 @@ function App() {
                 <Route path='/register' component={Register}/>
                 <PrivateRoute path='/create/playlist' component={CreatePlaylist}/>
                 <PrivateRoute path='/create/video' component={CreateVideo}/>
-                <Route path='/video/:videoID' component={Player}/>
                 <Route path='/playlist/:listID' component={Playlist}/>
-                <Route path='/:username/video' component={UserVideoList}/>
+                <Route exact path='/@:username/video' component={UserVideoList}/>
+                <Route path='/@:username/video/:videoID' component={Player}/>
                 <Redirect from="*" to="/" />
             </Switch>
             </GlobalLayoutStyle>
