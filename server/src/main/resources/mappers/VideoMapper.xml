@@ -20,7 +20,6 @@
     		FROM VIDEO
     		WHERE `videoID` = #{videoID}
     		
-    		
     		</select>
     		
         <select id="getDescbyUser" 
@@ -33,6 +32,16 @@
     		
     		</select>
     		
+    		
+    	        <select id="getDescbyFile" 
+    		parameterType="Integer" 
+    		resultType="com.SOOKTUBE.model.VideoDTO">
+    		
+    		SELECT `videoID`, `videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`, `videoPath`
+    		FROM VIDEO
+    		WHERE `uploadFileName` = #{uploadFileName}
+    		
+    		</select>	
     	    		
     
     <select id="getURLfromVideoID" 
@@ -65,13 +74,23 @@
     			WHERE `uploadFileName` = #{uploadFileName}
     			
     			</select>
+
+
+    	<select id="getURLfromTitle"
+    			parameterType="Integer"
+    			resultType="String">
     			
+    			SELECT `uploadFileName`
+    			FROM VIDEO
+    			WHERE `videoTitle` = #{videoTitle}
+    			
+    			</select>    			
     			
     	<select id="searchVideobyTitle"
     			parameterType="String"
     			resultType="com.SOOKTUBE.model.VideoDTO">
     			
-    			SELECT `videoID`, `videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`
+    			SELECT `videoID`, `videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`, `videoPath`
     			FROM VIDEO
     			WHERE `videoTitle` LIKE CONCAT('%',#{videoTitle},'%')
 
@@ -102,7 +121,7 @@
     	DELETE FROM VIDEO
     	WHERE videoID = #{videoID}
     </delete>
-    
+    			
     <delete id="deleteVideobyFileName">
     	DELETE FROM VIDEO
     	WHERE uploadFileName = #{uploadFileName}

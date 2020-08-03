@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.SOOKTUBE.dao.VideoDAO;
 import com.SOOKTUBE.dao.VideoListDAO;
 import com.SOOKTUBE.model.UploadReqDto;
+import com.SOOKTUBE.model.VideoDTO;
+import com.SOOKTUBE.model.VideoListDTO;
 import com.SOOKTUBE.service.GCSService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 public class GCSController {
 
 // private final S3Service s3Service;
+	
  private final GCSService gcsService;
 // private final VideoDAO videoDAO;
  
@@ -63,46 +66,59 @@ public class GCSController {
 	
 	
 	//get videos by videoID
-    @CrossOrigin("*")
-	@RequestMapping(value = "/api/video/getVideobyID/{videoID}", method = RequestMethod.GET)
-	public String getURLfromGCSbyVideoID(@PathVariable("videoID") final int videoID) throws Exception {
+    //modified
+    @CrossOrigin
+	@RequestMapping(value = "/api/video/desc/url/ID/{videoID}", method = RequestMethod.GET)
+	public VideoDTO getURLfromGCSbyVideoID(@PathVariable("videoID") final int videoID) throws Exception {
 		
+    	VideoDTO video = videoDAO.getDescbyVideoID(videoID);
+    	
 		String fileName = videoDAO.getURLfromVideoID(videoID);
 
 		String url = gcsService.getVideobyVIDEOtable(fileName);
 		
-		return url;
+		video.setVideoPath(url);
+		
+		return video;
 		
 	}
 	
 	
 	//get videos by username
-    @CrossOrigin("*")
-	@RequestMapping(value = "/api/video/getVideobyUser/{username}", method = RequestMethod.GET)
-	public List<String> getURLfromGCSbyUsername(@PathVariable("username") final String username) throws Exception{
+    //modified
+    @CrossOrigin
+	@RequestMapping(value = "/api/video/desc/url/user/{username}", method = RequestMethod.GET)
+	public VideoDTO[] getURLfromGCSbyUsername(@PathVariable("username") final String username) throws Exception{
 		
+    	VideoDTO[] video = videoDAO.getDescbyUser(username);
+    	
 		List<String> fileName = videoDAO.getURLfromUsername(username);
-
-		
-		List<String> res = new ArrayList<>();
 		
 		for(int i = 0; i < fileName.size(); i++) {
 			
-			res.add(gcsService.getVideobyVIDEOtable(fileName.get(i)));
+			video[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
+
 		}
 		
-		return res;
+		return video;
 	}
 	
 	//get videos by fileName
-    @CrossOrigin("*")
-	@RequestMapping(value = "/api/video/getVideobyFile/{uploadFileName}", method = RequestMethod.GET)
-	public String getURLfromGCSbyFileName(@PathVariable("uploadFileName") final String uploadFileName) throws Exception {
+    //modified
+    @CrossOrigin
+	@RequestMapping(value = "/api/video/desc/url/filename/{uploadFileName}", method = RequestMethod.GET)
+	public VideoDTO getURLfromGCSbyFileName(@PathVariable("uploadFileName") final String uploadFileName) throws Exception {
+    	
+    	VideoDTO video = videoDAO.getDescbyFile(uploadFileName);
 
 		String url = gcsService.getVideobyVIDEOtable(uploadFileName);
 		
-		return url;
+		video.setVideoPath(url);
+		
+		return video;
 	}
+    
+    
 	
 	//delete videos by videoID
     @CrossOrigin("*")
@@ -152,21 +168,21 @@ public class GCSController {
 	}
     
     
-    //get videoURL in a videoList
+    //get videoURL and description in a videoList
     @CrossOrigin
-    @RequestMapping(value = "/api/video/list/URL/{listID}", method = RequestMethod.GET)
-    public List<String> getURLfromGCSbylistID(@PathVariable("listID") final int listID) throws Exception{
+    @RequestMapping(value = "/api/video/list/desc/URL/{listID}", method = RequestMethod.GET)
+    public VideoListDTO[] getURLfromGCSbylistID(@PathVariable("listID") final int listID) throws Exception{
     	
     	List<String> fileName = videoListDAO.getFileNamebylistID(listID);
-    	
-		List<String> res = new ArrayList<>();
+
+		VideoListDTO[] desc = videoListDAO.getVideoListbyID(listID);
 		
-		for(int i = 0; i < fileName.size(); i++) {
+		for(int i = 0; i < desc.length; i++) {
 			
-			res.add(gcsService.getVideobyVIDEOtable(fileName.get(i)));
+			desc[i].setUrl(gcsService.getVideobyVIDEOtable(fileName.get(i)));
 		}
 		
-		return res;
+		return desc;
     	
     }
     

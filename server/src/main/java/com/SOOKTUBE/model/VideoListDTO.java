@@ -15,7 +15,6 @@ public class VideoListDTO {
 	
 	private int listID;
 	private int videoID;
-	private String userID;
 	
 	private String listName;
 	private String listDesc;
@@ -25,6 +24,8 @@ public class VideoListDTO {
 	
 	private int like;
 	private int dislike;
+	
+	private String url;
 
 
 }
