@@ -14,8 +14,14 @@ public interface VideoDAO {
 	List<String> getURLfromUsername(String username) throws Exception;
 	VideoDTO getDescbyVideoID(int videoID) throws Exception;
 	VideoDTO[] getDescbyUser(String username) throws Exception;
-	int editVideo(VideoDTO param) throws Exception;
+	VideoDTO getDescbyFile(String uploadFileName) throws Exception;
+	
 	String getURLfromFilename(String uploadFileName) throws Exception;
+	List<String> getURLfromTitle(String videoTitle) throws Exception;
+	
+	
+	//update
+	int editVideo(VideoDTO param) throws Exception;
 	
 	//delete
 	int deleteVideobyID(int videoID) throws Exception;

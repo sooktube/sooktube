@@ -1,8 +1,6 @@
 package com.SOOKTUBE.model;
 
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,11 +16,13 @@ public class VideoDTO {
 	private int videoID;
 	private String videoTitle;
 	private String videoDesc;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date videoDate;
+	private Timestamp videoDate;
 	private String username;
 	private String uploadFileName;
 	private String videoPath;
+	
+	
+	
 
 }
 

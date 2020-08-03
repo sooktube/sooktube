@@ -33,11 +33,10 @@
     		parameterType="Integer"
 		    resultType="com.SOOKTUBE.model.VideoListDTO">
     		
-			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, videoList.`username`, `isPublic`
-			FROM videoList, listInfo, user
+			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, `username`, `isPublic`
+			FROM videoList, listInfo
 			WHERE videoList.`listID` = listInfo.`listID`
-				AND
-					videoList.`username` = user.`username`
+
     		
     		</select>
     		

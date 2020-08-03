@@ -1,6 +1,9 @@
 package com.SOOKTUBE.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -14,20 +17,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.SOOKTUBE.dao.VideoDAO;
 import com.SOOKTUBE.model.VideoDTO;
+import com.SOOKTUBE.service.GCSService;
+
+import lombok.RequiredArgsConstructor;
  
 @RestController
+@RequiredArgsConstructor
 @EnableAutoConfiguration
 @CrossOrigin
 @MapperScan(basePackages = "com.SOOKTUBE.dao")
 public class VideoController {
 	
+	 private final GCSService gcsService;
+	
     @Autowired
     private VideoDAO videoDAO;
 
     //insert video descriptions to DB
-    @CrossOrigin("http://localhost:9000")
+    @CrossOrigin
     @RequestMapping(value = "/api/video/upload", method = RequestMethod.POST)
     public VideoDTO postVideo(VideoDTO video) throws Exception {
+    	System.out.println(video.getVideoID());
+    	System.out.println(video.getUploadFileName());
+    	System.out.println(video.getUsername());
+    	System.out.println(video.getVideoTitle());
+    	System.out.println(video.getVideoDesc());
+    	videoDAO.newVideo(video);
         return video;
     }
     
@@ -76,11 +91,22 @@ public class VideoController {
     }
     
     //search Videos by its title
+    //modified
     @CrossOrigin
     @RequestMapping(value = "/api/video/search/title/{videoTitle}", method = RequestMethod.GET)
     public VideoDTO[] searchbyTitle(@PathVariable("videoTitle") final String videoTitle) throws Exception {
     	
     	VideoDTO[] searchRes = videoDAO.searchVideobyTitle(videoTitle);
+    	
+		//List<String> fileName = videoDAO.getURLfromTitle(videoTitle);
+
+		for(int i = 0; i < searchRes.length; i++) {
+			
+			searchRes[i].setVideoPath(gcsService.getVideobyVIDEOtable(searchRes[i].getUploadFileName()));
+			
+			//video[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
+
+		}
     	
     	return searchRes;
     	
