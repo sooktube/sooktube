@@ -53,11 +53,11 @@ export const CardHeart = styled(FiHeart)`
 `;
 
 export const Shelf = styled.div`
-    width: 100%;
-    margin-top: 0.3em;
+    width: 90%;
+    margin: 1em auto;
     height: 3vh;
     z-index: 3;
-    background-color: #f2f2f2;
+    background-color: #dfdfdf;
 `;
 
 
