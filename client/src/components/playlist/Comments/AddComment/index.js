@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import * as S from "./style";
 
 function AddComment({username, photo}) {
-    const [comment, setComment] = useState(null);
+    const [comment, setComment] = useState('');
 
     function handleChange(e) {
         setComment(e.target.value);

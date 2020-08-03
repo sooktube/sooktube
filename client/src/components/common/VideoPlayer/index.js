@@ -5,7 +5,7 @@ function VideoPlayer({url, controls}){
     return (
         <S.PlayerWrapper>
             <S.StyledReactPlayer
-                controls={controls ? true : controls}
+                controls={controls ? controls : true}
                 url={url ? url : '/'}
                 width='100%'
                 height='100%'

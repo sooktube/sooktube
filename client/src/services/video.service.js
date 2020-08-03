@@ -99,11 +99,10 @@ function searchVideoByTitle(keyword) {
         url: `https://soktube.uc.r.appspot.com/api/video/search/title/${keyword}`,
     })
         .then(response => {
-            console.log(response);
             return response.data;
         })
         .catch(error => {
-            return error;
+            return null;
         })
 }
 

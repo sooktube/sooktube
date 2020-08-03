@@ -11,6 +11,7 @@ function Comments() {
             <AddComment/>
             {comments.map(
                 (comment,index) => (<Comment
+                    key={index}
                     username={comment.username}
                     text={comment.text}
                     photo={comment.photo}/>)

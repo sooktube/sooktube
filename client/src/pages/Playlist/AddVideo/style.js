@@ -3,7 +3,7 @@ import {MAIN} from "../../../components/style/Main";
 import search from "../../../../public/search.png";
 
 export const AddVideoWrapper = styled.div`
-  padding: 0;
+    padding: 0;
 	justify-content: center;
 `;
 
