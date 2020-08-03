@@ -7,9 +7,6 @@ export const videoService = {
     UploadVideoInfo,
     getVideoFile,
     getVideoInfoByVideoID,
-    getVideoURLByVideoID,
-    getVideoInfoByUsername,
-    getVideoURLByUsername,
     searchVideoByTitle
 };
 
@@ -85,7 +82,7 @@ function getVideoFile(uploadFileName) {
 function getVideoInfoByVideoID(videoID) {
     return axios({
         method: 'GET',
-        url: `https://soktube.appspot.com/api/video/desc/${videoID}`,
+        url: `https://soktube.appspot.com/api/video/desc/url/ID/71`,
     })
         .then(response => {
             return response.data;
@@ -95,54 +92,6 @@ function getVideoInfoByVideoID(videoID) {
         })
 }
 
-function getVideoURLByVideoID(videoID) {
-    return axios({
-        method: 'GET',
-        url: `https://soktube.appspot.com/api/video/getVideobyID/${videoID}`,
-    })
-        .then(response => {
-            return response;
-        })
-        .catch(error => {
-            return error;
-        })
-}
-
-function getVideoInfoByUsername(username) {
-    return axios({
-        method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/desc/user/${username}`,
-    })
-        .then(response => {
-            let videoInfo = response.data;
-            return axios({
-                method: 'GET',
-                url: `https://soktube.uc.r.appspot.com/api/video/getVideobyUser/${username}`
-            }).then(response => {
-                const videoList = [];
-                for(let i = 0; i<videoInfo.size(); i++){
-                    videoList.push(videoInfo[i], response[i]);
-                }
-                return videoList;
-            })
-        })
-        .catch(error => {
-            return error;
-        })
-}
-
-function getVideoURLByUsername(username) {
-    return axios({
-        method: 'GET',
-        url: `https://soktube.appspot.com/api/video/getVideobyUser/${username}`,
-    })
-        .then(response => {
-            return response;
-        })
-        .catch(error => {
-            return error;
-        })
-}
 
 function searchVideoByTitle(keyword) {
     return axios({

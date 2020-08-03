@@ -12,13 +12,13 @@ function CommentBox(){
     return(
         <S.CommentBox>
             <S.CommentTitle>Comments  {comments.length}</S.CommentTitle>
-            {comments.map(
-                (comment,index) => (<Comment
+            {comments.map((comment,index) =>
+                <Comment
+                    key={index}
                     username={comment.username}
                     text={comment.text}
-                    photo={comment.photo}/>)
+                    photo={comment.photo}/>
             )}
-
         </S.CommentBox>
     );
 }

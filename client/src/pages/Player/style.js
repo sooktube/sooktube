@@ -1,77 +1,76 @@
 import styled from 'styled-components'
-import img from '../../../public/vid.jpg';
-import VideoPlayer from "../../components/common/VideoPlayer";
+import {IoIosHeart, IoMdHeartDislike} from "react-icons/all";
+import {MAIN} from "../../components/style/Main";
 
-export const MainBackground = styled.div`
+export const VideoWrapper = styled.div`
     background:#ffffff;
+    border-radius: 20px;
+    margin-top: 2rem;
+    padding: 1rem 1.5rem;
 `;
 
-export const VideoBox = styled.div`
-    margin-top:1%;
-    width: 40%;
+export const VideoContainer = styled.div`
+    margin-top: 1rem;
+    @media (max-width: 1919px) {
+    width: calc(60% - 1rem);
+    }
+    @media (max-width: 1440px) {
+    width: calc(50% - 1rem);
+    }
+    @media (max-width: 1312px) {
+    width: calc(50% - 1rem);
+    }
+    @media (max-width: 944px) {
+    width: calc(80% - 1rem);
+    margin-left: auto;
+    margin-right: auto;
+    }
+    @media (max-width: 767px) {
+    width: calc(100% - 2rem);
+    margin-left: auto;
+    margin-right: auto;
+    }
 `;
 
 export const VideoTitle = styled.div`
-    margin-top:1em;
-    font-size: 3vh;
+    margin-top: 1rem;
+    font-size: 2rem;
     font-weight:600;
 `;
 
 export const VideoDesc = styled.div`
-    margin-top:1em;
-
+    margin-top: 1rem;
+    font-size: 1.2rem;
 `;
 
-export const line = styled.hr`
-    border:1px;
+export const VideoInfo = styled.div`
+    margin-top: 1em;  
+    display: flex;
+    font-family: Georgia, sans-serif;
+    justify-content: space-between;
 `;
 
-export const CommentBox = styled.div`
-    width:80%;
-    margin-top:2%;
-    background:#ffffff;
-    display:block;
-    padding-top:1%;
+export const VideoDate = styled.div`
+    font-size: 1.2em;
 `;
 
-export const CommentContainer= styled.div`
-    width:70%;
-    display:float;
-    flex-direction:row;
-    margin-top:1em;
-    margin-bottom:1em;
-    text-align:left;
-    vertical-align:top;
-    padding:1vh;
+export const VideoLike = styled.div`
+    font-size: 1.3em;
+    span {
+      margin-right: 0.5em;
+    }
+`;
+export const Heart = styled(IoIosHeart)`
+    margin-right: 0.2em;
+    width: 1.5em;
+    height: 1.5em;
+    color: ${MAIN.MAIN_THEME_COLOR};
 `;
 
-export const CommentTitle = styled.div`
-    position:static;
-    font-size:2.6vh;
-    font-weight:550;
-    margin-bottom:1em;
-    
+export const DislikeHeart = styled(IoMdHeartDislike)`
+    width: 1.5em;
+    height: 1.5em;
+    color: ${MAIN.MAIN_THEME_COLOR};
 `;
 
-export const Photo = styled.img`
-    width:5vh;
-    height:5vh;
-    border-radius:2.5vh;
-`;
 
-export const TextBox = styled.div`
-    margin-left:1.5em;
-
-`;
-
-export const Username = styled.div`
-    position:static;
-    font-weight:500;
-    font-size:2.2vh;
-    margin-bottom:0.5em;
-    color:gray;
-`;
-
-export const Text = styled.div`
-    font-size:2.5vh;
-`;
