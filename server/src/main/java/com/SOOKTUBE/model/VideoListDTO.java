@@ -20,12 +20,14 @@ public class VideoListDTO {
 	private String listDesc;
 	private String username;
 	private int isPublic;
+	private String thumbnail;
 	
 	
 	private int like;
 	private int dislike;
 	
 	private String url;
+	private String uploadFileName;
 
 
 }
