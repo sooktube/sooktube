@@ -2,7 +2,6 @@
 package com.SOOKTUBE.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,15 +54,16 @@ public class GCSController {
  }
 	
 //GCS 파일 보기 URL 생성	
-    @CrossOrigin("*")
-	@RequestMapping(value = "/api/video/getVideo", method = RequestMethod.POST)
+    @CrossOrigin
+	@RequestMapping(value = "/api/bucket/url", method = RequestMethod.POST)
 	public String getURLfromGCS(@RequestBody UploadReqDto uploadReqDto) throws IOException{
 		
 		String url = gcsService.generateV4GetObjectSignedUrl(uploadReqDto);
 		
 		return url;
 	}
-	
+
+
 	
 	//get videos by videoID
     //modified
@@ -94,7 +94,7 @@ public class GCSController {
     	
 		List<String> fileName = videoDAO.getURLfromUsername(username);
 		
-		for(int i = 0; i < fileName.size(); i++) {
+		for(int i = 0; i < video.length; i++) {
 			
 			video[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
 
@@ -197,8 +197,12 @@ public class GCSController {
 
 			String[] res = gcsService.generateURLforThumbnailImg(uploadReqDto);
 			
+			
 			return res;
 	 }
+	  
+	  
+
 	 
 
 

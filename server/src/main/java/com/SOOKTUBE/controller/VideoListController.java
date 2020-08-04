@@ -40,6 +40,16 @@ public class VideoListController {
     }
 	
 	
+	  //get video list
+	  @CrossOrigin
+	  @RequestMapping(value = "api/videolist/desc/thumbnail/{listID}", method = RequestMethod.GET)
+	  public VideoListDTO[] getVideolistbyID(@PathVariable("listID") final int listID) throws Exception {
+		  
+		  VideoListDTO[] res = videoListDAO.getVideoListbyID(listID);
+		  return res;
+	  }
+	
+	
 	//get desc about videolist from db
 	/*
 	 * @CrossOrigin

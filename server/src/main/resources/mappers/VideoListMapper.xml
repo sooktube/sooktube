@@ -13,7 +13,7 @@
 		    
 		    <insert id="newListInfo"
 		            parameterType="com.SOOKTUBE.model.VideoListDTO">
-		        INSERT INTO listInfo(`listID`, `listName`, `listDesc`, `isPublic`)
+		        INSERT INTO listInfo(`listID`, `listName`, `listDesc`, `isPublic`, `thumbnail`)
 		        VALUES (#{listID}, #{listName}, #{listDesc}, #{isPublic})
 		    </insert>
 	
@@ -21,7 +21,7 @@
 		    <select id="getVideoList"
 		    resultType="com.SOOKTUBE.model.VideoListDTO">
     		
-			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, videoList.`username`, `isPublic`
+			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, videoList.`username`, `isPublic`, `thumbnail`
 			FROM videoList, listInfo, user
 			WHERE videoList.`listID` = listInfo.`listID`
 				AND
@@ -33,7 +33,7 @@
     		parameterType="Integer"
 		    resultType="com.SOOKTUBE.model.VideoListDTO">
     		
-			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, `username`, `isPublic`
+			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`
 			FROM videoList, listInfo
 			WHERE videoList.`listID` = listInfo.`listID`
 

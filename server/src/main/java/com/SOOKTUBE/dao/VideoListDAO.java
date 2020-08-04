@@ -11,6 +11,8 @@ public interface VideoListDAO {
 	
 	List<String> getFileNamebylistID(int listID) throws Exception;
 	
+	List<String> getFileNamebylistName(String listName);
+	
 	//insert new videoList
 	int newList(VideoListDTO list) throws Exception;
 	int newListInfo(VideoListDTO list) throws Exception;
