@@ -25,7 +25,7 @@ export const VideoTitle = styled.div`
 
 export const VideoInfo = styled.div`
     font-size: 2vh;
-    margin-left: 0.5em;
+    margin-left: 1em;
     div {
       margin-right: 1em;
     }
@@ -36,4 +36,3 @@ export const VideoDetail = styled.div`
     display: flex;
     margin-top: 2rem;
 `;
-

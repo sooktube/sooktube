@@ -18,14 +18,12 @@ function uploadVideoFile(input) {
             uploadURL = response[1];
             return videoService.UploadVideoFile(uploadURL, input.videoFile)
         })
-            /*
         .then(() => {
             return videoService.getVideoFileByFileName(uploadFileName)
         })
-        */
         .then(response => {
             console.log(response);
-            videoURL = response.data.videoURL;
+            videoURL = response.data.videoPath;
             dispatch(success(uploadFileName, String(videoURL)));
             return response;
         },
