@@ -77,7 +77,7 @@ function CreatePlaylist(){
 
     
     return(
-        <VideoProvider>   
+        <>
             <Header/>
             <S.MainBackground>
             
@@ -97,18 +97,18 @@ function CreatePlaylist(){
                 
                 
                 <S.UploadButton onClick={UploadPlaylist}>CREATE</S.UploadButton>
-                
-                
-                
+
+
+
             </S.UploadBox>    
             <S.TextCheck2>Anyone can search for and edit</S.TextCheck2>
             <S.UploadBox2><S.PreviewImage src={imageURL}/></S.UploadBox2>
             </S.UploadForm>
-            
+
             </S.MainBackground>
-            
-       
-        </VideoProvider> 
+
+
+        </>
     );
 
 }
