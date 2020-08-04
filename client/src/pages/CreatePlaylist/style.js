@@ -90,8 +90,9 @@ export const Label = styled.label`
 export const UploadBox = styled.div`
     position:relative;
 	display:block;
-	margin-top:2vh;
+	margin-top:2.9vh;
 	width:415px;
+	height:4.6vh;
 `;
 
 export const UploadBox2 = styled.div`
@@ -101,7 +102,37 @@ export const UploadBox2 = styled.div`
 	width:330px;
 `;
 
+export const PreviewImage = styled.img`
+	position:static;
+`;
 
+export const InputCheck = styled.input`
+	position:static;
+	display:inline-block;
+	
+	width:50px;
+	font-size:50px;
+`;
+
+
+export const TextCheck = styled.div`
+    display:inline-block;
+	margin-top:0.9vh;
+	margin-left:35px;
+	position:static;
+	font-size:2.7vh;
+	font-weight:bold;
+	width:200px;
+`;
+
+export const TextCheck2 = styled.div`
+    margin-left:35px;
+	position:static;
+	font-size:2.4vh;
+	width:250px;
+	color:#868e96;
+	
+`;
 
 export const VideoAdd = styled.button`
 	position:static;

@@ -23,6 +23,7 @@ function getVideoUploadURL(input) {
             "username": input.username
         })})
        .then(response => {
+            console.log(response);
             return response.data;
         })
         .catch(error => {

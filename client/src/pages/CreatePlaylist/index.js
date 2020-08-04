@@ -1,14 +1,13 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as S from "./style";
-import { useState, createContext, useContext } from 'react';
+import { useState, createContext, useRef } from 'react';
 import { MAIN } from '../../components/style/Main';
 import Header from "../../components/base/Header";
 import Modal from "../../components/common/Modal/Modal";
-import YoutubeSearch from "./YoutubeSearch";
-import VideoSearch from "./VideoSearch";
 import {VideoProvider} from "./VideoListContext";
-import ShowVideoList from "./ShowVideoList";
-import Video from "./Video/VIdeo";
+import {playlistService} from "../../services/playlist.service";
+
 
 const videoList = createContext([{url:"https://storage.googleapis.com/sttbucket2020/dog1.mp4",title:"title"},
     {url:"https://storage.googleapis.com/sttbucket2020/dog1.mp4",title:"title"},
@@ -24,41 +23,77 @@ const videoList = createContext([{url:"https://storage.googleapis.com/sttbucket2
 
 function CreatePlaylist(){
     const [text,setText]=useState(' ');
-    const [youtubeModalVisible, setYoutubeModalVisible] = useState(false);
-    const [searchModalVisible, setSearchModalVisible] = useState(false);
-    const [noVideo, setNoVideo] = useState(true);
+    const [uploadFilename,setUploadFilename]=useState(null);
+    let imageFile,uploadURL,imageURL;
+
+    const s_username = useSelector(state => state.authentication.username);
+
+    const inputTitle = useRef(null);
+    const inputDesc = useRef(null);
+    const inputCheck = useRef(null);
     
     function fileSelect(event){
         console.log(`Selected file - ${event.target.files[0].name}`);
         setText(' '+event.target.files[0].name);
+        imageFile = event.target.files[0];
+
+        const time = new Date().getTime().toString();
+       
+        
+        playlistService.getPlaylistUploadURL({
+            uploadFileName:time+event.target.files[0].name,
+            username:s_username
+        })
+        .then(response => {
+            const name = response[0];
+            setUploadFilename(name);
+            uploadURL = response[1];
+            
+            
+            playlistService.UploadPlaylistFile(uploadURL,imageFile)
+            .then(response => {
+                playlistService.getPlaylistFile(name)
+                .then(response =>{
+                console.log(name);
+                console.log(response.data);
+                imageURL = response.data;
+                console.log(imageURL);
+            })
+        })
+        })
+    }
+
+    function UploadPlaylist(){
+        const listName = inputTitle.current.value;
+        console.log(listName);
+        const listDesc = inputDesc.current.value;
+        const uploadFile = uploadFilename;
+        const isPublic = inputCheck.current.checked ? 1 : 0;
+        console.log(isPublic);
+        if(!listName){
+            return alert("제목을 입력해주세요.");
+        }
+        if(!listDesc){
+            return alert("재생목록에 대한 설명을 입력해주세요.");
+        }
+        if(listName&&listDesc){
+            playlistService.UploadPlaylistInfo({
+                listName,listDesc,uploadFile,isPublic
+            }).then(response => {
+                console.log(response);
+            })
+        }
+        
+        
+
     }
 
     const style={
-        border:0  
+        position:'absolute',top:'2vh',
+        width:'20px',height:'20px'
     }
 
-    const openYoutubeModal = () => {
-        setYoutubeModalVisible(true)
-    };
-    const closeYoutubeModal = () => {
-        setYoutubeModalVisible(false)
-    };
-    const openSearchModal = () => {
-        setSearchModalVisible(true)
-    };
-    const closeSearchModal = () => {
-        setSearchModalVisible(false)
-    };
-
-    const af =false;
-
-
-
-    /*const videoList6 = useContext(videoList);*/
-
-
     
-
     return(
         <VideoProvider>   
             <Header></Header>
@@ -68,29 +103,26 @@ function CreatePlaylist(){
             <S.UploadLogo> CREATE THE PLAYLIST </S.UploadLogo>
             <S.UploadVideo>
                     <S.Label>Input the Preview Image
-                    <S.UploadInput id="inputId" type="file" onChange={fileSelect}/>
+                    <S.UploadInput id="inputId" type="file"  onChange={fileSelect} />
                     </S.Label>
                     <S.NameInput>{text}</S.NameInput>
             </S.UploadVideo>  
-                <S.InputTitle type="text" placeholder="Title" ></S.InputTitle>
-                <S.InputDesc cols="10" rows="5" placeholder="Description" ></S.InputDesc>
+                <S.InputTitle type="text" placeholder="Title" ref={inputTitle} ></S.InputTitle>
+                <S.InputDesc cols="10" rows="5" placeholder="Description" ref={inputDesc}  ></S.InputDesc>
             <S.UploadBox>
-                <S.UploadButton >CREATE</S.UploadButton>
-                <S.VideoAdd onClick={openSearchModal}> + Add Videos</S.VideoAdd>
-                {searchModalVisible &&
-                    <Modal visible={searchModalVisible}
-                        onClose={closeSearchModal}
-                        width="600px">
-                        <VideoSearch/>
-                    </Modal>
-                }
-            </S.UploadBox>    
-            <S.UploadBox2></S.UploadBox2>
-            </S.UploadForm>
-            {af && <Video></Video>}
-            <ShowVideoList>
+                <input style={style} type="checkbox"  ref={inputCheck} ></input>
+                <S.TextCheck>Public</S.TextCheck>
                 
-            </ShowVideoList>
+                
+                <S.UploadButton onClick={UploadPlaylist}>CREATE</S.UploadButton>
+                
+                
+                
+            </S.UploadBox>    
+            <S.TextCheck2>Anyone can search for and edit</S.TextCheck2>
+            <S.UploadBox2><S.PreviewImage src={imageURL}></S.PreviewImage></S.UploadBox2>
+            </S.UploadForm>
+            
             </S.MainBackground>
             
        
