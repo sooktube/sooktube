@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import * as S from './style';
 import Modal from "../../../../components/common/Modal";
-import AddVideo from "../../AddVideo";
+import SearchVideo from "../../../../components/video/SearchVideo";
 
 function AddVideoButton() {
     const [modalVisible, setModalVisible] = useState(false);
@@ -19,7 +19,7 @@ function AddVideoButton() {
             <Modal visible={modalVisible}
                    onClose={closeModal}
                    width="700px">
-                <AddVideo/>
+                <SearchVideo/>
             </Modal>
             }
             <S.AddVideoComment> 재생목록에 추가하고 싶은 영상이 있나요? </S.AddVideoComment>

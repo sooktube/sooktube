@@ -34,12 +34,10 @@ function CreatePlaylist(){
 
             playlistService.UploadPlaylistFile(uploadURL,imageFile)
             .then(response => {
-                playlistService.getPlaylistFile(name)
+                playlistService.getVideoPlaylistImgByFileName(name)
                 .then(response =>{
-                console.log(name);
-                console.log(response.data);
-                imageURL = response.data;
-                console.log(imageURL);
+                    console.log(response);
+                    imageURL = response.data;
             })
         })
         })
@@ -47,11 +45,9 @@ function CreatePlaylist(){
 
     function UploadPlaylist(){
         const listName = inputTitle.current.value;
-        console.log(listName);
         const listDesc = inputDesc.current.value;
         const uploadFile = uploadFilename;
         const isPublic = inputCheck.current.checked ? 1 : 0;
-        console.log(isPublic);
         if(!listName){
             return alert("제목을 입력해주세요.");
         }

@@ -72,7 +72,6 @@ function CreateVideo(){
                 username: input.username,
                 uploadFileName: uploadFileName
             }).then(response => {
-                console.log(response);
                 history.push(`/@${username}/video/${response.videoID}`)
             })
         }

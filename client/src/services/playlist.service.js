@@ -4,7 +4,7 @@ import qs from 'qs';
 export const playlistService ={
     getPlaylistUploadURL,
     UploadPlaylistFile,
-    getPlaylistFile,
+    getVideoPlaylistImgByFileName,
     UploadPlaylistInfo
 }
 
@@ -50,13 +50,16 @@ function getPlaylistUploadURL(input) {
         });
 }
 
-function getPlaylistFile(uploadFileName) {
+function getVideoPlaylistImgByFileName(uploadFileName) {
     return axios({
-        method: 'GET',
-        url: `https://soktube.appspot.com/api/video/getVideobyFile/${uploadFileName}`,
-    })
+        method: 'POST',
+        url: `https://soktube.uc.r.appspot.com/api/bucket/url`,
+        data: {
+            "bucketName": "soktube.appspot.com",
+            "uploadFileName": `${uploadFileName}`
+        }})
         .then(response => {
-            return response;
+            return response.data;
         })
         .catch(error => {
             return error;

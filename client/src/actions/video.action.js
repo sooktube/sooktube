@@ -22,9 +22,7 @@ function uploadVideoFile(input) {
             return videoService.getVideoFileByFileName(uploadFileName)
         })
         .then(response => {
-            console.log(response);
-            videoURL = response.data.videoPath;
-            dispatch(success(uploadFileName, String(videoURL)));
+            dispatch(success(uploadFileName, String(response)));
             return response;
         },
         error => {

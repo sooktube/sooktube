@@ -58,8 +58,7 @@ function UploadVideoInfo(input) {
         data: qs.stringify(input),
         })
         .then(response => {
-            console.log(response);
-            return response;
+            return response.data;
         })
         .catch(error => {
             return error;
@@ -68,11 +67,14 @@ function UploadVideoInfo(input) {
 
 function getVideoFileByFileName(uploadFileName) {
     return axios({
-        method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/desc/url/filename/${uploadFileName}`,
-    })
+        method: 'POST',
+        url: `https://soktube.uc.r.appspot.com/api/bucket/url`,
+        data: {
+            "bucketName": "soktube.appspot.com",
+            "uploadFileName": `${uploadFileName}`
+        }})
         .then(response => {
-            return response;
+            return response.data;
         })
         .catch(error => {
             return error;
@@ -83,7 +85,7 @@ function getVideoFileByFileName(uploadFileName) {
 function getVideoInfoByVideoID(videoID) {
     return axios({
         method: 'GET',
-        url: `https://soktube.appspot.com/api/video/desc/url/ID/71`,
+        url: `https://soktube.appspot.com/api/video/desc/url/ID/${videoID}`,
     })
         .then(response => {
             return response.data;
