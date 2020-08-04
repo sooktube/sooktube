@@ -9,6 +9,9 @@ public interface VideoListDAO {
 	VideoListDTO[] getVideoList() throws Exception;
 	VideoListDTO[] getVideoListbyID(int listID) throws Exception;
 	
+	VideoListDTO getListbyID(int listID) throws Exception;
+	VideoListDTO getVideoListbyVideoID(int videoID) throws Exception;
+	
 	List<String> getFileNamebylistID(int listID) throws Exception;
 	
 	List<String> getFileNamebylistName(String listName);

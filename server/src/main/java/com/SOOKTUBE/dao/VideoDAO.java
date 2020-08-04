@@ -19,6 +19,8 @@ public interface VideoDAO {
 	String getURLfromFilename(String uploadFileName) throws Exception;
 	List<String> getURLfromTitle(String videoTitle) throws Exception;
 	
+	VideoDTO[] getDescbyListID(int listID) throws Exception;
+	
 	
 	//update
 	int editVideo(VideoDTO param) throws Exception;
