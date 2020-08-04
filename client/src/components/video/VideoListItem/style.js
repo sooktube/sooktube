@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 import {MAIN} from "../../style/Main";
+import {IoIosHeart, IoMdHeartDislike} from "react-icons/all";
 
 export const VideoWrapper = styled.div`
-    width:100%;
     padding:14px;
+    height: 8rem;
     border-bottom:1px solid #ced4da;
     border-top:1px solid #ced4da;
     display:flex;
@@ -36,3 +37,24 @@ export const VideoDetail = styled.div`
     display: flex;
     margin-top: 2rem;
 `;
+
+export const VideoLike = styled.div`
+    margin-left: auto;
+    display: flex;
+    div {
+      margin-right: 1em;
+    }
+`;
+
+export const Like = styled(IoIosHeart)`
+    width: 3rem;
+    height: 2.2rem;
+    margin-right: 1em;
+    color: ${MAIN.MAIN_THEME_COLOR};
+`;
+
+export const Dislike = styled(IoMdHeartDislike)`
+    width: 3rem;
+    height: 2.2rem;
+    color: ${MAIN.MAIN_THEME_COLOR};
+`

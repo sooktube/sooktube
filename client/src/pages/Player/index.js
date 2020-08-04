@@ -7,7 +7,7 @@ import CommentBox from "./Comments";
 import {videoService} from "../../services";
 
 function Player(){
-    let { videoID } = useParams();
+    const { videoID } = useParams();
 
     const [loading, setLoading] = useState(true);
 

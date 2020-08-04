@@ -36,6 +36,8 @@ function SearchVideo() {
                                        title={result.videoTitle}
                                        username={result.username}
                                        date={result.videoDate.substr(0,10)}
+                                       like={result.like}
+                                       dislike={result.dislike}
                         />
                     )}
                 </S.SearchResult>

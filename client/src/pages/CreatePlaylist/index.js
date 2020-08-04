@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import * as S from "./style";
 import { useState, useRef } from 'react';
 import Header from "../../components/base/Header";
 import {playlistService} from "../../services/playlist.service";
+import {history} from "../../helpers";
 
 function CreatePlaylist(){
     const [text,setText]=useState(' ');
-    const [uploadFilename,setUploadFilename]=useState(null);
-    let imageFile,uploadURL,imageURL;
+    const [uploadFilename,setUploadFilename]= useState(null);
+    const [imageURL, setImageURL] = useState(null);
+    const [isUploaded, setIsUploaded] = useState(false);
+
+    let imageFile, uploadURL;
 
     const s_username = useSelector(state => state.authentication.username);
 
@@ -17,53 +21,58 @@ function CreatePlaylist(){
     const inputCheck = useRef(null);
     
     function fileSelect(event){
-        console.log(`Selected file - ${event.target.files[0].name}`);
         setText(' '+event.target.files[0].name);
         imageFile = event.target.files[0];
 
         const time = new Date().getTime().toString();
 
         playlistService.getPlaylistUploadURL({
-            uploadFileName:time+event.target.files[0].name,
+            uploadFileName:time,
             username:s_username
         })
         .then(response => {
             const name = response[0];
             setUploadFilename(name);
             uploadURL = response[1];
-
             playlistService.UploadPlaylistFile(uploadURL,imageFile)
             .then(response => {
                 playlistService.getVideoPlaylistImgByFileName(name)
                 .then(response =>{
-                    console.log(response);
-                    imageURL = response.data;
+                    setIsUploaded(true);
+                    setImageURL(response);
+                })
             })
         })
-        })
     }
+
+    useEffect(() => {},[imageURL])
 
     function UploadPlaylist(){
         const listName = inputTitle.current.value;
         const listDesc = inputDesc.current.value;
-        const uploadFile = uploadFilename;
+        const uploadFileName = uploadFilename;
         const isPublic = inputCheck.current.checked ? 1 : 0;
+
         if(!listName){
             return alert("제목을 입력해주세요.");
         }
         if(!listDesc){
             return alert("재생목록에 대한 설명을 입력해주세요.");
         }
+        if(!isUploaded){
+            return alert("재생목록 대표 이미지가 아직 업로드 되지 않았습니다.")
+        }
         if(listName&&listDesc){
             playlistService.UploadPlaylistInfo({
-                listName,listDesc,uploadFile,isPublic
+                "listName": listName,
+                "listDesc": listDesc,
+                "thumbnail": uploadFileName,
+                "isPublic": isPublic
             }).then(response => {
                 console.log(response);
+                history.push(`/playlist/${response.listID}`);
             })
         }
-        
-        
-
     }
 
     const style={
@@ -76,34 +85,25 @@ function CreatePlaylist(){
         <>
             <Header/>
             <S.MainBackground>
-            
-            <S.UploadForm>
-            <S.UploadLogo> CREATE THE PLAYLIST </S.UploadLogo>
-            <S.UploadVideo>
-                    <S.Label>Input the Preview Image
-                    <S.UploadInput id="inputId" type="file"  onChange={fileSelect} />
-                    </S.Label>
-                    <S.NameInput>{text}</S.NameInput>
-            </S.UploadVideo>  
-                <S.InputTitle type="text" placeholder="Title" ref={inputTitle}/>
-                <S.InputDesc cols="10" rows="5" placeholder="Description" ref={inputDesc}/>
-            <S.UploadBox>
-                <input style={style} type="checkbox"  ref={inputCheck}/>
-                <S.TextCheck>Public</S.TextCheck>
-                
-                
-                <S.UploadButton onClick={UploadPlaylist}>CREATE</S.UploadButton>
-
-
-
-            </S.UploadBox>    
-            <S.TextCheck2>Anyone can search for and edit</S.TextCheck2>
-            <S.UploadBox2><S.PreviewImage src={imageURL}/></S.UploadBox2>
-            </S.UploadForm>
-
+                <S.UploadForm>
+                    <S.UploadLogo> CREATE THE PLAYLIST </S.UploadLogo>
+                    <S.UploadVideo>
+                            <S.Label>Input the Preview Image
+                            <S.UploadInput id="inputId" type="file"  onChange={fileSelect} />
+                            </S.Label>
+                            <S.NameInput>{text}</S.NameInput>
+                    </S.UploadVideo>
+                        <S.InputTitle type="text" placeholder="Title" ref={inputTitle}/>
+                        <S.InputDesc cols="10" rows="5" placeholder="Description" ref={inputDesc}/>
+                    <S.UploadBox>
+                        <input style={style} type="checkbox" ref={inputCheck}/>
+                        <S.TextCheck>Public</S.TextCheck>
+                        <S.UploadButton onClick={UploadPlaylist}>CREATE</S.UploadButton>
+                    </S.UploadBox>
+                    <S.TextCheck2>Anyone can search for and edit</S.TextCheck2>
+                </S.UploadForm>
+                <S.PreviewImage src={imageURL}/>
             </S.MainBackground>
-
-
         </>
     );
 

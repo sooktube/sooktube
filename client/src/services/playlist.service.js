@@ -1,13 +1,15 @@
 import axios from "axios";
-import qs from 'qs';
+import qs from 'querystring';
+import {func} from "prop-types";
 
 export const playlistService ={
     getPlaylistUploadURL,
     UploadPlaylistFile,
     getVideoPlaylistImgByFileName,
-    UploadPlaylistInfo
+    UploadPlaylistInfo,
+    getPlaylistInfoByListID,
+    getVideoListByListID
 }
-
 
 function getPlaylistUploadURL(input) {
     return axios({
@@ -32,8 +34,6 @@ function getPlaylistUploadURL(input) {
 
 
  function UploadPlaylistFile(uploadURL, imageFile) {
-    console.log(imageFile.type);
-    console.log('aa');
     return axios({
         method: 'PUT',
         url: uploadURL,
@@ -66,25 +66,42 @@ function getVideoPlaylistImgByFileName(uploadFileName) {
         })
 }
 
-function UploadPlaylistInfo(listName,listDesc,isPublic,uploadFileName) {
-    console.log('aa');
-    console.log(listName);
-    console.log('bb');
-    console.log(listDesc);
+function UploadPlaylistInfo(input) {
     return axios({
         method: 'POST',
         url: 'https://soktube.appspot.com/api/video/list/newList/info',
-        data: qs.stringify({
-            "listName": listName,
-            "listDesc": listDesc,
-            "isPublic" : isPublic,
-            "uploadFilename":uploadFileName
-        })})
+        data: qs.stringify(input)
+        })
         .then(response => {
-        return response;
+        return response.data;
         })
         .catch(error => {
         return error;
     })
 }
 
+function getPlaylistInfoByListID(listID) {
+    return axios({
+        method: 'GET',
+        url: 'https://soktube.appspot.com/api/video/list/newList/info'
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}
+
+function getVideoListByListID(listID) {
+    return axios({
+        method: 'GET',
+        url: 'https://soktube.appspot.com/api/video/list/newList/info'
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}
