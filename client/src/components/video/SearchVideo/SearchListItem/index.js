@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from "./style";
-import {history} from "../../../helpers";
+import {history} from "../../../../helpers";
 
-function VideoListItem({videoID, url, title, username, date, like, dislike}){
+function SearchListItem({videoID, url, title, username, date, like, dislike}){
     function handleClick() {
         history.push(`/@${username}/video/${videoID}`);
     }
@@ -25,4 +25,4 @@ function VideoListItem({videoID, url, title, username, date, like, dislike}){
     );
 }
 
-export default VideoListItem;
+export default SearchListItem;

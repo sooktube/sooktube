@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import * as S from './style';
 import {videoService} from "../../../services";
-import VideoListItem from "../VideoListItem";
+import SearchListItem from "./SearchListItem";
 
 function SearchVideo() {
     const [keyword, setKeyword] = useState('');
@@ -34,14 +34,14 @@ function SearchVideo() {
             {keyword && searchResult &&
                 <S.SearchResult>
                     {searchResult.map((result, index) =>
-                        <VideoListItem key={index}
-                                       videoID={result.videoID}
-                                       url={result.videoPath}
-                                       title={result.videoTitle}
-                                       username={result.username}
-                                       date={result.videoDate.substr(0,10)}
-                                       like={result.like}
-                                       dislike={result.dislike}
+                        <SearchListItem key={index}
+                                        videoID={result.videoID}
+                                        url={result.videoPath}
+                                        title={result.videoTitle}
+                                        username={result.username}
+                                        date={result.videoDate.substr(0,10)}
+                                        like={result.like}
+                                        dislike={result.dislike}
                         />
                     )}
                 </S.SearchResult>
