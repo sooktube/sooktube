@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import {IoIosHeart, IoMdHeartDislike} from "react-icons/all";
 import {MAIN} from "../../components/style/Main";
+import {Link} from "react-router-dom";
 
 export const VideoWrapper = styled.div`
     background:#ffffff;
@@ -36,6 +37,7 @@ export const VideoTitle = styled.div`
     margin-top: 1rem;
     font-size: 2rem;
     font-weight:600;
+    color: ${MAIN.DARK_TEXT_COLOR};
 `;
 
 export const VideoDesc = styled.div`
@@ -46,16 +48,19 @@ export const VideoDesc = styled.div`
 export const VideoInfo = styled.div`
     margin-top: 1em;  
     display: flex;
-    font-family: Georgia, sans-serif;
-    justify-content: space-between;
 `;
 
 export const VideoDate = styled.div`
     font-size: 1.2em;
 `;
 
+export const VideoUsername = styled.div`
+    font-size: 1.2em;
+`;
+
 export const VideoLike = styled.div`
     font-size: 1.3em;
+    margin-left: auto;
     span {
       margin-right: 0.5em;
     }
@@ -73,4 +78,15 @@ export const DislikeHeart = styled(IoMdHeartDislike)`
     color: ${MAIN.MAIN_THEME_COLOR};
 `;
 
+export const EditButton = styled(Link)`
+    color: ${MAIN.DARK_TEXT_COLOR};
+    margin-right: 1em;
+    &:hover {
+      color: ${MAIN.DARK_TEXT_COLOR};
+    }
+`;
 
+export const Separator = styled.div`
+    margin: 0 1em;
+    color: #e5e5e5;
+`;

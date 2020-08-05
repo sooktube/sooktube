@@ -7,7 +7,7 @@ import Register from "./pages/Register";
 import PrivateRoute from "./components/common/PrivateRoute";
 import GlobalLayoutStyle from "./components/style/GlobalLayout";
 import CreatePlaylist from "./pages/CreatePlaylist";
-import CreateVideo from "./pages/CreateVideo";
+import CreateVideo from "./pages/UploadVideo/CreateVideo";
 import Player from "./pages/Player";
 import StyleReset from "./components/style/StyleReset";
 import Playlist from "./pages/Playlist";

@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {videoActions} from "../../actions";
-import {history} from "../../helpers";
-import {videoService} from "../../services";
+import {videoActions} from "../../../actions";
+import {history} from "../../../helpers";
+import {videoService} from "../../../services";
 
 import * as S from "./style";
-import Header from "../../components/base/Header";
-import VideoPlayer from "../../components/common/VideoPlayer";
-import Loader from "../../components/common/Loader";
+import Header from "../../../components/base/Header";
+import VideoPlayer from "../../../components/common/VideoPlayer";
+import Loader from "../../../components/common/Loader";
 
 function CreateVideo(){
     const dispatch = useDispatch();

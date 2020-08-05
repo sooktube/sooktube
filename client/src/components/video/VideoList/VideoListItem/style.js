@@ -44,14 +44,4 @@ export const VideoDetail = styled.div`
     margin-top: 2rem;
 `;
 
-export const UserButton = styled.div`
-     margin-left: auto;
-`;
 
-export const StyledLink = styled(Link)`
-    color: ${MAIN.DARK_TEXT_COLOR};
-    margin-right: 1em;
-    &:focus {
-      color: ${MAIN.DARK_TEXT_COLOR};
-    }
-`;

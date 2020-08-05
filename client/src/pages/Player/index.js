@@ -5,18 +5,21 @@ import Header from "../../components/base/Header";
 import VideoPlayer from "../../components/common/VideoPlayer";
 import CommentBox from "./Comments";
 import {videoService} from "../../services";
+import DeleteVideo from "../UploadVideo/DeleteVideo";
+import {useSelector} from "react-redux";
 
 function Player(){
     const { videoID } = useParams();
 
     const [loading, setLoading] = useState(true);
+    const loginUsername = useSelector(state => state.authentication.username);
 
     const [videoInfo, setVideoInfo] = useState({
         videoTitle: null,
         videoDesc: null,
         videoDate: null,
         videoPath: null,
-        userID: null
+        username: null
     });
 
     useEffect(() => {
@@ -26,7 +29,7 @@ function Player(){
                 setLoading(false);
             })
     },[])
-    console.log(videoInfo);
+
 
     return(
         <>
@@ -38,6 +41,15 @@ function Player(){
                     <S.VideoTitle> {videoInfo.videoTitle} </S.VideoTitle>
                     <S.VideoInfo>
                         <S.VideoDate> {videoInfo.videoDate.substr(0,10)} </S.VideoDate>
+                        <S.Separator> | </S.Separator>
+                        <S.VideoUsername> {videoInfo.username} </S.VideoUsername>
+                        <S.Separator> | </S.Separator>
+                        {loginUsername === videoInfo.username &&
+                            <>
+                                <S.EditButton to='/'> 수정 </S.EditButton>
+                                <DeleteVideo videoID={videoID}/>
+                            </>
+                        }
                         <S.VideoLike>
                             <span> 7 <S.Heart/> </span>
                             <span> 1 <S.DislikeHeart/> </span>

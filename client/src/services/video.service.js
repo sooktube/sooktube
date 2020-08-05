@@ -8,7 +8,8 @@ export const videoService = {
     getVideoFileByFileName,
     getVideoInfoByVideoID,
     searchVideoByTitle,
-    getVideoListByUsername
+    getVideoListByUsername,
+    deleteVideoByVideoID
 };
 
 function getVideoUploadURL(input) {
@@ -123,4 +124,15 @@ function getVideoListByUsername(username) {
       })
 }
 
-
+function deleteVideoByVideoID(videoID) {
+    return axios({
+        method: 'DELETE',
+        url: `https://soktube.uc.r.appspot.com/api/video/deletebyID/${videoID}`,
+    })
+      .then(response => {
+          return response.data;
+      })
+      .catch(error => {
+          return error;
+      })
+}
