@@ -168,22 +168,59 @@ public class GCSController {
 	}
     
     
-    //get videoURL and description in a videoList
+    //get videoURL and description of videos in a videoList(all)
+    //modified
     @CrossOrigin
     @RequestMapping(value = "/api/video/list/desc/URL/{listID}", method = RequestMethod.GET)
-    public VideoListDTO[] getURLfromGCSbylistID(@PathVariable("listID") final int listID) throws Exception{
+    public VideoDTO[] getURLfromGCSbylistID(@PathVariable("listID") final int listID) throws Exception{
     	
     	List<String> fileName = videoListDAO.getFileNamebylistID(listID);
-
-		VideoListDTO[] desc = videoListDAO.getVideoListbyID(listID);
 		
-		for(int i = 0; i < desc.length; i++) {
-			
-			desc[i].setUrl(gcsService.getVideobyVIDEOtable(fileName.get(i)));
+		VideoDTO[] res = videoDAO.getDescbyListID(listID);
+    	
+    	//VideoDTO res;
+		
+		for(int i = 0; i < res.length; i++) {
+			res[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
 		}
 		
-		return desc;
+		return res;
     	
+    }
+    
+    //get videoURL and desc of videos in a videolist  >  5
+    @CrossOrigin
+    @RequestMapping(value = "/api/video/list/desc/URL/GTEQ/5/{listID}", method = RequestMethod.GET)
+    public VideoDTO[] getURLfromGCSmorethan5(@PathVariable("listID") final int listID) throws Exception {
+    	List<String> fileName = videoListDAO.getFileNamebylistIDGTEQ5(listID);
+    	
+    	VideoDTO[] res = videoDAO.getDescbyListIDGTEQ5(listID);
+    	
+    	for(int i = 0; i < res.length; i ++) {
+    		
+    		res[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
+    		
+    	}
+    	return res;
+    }
+    
+    //get videoURL and des of videos in a videolist between 0 and 5
+    @CrossOrigin
+    @RequestMapping(value = "/api/video/list/desc/URL/GTEQ/0/LT/5/{listID}", method = RequestMethod.GET)
+    public VideoDTO[] getURLbetween0and5(@PathVariable("listID") final int listID) throws Exception {
+    	
+    	List<String> fileName = videoListDAO.getFileNamebylistIDbetween0and5(listID);
+    	
+    	VideoDTO[] res = videoDAO.getDescbyListBetween0and5(listID);
+
+    	
+    	for(int i = 0; i < res.length; i++) {
+    		
+    		res[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
+    		
+    	}
+    	
+    	return res;
     }
     
     

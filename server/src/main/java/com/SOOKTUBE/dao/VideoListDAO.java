@@ -2,6 +2,8 @@ package com.SOOKTUBE.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.SOOKTUBE.model.VideoListDTO;
 
 public interface VideoListDAO {
@@ -9,7 +11,13 @@ public interface VideoListDAO {
 	VideoListDTO[] getVideoList() throws Exception;
 	VideoListDTO[] getVideoListbyID(int listID) throws Exception;
 	
+	VideoListDTO getListbyID(int listID) throws Exception;
+	VideoListDTO getVideoListbyVideoID(@Param("videoID") int videoID, @Param("listID") int listID) throws Exception;
+	
+	
 	List<String> getFileNamebylistID(int listID) throws Exception;
+	List<String> getFileNamebylistIDGTEQ5(int listID) throws Exception;
+	List<String> getFileNamebylistIDbetween0and5(int listID) throws Exception;
 	
 	List<String> getFileNamebylistName(String listName);
 	
@@ -23,5 +31,9 @@ public interface VideoListDAO {
 	//like&dislike
 	int editLike(VideoListDTO list) throws Exception;
 	int editDislike(VideoListDTO list) throws Exception;
+	
+	
+	//delete video
+	int deleteVideoFromlist(@Param("videoID") int videoID, @Param("listID") int listID) throws Exception;
 
 }
