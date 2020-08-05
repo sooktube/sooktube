@@ -42,10 +42,15 @@ public class VideoListController {
 	
 	  //get video list
 	  @CrossOrigin
-	  @RequestMapping(value = "api/videolist/desc/thumbnail/{listID}", method = RequestMethod.GET)
+	  @RequestMapping(value = "/api/videolist/desc/thumbnail/{listID}", method = RequestMethod.GET)
 	  public VideoListDTO[] getVideolistbyID(@PathVariable("listID") final int listID) throws Exception {
 		  
 		  VideoListDTO[] res = videoListDAO.getVideoListbyID(listID);
+		  
+		  for(int i = 0; i < res.length; i++) {
+			  
+			  res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getUploadFileName()));
+		  }
 		  return res;
 	  }
 	
@@ -54,7 +59,7 @@ public class VideoListController {
 	//modified
 	  @CrossOrigin
 	  @RequestMapping(value = "/api/video/list/ID/{listID}", method=RequestMethod.GET) 
-	  public VideoListDTO getVideoListbyID(@PathVariable("listID") final int listID) throws Exception {
+	  public VideoListDTO getVideoListwithID(@PathVariable("listID") final int listID) throws Exception {
 	  
 	  VideoListDTO res = videoListDAO.getListbyID(listID);
 	  
@@ -120,15 +125,22 @@ public class VideoListController {
 	@RequestMapping(value = "/api/video/list/like/{listID}/{videoID}", method = RequestMethod.PUT)
 	public int[] likeaList(@PathVariable("listID") final int listID, @PathVariable("videoID") final int videoID) throws Exception {
 		
-		VideoListDTO videolist = videoListDAO.getVideoListbyVideoID(videoID);
-		
+		VideoListDTO videolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
 		videoListDAO.editLike(videolist);
 		
-		int[] res = new int[2];
+		int[] res = new int[3];
+		
 		
 		//return count(like) and count(like+dislike)
 		res[0] = videolist.getLike() + 1;
-		res[1] = res[0] + videolist.getDislike();
+		res[1] = videolist.getDislike();
+		
+		if(res[0] + res[1] < 0) {
+			
+			videoListDAO.deleteVideoFromlist(videoID, listID);
+			res[2] = -1;
+			
+		}
 		
 		return res;
 	}
@@ -138,15 +150,24 @@ public class VideoListController {
 	@RequestMapping(value = "/api/video/list/dislike/{listID}/{videoID}", method = RequestMethod.PUT)
 	public int[] dislikeaList(@PathVariable("listID") final int listID, @PathVariable("videoID") final int videoID) throws Exception {
 		
-		VideoListDTO videolist = videoListDAO.getVideoListbyVideoID(videoID);
+		VideoListDTO videolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
 		
 		videoListDAO.editDislike(videolist);
 		
-		int[] res = new int[2];
+		int[] res = new int[3];
 		
 		//return count(like) and count(like+dislike)
-		res[0] = videolist.getDislike() - 1;
-		res[1] = videolist.getLike() + res[0];
+		res[0] = videolist.getLike();
+		res[1] = videolist.getDislike() - 1;
+		
+		if(res[0] + res[1] < 0) {
+			
+			System.out.println("deleted");
+			
+			videoListDAO.deleteVideoFromlist(videoID, listID);
+			res[2] = -1;
+			
+		}
 		
 		return res;
 	}

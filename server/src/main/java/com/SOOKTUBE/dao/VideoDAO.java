@@ -20,6 +20,8 @@ public interface VideoDAO {
 	List<String> getURLfromTitle(String videoTitle) throws Exception;
 	
 	VideoDTO[] getDescbyListID(int listID) throws Exception;
+	VideoDTO[] getDescbyListIDGTEQ5(int listID) throws Exception;
+	VideoDTO[] getDescbyListBetween0and5(int listID) throws Exception;
 	
 	
 	//update

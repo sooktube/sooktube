@@ -35,9 +35,11 @@
     		parameterType="Integer"
 		    resultType="com.SOOKTUBE.model.VideoListDTO">
     		
-			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`
-			FROM videoList, listInfo
-			WHERE videoList.`listID` = listInfo.`listID`
+			SELECT videoList.`listID`, videoList.`videoID`, `listName`, `listDesc`, VIDEO.`username`, `isPublic`, `thumbnail`, `uploadFileName`
+			FROM videoList, listInfo, VIDEO
+			WHERE listInfo.`listID` = 1
+			AND listInfo.`listID` = videoList.`listID`
+            AND VIDEO.`videoID` = videoList.`videoID`
 
     		
     		</select>
@@ -49,8 +51,9 @@
     		
 			SELECT videoList.`listID`, videoList.`videoID`, `listName`, `listDesc`, videoList.`username`, `isPublic`, `thumbnail`, `like`, `dislike`
 			FROM videoList, listInfo
-			WHERE listInfo.`listID` = videoList.`listID`
+			WHERE videoList.`listID` = #{listID}
 			AND `videoID` = #{videoID}
+			AND videoList.`listID` = listInfo.`listID`
 
     		
     		</select>
@@ -63,7 +66,7 @@
 			SELECT DISTINCT
 			     videoList.`listID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`
 			FROM videoList, listInfo
-			WHERE videoList.`listID` = listInfo.`listID`
+			WHERE videoList.`listID` = #{listID}
 
     		
     		</select> 
@@ -81,6 +84,32 @@
     		
     		</select>
 
+
+    		<select id="getFileNamebylistIDGTEQ5"
+    		parameterType="Integer"
+		    resultType="String">
+    		
+			SELECT `uploadFileName`
+			FROM videoList, VIDEO
+			WHERE `listID` = #{listID}
+				AND
+					videoList.`videoID` = VIDEO.`videoID`
+				AND videoList.`like` + videoList.`dislike` &gt;= 5
+    		
+    		</select>
+
+    		<select id="getFileNamebylistIDbetween0and5"
+    		parameterType="Integer"
+		    resultType="String">
+    		
+			SELECT `uploadFileName`
+			FROM videoList, VIDEO
+			WHERE `listID` = #{listID}
+				AND
+					videoList.`videoID` = VIDEO.`videoID`
+				AND videoList.`like` + videoList.`dislike` BETWEEN 0 AND 4
+    		
+    		</select>
 
     		<select id="getFileNamebylistName"
     		parameterType="String"
@@ -133,6 +162,12 @@
 		         WHERE `listID` = #{listID}
 		         AND `videoID` = #{videoID}
 		    </update>
+
+    <delete id="deleteVideoFromlist">
+    	DELETE FROM videoList
+    	WHERE videoID = #{videoID}
+    	AND listID = #{listID}
+    </delete>
 
 
 </mapper>
