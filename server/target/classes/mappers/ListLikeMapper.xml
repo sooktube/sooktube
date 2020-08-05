@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.SOOKTUBE.dao.ListLikeDAO">
+
+    <insert id="likeaList">
+            
+            INSERT INTO listLike(`listID`, `username`)
+            VALUES(#{listID}, #{username})
+            
+    </insert>
+
+
+    <insert id="dislikeaList">
+            
+            INSERT INTO listDislike(`listID`, `username`)
+            VALUES(#{listID}, #{username})
+            
+    </insert>    
+
+	<select id="selectLikeList"
+		    resultType="com.SOOKTUBE.model.ListLikeDTO">
+    		
+    		SELECT `listID`, `username`
+    		FROM listLike
+    		WHERE `listID` = #{listID}
+    		AND 
+    			`username` = #{username}
+    		
+    </select>
+
+	<select id="selectDislikeList"
+		    resultType="com.SOOKTUBE.model.ListLikeDTO">
+    		
+    		SELECT `listID`, `username`
+    		FROM listDislike
+    		WHERE `listID` = #{listID}
+    		AND 
+    			`username` = #{username}
+    		
+    </select>
+
+    <delete id="revertLike"> 
+    	DELETE FROM listLike
+    	WHERE `listID` = #{listID}
+    	AND
+    		`username` = #{username}
+    </delete>
+
+    <delete id="revertDislike"> 
+    	DELETE FROM listDislike
+    	WHERE `listID` = #{listID}
+    	AND
+    		`username` = #{username}
+    </delete>
+    
+</mapper>
