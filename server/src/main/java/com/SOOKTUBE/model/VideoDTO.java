@@ -22,7 +22,13 @@ public class VideoDTO {
 	private String videoPath;
 	
 	
+	private int listID;
 	
+	
+	private int like;
+	private int dislike;
+	
+	private int recommended;
 
 }
 

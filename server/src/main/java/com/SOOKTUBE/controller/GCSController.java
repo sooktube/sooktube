@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.SOOKTUBE.dao.RecommendDAO;
 import com.SOOKTUBE.dao.VideoDAO;
+import com.SOOKTUBE.dao.VideoLikeDAO;
 import com.SOOKTUBE.dao.VideoListDAO;
 import com.SOOKTUBE.model.UploadReqDto;
 import com.SOOKTUBE.model.VideoDTO;
-import com.SOOKTUBE.model.VideoListDTO;
 import com.SOOKTUBE.service.GCSService;
 
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,12 @@ public class GCSController {
  
  @Autowired
  private VideoListDAO videoListDAO;
+ 
+ @Autowired
+ private VideoLikeDAO videoLikeDAO;
+ 
+ @Autowired
+ private RecommendDAO recommendDAO;
 
 
 
@@ -171,18 +178,33 @@ public class GCSController {
     //get videoURL and description of videos in a videoList(all)
     //modified
     @CrossOrigin
-    @RequestMapping(value = "/api/video/list/desc/URL/{listID}", method = RequestMethod.GET)
-    public VideoDTO[] getURLfromGCSbylistID(@PathVariable("listID") final int listID) throws Exception{
+    @RequestMapping(value = "/api/video/list/desc/URL/{listID}/{username}", method = RequestMethod.GET)
+    public VideoDTO[] getURLfromGCSbylistID(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception{
     	
     	List<String> fileName = videoListDAO.getFileNamebylistID(listID);
 		
 		VideoDTO[] res = videoDAO.getDescbyListID(listID);
-    	
-    	//VideoDTO res;
+
 		
 		for(int i = 0; i < res.length; i++) {
 			res[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
+			
+			if (videoLikeDAO.selectLikeVideo(res[i].getVideoID(), username) != null) {
+				res[i].setLike(1);
+			}
+			
+			else if (videoLikeDAO.selectDislikeVideo(res[i].getVideoID(), username) != null) {
+				res[i].setDislike(-1);
+			}
+			
+			if (recommendDAO.getRecommendedVideo(res[i].getVideoID(), listID, username) != null) {
+				res[i].setRecommended(1);
+			}
+			
+			
 		}
+		
+		
 		
 		return res;
     	
@@ -190,8 +212,8 @@ public class GCSController {
     
     //get videoURL and desc of videos in a videolist  >  5
     @CrossOrigin
-    @RequestMapping(value = "/api/video/list/desc/URL/GTEQ/5/{listID}", method = RequestMethod.GET)
-    public VideoDTO[] getURLfromGCSmorethan5(@PathVariable("listID") final int listID) throws Exception {
+    @RequestMapping(value = "/api/video/list/desc/URL/GTEQ/5/{listID}/{username}", method = RequestMethod.GET)
+    public VideoDTO[] getURLfromGCSmorethan5(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception {
     	List<String> fileName = videoListDAO.getFileNamebylistIDGTEQ5(listID);
     	
     	VideoDTO[] res = videoDAO.getDescbyListIDGTEQ5(listID);
@@ -200,14 +222,26 @@ public class GCSController {
     		
     		res[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
     		
+			if (videoLikeDAO.selectLikeVideo(res[i].getVideoID(), username) != null) {
+				res[i].setLike(1);
+			}
+			
+			else if (videoLikeDAO.selectDislikeVideo(res[i].getVideoID(), username) != null) {
+				res[i].setDislike(-1);
+			}
+			
+			if (recommendDAO.getRecommendedVideo(res[i].getVideoID(), listID, username) != null) {
+				res[i].setRecommended(1);
+			}
+    		
     	}
     	return res;
     }
     
     //get videoURL and des of videos in a videolist between 0 and 5
     @CrossOrigin
-    @RequestMapping(value = "/api/video/list/desc/URL/GTEQ/0/LT/5/{listID}", method = RequestMethod.GET)
-    public VideoDTO[] getURLbetween0and5(@PathVariable("listID") final int listID) throws Exception {
+    @RequestMapping(value = "/api/video/list/desc/URL/GTEQ/0/LT/5/{listID}/{username}", method = RequestMethod.GET)
+    public VideoDTO[] getURLbetween0and5(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception {
     	
     	List<String> fileName = videoListDAO.getFileNamebylistIDbetween0and5(listID);
     	
@@ -217,6 +251,18 @@ public class GCSController {
     	for(int i = 0; i < res.length; i++) {
     		
     		res[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
+    		
+			if (videoLikeDAO.selectLikeVideo(res[i].getVideoID(), username) != null) {
+				res[i].setLike(1);
+			}
+			
+			else if (videoLikeDAO.selectDislikeVideo(res[i].getVideoID(), username) != null) {
+				res[i].setDislike(-1);
+			}
+			
+			if (recommendDAO.getRecommendedVideo(res[i].getVideoID(), listID, username) != null) {
+				res[i].setRecommended(1);
+			}
     		
     	}
     	

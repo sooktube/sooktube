@@ -15,8 +15,8 @@
 		            parameterType="com.SOOKTUBE.model.VideoListDTO"
 		            useGeneratedKeys="true"
             		keyProperty="listID">
-		        INSERT INTO listInfo(`listName`, `listDesc`, `isPublic`, `thumbnail`)
-		        VALUES (#{listName}, #{listDesc}, #{isPublic},  #{thumbnail})
+		        INSERT INTO listInfo(`listName`, `listDesc`, `isPublic`, `thumbnail`, `username`)
+		        VALUES (#{listName}, #{listDesc}, #{isPublic},  #{thumbnail}, #{username})
 		    </insert>
 	
 		    
@@ -35,11 +35,10 @@
     		parameterType="Integer"
 		    resultType="com.SOOKTUBE.model.VideoListDTO">
     		
-			SELECT videoList.`listID`, videoList.`videoID`, `listName`, `listDesc`, VIDEO.`username`, `isPublic`, `thumbnail`, `uploadFileName`
-			FROM videoList, listInfo, VIDEO
-			WHERE listInfo.`listID` = 1
-			AND listInfo.`listID` = videoList.`listID`
-            AND VIDEO.`videoID` = videoList.`videoID`
+			SELECT 
+			     `listID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`
+			FROM listInfo
+			WHERE listInfo.`listID` = #{listID}
 
     		
     		</select>
@@ -64,7 +63,7 @@
 		    resultType="com.SOOKTUBE.model.VideoListDTO">
     		
 			SELECT DISTINCT
-			     videoList.`listID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`
+			     videoList.`listID`, `listName`, `listDesc`, videoList.`username`, `isPublic`, `thumbnail`
 			FROM videoList, listInfo
 			WHERE videoList.`listID` = #{listID}
 
@@ -130,12 +129,22 @@
     			parameterType="String"
     			resultType="com.SOOKTUBE.model.VideoListDTO">
     			
-    			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, videoList.`username`, `isPublic`
-    			FROM videoList, listInfo
+    			SELECT `listID`, `listName`, `listDesc`, listInfo.`username`, `isPublic`, `thumbnail`
+    			FROM listInfo
     			WHERE `listName` LIKE CONCAT('%',#{listName},'%')
 
     			
     			</select>  
+    			
+    	<select id="getUsernameofList"
+    			parameterType="Integer"
+    			resultType="String">
+    			
+    			SELECT `username`
+    			FROM listInfo
+    			WHERE `listID` = #{listID}
+    			
+    			</select>
     			
 		
     		
@@ -149,6 +158,9 @@
 		    </insert> -->
 		    
 		    
+
+		    
+		    
     	    <update id="editLike" parameterType="int">
 		        UPDATE videoList
 		           SET `like` = `like` + 1
@@ -159,6 +171,27 @@
     	    <update id="editDislike" parameterType="int">
 		        UPDATE videoList
 		           SET `dislike` = `dislike` - 1
+		         WHERE `listID` = #{listID}
+		         AND `videoID` = #{videoID}
+		    </update>
+
+    	    <update id="editLikeSet5" parameterType="int">
+		        UPDATE videoList
+		           SET `like` = 10
+		         WHERE `listID` = #{listID}
+		         AND `videoID` = #{videoID}
+		    </update>
+		    
+		        	    <update id="revertRecommend" parameterType="int">
+		        UPDATE videoList
+		           SET `like` = `like` - 1
+		         WHERE `listID` = #{listID}
+		         AND `videoID` = #{videoID}
+		    </update>
+		    
+		        	    <update id="revertDisrecommend" parameterType="int">
+		        UPDATE videoList
+		           SET `dislike` = `dislike` + 1
 		         WHERE `listID` = #{listID}
 		         AND `videoID` = #{videoID}
 		    </update>
