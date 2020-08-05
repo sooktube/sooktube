@@ -111,5 +111,24 @@ public class VideoController {
     	return searchRes;
     	
     }
+    
+    
+	//search video by title from videolist
+	@CrossOrigin
+	@RequestMapping(value = "/api/video/list/listID/{listID}/search/title/{videoTitle}", method = RequestMethod.GET)
+	public VideoDTO[] searchVideoFromvideoList(@PathVariable("listID") final int listID, @PathVariable("videoTitle") final String videoTitle) throws Exception {
+		
+		
+		VideoDTO[] searchRes = videoDAO.searchVideobyTitleformList(videoTitle, listID);
+		
+		for(int i = 0; i < searchRes.length; i++) {
+			
+			searchRes[i].setVideoPath(gcsService.getVideobyVIDEOtable(searchRes[i].getUploadFileName()));
+			
+		}
+		
+		return searchRes;
+		
+	}
 
 }

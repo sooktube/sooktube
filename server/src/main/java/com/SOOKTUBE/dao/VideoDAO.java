@@ -2,6 +2,8 @@ package com.SOOKTUBE.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.SOOKTUBE.model.VideoDTO;
 
 public interface VideoDAO {
@@ -34,6 +36,7 @@ public interface VideoDAO {
 	
 	//search
 	VideoDTO[] searchVideobyTitle(String search) throws Exception;
+	VideoDTO[] searchVideobyTitleformList(@Param("videoTitle") String videoTitle, @Param("listID") int listID) throws Exception;
 	
 
 }

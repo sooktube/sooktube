@@ -136,7 +136,17 @@
     			FROM VIDEO
     			WHERE `videoTitle` LIKE CONCAT('%',#{videoTitle},'%')
 
+    			</select>
     			
+    	<select id="searchVideobyTitleformList"
+    			resultType="com.SOOKTUBE.model.VideoDTO">
+    			
+    			SELECT listInfo.`listID`, videoList.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, `videoPath`
+    			FROM VIDEO, listInfo, videoList
+    			WHERE `videoTitle` LIKE CONCAT('%',#{videoTitle},'%')
+                AND listInfo.listID = #{listID}
+                AND VIDEO.videoID = videoList.videoID
+
     			</select>
     			
 <!--     	 <select id="getVideoPath"
