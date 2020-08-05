@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.SOOKTUBE.dao.VideoLikeDAO">
+
+    <insert id="likeaVideo">
+            
+            INSERT INTO videoLike(`videoID`, `username`)
+            VALUES(#{videoID}, #{username})
+            
+    </insert>
+
+
+    <insert id="dislikeaVideo">
+            
+            INSERT INTO videoDislike(`videoID`, `username`)
+            VALUES(#{videoID}, #{username})
+            
+    </insert>    
+
+	<select id="selectLikeVideo"
+		    resultType="com.SOOKTUBE.model.VideoLikeDTO">
+    		
+    		SELECT `videoID`, `username`
+    		FROM videoLike
+    		WHERE `videoID` = #{videoID}
+    		AND 
+    			`username` = #{username}
+    		
+    </select>
+
+	<select id="selectDislikeVideo"
+		    resultType="com.SOOKTUBE.model.VideoLikeDTO">
+    		
+    		SELECT `videoID`, `username`
+    		FROM videoDislike
+    		WHERE `videoID` = #{videoID}
+    		AND 
+    			`username` = #{username}
+    		
+    </select>
+
+    <delete id="revertLike"> 
+    	DELETE FROM videoLike
+    	WHERE `videoID` = #{videoID}
+    	AND
+    		`username` = #{username}
+    </delete>
+
+    <delete id="revertDislike"> 
+    	DELETE FROM videoDislike
+    	WHERE `videoID` = #{videoID}
+    	AND
+    		`username` = #{username}
+    </delete>
+
+</mapper>

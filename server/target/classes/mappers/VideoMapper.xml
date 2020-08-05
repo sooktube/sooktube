@@ -141,7 +141,7 @@
     	<select id="searchVideobyTitleformList"
     			resultType="com.SOOKTUBE.model.VideoDTO">
     			
-    			SELECT listInfo.`listID`, videoList.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, `videoPath`
+    			SELECT DISTINCT listInfo.`listID`, videoList.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, `videoPath`
     			FROM VIDEO, listInfo, videoList
     			WHERE `videoTitle` LIKE CONCAT('%',#{videoTitle},'%')
                 AND listInfo.listID = #{listID}
@@ -171,12 +171,12 @@
     
     <delete id="deleteVideobyID"> 
     	DELETE FROM VIDEO
-    	WHERE videoID = #{videoID}
+    	WHERE `videoID` = #{videoID}
     </delete>
     			
     <delete id="deleteVideobyFileName">
     	DELETE FROM VIDEO
-    	WHERE uploadFileName = #{uploadFileName}
+    	WHERE `uploadFileName` = #{uploadFileName}
     </delete>
 
     

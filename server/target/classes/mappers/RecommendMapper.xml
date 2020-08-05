@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.SOOKTUBE.dao.RecommendDAO">
+
+
+		    <insert id = "recommendVideoInList">
+		    	INSERT INTO recommendVideo_list(`listID`, `videoID`, `username`)
+		    	VALUES(#{listID}, #{videoID}, #{username})
+		    
+		    </insert>
+
+		    
+		    <delete id = "disrecommendVideoInList">
+		    	DELETE FROM recommendVideo_list
+		    	WHERE `listID` = #{listID}
+		    		AND `videoID` = #{videoID}
+		    			AND `username` = #{username}
+		    </delete>
+		    
+		    <select id="getRecommendedVideo"
+		    	resultType="com.SOOKTUBE.model.RecommendDTO">
+		    	
+		    	SELECT `listID`, `videoID`, `username`
+		    	FROM recommendVideo_list
+		    	WHERE `listID` = #{listID}
+		    		AND `videoID` = #{videoID}
+		    			AND `username` = #{username}
+		    	
+		    	</select>
+</mapper>
+

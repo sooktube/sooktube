@@ -1,9 +1,6 @@
 package com.SOOKTUBE.controller;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -15,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.SOOKTUBE.dao.RecommendDAO;
 import com.SOOKTUBE.dao.VideoDAO;
+import com.SOOKTUBE.dao.VideoLikeDAO;
+import com.SOOKTUBE.dao.VideoListDAO;
 import com.SOOKTUBE.model.VideoDTO;
 import com.SOOKTUBE.service.GCSService;
 
@@ -32,6 +32,15 @@ public class VideoController {
 	
     @Autowired
     private VideoDAO videoDAO;
+    
+    @Autowired
+    private VideoLikeDAO videolikeDAO;
+    
+    @Autowired
+    private VideoListDAO videolistDAO;
+    
+    @Autowired
+    private RecommendDAO recommendDAO;
 
     //insert video descriptions to DB
     @CrossOrigin
@@ -103,8 +112,6 @@ public class VideoController {
 		for(int i = 0; i < searchRes.length; i++) {
 			
 			searchRes[i].setVideoPath(gcsService.getVideobyVIDEOtable(searchRes[i].getUploadFileName()));
-			
-			//video[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
 
 		}
     	
@@ -115,8 +122,9 @@ public class VideoController {
     
 	//search video by title from videolist
 	@CrossOrigin
-	@RequestMapping(value = "/api/video/list/listID/{listID}/search/title/{videoTitle}", method = RequestMethod.GET)
-	public VideoDTO[] searchVideoFromvideoList(@PathVariable("listID") final int listID, @PathVariable("videoTitle") final String videoTitle) throws Exception {
+	@RequestMapping(value = "/api/video/list/listID/{listID}/user/{username}/search/title/{videoTitle}", method = RequestMethod.GET)
+	public VideoDTO[] searchVideoFromvideoList(@PathVariable("listID") final int listID, @PathVariable("videoTitle") final String videoTitle,
+			@PathVariable("username") final String username) throws Exception {
 		
 		
 		VideoDTO[] searchRes = videoDAO.searchVideobyTitleformList(videoTitle, listID);
@@ -124,6 +132,18 @@ public class VideoController {
 		for(int i = 0; i < searchRes.length; i++) {
 			
 			searchRes[i].setVideoPath(gcsService.getVideobyVIDEOtable(searchRes[i].getUploadFileName()));
+			
+			if (videolikeDAO.selectLikeVideo(searchRes[i].getVideoID(), username) != null) {
+				searchRes[i].setLike(1);
+			}
+			
+			else if (videolikeDAO.selectDislikeVideo(searchRes[i].getVideoID(), username) != null) {
+				searchRes[i].setDislike(-1);
+			}
+			
+			if (recommendDAO.getRecommendedVideo(searchRes[i].getVideoID(), listID, username) != null) {
+				searchRes[i].setRecommended(1);
+			}
 			
 		}
 		

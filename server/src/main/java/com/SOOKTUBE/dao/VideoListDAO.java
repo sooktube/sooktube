@@ -21,6 +21,8 @@ public interface VideoListDAO {
 	
 	List<String> getFileNamebylistName(String listName);
 	
+	String getUsernameofList(int listID);
+	
 	//insert new videoList
 	int newList(VideoListDTO list) throws Exception;
 	int newListInfo(VideoListDTO list) throws Exception;
@@ -28,9 +30,15 @@ public interface VideoListDAO {
 	//search
 	VideoListDTO[] searchListbyTitle(String listName) throws Exception;
 	
-	//like&dislike
+	//like&dislike(recommend)
 	int editLike(VideoListDTO list) throws Exception;
 	int editDislike(VideoListDTO list) throws Exception;
+	int editLikeSet5(VideoListDTO list) throws Exception;
+	
+	int revertRecommend(VideoListDTO list) throws Exception;
+	int revertDisrecommend(VideoListDTO list) throws Exception;
+	
+
 	
 	
 	//delete video
