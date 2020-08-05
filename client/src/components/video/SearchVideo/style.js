@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import search from "../../../../public/search.png";
+import {IoIosHeart, IoMdHeartDislike} from "react-icons/all";
 import {MAIN} from "../../style/Main";
 
 export const SearchVideoWrapper = styled.div`
@@ -22,6 +23,27 @@ export const SearchInput = styled.input`
 	}
 `;
 
+export const SearchComment = styled.div`
+    font-size: 1.2em;
+    margin-top: 1em;
+    line-height: 1.2em;
+    div {
+      color: ${MAIN.DARK_TEXT_COLOR};
+    }
+`;
+
+export const Like = styled(IoIosHeart)`
+    width: 1em;
+    height: 1em;
+    color: ${MAIN.MAIN_THEME_COLOR};
+`;
+
+export const Dislike = styled(IoMdHeartDislike)`
+    width: 1em;
+    height: 1em;
+    color: ${MAIN.MAIN_THEME_COLOR};
+`
+
 export const SearchResult = styled.div`
     width: 90%;
     font-size: 1em;
@@ -30,6 +52,6 @@ export const SearchResult = styled.div`
 
 export const InvalidSearchFeedback = styled.div`
     margin-top: 1.5rem;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: ${MAIN.DARK_TEXT_COLOR};
 `;

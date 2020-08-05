@@ -14,6 +14,7 @@ export const VideoWrapper = styled.div`
 export const Video = styled.video`
     width:112px;
     height:63px;
+    cursor: pointer;
     display:inline-block;
 `;
 
@@ -27,6 +28,7 @@ export const VideoTitle = styled.div`
 export const VideoInfo = styled.div`
     font-size: 2vh;
     margin-left: 1em;
+    cursor: pointer;
     div {
       margin-right: 1em;
     }

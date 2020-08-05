@@ -23,10 +23,10 @@ export const CardInfo = styled.div`
 `;
 
 export const CardTitle = styled.div`
-    margin-top: 1.5em;
+    margin-top: 1em;
     padding: 1.5em 1em 2em 1em;
     height: 3rem;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     width: 100%;
     text-align: center;
     color: ${MAIN.DARK_TEXT_COLOR};

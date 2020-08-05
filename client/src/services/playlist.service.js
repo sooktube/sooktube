@@ -1,11 +1,10 @@
 import axios from "axios";
 import qs from 'querystring';
-import {func} from "prop-types";
 
 export const playlistService ={
     getPlaylistUploadURL,
     UploadPlaylistFile,
-    getVideoPlaylistImgByFileName,
+    getPlaylistImgByFileName,
     UploadPlaylistInfo,
     getPlaylistInfoByListID,
     getVideoListByListID
@@ -50,7 +49,7 @@ function getPlaylistUploadURL(input) {
         });
 }
 
-function getVideoPlaylistImgByFileName(uploadFileName) {
+function getPlaylistImgByFileName(uploadFileName) {
     return axios({
         method: 'POST',
         url: `https://soktube.uc.r.appspot.com/api/bucket/url`,
@@ -83,10 +82,10 @@ function UploadPlaylistInfo(input) {
 function getPlaylistInfoByListID(listID) {
     return axios({
         method: 'GET',
-        url: 'https://soktube.appspot.com/api/video/list/newList/info'
+        url: `https://soktube.uc.r.appspot.com/api/videolist/desc/thumbnail/${listID}`
     })
         .then(response => {
-            return response.data;
+            return response.data[0];
         })
         .catch(error => {
             return error;

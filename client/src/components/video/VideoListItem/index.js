@@ -1,10 +1,15 @@
 import React from 'react';
 import * as S from "./style";
+import {history} from "../../../helpers";
 
-function VideoListItem({url, title, username, date, like, dislike}){
+function VideoListItem({videoID, url, title, username, date, like, dislike}){
+    function handleClick() {
+        history.push(`/@${username}/video/${videoID}`);
+    }
+
     return(
         <S.VideoWrapper>
-            <S.Video src={url}/>
+            <S.Video src={url} onClick={handleClick}/>
             <S.VideoInfo>
                 <S.VideoTitle>{title}</S.VideoTitle>
                 <S.VideoDetail>

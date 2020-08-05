@@ -6,7 +6,7 @@ import * as S from './style';
 function PlaylistInfo({ listID }) {
     return (
       <S.PlaylistInfoWrapper>
-          <PlaylistCard lisID={listID}/>
+          <PlaylistCard listID={listID}/>
           <Comments listID={listID}/>
       </S.PlaylistInfoWrapper>
     );

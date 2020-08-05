@@ -36,7 +36,7 @@ function CreatePlaylist(){
             uploadURL = response[1];
             playlistService.UploadPlaylistFile(uploadURL,imageFile)
             .then(response => {
-                playlistService.getVideoPlaylistImgByFileName(name)
+                playlistService.getPlaylistImgByFileName(name)
                 .then(response =>{
                     setIsUploaded(true);
                     setImageURL(response);
@@ -69,7 +69,6 @@ function CreatePlaylist(){
                 "thumbnail": uploadFileName,
                 "isPublic": isPublic
             }).then(response => {
-                console.log(response);
                 history.push(`/playlist/${response.listID}`);
             })
         }
@@ -88,7 +87,7 @@ function CreatePlaylist(){
                 <S.UploadForm>
                     <S.UploadLogo> CREATE THE PLAYLIST </S.UploadLogo>
                     <S.UploadVideo>
-                            <S.Label>Input the Preview Image
+                            <S.Label>Thumbnail Image Upload
                             <S.UploadInput id="inputId" type="file"  onChange={fileSelect} />
                             </S.Label>
                             <S.NameInput>{text}</S.NameInput>

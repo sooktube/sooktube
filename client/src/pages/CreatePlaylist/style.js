@@ -10,7 +10,7 @@ export const MainBackground = styled.div`
 `;
 
 export const UploadForm = styled.div`
-    display:inline-block;
+  display:inline-block;
 	flex-direction: column;
 	width:450px;
 `;
@@ -23,20 +23,18 @@ export const UploadLogo = styled.div`
 
 export const UploadVideo = styled.div`
 	margin-top:4vh;
-    padding:2px;
-	height:50px;
 	display:flex;
 	width:100%;
 `;
 
 export const UploadInput = styled.input`
-    width: 0;
-    height:0;
-    overflow:hidden;
+  width: 0;
+  height:0;
+  overflow:hidden;
 `;
 
 export const NameInput=styled.span`
-    display:inline;
+  display:inline;
 	border:none;
 	font-weight:bold;
 	font-size:2.5vh;
@@ -67,8 +65,7 @@ export const InputDesc = styled.textarea`
 `;
 
 export const Label = styled.label`
-	position:static;
-    padding: 0.5em 1em 0.5em 1em;
+  padding: 0.3em 1em 0.5em 1em;
 	background:  ${MAIN.MAIN_THEME_COLOR};
 	display:inline;
 	border-radius: 30px;
@@ -85,7 +82,7 @@ export const Label = styled.label`
 `;
 
 export const UploadBox = styled.div`
-    position:relative;
+  position:relative;
 	display:block;
 	margin-top:2.9vh;
 	width:415px;
@@ -94,26 +91,26 @@ export const UploadBox = styled.div`
 
 export const PreviewImage = styled.img`
 	@media (max-width: 1919px) {
-    width: calc(60% - 1rem);
-    }
-    @media (max-width: 1440px) {
-    width: calc(50% - 1rem);
-    }
-    @media (max-width: 1312px) {
-    width: calc(50% - 1rem);
-    }
-    @media (max-width: 944px) {
-    width: calc(80% - 1rem);
-    }
-    @media (max-width: 767px) {
-    width: calc(100% - 2rem);
-    }
+  width: calc(60% - 1rem);
+  }
+  @media (max-width: 1440px) {
+  width: calc(50% - 1rem);
+  }
+  @media (max-width: 1312px) {
+  width: calc(50% - 1rem);
+  }
+  @media (max-width: 944px) {
+  width: calc(80% - 1rem);
+  }
+  @media (max-width: 767px) {
+  width: calc(100% - 2rem);
+  }
 	height: 80%;
 	margin-top: 5rem;
 `;
 
 export const TextCheck = styled.div`
-    display:inline-block;
+  display:inline-block;
 	margin-top:0.9vh;
 	margin-left:35px;
 	position:static;
@@ -123,8 +120,7 @@ export const TextCheck = styled.div`
 `;
 
 export const TextCheck2 = styled.div`
-    margin-left:35px;
-	position:static;
+  margin-left:35px;
 	font-size:2.4vh;
 	width:250px;
 	color:#868e96;
@@ -133,10 +129,10 @@ export const TextCheck2 = styled.div`
 
 export const UploadButton = styled.button`
 	background:  ${MAIN.MAIN_THEME_COLOR};
-	border-radius:3px;
+	border-radius: 25px;
 	color:white;
 	float:right;
-	padding: 1em 1em 1em 1em;
+	padding: 1em;
 	font-size: 2.3vh;
 	border:none;
 	&:hover {
@@ -145,9 +141,9 @@ export const UploadButton = styled.button`
 `;
 
 export const Check = styled(FaCheck)`
-    width: 1.2rem;
-    height: 1.5rem;
-    color: forestgreen;
+  width: 1.2rem;
+  height: 1.5rem;
+  color: forestgreen;
 `;
 
 export const ImageUploadLoading = styled.span`
