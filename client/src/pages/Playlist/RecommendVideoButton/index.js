@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import * as S from './style';
-import Modal from "../../../../components/common/Modal";
-import SearchVideo from "../../../../components/video/SearchVideo";
+import Modal from "../../../components/common/Modal";
+import SearchVideo from "../../../components/playlist/SearchVideo";
 
-function AddVideoButton() {
+function RecommendVideoButton() {
     const [modalVisible, setModalVisible] = useState(false);
 
     const openModal = () => {
@@ -27,4 +27,4 @@ function AddVideoButton() {
     );
 }
 
-export default AddVideoButton;
+export default RecommendVideoButton;

@@ -64,6 +64,7 @@ function CreatePlaylist(){
         }
         if(listName&&listDesc){
             playlistService.UploadPlaylistInfo({
+                "username": s_username,
                 "listName": listName,
                 "listDesc": listDesc,
                 "thumbnail": uploadFileName,

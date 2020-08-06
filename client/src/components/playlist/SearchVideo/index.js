@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import * as S from './style';
-import {videoService} from "../../../services";
+import {playlistService, videoService} from "../../../services";
 import SearchListItem from "./SearchListItem";
 
 function SearchVideo() {
@@ -14,7 +14,7 @@ function SearchVideo() {
 
     useEffect(() =>{
         if(keyword) {
-            videoService.searchVideoByTitle(keyword)
+            playlistService.searchVideoByTitle(keyword)
                 .then(response => {
                     setSearchResult(response);
                     console.log(response);

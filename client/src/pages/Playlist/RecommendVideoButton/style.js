@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {FaPlus} from "react-icons/all";
-import {MAIN} from "../../../../components/style/Main";
+import {MAIN} from "../../../components/style/Main";
 
 export const AddVideoButtonWrapper = styled.div`
     margin-top: 2rem;

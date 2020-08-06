@@ -7,7 +7,8 @@ export const playlistService ={
     getPlaylistImgByFileName,
     UploadPlaylistInfo,
     getPlaylistInfoByListID,
-    getVideoListByListID
+    getVideoListByListID,
+    searchVideoByTitle,
 }
 
 function getPlaylistUploadURL(input) {
@@ -102,5 +103,18 @@ function getVideoListByListID(listID) {
         })
         .catch(error => {
             return error;
+        })
+}
+
+function searchVideoByTitle(keyword) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.uc.r.appspot.com/api/video/search/title/${keyword}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return null;
         })
 }
