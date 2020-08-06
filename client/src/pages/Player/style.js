@@ -69,13 +69,13 @@ export const Heart = styled(IoIosHeart)`
     margin-right: 0.2em;
     width: 1.5em;
     height: 1.5em;
-    color: ${MAIN.MAIN_THEME_COLOR};
+    color: ${props => props.on === 1 ? '#71A6C6' : '#e5e5e5'}
 `;
 
 export const DislikeHeart = styled(IoMdHeartDislike)`
     width: 1.5em;
     height: 1.5em;
-    color: ${MAIN.MAIN_THEME_COLOR};
+     color: ${props => props.on === 1 ? '#71A6C6' : '#e5e5e5'}
 `;
 
 export const EditButton = styled(Link)`

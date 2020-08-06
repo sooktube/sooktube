@@ -19,7 +19,11 @@ function Player(){
         videoDesc: null,
         videoDate: null,
         videoPath: null,
-        username: null
+        username: null,
+        likeCount: 0,
+        dislikeCount: 0,
+        like: 1,
+        dislike: 0
     });
 
     useEffect(() => {
@@ -27,6 +31,13 @@ function Player(){
             .then(response => {
                 setVideoInfo(response);
                 setLoading(false);
+                /*
+                return videoService.getLikeCountByVideoID(videoID)
+            })
+            .then(response => {
+                setVideoInfo({...videoInfo, like: response.likeCount, dislike: response.dislikeCount})
+            })
+             */
             })
     },[])
 
@@ -51,8 +62,8 @@ function Player(){
                             </>
                         }
                         <S.VideoLike>
-                            <span> 7 <S.Heart/> </span>
-                            <span> 1 <S.DislikeHeart/> </span>
+                            <span> {videoInfo.likeCount} <S.Heart on={videoInfo.like}/> </span>
+                            <span> {videoInfo.dislikeCount} <S.DislikeHeart on={videoInfo.dislike}/> </span>
                         </S.VideoLike>
                     </S.VideoInfo>
                     <S.VideoDesc> {videoInfo.videoDesc} </S.VideoDesc>

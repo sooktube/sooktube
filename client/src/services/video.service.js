@@ -9,7 +9,8 @@ export const videoService = {
     getVideoInfoByVideoID,
     getVideoListByUsername,
     deleteVideoByVideoID,
-    updateVideoByVideoID
+    updateVideoByVideoID,
+    getLikeCountByVideoID
 };
 
 function getVideoUploadURL(input) {
@@ -131,6 +132,19 @@ function updateVideoByVideoID(input, videoID) {
             'content-type': 'application/x-www-form-urlencoded'
         },
         data: qs.stringify(input)
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}
+
+function getLikeCountByVideoID(videoID) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.uc.r.appspot.com/api/like/dislike/videoID/${videoID}`,
     })
         .then(response => {
             return response.data;
