@@ -9,7 +9,8 @@ export const videoService = {
     getVideoInfoByVideoID,
     searchVideoByTitle,
     getVideoListByUsername,
-    deleteVideoByVideoID
+    deleteVideoByVideoID,
+    updateVideoByVideoID
 };
 
 function getVideoUploadURL(input) {
@@ -135,4 +136,21 @@ function deleteVideoByVideoID(videoID) {
       .catch(error => {
           return error;
       })
+}
+
+function updateVideoByVideoID(input, videoID) {
+    return axios({
+        method: 'PUT',
+        url: `https://soktube.uc.r.appspot.com/api/video/update/${videoID}`,
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: qs.stringify(input)
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
 }

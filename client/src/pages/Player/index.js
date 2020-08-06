@@ -46,7 +46,7 @@ function Player(){
                         <S.Separator> | </S.Separator>
                         {loginUsername === videoInfo.username &&
                             <>
-                                <S.EditButton to='/'> 수정 </S.EditButton>
+                                <S.EditButton to={`/@${videoInfo.username}/video/update/${videoID}`}> 수정 </S.EditButton>
                                 <DeleteVideo videoID={videoID}/>
                             </>
                         }

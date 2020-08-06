@@ -12,6 +12,7 @@ import Player from "./pages/Player";
 import StyleReset from "./components/style/StyleReset";
 import Playlist from "./pages/Playlist";
 import UserVideoList from "./pages/User/UserVideoList";
+import UpdateVideo from "./pages/UploadVideo/UpdateVideo";
 
 function App() {
     return (
@@ -28,7 +29,8 @@ function App() {
                 <PrivateRoute path='/create/video' component={CreateVideo}/>
                 <Route path='/playlist/:listID' component={Playlist}/>
                 <Route exact path='/@:username/video' component={UserVideoList}/>
-                <Route path='/@:username/video/:videoID' component={Player}/>
+                <Route exact path='/@:username/video/:videoID' component={Player}/>
+                <Route path='/@:username/video/update/:videoID' component={UpdateVideo}/>
                 <Redirect from="*" to="/" />
             </Switch>
             </GlobalLayoutStyle>
