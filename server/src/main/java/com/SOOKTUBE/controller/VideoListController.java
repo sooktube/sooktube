@@ -36,15 +36,23 @@ public class VideoListController {
 	
 	//get all videoList from DB
 	@CrossOrigin
-	@RequestMapping(value = "/api/video/list", method = RequestMethod.GET)
-    public VideoListDTO[] getVideoList() throws Exception {
+	@RequestMapping(value = "/api/video/list/{username}", method = RequestMethod.GET)
+    public VideoListDTO[] getVideoList(@PathVariable("username") final String username) throws Exception {
     	
     	VideoListDTO[] res = videoListDAO.getVideoList();
     	
     	for(int i = 0; i < res.length; i++) {
     		
-    		res[i].setLike(listlikeDAO.countLike(res[i].getListID()));
-    		res[i].setDislike(listlikeDAO.countDislike(res[i].getListID()));
+    		int listID = res[i].getListID();
+    		
+    		if(listlikeDAO.selectLikeList(listID, username) != null) {
+    			res[i].setLike(1);
+    		}
+    		
+    		else if(listlikeDAO.selectDislikeList(listID, username) != null) {
+    			res[i].setDislike(-1);
+    		}
+    		
     		res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
     		
     	}
@@ -55,10 +63,23 @@ public class VideoListController {
 	
 	  //get video list
 	  @CrossOrigin
-	  @RequestMapping(value = "/api/videolist/desc/thumbnail/{listID}", method = RequestMethod.GET)
-	  public VideoListDTO[] getVideolistbyID(@PathVariable("listID") final int listID) throws Exception {
+	  @RequestMapping(value = "/api/videolist/desc/thumbnail/{listID}/{username}", method = RequestMethod.GET)
+	  public VideoListDTO[] getVideolistbyID(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception {
 		  
 		  VideoListDTO[] res = videoListDAO.getVideoListbyID(listID);
+		  
+		  for (int i = 0; i< res.length; i++) {
+			  
+	    		if(listlikeDAO.selectLikeList(listID, username) != null) {
+	    			res[i].setLike(1);
+	    		}
+	    		
+	    		else if(listlikeDAO.selectDislikeList(listID, username) != null) {
+	    			res[i].setDislike(-1);
+	    		}
+	    		
+	    		res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
+		  }
 
 		  return res;
 	  }
@@ -150,9 +171,11 @@ public class VideoListController {
 		}
 		
 			else {
-			videoListDAO.editLike(videolist);
+			
 			
 			if(recommendDAO.getRecommendedVideo(videoID, listID, username) == null) {
+				
+				videoListDAO.editLike(videolist);
 				
 				recommendDAO.recommendVideoInList(videoID, listID, username);
 			}
@@ -221,11 +244,13 @@ public class VideoListController {
 		VideoListDTO videolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
 		
 		int[] res = new int[2];
+
 		
-		videoListDAO.editDislike(videolist);
+		
 		
 		if (recommendDAO.getDisrecommendedVideo(videoID, listID, username) == null) {
 			
+			videoListDAO.editDislike(videolist);
 			recommendDAO.disrecommendVideoInList(videoID, listID, username);
 			
 		}
