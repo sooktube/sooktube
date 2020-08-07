@@ -66,19 +66,19 @@ function getVideoPlaylistImgByFileName(uploadFileName) {
         })
 }
 
-function UploadPlaylistInfo(listName,listDesc,isPublic,uploadFileName) {
+function UploadPlaylistInfo(list) {
     console.log('aa');
-    console.log(listName);
+    console.log(list);
     console.log('bb');
-    console.log(listDesc);
+    console.log(list.listName);
     return axios({
         method: 'POST',
         url: 'https://soktube.appspot.com/api/video/list/newList/info',
         data: qs.stringify({
-            "listName": listName,
-            "listDesc": listDesc,
-            "isPublic" : isPublic,
-            "uploadFilename":uploadFileName
+            "listName": list.listName,
+            "listDesc": list.listDesc,
+            "isPublic" : list.isPublic,
+            "thumbnail":list.uploadFile
         })})
         .then(response => {
         return response;

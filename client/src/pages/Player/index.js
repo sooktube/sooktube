@@ -1,13 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useSelector} from 'react';
 import {useParams} from "react-router-dom";
 import * as S from "./style";
 import Header from "../../components/base/Header";
 import VideoPlayer from "../../components/common/VideoPlayer";
 import CommentBox from "./Comments";
 import {videoService} from "../../services";
+import { CommentProvider } from './CommentContext';
 
 function Player(){
     let { videoID } = useParams();
+    let { username } = useParams();
+
 
     const [loading, setLoading] = useState(true);
 
@@ -29,7 +32,7 @@ function Player(){
     console.log(videoInfo);
 
     return(
-        <>
+        <CommentProvider>
             <Header/>
             {!loading &&
             <S.VideoWrapper>
@@ -46,11 +49,11 @@ function Player(){
                     <S.VideoDesc> {videoInfo.videoDesc} </S.VideoDesc>
                 </S.VideoContainer>
                 <hr/>
-                <CommentBox/>
+                <CommentBox c_username={username}/>
             </S.VideoWrapper>
             }
 
-        </>
+        </CommentProvider>
     );
 }
 
