@@ -56,7 +56,7 @@ public class VideoLikeController {
 	
 	//user dislikes a video
 	@CrossOrigin
-	@RequestMapping(value = "/api/dislike/video/{videoID}/{username}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/api/dislike/video/{videoID}/{username}", method = RequestMethod.POST)
 	public VideoLikeDTO userDislikesVideo(@PathVariable("videoID") final int videoID, @PathVariable("username") final String username) throws Exception {
 		
 		if(videoLikeDAO.selectLikeVideo(videoID, username) != null) {
@@ -80,5 +80,23 @@ public class VideoLikeController {
 		return "dislike reverted";
 		
 	}
+	
+	//get like, dislike count
+	@CrossOrigin
+	@RequestMapping(value ="/api/like/dislike/count/videoID/{videoID}", method = RequestMethod.GET)
+	public int[] likeCount(@PathVariable("videoID") final int videoID) throws Exception {
+		
+		int like = videoLikeDAO.likeCount(videoID);
+		int dislike = videoLikeDAO.dislikeCount(videoID);
+		
+		int [] count = new int[2];
+		
+		count[0] = like;
+		count[1] = dislike;
+		
+		return count;
+		
+	}
+	
 
 }

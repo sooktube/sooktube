@@ -29,6 +29,12 @@ public class VideoDTO {
 	private int dislike;
 	
 	private int recommended;
+	private int disrecommended;
+	
+	private int recCount;
+	private int disrecCount;
+	
+	private int inVideoList; //if in 1 not 0
 
 }
 

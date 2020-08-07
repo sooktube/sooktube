@@ -21,5 +21,10 @@ public interface ListLikeDAO {
 	int revertLike(@Param("listID") int listID, @Param("username") String username) throws Exception;
 	//revert dislike
 	int revertDislike(@Param("listID") int listID, @Param("username") String username) throws Exception;
+	
+	//count like
+	int countLike(int listID) throws Exception;
+	//count dislike
+	int countDislike(int listID) throws Exception;
 
 }

@@ -39,6 +39,24 @@
     			`username` = #{username}
     		
     </select>
+    
+    <select id="likeCount"
+    	resultType = "Integer">
+    	
+    	SELECT COUNT(*)
+    	FROM videoLike
+    	WHERE `videoID` = #{videoID}
+    	
+    </select>
+
+    <select id="dislikeCount"
+    	resultType = "Integer">
+    	
+    	SELECT COUNT(*)
+    	FROM videoDislike
+    	WHERE `videoID` = #{videoID}
+    	
+    </select>
 
     <delete id="revertLike"> 
     	DELETE FROM videoLike

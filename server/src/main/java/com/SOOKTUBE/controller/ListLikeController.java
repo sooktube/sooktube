@@ -74,4 +74,21 @@ public class ListLikeController {
 		
 		return "dislike reverted";
 	}
+	
+	//count videoList's like, dislike 
+	@CrossOrigin
+	@RequestMapping(value = "/api/like/dislike/count/listID/{listID}", method = RequestMethod.GET)
+	public int[] countLike(@PathVariable("listID") final int listID) throws Exception {
+		
+		int[] count = new int[2];
+		
+		int like = listlikeDAO.countLike(listID);
+		int dislike = listlikeDAO.countDislike(listID);
+		
+		count[0] = like;
+		count[1] = dislike;
+		
+		return count;
+		
+	}
 }

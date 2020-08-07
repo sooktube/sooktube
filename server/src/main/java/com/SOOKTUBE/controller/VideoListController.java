@@ -1,7 +1,5 @@
 package com.SOOKTUBE.controller;
 
-import java.util.List;
-
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -11,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.SOOKTUBE.dao.ListLikeDAO;
 import com.SOOKTUBE.dao.RecommendDAO;
 import com.SOOKTUBE.dao.VideoListDAO;
-import com.SOOKTUBE.model.VideoDTO;
 import com.SOOKTUBE.model.VideoListDTO;
 import com.SOOKTUBE.service.GCSService;
 
@@ -33,12 +31,23 @@ public class VideoListController {
 	@Autowired
 	private RecommendDAO recommendDAO;
 	
+	@Autowired
+	private ListLikeDAO listlikeDAO;
+	
 	//get all videoList from DB
 	@CrossOrigin
 	@RequestMapping(value = "/api/video/list", method = RequestMethod.GET)
     public VideoListDTO[] getVideoList() throws Exception {
     	
     	VideoListDTO[] res = videoListDAO.getVideoList();
+    	
+    	for(int i = 0; i < res.length; i++) {
+    		
+    		res[i].setLike(listlikeDAO.countLike(res[i].getListID()));
+    		res[i].setDislike(listlikeDAO.countDislike(res[i].getListID()));
+    		res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
+    		
+    	}
     	
     	return res;
     }
@@ -101,6 +110,10 @@ public class VideoListController {
 		for(int i = 0; i < searchRes.length; i++) {
 			
 			searchRes[i].setUrl(gcsService.getVideobyVIDEOtable(searchRes[i].getThumbnail()));
+			
+			searchRes[i].setLike(listlikeDAO.countLike(searchRes[i].getListID()));
+			searchRes[i].setDislike(listlikeDAO.countDislike(searchRes[i].getListID()));
+			
 		}
 	
 		return searchRes;
@@ -111,20 +124,25 @@ public class VideoListController {
 
 	
 	
-	//user recommends a video videoList
+	//user recommends a video in videoList
 	@CrossOrigin
-	@RequestMapping(value = "/api/video/list/like/{listID}/{videoID}/{username}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/api/video/list/like/{listID}/{videoID}/{username}", method = RequestMethod.POST)
 	public int[] likeaList(@PathVariable("listID") final int listID, @PathVariable("videoID") final int videoID, 
 			@PathVariable("username") final String username) throws Exception {
-		
 
+		
+		if(recommendDAO.getDisrecommendedVideo(videoID, listID, username) != null) {
+			recommendDAO.revertDisrecommend(videoID, listID, username);
+		}
+		
 		
 		VideoListDTO videolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
 		
-		int[] res = new int[3];
+		int[] res = new int[2];
 		
 		if (username.equals(videoListDAO.getUsernameofList(listID).toString())) {
 			videoListDAO.editLikeSet5(videolist);
+			recommendDAO.recommendVideoInList(videoID, listID, username);
 			res[0] = 10;
 			res[1] = videolist.getDislike();
 			
@@ -143,12 +161,13 @@ public class VideoListController {
 			res[0] = videolist.getLike() + 1;
 			res[1] = videolist.getDislike();
 			
-			if(res[0] + res[1] < 0) {
-				
-				videoListDAO.deleteVideoFromlist(videoID, listID);
-				res[2] = -1;
-				
-			}
+			/*
+			 * if(res[0] + res[1] < 0) {
+			 * 
+			 * videoListDAO.deleteVideoFromlist(videoID, listID); res[2] = -1;
+			 * 
+			 * }
+			 */
 			
 			
 		}
@@ -158,14 +177,14 @@ public class VideoListController {
 	
 	//user reverts recommending video in a videolist
 	@CrossOrigin
-	@RequestMapping(value = "/api/video/list/revert/like/{listID}/{videoID}/{username}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/api/video/list/revert/like/{listID}/{videoID}/{username}", method = RequestMethod.DELETE)
 	public int[] revertRecommend(@PathVariable("listID") final int listID, @PathVariable("videoID") final int videoID, 
 			@PathVariable("username") final String username) throws Exception {
 		
-		int[] res = new int[3];
+		int[] res = new int[2];
 		
 		if (recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
-			recommendDAO.disrecommendVideoInList(videoID, listID, username);
+			recommendDAO.revertRecommend(videoID, listID, username);
 		}
 		
 		VideoListDTO videolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
@@ -175,12 +194,13 @@ public class VideoListController {
 		res[0] = videolist.getLike() - 1;
 		res[1] = videolist.getDislike();
 		
-		if(res[0] + res[1] < 0) {
-			
-			videoListDAO.deleteVideoFromlist(videoID, listID);
-			res[2] = -1;
-			
-		}
+		/*
+		 * if(res[0] + res[1] < 0) {
+		 * 
+		 * videoListDAO.deleteVideoFromlist(videoID, listID); res[2] = -1;
+		 * 
+		 * }
+		 */
 		
 		return res;
 		
@@ -190,17 +210,21 @@ public class VideoListController {
 	
 	//user disrecommends video in a videoList
 	@CrossOrigin
-	@RequestMapping(value = "/api/video/list/dislike/{listID}/{videoID}/{username}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/api/video/list/dislike/{listID}/{videoID}/{username}", method = RequestMethod.POST)
 	public int[] dislikeaList(@PathVariable("listID") final int listID, @PathVariable("videoID") final int videoID,
 			@PathVariable("username") final String username) throws Exception {
 		
+		if(recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
+			recommendDAO.revertRecommend(videoID, listID, username);
+		}
+		
 		VideoListDTO videolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
 		
-		int[] res = new int[3];
+		int[] res = new int[2];
 		
 		videoListDAO.editDislike(videolist);
 		
-		if (recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
+		if (recommendDAO.getDisrecommendedVideo(videoID, listID, username) == null) {
 			
 			recommendDAO.disrecommendVideoInList(videoID, listID, username);
 			
@@ -211,28 +235,29 @@ public class VideoListController {
 		res[0] = videolist.getLike();
 		res[1] = videolist.getDislike() - 1;
 		
-		if(res[0] + res[1] < 0) {
-			
-			System.out.println("deleted");
-			
-			videoListDAO.deleteVideoFromlist(videoID, listID);
-			res[2] = -1;
-			
-		}
+		/*
+		 * if(res[0] + res[1] < 0) {
+		 * 
+		 * System.out.println("deleted");
+		 * 
+		 * videoListDAO.deleteVideoFromlist(videoID, listID); res[2] = -1;
+		 * 
+		 * }
+		 */
 		
 		return res;
 	}
 	
 	//user reverts disrecommending video from videolist
 	@CrossOrigin
-	@RequestMapping(value="/api/video/list/revert/dislike/{listID}/{videoID}/{username}", method=RequestMethod.PUT)
+	@RequestMapping(value="/api/video/list/revert/dislike/{listID}/{videoID}/{username}", method=RequestMethod.DELETE)
 	public int[] revertDisrecommend(@PathVariable("listID") final int listID, @PathVariable("videoID") final int videoID,
 			@PathVariable("username") final String username) throws Exception {
 		
-		int[] res = new int[3];
+		int[] res = new int[2];
 		
-		if(recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
-			recommendDAO.disrecommendVideoInList(videoID, listID, username);
+		if(recommendDAO.getDisrecommendedVideo(videoID, listID, username) != null) {
+			recommendDAO.revertDisrecommend(videoID, listID, username);
 		}
 		
 		VideoListDTO videolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
@@ -242,12 +267,13 @@ public class VideoListController {
 		res[0] = videolist.getLike();
 		res[1] = videolist.getDislike() + 1;
 		
-		if(res[0] + res[1] < 0) {
-			
-			videoListDAO.deleteVideoFromlist(videoID, listID);
-			res[2] = -1;
-			
-		}
+		/*
+		 * if(res[0] + res[1] < 0) {
+		 * 
+		 * videoListDAO.deleteVideoFromlist(videoID, listID); res[2] = -1;
+		 * 
+		 * }
+		 */
 		
 		return res;
 		
