@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.SOOKTUBE.dao.VideoCommentDAO">
+
+    <insert id="commentVideo"
+            parameterType="com.SOOKTUBE.model.VideoCommentDTO"
+            useGeneratedKeys="true"
+            keyProperty="commentID">
+            
+            INSERT INTO videoComments(`videoID`, `username`, `userComment`, `commentDate`)
+            VALUES(#{videoID}, #{username}, #{userComment}, CURRENT_TIMESTAMP)
+            
+    </insert>
+    
+    <update id="editVideoComment" parameterType="com.SOOKTUBE.model.VideoCommentDTO">
+        UPDATE videoComments
+           SET `userComment` = #{userComment}
+             , `commentDate` = CURRENT_TIMESTAMP
+         WHERE `videoID` = #{videoID}
+         AND `username` = #{username}
+         AND `commentID` = #{commentID}
+    </update>
+
+
+	<select id="getComments"
+		    	resultType="com.SOOKTUBE.model.VideoCommentDTO">
+		    	
+		SELECT `commentID`, `videoID`, `userComment`, `username`, `commentDate`
+		FROM videoComments
+		WHERE `commentID` = #{commentID}
+		    AND `videoID` = #{videoID}
+		    	AND `username` = #{username}
+		    	
+	</select>
+	
+	<select id="getCommentsByVideoID"
+		    	resultType="com.SOOKTUBE.model.VideoCommentDTO">
+		    	
+		SELECT `commentID`, `videoID`, `userComment`, `username`, `commentDate`
+		FROM videoComments
+		WHERE `videoID` = #{videoID}
+		    	
+	</select>
+	
+    <delete id="deleteVideoComment"> 
+    	DELETE FROM videoComments
+		WHERE `commentID` = #{commentID}
+		    AND `videoID` = #{videoID}
+		    	AND `username` = #{username}
+    </delete>
+
+</mapper>
