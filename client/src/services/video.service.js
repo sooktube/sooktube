@@ -147,7 +147,7 @@ function getLikeCountByVideoID(videoID) {
         url: `https://soktube.uc.r.appspot.com/api/like/dislike/videoID/${videoID}`,
     })
         .then(response => {
-            return response.data;
+            return response;
         })
         .catch(error => {
             return error;
