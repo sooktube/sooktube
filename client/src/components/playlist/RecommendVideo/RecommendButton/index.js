@@ -14,7 +14,6 @@ function RecommendButton({inVideoList, videoID, username, recommended, recCount}
     });
 
     useEffect(() => {
-        console.log(rec.inVideoList, rec.recommended, rec.recCount);
     }, [rec.recommended]);
 
     async function toggleRecommend() {
@@ -27,7 +26,6 @@ function RecommendButton({inVideoList, videoID, username, recommended, recCount}
             })
             playlistService.recommendVideoInPlaylist({listID, videoID, username})
                 .then(response => {
-                    console.log(response);
                     setRec({
                         ...rec,
                         recommended: 1,
@@ -41,7 +39,6 @@ function RecommendButton({inVideoList, videoID, username, recommended, recCount}
         }
         //영상을 추천하면서 재생목록에 새로 추가
         else if (!rec.loading && rec.recommended === 0 && rec.inVideoList === 0) {
-            console.log("새로 추가");
             await setRec({
                 ...rec,
                 recommended: 1,
@@ -52,7 +49,6 @@ function RecommendButton({inVideoList, videoID, username, recommended, recCount}
                     return playlistService.recommendVideoInPlaylist({listID, videoID, username})
                 })
                 .then(response => {
-                    console.log(response);
                     setRec({
                         recommended: 1,
                         inVideoList: 1,
@@ -65,7 +61,6 @@ function RecommendButton({inVideoList, videoID, username, recommended, recCount}
         }
         //이미 재생목록에 있던 영상을 추천 취소
         else if (!rec.loading && rec.recommended === 1 && rec.inVideoList === 1) {
-            console.log("추천 취소");
             await setRec({
                 ...rec,
                 recommended: 0,
@@ -73,7 +68,6 @@ function RecommendButton({inVideoList, videoID, username, recommended, recCount}
             },
             playlistService.cancelRecommendVideoInPlaylist({listID, videoID, username})
                 .then(response => {
-                    console.log(response);
                     setRec({
                         ...rec,
                         recommended: 0,

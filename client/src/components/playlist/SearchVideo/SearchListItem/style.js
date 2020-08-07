@@ -1,12 +1,11 @@
 import styled from 'styled-components'
 import {MAIN} from "../../../style/Main";
-import {IoIosHeart, IoMdHeartDislike} from "react-icons/all";
+import {IoIosHeart, IoMdHeartDislike, TiInputChecked} from "react-icons/all";
 
 export const VideoWrapper = styled.div`
     padding:14px;
     height: 8rem;
     border-bottom:1px solid #ced4da;
-    border-top:1px solid #ced4da;
     display:flex;
     color: ${MAIN.DARK_TEXT_COLOR};
 `;
@@ -53,3 +52,10 @@ export const Disrecommned = styled(IoMdHeartDislike)`
     height: 2.2rem;
     color: ${props => props.on === 1 ? '#71A6C6' : '#cecece'}
 `
+
+export const InVideoList = styled(TiInputChecked)`
+    color: forestgreen;
+    width: 1.5em;
+    height: 1.5em;
+    display: ${props => props.count >= 5 ? 'inline-block' : 'none'};
+`;

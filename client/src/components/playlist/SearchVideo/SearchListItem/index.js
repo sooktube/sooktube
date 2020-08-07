@@ -12,7 +12,7 @@ function SearchListItem({inVideoList, videoID, url, title, username, date, recom
         <S.VideoWrapper>
             <S.Video src={url} onClick={handleClick}/>
             <S.VideoInfo>
-                <S.VideoTitle>{title}</S.VideoTitle>
+                <S.VideoTitle>{title} <S.InVideoList count={recCount + disrecCount}/></S.VideoTitle>
                 <S.VideoDetail>
                     <div> {username} </div>
                     <div> {date} </div>
