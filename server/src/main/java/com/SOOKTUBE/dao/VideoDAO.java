@@ -37,6 +37,7 @@ public interface VideoDAO {
 	//search
 	VideoDTO[] searchVideobyTitle(String search) throws Exception;
 	VideoDTO[] searchVideobyTitleformList(@Param("videoTitle") String videoTitle, @Param("listID") int listID) throws Exception;
+	VideoDTO findVideoinList(@Param("videoID") int videoID, @Param("listID") int listID) throws Exception;
 	
 
 }

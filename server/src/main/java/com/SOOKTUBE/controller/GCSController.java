@@ -84,6 +84,9 @@ public class GCSController {
 
 		String url = gcsService.getVideobyVIDEOtable(fileName);
 		
+		video.setLike(videoLikeDAO.likeCount(videoID));
+		video.setDislike(videoLikeDAO.dislikeCount(videoID));
+		
 		video.setVideoPath(url);
 		
 		return video;
@@ -187,21 +190,35 @@ public class GCSController {
 
 		
 		for(int i = 0; i < res.length; i++) {
+			
+			int videoID = res[i].getVideoID();
+			
 			res[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
 			
-			if (videoLikeDAO.selectLikeVideo(res[i].getVideoID(), username) != null) {
+			res[i].setLike(0);
+			res[i].setDislike(0);
+			
+			res[i].setRecommended(0);
+			res[i].setDisrecommended(0);
+			
+			if (videoLikeDAO.selectLikeVideo(videoID, username) != null) {
 				res[i].setLike(1);
 			}
 			
-			else if (videoLikeDAO.selectDislikeVideo(res[i].getVideoID(), username) != null) {
+			else if (videoLikeDAO.selectDislikeVideo(videoID, username) != null) {
 				res[i].setDislike(-1);
 			}
 			
-			if (recommendDAO.getRecommendedVideo(res[i].getVideoID(), listID, username) != null) {
+			if (recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
 				res[i].setRecommended(1);
 			}
+			else if (recommendDAO.getDisrecommendedVideo(videoID, listID, username) != null) {
+				res[i].setDisrecommended(-1);
+			}
 			
-			
+			res[i].setRecCount(recommendDAO.recCount(videoID, listID));
+			res[i].setDisrecCount(recommendDAO.disrecCount(videoID, listID));
+
 		}
 		
 		
@@ -218,23 +235,38 @@ public class GCSController {
     	
     	VideoDTO[] res = videoDAO.getDescbyListIDGTEQ5(listID);
     	
-    	for(int i = 0; i < res.length; i ++) {
-    		
-    		res[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
-    		
-			if (videoLikeDAO.selectLikeVideo(res[i].getVideoID(), username) != null) {
+		for(int i = 0; i < res.length; i++) {
+			
+			int videoID = res[i].getVideoID();
+			
+			res[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
+			
+			res[i].setLike(0);
+			res[i].setDislike(0);
+			
+			res[i].setRecommended(0);
+			res[i].setDisrecommended(0);
+			
+			if (videoLikeDAO.selectLikeVideo(videoID, username) != null) {
 				res[i].setLike(1);
 			}
 			
-			else if (videoLikeDAO.selectDislikeVideo(res[i].getVideoID(), username) != null) {
+			else if (videoLikeDAO.selectDislikeVideo(videoID, username) != null) {
 				res[i].setDislike(-1);
 			}
 			
-			if (recommendDAO.getRecommendedVideo(res[i].getVideoID(), listID, username) != null) {
+			if (recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
 				res[i].setRecommended(1);
 			}
-    		
-    	}
+			else if (recommendDAO.getDisrecommendedVideo(videoID, listID, username) != null) {
+				res[i].setDisrecommended(-1);
+			}
+			
+			res[i].setRecCount(recommendDAO.recCount(videoID, listID));
+			res[i].setDisrecCount(recommendDAO.disrecCount(videoID, listID));
+
+		}
+		
     	return res;
     }
     
@@ -248,23 +280,37 @@ public class GCSController {
     	VideoDTO[] res = videoDAO.getDescbyListBetween0and5(listID);
 
     	
-    	for(int i = 0; i < res.length; i++) {
-    		
-    		res[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
-    		
-			if (videoLikeDAO.selectLikeVideo(res[i].getVideoID(), username) != null) {
+		for(int i = 0; i < res.length; i++) {
+			
+			int videoID = res[i].getVideoID();
+			
+			res[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
+			
+			res[i].setLike(0);
+			res[i].setDislike(0);
+			
+			res[i].setRecommended(0);
+			res[i].setDisrecommended(0);
+			
+			if (videoLikeDAO.selectLikeVideo(videoID, username) != null) {
 				res[i].setLike(1);
 			}
 			
-			else if (videoLikeDAO.selectDislikeVideo(res[i].getVideoID(), username) != null) {
+			else if (videoLikeDAO.selectDislikeVideo(videoID, username) != null) {
 				res[i].setDislike(-1);
 			}
 			
-			if (recommendDAO.getRecommendedVideo(res[i].getVideoID(), listID, username) != null) {
+			if (recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
 				res[i].setRecommended(1);
 			}
-    		
-    	}
+			else if (recommendDAO.getDisrecommendedVideo(videoID, listID, username) != null) {
+				res[i].setDisrecommended(-1);
+			}
+			
+			res[i].setRecCount(recommendDAO.recCount(videoID, listID));
+			res[i].setDisrecCount(recommendDAO.disrecCount(videoID, listID));
+
+		}
     	
     	return res;
     }

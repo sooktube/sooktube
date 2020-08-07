@@ -22,4 +22,9 @@ public interface VideoLikeDAO {
 	//revert dislike
 	int revertDislike(@Param("videoID") int videoID, @Param("username") String username) throws Exception;
 	
+	//like count
+	int likeCount(int videoID) throws Exception;
+	//dislike count
+	int dislikeCount(int videoID) throws Exception;
+	
 }

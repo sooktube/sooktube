@@ -47,7 +47,8 @@
     		parameterType="Integer" 
     		resultType="com.SOOKTUBE.model.VideoDTO">
     		
-    		SELECT listInfo.`listID`, VIDEO.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, `videoPath`
+    		SELECT listInfo.`listID`, VIDEO.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, `videoPath`,
+    					videoList.`like`, videoList.`dislike`
     		FROM VIDEO, listInfo, videoList
     		WHERE listInfo.`listID` = #{listID}
     			AND
@@ -149,6 +150,16 @@
 
     			</select>
     			
+    	<select id="findVideoinList"
+    			resultType="com.SOOKTUBE.model.VideoDTO">
+    			
+    			SELECT videoList.`like`, videoList.`dislike`, videoList.`listID`
+    			FROM videoList, VIDEO
+    			WHERE videoList.`videoID` = #{videoID}
+    				AND videoList.`listID` = #{listID}
+    					AND videoList.`videoID` = VIDEO.`videoID`
+    			</select>
+    			
 <!--     	 <select id="getVideoPath"
     			parameterType="Integer"
     			resultType="String">
@@ -164,7 +175,7 @@
         UPDATE VIDEO
            SET `videoTitle` = #{videoTitle}
              , `videoDesc` = #{videoDesc}
-             , `videoDate` = #{videoDate}
+             , `videoDate` = CURRENT_TIMESTAMP
          WHERE `videoID` = #{videoID}
     </update>
     
