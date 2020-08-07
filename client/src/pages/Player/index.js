@@ -29,7 +29,7 @@ function Player(){
     });
 
     useEffect(() => {
-        videoService.getVideoInfoByVideoID(videoID)
+        videoService.getVideoInfoByVideoID(videoID, username)
             .then(response => {
                 setVideoInfo(response);
                 setLoading(false);

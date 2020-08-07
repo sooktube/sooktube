@@ -85,10 +85,10 @@ function getVideoFileByFileName(uploadFileName) {
 }
 
 
-function getVideoInfoByVideoID(videoID) {
+function getVideoInfoByVideoID(videoID, username) {
     return axios({
         method: 'GET',
-        url: `https://soktube.appspot.com/api/video/desc/url/ID/${videoID}`,
+        url: `https://soktube.appspot.com/api/video/desc/url/ID/${videoID}/${username}`,
     })
         .then(response => {
             return response.data;
