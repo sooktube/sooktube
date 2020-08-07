@@ -2,9 +2,12 @@ import React, {useEffect, useState} from 'react';
 import * as S from './style';
 import {playlistService} from "../../../services";
 import dummy_card_image from '../../../../public/images/dummy_card_img.jpg';
+import {useSelector} from "react-redux";
 
 function PlaylistCard({ listID }) {
     const [loading, setLoading] = useState(true);
+    const {username} = useSelector(state => state.authentication.username);
+
     const [card, setCard] = useState({
         thumbnail: null,
         listName: null,
@@ -16,7 +19,7 @@ function PlaylistCard({ listID }) {
     const [thumbnailImgURL, setThumbnailImgURL] = useState(null);
 
     useEffect(() => {
-        playlistService.getPlaylistInfoByListID(listID)
+        playlistService.getPlaylistInfoByListID(listID, username)
             .then(response => {
                 setCard(response);
                 setLoading(false);

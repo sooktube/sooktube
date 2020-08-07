@@ -46,6 +46,7 @@ function SearchVideo({listID}) {
                                         disrecommended={result.disrecommended}
                                         recCount={result.recCount}
                                         disrecCount={result.disrecCount}
+                                        inVideoList={result.inVideoList}
                         />
                     )}
                 </S.SearchResult>

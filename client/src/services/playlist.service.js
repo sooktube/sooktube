@@ -88,10 +88,10 @@ function UploadPlaylistInfo(input) {
     })
 }
 
-function getPlaylistInfoByListID(listID) {
+function getPlaylistInfoByListID(listID, username) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/videolist/desc/thumbnail/${listID}`
+        url: `https://soktube.uc.r.appspot.com/api/videolist/desc/thumbnail/${listID}/${username}`
     })
         .then(response => {
             return response.data[0];
@@ -155,14 +155,12 @@ function getGTEQ5VideoList(listID, username) {
 }
 
 function recommendVideoInPlaylist({listID, videoID, username}) {
-    console.log(listID, videoID, username);
     return axios({
         method: 'POST',
         url: `https://soktube.uc.r.appspot.com/api/video/list/like/${listID}/${videoID}/${username}`,
     })
         .then(response => {
-            console.log(response);
-            return response;
+            return response.data;
         })
         .catch(error => {
             return error;
@@ -175,7 +173,7 @@ function cancelRecommendVideoInPlaylist({listID, videoID, username}) {
         url: `https://soktube.uc.r.appspot.com/api/video/list/revert/like/${listID}/${videoID}/${username}`,
     })
         .then(response => {
-            return response;
+            return response.data;
         })
         .catch(error => {
             return error;
@@ -212,6 +210,10 @@ function addVideoToPlaylist({listID, videoID, username}) {
     return axios({
         method: 'POST',
         url: `https://soktube.uc.r.appspot.com/api/video/list/newList`,
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: qs.stringify({listID, videoID, username})
     })
         .then(response => {
             return response.data;

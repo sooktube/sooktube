@@ -1,36 +1,87 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {playlistService} from "../../../../services";
 import styled from "styled-components";
 import {IoIosHeart} from "react-icons/all";
 import {useParams} from 'react-router-dom';
 
-function RecommendButton({videoID, username, recommended, recCount}) {
+function RecommendButton({inVideoList, videoID, username, recommended, recCount}) {
     const {listID} = useParams();
     const [rec, setRec] = useState({
+        inVideoList: inVideoList,
         recommended: recommended,
-        recCount: recCount
+        recCount: recCount,
+        loading: false
     });
 
-    function toggleRecommend() {
-        if(rec.recommended === 0){
+    useEffect(() => {
+        console.log(rec.inVideoList, rec.recommended, rec.recCount);
+    }, [rec.recommended]);
+
+    async function toggleRecommend() {
+        //이미 재생목록에 있던 영상을 추천
+       if(!rec.loading && rec.recommended === 0 && rec.inVideoList === 1) {
+            await setRec({
+                ...rec,
+                recommended: 1,
+                loading: true
+            })
             playlistService.recommendVideoInPlaylist({listID, videoID, username})
                 .then(response => {
                     console.log(response);
                     setRec({
-                        isRecommend: 1,
-                        recCount: response[0]
+                        ...rec,
+                        recommended: 1,
+                        recCount: response[0],
+                        loading: false
+                    })
+                }
+            )
+
+
+        }
+        //영상을 추천하면서 재생목록에 새로 추가
+        else if (!rec.loading && rec.recommended === 0 && rec.inVideoList === 0) {
+            console.log("새로 추가");
+            await setRec({
+                ...rec,
+                recommended: 1,
+                loading: true
+            },
+            playlistService.addVideoToPlaylist({listID, videoID, username})
+                .then(response => {
+                    return playlistService.recommendVideoInPlaylist({listID, videoID, username})
+                })
+                .then(response => {
+                    console.log(response);
+                    setRec({
+                        recommended: 1,
+                        inVideoList: 1,
+                        recCount: response[0],
+                        loading: false
                     })
                 })
+            )
+
         }
-        else {
+        //이미 재생목록에 있던 영상을 추천 취소
+        else if (!rec.loading && rec.recommended === 1 && rec.inVideoList === 1) {
+            console.log("추천 취소");
+            await setRec({
+                ...rec,
+                recommended: 0,
+                loading: true
+            },
             playlistService.cancelRecommendVideoInPlaylist({listID, videoID, username})
                 .then(response => {
                     console.log(response);
                     setRec({
-                        isRecommend: 0,
-                        recCount: response[0]
+                        ...rec,
+                        recommended: 0,
+                        recCount: response[0],
+                        loading: false
                     })
-                })
+                }))
+
         }
     }
 
@@ -44,7 +95,7 @@ function RecommendButton({videoID, username, recommended, recCount}) {
 
     return (
         <div>
-            <Recommend on={rec.isRecommend} onClick={toggleRecommend}/>
+            <Recommend on={rec.recommended} onClick={toggleRecommend}/>
             {rec.recCount}
         </div>
     );
