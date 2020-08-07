@@ -18,7 +18,6 @@ function DeleteVideo({videoID}) {
     function deleteVideo() {
         videoService.deleteVideoByVideoID(videoID)
             .then(response => {
-                console.log(response);
                 if(response === 'deleted') {
                   history.push(`/@${username}/video`)
                 }

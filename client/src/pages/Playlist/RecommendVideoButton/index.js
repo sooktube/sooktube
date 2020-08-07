@@ -3,7 +3,7 @@ import * as S from './style';
 import Modal from "../../../components/common/Modal";
 import SearchVideo from "../../../components/playlist/SearchVideo";
 
-function RecommendVideoButton() {
+function RecommendVideoButton({listID}) {
     const [modalVisible, setModalVisible] = useState(false);
 
     const openModal = () => {
@@ -19,7 +19,7 @@ function RecommendVideoButton() {
             <Modal visible={modalVisible}
                    onClose={closeModal}
                    width="700px">
-                <SearchVideo/>
+                <SearchVideo listID={listID}/>
             </Modal>
             }
             <S.AddVideoComment> 재생목록에 추가하고 싶은 영상이 있나요? </S.AddVideoComment>

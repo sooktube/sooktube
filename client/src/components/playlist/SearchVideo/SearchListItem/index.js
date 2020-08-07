@@ -1,8 +1,9 @@
 import React from 'react';
 import * as S from "./style";
 import {history} from "../../../../helpers";
+import RecommendButton from "../../RecommendVideo/RecommendButton";
 
-function SearchListItem({videoID, url, title, username, date, like, dislike}){
+function SearchListItem({listID, videoID, url, title, username, date, recommended, disrecommended, recCount, disrecCount}){
     function handleClick() {
         history.push(`/@${username}/video/${videoID}`);
     }
@@ -18,8 +19,11 @@ function SearchListItem({videoID, url, title, username, date, like, dislike}){
                 </S.VideoDetail>
             </S.VideoInfo>
             <S.VideoLike>
-                <div> <S.Like/> {like} </div>
-                <div> <S.Dislike/> {dislike} </div>
+                <RecommendButton videoID={videoID}
+                                 username={username}
+                                 recommended={recommended}
+                                 recCount={recCount}/>
+                <div> <S.Disrecommned on={disrecommended}/> {disrecCount} </div>
             </S.VideoLike>
         </S.VideoWrapper>
     );

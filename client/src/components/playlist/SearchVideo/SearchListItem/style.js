@@ -48,15 +48,8 @@ export const VideoLike = styled.div`
     }
 `;
 
-export const Like = styled(IoIosHeart)`
+export const Disrecommned = styled(IoMdHeartDislike)`
     width: 3rem;
     height: 2.2rem;
-    margin-right: 1em;
-    color: ${MAIN.MAIN_THEME_COLOR};
-`;
-
-export const Dislike = styled(IoMdHeartDislike)`
-    width: 3rem;
-    height: 2.2rem;
-    color: ${MAIN.MAIN_THEME_COLOR};
+    color: ${props => props.on === 1 ? '#71A6C6' : '#cecece'}
 `

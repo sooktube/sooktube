@@ -1,12 +1,12 @@
 import React from 'react';
 import * as S from './style';
 import VideoList from "../../../components/playlist/VideoList";
-import AddVideoButton from "../RecommendVideoButton";
+import RecommendVideoButton from "../RecommendVideoButton";
 
 function PlaylistVideo({ listID }) {
     return (
       <S.PlaylistVideoWrapper>
-          <AddVideoButton/>
+          <RecommendVideoButton listID={listID}/>
           <VideoList/>
       </S.PlaylistVideoWrapper>
     );

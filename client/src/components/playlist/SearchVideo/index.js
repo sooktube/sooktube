@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import * as S from './style';
-import {playlistService, videoService} from "../../../services";
+import {playlistService} from "../../../services";
 import SearchListItem from "./SearchListItem";
+import {useSelector} from "react-redux";
 
-function SearchVideo() {
+function SearchVideo({listID}) {
     const [keyword, setKeyword] = useState('');
     const [searchResult, setSearchResult] = useState(null);
+    const username = useSelector(state => state.authentication.username);
 
     function handleChange(e) {
         const { value } = e.target;
@@ -14,10 +16,10 @@ function SearchVideo() {
 
     useEffect(() =>{
         if(keyword) {
-            playlistService.searchVideoByTitle(keyword)
+            playlistService.searchVideoByTitle(listID, username, keyword)
                 .then(response => {
-                    setSearchResult(response);
                     console.log(response);
+                    setSearchResult(response);
                 })
         }
     }, [keyword])
@@ -40,8 +42,10 @@ function SearchVideo() {
                                         title={result.videoTitle}
                                         username={result.username}
                                         date={result.videoDate.substr(0,10)}
-                                        like={result.like}
-                                        dislike={result.dislike}
+                                        recommended={result.recommended}
+                                        disrecommended={result.disrecommended}
+                                        recCount={result.recCount}
+                                        disrecCount={result.disrecCount}
                         />
                     )}
                 </S.SearchResult>
