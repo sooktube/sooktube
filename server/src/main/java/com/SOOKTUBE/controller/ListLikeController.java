@@ -1,5 +1,7 @@
 package com.SOOKTUBE.controller;
 
+import java.util.List;
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -10,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SOOKTUBE.dao.ListLikeDAO;
+import com.SOOKTUBE.dao.VideoListDAO;
 import com.SOOKTUBE.model.ListLikeDTO;
+import com.SOOKTUBE.model.VideoListDTO;
+import com.SOOKTUBE.service.GCSService;
+
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -19,8 +25,13 @@ import lombok.RequiredArgsConstructor;
 @MapperScan(basePackages = "com.SOOKTUBE.dao")
 public class ListLikeController {
 	
+	 private final GCSService gcsService;
+	
 	@Autowired
 	ListLikeDAO listlikeDAO;
+	
+	@Autowired
+	VideoListDAO videolistDAO;
 
 	//user likes a video list
 	@CrossOrigin
@@ -89,6 +100,57 @@ public class ListLikeController {
 		count[1] = dislike;
 		
 		return count;
+		
+	}
+	
+	//get liked list by user
+	@CrossOrigin
+	@RequestMapping(value = "/api/liked/list/byUser/{username}", method = RequestMethod.GET)
+	public VideoListDTO[] likedListbyUser(@PathVariable("username") final String username) throws Exception {
+		
+		List<Integer> listID = listlikeDAO.getlikedListbyUser(username);
+		
+		VideoListDTO[] res = new VideoListDTO[listID.size()];
+		
+		for(int i = 0; i < listID.size(); i++) {
+			
+			VideoListDTO[] list = videolistDAO.getVideoListbyID(listID.get(i));
+			
+			res[i] = list[0];
+			
+			res[i].setLike(listlikeDAO.countLike(listID.get(i)));
+			res[i].setDislike(listlikeDAO.countDislike(listID.get(i)));
+			
+			res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
+			
+		}
+		
+		return res;
+	}
+	
+	//get disliked list by user
+	@CrossOrigin
+	@RequestMapping(value = "/api/disliked/list/byUser/{username}", method = RequestMethod.GET)
+	public VideoListDTO[] dislikedListbyUser(@PathVariable("username") final String username) throws Exception {
+		
+		List<Integer> listID = listlikeDAO.getdislikedListbyUser(username);
+		
+		VideoListDTO[] res = new VideoListDTO[listID.size()];
+		
+		for(int i = 0; i < listID.size(); i++) {
+			
+			VideoListDTO[] list = videolistDAO.getVideoListbyID(listID.get(i));
+			
+			res[i] = list[0];
+			
+			res[i].setLike(listlikeDAO.countLike(listID.get(i)));
+			res[i].setDislike(listlikeDAO.countDislike(listID.get(i)));
+			
+			res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
+			
+		}
+		
+		return res;
 		
 	}
 }

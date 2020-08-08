@@ -39,6 +39,24 @@
     			`username` = #{username}
     		
     </select>
+    
+    <select id="countLike"
+    		resultType="Integer">
+    
+    		SELECT COUNT(*)
+    		FROM listLike
+    		WHERE `listID` = #{listID}		
+    		
+    </select>
+    
+    <select id="countDislike"
+    		resultType="Integer">
+    		
+    		SELECT COUNT(*)
+    		FROM listDislike
+    		WHERE `listID` = #{listID}
+    		
+    </select>
 
     <delete id="revertLike"> 
     	DELETE FROM listLike
