@@ -23,11 +23,9 @@
 		    <select id="getVideoList"
 		    resultType="com.SOOKTUBE.model.VideoListDTO">
     		
-			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, videoList.`username`, `isPublic`, `thumbnail`
-			FROM videoList, listInfo, user
-			WHERE videoList.`listID` = listInfo.`listID`
-				AND
-					videoList.`username` = user.`username`
+			SELECT 
+			     `listID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`
+			FROM listInfo
     		
     		</select>
     		
@@ -195,6 +193,7 @@
 		         WHERE `listID` = #{listID}
 		         AND `videoID` = #{videoID}
 		    </update>
+		    
 
     <delete id="deleteVideoFromlist">
     	DELETE FROM videoList
