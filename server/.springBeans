@@ -9,9 +9,11 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>java:com.SOOKTUBE.controller.ListCommentController</config>
 		<config>java:com.SOOKTUBE.controller.VideoCommentController</config>
 		<config>java:com.SOOKTUBE.controller.VideoLikeController</config>
 		<config>java:com.SOOKTUBE.controller.ListLikeController</config>
+		<config>java:com.SOOKTUBE.controller.ListRecommendController</config>
 		<config>java:com.SOOKTUBE.SpringBootSOOKTUBEApplication</config>
 		<config>java:com.SOOKTUBE.controller.VideoController</config>
 		<config>java:com.SOOKTUBE.controller.VideoListController</config>
