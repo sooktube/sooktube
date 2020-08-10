@@ -144,10 +144,10 @@ function updateVideoByVideoID(input, videoID) {
 function getLikeCountByVideoID(videoID) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/like/dislike/videoID/${videoID}`,
+        url: `https://soktube.uc.r.appspot.com/api/like/dislike/count/videoID/${videoID}`,
     })
         .then(response => {
-            return response;
+            return response.data;
         })
         .catch(error => {
             return error;
