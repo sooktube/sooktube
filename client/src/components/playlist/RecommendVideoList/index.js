@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {playlistService} from "../../../services";
-import SearchListItem from "../SearchVideo/SearchListItem";
+import VideoList from "../../video/VideoList";
 
 function RecommendVideoList({listID, username}) {
     const [videoList, setVideoList] = useState(null);
 
     useEffect(() => {
-        playlistService.getGTEQ1LT5VideoList(listID, username)
+        playlistService.getGTEQ0LT5VideoList(listID, username)
             .then(response => {
                 setVideoList(response);
             })
@@ -14,17 +14,7 @@ function RecommendVideoList({listID, username}) {
 
     return (
         <>
-            {videoList.map((result, index) =>
-                <SearchListItem key={index}
-                                videoID={result.videoID}
-                                url={result.videoPath}
-                                title={result.videoTitle}
-                                username={result.username}
-                                date={result.videoDate.substr(0,10)}
-                                like={result.like}
-                                dislike={result.dislike}
-                />
-            )}
+            {videoList && videoList.length > 0 && <VideoList videoList={videoList}/>}
         </>
     );
 }

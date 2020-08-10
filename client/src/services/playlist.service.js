@@ -31,7 +31,6 @@ function getPlaylistUploadURL(input) {
              "username": input.username
          })})
         .then(response => {
-             console.log(response);
              return response.data;
          })
          .catch(error => {
@@ -115,7 +114,6 @@ function getVideoListByListID(listID) {
 }
 
 function searchVideoByTitle(listID, username, keyword) {
-    console.log(listID, username, keyword);
     return axios({
         method: 'GET',
         url: `https://soktube.uc.r.appspot.com/api/video/search/title/${keyword}/listID/${listID}/user/${username}`,
@@ -134,6 +132,7 @@ function getGTEQ0LT5VideoList(listID, username) {
         url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/0/LT/5/${listID}/${username}`,
     })
         .then(response => {
+            console.log(response);
             return response.data;
         })
         .catch(error => {
@@ -147,7 +146,6 @@ function getGTEQ5VideoList(listID, username) {
         url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/5/${listID}/${username}`,
     })
         .then(response => {
-            console.log(response.data);
             return response.data;
         })
         .catch(error => {

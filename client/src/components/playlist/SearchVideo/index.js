@@ -3,6 +3,7 @@ import * as S from './style';
 import {playlistService} from "../../../services";
 import SearchListItem from "./SearchListItem";
 import {useSelector} from "react-redux";
+import RecommendVideoList from "../RecommendVideoList";
 
 function SearchVideo({listID}) {
     const [keyword, setKeyword] = useState('');
