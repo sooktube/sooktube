@@ -15,6 +15,9 @@ public class DAOUser {
 	@Column
 	private String username;
 	private String userID;
+	private String profilepic;
+	private String picpath;
+	
 	@Column
 	@JsonIgnore
 	private String password;
@@ -42,6 +45,23 @@ public class DAOUser {
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
+
+	public String getProfilepic() {
+		return profilepic;
+	}
+
+	public void setProfilepic(String profilepic) {
+		this.profilepic = profilepic;
+	}
+
+	public String getPicpath() {
+		return picpath;
+	}
+
+	public void setPicpath(String picpath) {
+		this.picpath = picpath;
+	}
+	 
 
 }
 

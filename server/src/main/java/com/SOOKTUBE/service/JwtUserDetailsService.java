@@ -3,6 +3,7 @@ package com.SOOKTUBE.service;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,9 +14,14 @@ import com.SOOKTUBE.dao.UserDao;
 import com.SOOKTUBE.model.DAOUser;
 import com.SOOKTUBE.model.UserDTO;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
-
+	
+	@Autowired
+	private GCSService gcsService;
+	
 	@Autowired
 	private UserDao userDao;
 
@@ -46,9 +52,29 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	public DAOUser save(UserDTO user) {
 		DAOUser newUser = new DAOUser();
+		
+		String username = user.getUsername();
+		String profilepic = user.getProfilepic();
+		String picPath = gcsService.generateURLforProfilePic(username, profilepic);
+		
+		if (profilepic.equals("defaultProfile.jpeg")) {
+			newUser.setPicpath(gcsService.getVideobyVIDEOtable("defaultProfile.jpeg"));
+			newUser.setProfilepic(profilepic);
+		}
+		
+		else {
+			newUser.setPicpath(picPath);
+			profilepic = username + profilepic + "PROFILE";
+			newUser.setProfilepic(profilepic);
+		}
+		
+
 		newUser.setUserID(user.getUserID());
-		newUser.setUsername(user.getUsername());
+		newUser.setUsername(username);
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+		//newUser.setProfilepic(user.getProfilepic());
+		
+		
 		return userDao.save(newUser);
 	}
 	
@@ -71,6 +97,5 @@ public class JwtUserDetailsService implements UserDetailsService {
 		else 
 			return "TRY AGAIN";
 	}
-
 }
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.SOOKTUBE.dao.ListRecommendDAO">
+
+      <select id="selectRecommendedVideo"
+            resultType="com.SOOKTUBE.model.ListRecommendDTO">
+            
+            SELECT listInfo.`listID`, `listName`, `listDesc`, listInfo.`username` as listUsername, `isPublic`, `thumbnail`,
+              VIDEO.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username` as videoUsername, `uploadFileName`
+            FROM listInfo, VIDEO, videoList
+            WHERE listInfo.`listID` = #{listID}
+            AND VIDEO.`videoID` = #{videoID}
+             AND listInfo.`listID` = videoList.`listID`
+             AND VIDEO.`videoID` = videoList.`videoID`
+            
+      </select>
+</mapper>

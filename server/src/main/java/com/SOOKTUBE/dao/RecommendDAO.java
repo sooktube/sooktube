@@ -18,6 +18,7 @@ public interface RecommendDAO {
 	//select
 	RecommendDTO getRecommendedVideo(@Param("videoID") int videoID, @Param("listID") int listID, @Param("username") String username) throws Exception;
 	RecommendDTO getDisrecommendedVideo(@Param("videoID") int videoID, @Param("listID") int listID, @Param("username") String username) throws Exception;
+	RecommendDTO[] getRecommendedbyUser(String username) throws Exception;
 	
 	//select count
 	int recCount(@Param("videoID") int videoID, @Param("listID") int listID) throws Exception;
