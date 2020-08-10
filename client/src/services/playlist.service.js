@@ -9,7 +9,7 @@ export const playlistService ={
     getPlaylistInfoByListID,
     getVideoListByListID,
     searchVideoByTitle,
-    getGTEQ1LT5VideoList,
+    getGTEQ0LT5VideoList,
     getGTEQ5VideoList,
     recommendVideoInPlaylist,
     cancelRecommendVideoInPlaylist,
@@ -128,10 +128,10 @@ function searchVideoByTitle(listID, username, keyword) {
         })
 }
 
-function getGTEQ1LT5VideoList(listID, username) {
+function getGTEQ0LT5VideoList(listID, username) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/1/LT/5/${listID}/${username}`,
+        url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/0/LT/5/${listID}/${username}`,
     })
         .then(response => {
             return response.data;
@@ -147,6 +147,7 @@ function getGTEQ5VideoList(listID, username) {
         url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/5/${listID}/${username}`,
     })
         .then(response => {
+            console.log(response.data);
             return response.data;
         })
         .catch(error => {
