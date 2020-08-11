@@ -6,18 +6,16 @@ import {commentService} from "../../../services/comment.service";
 import {userService} from "../../../services/user.service";
 
 function Comments({listID}) {
-
-    const real_username = useSelector(state => state.authentication.username);
+    const current_username = useSelector(state => state.authentication.username);
     const comments = useSelector(state => state.comment);
     const dispatch = useDispatch();
 
-    const playlistID = listID;
     const [commentText, setCommentText] = useState('');
     const [newText, setNewText] = useState({username:'',userComment:'',profileUrl:''});
     const [pic, setPic] =useState('');
 
     useEffect(()=>{
-        userService.getUserProfilePic(real_username)
+        userService.getUserProfilePic(current_username)
         .then(response => {
             setPic(response);
         })
@@ -25,8 +23,7 @@ function Comments({listID}) {
 
     function handleChange(e) {
         setCommentText(e.target.value);
-        setNewText({username:real_username,userComment:e.target.value,profileUrl:pic});
-        console.log(comments);
+        setNewText({username:current_username,userComment:e.target.value,profileUrl:pic});
     }
 
     function InputClick(e) {
@@ -34,19 +31,18 @@ function Comments({listID}) {
             alert('한 글자 이상 입력해주세요.');
         }
         if(commentText !== ''){
-            dispatch({type:'ADD',value:newText});
             commentService.uploadCommentByPlaylistID({
-                listID: playlistID,
-                username: real_username,
+                listID,
+                username: current_username,
                 userComment: newText.userComment
             }).then(() => {
+                dispatch({type:'ADD',value:newText});
                 setCommentText('');
             })
         }
     }
 
     return(
-        <>
         <S.CommentBox>
             <S.CommentTitle>Comments  {comments.length}</S.CommentTitle>
             <S.AddCommentWrapper>
@@ -57,16 +53,15 @@ function Comments({listID}) {
             </S.AddCommentWrapper>
             {comments.map((comment,index) =>
                 <Comment key={index}
-                         listID = {playlistID}
+                         listID = {listID}
                          commentID = {comment.commentID}
                          length={comments.length}
-                         c_index={index}
+                         index={index}
                          username={comment.username}
                          text={comment.userComment}
                          photo={comment.profileUrl}/>
             )}
         </S.CommentBox>
-        </>
     );
 }
 

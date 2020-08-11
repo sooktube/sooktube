@@ -40,7 +40,7 @@ function PlaylistCard({ listID }) {
             }
             <S.CardInfo>
                 <S.CardTitle> {card.listName} </S.CardTitle>
-                <S.Seperator/>
+                <S.Separator/>
                 <S.CardDesc> {card.listDesc} </S.CardDesc>
                 <S.CardAuthor>
                     <div> by {card.username} </div>

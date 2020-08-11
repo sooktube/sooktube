@@ -41,7 +41,7 @@ export const CardDesc = styled.div`
     line-height: 1.5em;
 `;
 
-export const Seperator = styled.div`
+export const Separator = styled.div`
     margin: 1em auto 1em auto;
     height: 0.2em;
     width: 5em;

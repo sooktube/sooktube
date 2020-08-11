@@ -4,7 +4,10 @@ import {RiChatUploadLine,BsThreeDotsVertical} from "react-icons/all";
 
 export const CommentBox = styled.div`
     width:100%;
-    margin-top:2%;
+    margin-top: 1rem;
+    overflow: auto;
+    border-radius: 15px;
+    height: 48%;
     background:#ffffff;
     display:block;
     padding-top:1%;
@@ -21,6 +24,9 @@ export const CommentContainer= styled.div`
     text-align:left;
     vertical-align:top;
     padding:1vh;
+    &:focus-within {
+      color: ${MAIN.BASE_COLOR};
+    }
 `;
 
 export const CommentTitle = styled.div`
@@ -37,7 +43,7 @@ export const Photo = styled.img`
     width:5vh;
     height:5vh;
     border-radius:2.5vh;
-    margin-left:0.3em;
+    margin-left:1rem;
 `;
 
 export const TextBox = styled.div`
@@ -46,32 +52,34 @@ export const TextBox = styled.div`
 `;
 
 export const EditInput = styled.input`
-    margin-left:1.5em;
-    width:70%;
-    border-top:0px;
-    border-left:0px;
-    border-right:0px;
-    &:focus{
-        outline:none;
+    font-size:2.5vh;
+    padding-bottom: 0.3em;
+    width: 75%;
+    margin-left: 1em;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom: 2px solid ${MAIN.BORDER_COLOR};
+    &:focus {
+      outline: none;
+      transition: border-color 0.5s ease;  
+      border-bottom: 3px solid ${MAIN.BASE_COLOR};
     }
 `;
 
-export const SaveButton = styled.button`
-    border:none;
-    font-size:1.8vh;
-    margin-left:1.5em;
-    padding: 0.3em 0.6em 0.3em 0.6em;
-    font-weight:500;
-    color:white;
-    background-color:#adb5bd;
-    border-radius:2px;
+export const SaveButton = styled(RiChatUploadLine)`
+    width: 5vw;
+    height: 5vh;
+    padding-top: 0;
+    text-align: center;
+    border-radius: 50%;
+    color: #a9a9a9;
     &:hover {
-        background-color:#ced4da;
+	  cursor:pointer;
     }
 `;
 
 export const Username = styled.div`
-    position:static;
     font-weight:500;
     font-size:2.2vh;
     margin-bottom:0.5em;
@@ -93,7 +101,7 @@ export const AddCommentWrapper = styled.div`
 export const UserProfile = styled.img`
     width:5vh;
     height:5vh;
-    margin-left:1em;
+    margin-left:1rem;
     margin-top: 0.2em;
     border-radius:2.5vh;
 `;
@@ -136,7 +144,6 @@ export const DotIcon = styled(BsThreeDotsVertical)`
     }
 `;
 
- 
 export const CreateDropdownContent = styled.div`
     position: absolute;
     margin-top: 2.2em;
