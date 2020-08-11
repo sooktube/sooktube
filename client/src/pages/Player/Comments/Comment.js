@@ -6,24 +6,21 @@ import {commentService} from "../../../services/comment.service";
 
 
 
-function Comment({videoID, commentID, length, c_index, username, text, photo}){
+function Comment({videoID, commentID, length, index, username, text, photo}){
 
-    const real_username = useSelector(state => state.authentication.username);
-    const comments = useSelector(state => state.comment);
+    const current_username = useSelector(state => state.authentication.username);
     const dispatch = useDispatch();
-
-    const c_videoID = videoID;
-    const c_commentID = commentID;
-    const c_length = length;
-    const index = c_index;
-    const c_username = username;
-
 
     const [createDropdownVisible, setCreateDropdownVisible] = useState(false);
     const [edit,setEdit] = useState(true);
     const [comment,setComment] = useState('');
-    const [newText,setNewText]=useState({commentID:null,videoID:null,username:'',userComment:'',profileUrl:''});
-
+    const [newText,setNewText]=useState({
+        commentID:null,
+        videoID:null,
+        username:'',
+        userComment: '',
+        profileUrl:''
+    });
 
  
    
@@ -38,7 +35,7 @@ function Comment({videoID, commentID, length, c_index, username, text, photo}){
 
     function handleChange(e) {
         setComment(e.target.value);
-        setNewText({commentID:c_commentID,videoID:c_videoID,username:c_username,userComment:e.target.value,profileUrl:photo});
+        setNewText({commentID, videoID, username, userComment: e.target.value, profileUrl:photo});
     }
 
     function EditClick(){
@@ -46,41 +43,35 @@ function Comment({videoID, commentID, length, c_index, username, text, photo}){
     }
 
     function SaveEdit(){
-        if(comment == ''){
+        if(comment === ''){
             alert('한 글자 이상 입력해주세요.');
         }
-        if(comment != ''){
-            dispatch({type:"EDIT",value:newText,index:index,length:c_length});
+        else{
             const c_text = { userComment: newText.userComment };
             commentService.updateCommentByVideoID({
                 comment: c_text,
-                commentID: c_commentID,
-                videoID: c_videoID,
-                username: real_username
+                commentID,
+                videoID,
+                username: current_username
             })
-            .then(response => {
-                console.log(response);
+            .then(() => {
+                dispatch({type:"EDIT",value:newText,index,length});
+                setEdit(true);
             })
-            console.log(comments);
-            setEdit(true);
-    }
+        }
     }
 
     function DeleteClick(){
-        if(index==0){
-            dispatch({type:"DELETE_FIRST", length:c_length});
-        }
-        else{
-            dispatch({type:"DELETE", index:index, length:c_length});
+        if(index === 0){
+            dispatch({type:"DELETE_FIRST", length});
         }
         commentService.deleteCommentByVideoID({
-            commentID: c_commentID,
-            videoID: c_videoID,
-            username: real_username
-        }).then(response => {
-            console.log(response);
+            commentID,
+            videoID,
+            username: current_username
+        }).then(() => {
+            dispatch({type:"DELETE", index, length});
         })
-        console.log(comments);
     }
 
     
@@ -93,14 +84,15 @@ function Comment({videoID, commentID, length, c_index, username, text, photo}){
                 <S.Username>{username}</S.Username>
                 <S.Text>{text}</S.Text>
             </S.TextBox>}
-            {(real_username == username) && edit && <S.DotIcon onClick={toggleDropdown}/> }
+            {(current_username === username) && edit && <S.DotIcon onClick={toggleDropdown}/> }
             {!edit && <S.EditInput value={comment} onChange={handleChange}/>}
             {!edit && <S.SaveButton onClick={SaveEdit}>저장</S.SaveButton>}
 
             {createDropdownVisible &&
                     <S.CreateDropdownContent ref={contentRef}>
                         <S.EditButton  onClick={EditClick}> 수정 </S.EditButton>
-                        <S.EditButton  onClick={DeleteClick}> 삭제</S.EditButton>
+                        <S.EditButton  onClick={() => {
+                            if(window.confirm('댓글을 삭제하시겠습니까?')) DeleteClick()}}> 삭제</S.EditButton>
                     </S.CreateDropdownContent>
             }
         </S.CommentContainer>

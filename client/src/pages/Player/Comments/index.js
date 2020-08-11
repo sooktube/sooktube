@@ -11,7 +11,7 @@ function CommentBox({p_videoID}){
     const comments = useSelector(state => state.comment);
     const dispatch = useDispatch();
 
-    const real_videoID = p_videoID;
+    
     const [commentText, setCommentText] = useState('');
     const [newText,setNewText] = useState({username:'',userComment:'',profileUrl:''});
     const [pic, setPic] = useState('');
@@ -68,14 +68,14 @@ function CommentBox({p_videoID}){
             {comments.map((comment,index) =>
                 <Comment
                     key={index}
-                    videoID = {real_videoID}
+                    videoID = {p_videoID}
                     commentID = {comment.commentID}
                     length={comments.length}
-                    c_index={index}
+                    index={index}
                     username={comment.username}
                     text={comment.userComment}
-                    photo={comment.profileUrl}
-                    />   
+                    photo={comment.profileUrl}/>
+                    
             )}
         </S.CommentBox>
         </>

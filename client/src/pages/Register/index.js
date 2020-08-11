@@ -135,7 +135,6 @@ function Register() {
     }
    
     
-
     return (
         <S.MainBackground>
          <S.RegisterForm className="register">

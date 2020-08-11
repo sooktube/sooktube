@@ -115,6 +115,7 @@ export const Label = styled.label`
     background-image : url(${props => props.img!=null ? props.img : img});
     background-size:cover;
     background-repeat:no-repeat;
+    background-position:center;
     width:90px;
     height:90px;
 	border-radius:45px;
