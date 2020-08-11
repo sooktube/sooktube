@@ -132,7 +132,6 @@ function getGTEQ0LT5VideoList(listID, username) {
         url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/0/LT/5/${listID}/${username}`,
     })
         .then(response => {
-            console.log(response);
             return response.data;
         })
         .catch(error => {

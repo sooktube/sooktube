@@ -19,7 +19,6 @@ function SearchVideo({listID}) {
         if(keyword) {
             playlistService.searchVideoByTitle(listID, username, keyword)
                 .then(response => {
-                    console.log(response);
                     setSearchResult(response);
                 })
         }
@@ -42,8 +41,8 @@ function SearchVideo({listID}) {
             }
             {keyword && searchResult &&
                 <S.SearchResult>
-                    {searchResult.map((result, index) =>
-                        <SearchListItem key={index}
+                    {searchResult.map(result =>
+                        <SearchListItem key={result.videoID}
                                         videoID={result.videoID}
                                         url={result.videoPath}
                                         title={result.videoTitle}
