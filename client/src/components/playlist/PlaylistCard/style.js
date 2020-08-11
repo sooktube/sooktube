@@ -45,7 +45,7 @@ export const Seperator = styled.div`
     margin: 1em auto 1em auto;
     height: 0.2em;
     width: 5em;
-    background-color: ${MAIN.MAIN_THEME_COLOR}
+    background-color: ${MAIN.BASE_COLOR}
 `;
 
 

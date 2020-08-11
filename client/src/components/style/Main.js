@@ -5,5 +5,5 @@ export const MAIN = {
     BACKGROUND_COLOR: '#ffffff',
     DARK_TEXT_COLOR :'#343a40',
     TEXT_COLOR : '#ffffff',
-    MAIN_THEME_COLOR: '#71A6C6'
+    BASE_COLOR: '#71A6C6'
 };

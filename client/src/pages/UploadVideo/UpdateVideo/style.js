@@ -48,7 +48,7 @@ export const UploadVideo = styled.div`
 export const UploadInput = styled.input`
     width:0;
     height:0;
-    background-color: ${MAIN.MAIN_THEME_COLOR};
+    background-color: ${MAIN.BASE_COLOR};
 `;
 
 export const VideoName = styled.span`
@@ -102,7 +102,7 @@ export const InputDesc = styled.textarea`
 
 export const Label = styled.label`
     padding: 0.3em 1em 0.5em 1em;
-	background:  ${MAIN.MAIN_THEME_COLOR};
+	background:  ${MAIN.BASE_COLOR};
 	border-radius: 30px;
 	color: white;
 	font-weight: 300;
@@ -117,7 +117,7 @@ export const Label = styled.label`
 `;
 
 export const UploadButton = styled.button`
-	background: ${MAIN.MAIN_THEME_COLOR};
+	background: ${MAIN.BASE_COLOR};
 	float: right;
 	margin-top: 1em;
 	color:white;

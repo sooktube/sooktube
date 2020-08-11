@@ -6,7 +6,7 @@ export const LoginButtonWrapper = styled.div`
     margin: 0;
     padding: 1em 1em 0 0;
     font-weight: 500;
-    color: ${MAIN.MAIN_THEME_COLOR};
+    color: ${MAIN.BASE_COLOR};
 `;
 
 export const LoginButton = styled.span`
@@ -22,7 +22,7 @@ export const RegisterButton = styled.span`
 `;
 
 export const StyledLink = styled(Link)`
-    color: ${MAIN.MAIN_THEME_COLOR};
+    color: ${MAIN.BASE_COLOR};
     &:hover {
         text-decoration: none;
         color: ${MAIN.DARK_ON_HOVER};

@@ -22,7 +22,7 @@ export const LoginLogo = styled.div`
     justify-content: center;
     width:60%; 
     padding:0;
-    color: ${MAIN.MAIN_THEME_COLOR};
+    color: ${MAIN.BASE_COLOR};
     font-weight:bold;
     margin-top:1em;
     
@@ -79,7 +79,7 @@ export const SubmitButton = styled.button`
     position:static; 
     margin: 0;
     padding: 0.5em 1em 0.5em 1em;
-    background-color: ${MAIN.MAIN_THEME_COLOR};
+    background-color: ${MAIN.BASE_COLOR};
     border: none;
     color: white;
     border-radius:20px;

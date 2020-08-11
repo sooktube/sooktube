@@ -7,7 +7,7 @@ export const AddCommentWrapper = styled.div`
     display: flex;
     color: darkgrey;
     &:focus-within {
-      color: ${MAIN.MAIN_THEME_COLOR};
+      color: ${MAIN.BASE_COLOR};
     }
 `;
 export const UserProfile = styled.img`
@@ -30,7 +30,7 @@ export const TextInput = styled.input`
     &:focus {
       outline: none;
       transition: border-color 0.5s ease;  
-      border-bottom: 3px solid ${MAIN.MAIN_THEME_COLOR};
+      border-bottom: 3px solid ${MAIN.BASE_COLOR};
     }
 `;
 
