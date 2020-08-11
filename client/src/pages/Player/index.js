@@ -75,7 +75,7 @@ function Player(){
                     <S.VideoDesc> {videoInfo.videoDesc} </S.VideoDesc>
                 </S.VideoContainer>
                 <hr/>
-                <CommentBox p_videoID={videoID}/>
+                <CommentBox videoID={videoID}/>
             </S.VideoWrapper>
             }
         </>

@@ -113,9 +113,9 @@ export const LabelBox = styled.div`
 export const Label = styled.label`
     padding: 5em 1em 0.1em 1.4em;
     background-image : url(${props => props.img!=null ? props.img : img});
-    background-size:cover;
-    background-repeat:no-repeat;
-    background-position:center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     width:90px;
     height:90px;
 	border-radius:45px;

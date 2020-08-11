@@ -5,9 +5,9 @@ import Comment from "./Comment";
 import {commentService} from "../../../services/comment.service";
 import {userService} from "../../../services/user.service";
 
-function CommentBox({p_videoID}){
+function CommentBox({videoID}){
     
-    const real_username = useSelector(state => state.authentication.username);
+    const current_username = useSelector(state => state.authentication.username);
     const comments = useSelector(state => state.comment);
     const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ function CommentBox({p_videoID}){
 
 
     useEffect(()=>{
-        userService.getUserProfilePic(real_username)
+        userService.getUserProfilePic(current_username)
         .then( response => {
             setPic(response);
             console.log(pic);
@@ -29,26 +29,23 @@ function CommentBox({p_videoID}){
 
     function handleChange(e) {
         setCommentText(e.target.value);
-        setNewText({username:real_username,userComment:e.target.value,profileUrl:pic});
-        console.log(comments);
+        setNewText({username:current_username,userComment:e.target.value,profileUrl:pic});
     }
 
     function InputClick(e) {
-        if(commentText == ''){
+        if(commentText === ''){
             alert('한 글자 이상 입력해주세요.');
         }
-        if(commentText!=''){
-            dispatch({type:'ADD',value:newText});
+        else {
             commentService.uploadCommentByVideoID({
-                videoID: real_videoID,
-                username: real_username,
+                videoID,
+                username: current_username,
                 userComment: newText.userComment
             }).then(response => {
-                console.log(response);
+                dispatch({type:'ADD',value:newText});
+                setCommentText('');
             })
         }
-        console.log(comments);
-        setCommentText('');
     }
 
    
@@ -61,8 +58,7 @@ function CommentBox({p_videoID}){
             <S.UserProfile src={pic}/>
             <S.TextInput
                          placeholder="댓글 추가" value={commentText}
-                         onChange={handleChange}
-                         />
+                         onChange={handleChange} />
             <S.SubmitButton onClick={InputClick} />
             </S.AddCommentWrapper>
             {comments.map((comment,index) =>

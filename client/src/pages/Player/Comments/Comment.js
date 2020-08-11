@@ -23,7 +23,7 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
     });
 
  
-   
+    
 
     const toggleDropdown = () => {
         setCreateDropdownVisible(!createDropdownVisible);

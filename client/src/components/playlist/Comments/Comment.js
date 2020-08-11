@@ -13,7 +13,7 @@ function Comment({listID, commentID, length, index, username, text, photo}){
     const [comment,setComment] = useState('');
     const [newText,setNewText]=useState({
         commentID:null,
-        listID:null,
+        listID:null, 
         username:'',
         userComment: '',
         profileUrl:''

@@ -27,9 +27,9 @@ function Register() {
         username: ''
     });
 
-    const [submitted, setSubmitted] = useState(false);
     let userImage = null;
     const [imageURL, setImageURL] = useState(null);
+    const [submitted, setSubmitted] = useState(false);
 
     const dispatch = useDispatch();
     const registering = useSelector(state => state.registration.registering);
