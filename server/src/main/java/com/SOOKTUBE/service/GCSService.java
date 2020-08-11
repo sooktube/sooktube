@@ -267,8 +267,7 @@ public class GCSService {
 				    return url.toString();
 		 }
 			  
-			  public String generateDefaultProfilePic(
-					  String username, String profilepic) {
+			  public String generateDefaultProfilePic(String profilepic) {
 				    // String projectId = "my-project-id";
 				    // String bucketName = "my-bucket";
 				    // String objectName = "my-object";

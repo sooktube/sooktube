@@ -71,6 +71,15 @@
 		    	WHERE `listID` = #{listID}
 		    		AND `videoID` = #{videoID}
 		    	
-		    	</select>    	
+		    	</select>    
+		    	
+		    <select id="getRecommendedbyUser"
+		    		resultType="com.SOOKTUBE.model.RecommendDTO">
+		    		
+		    		SELECT `listID`, `videoID`, `username`
+		    		FROM recommendVideo_list
+		    		WHERE `username` = #{username}
+		    		
+		    </select>	
 </mapper>
 
