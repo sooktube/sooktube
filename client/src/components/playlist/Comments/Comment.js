@@ -10,7 +10,7 @@ function Comment({listID, commentID, length, index, username, text, photo}){
 
     const [createDropdownVisible, setCreateDropdownVisible] = useState(false);
     const [edit,setEdit] = useState(true);
-    const [comment,setComment] = useState('');
+    const [comment,setComment] = useState(text);
     const [newText,setNewText]=useState({
         commentID:null,
         listID:null, 
@@ -18,6 +18,8 @@ function Comment({listID, commentID, length, index, username, text, photo}){
         userComment: '',
         profileUrl:''
     });
+
+    
 
     const toggleDropdown = () => {
         setCreateDropdownVisible(!createDropdownVisible);
@@ -33,7 +35,9 @@ function Comment({listID, commentID, length, index, username, text, photo}){
     }
 
     function EditClick(){
+        setComment(text);
         setEdit(false);
+        setNewText({commentID, listID, username, userComment: text, profileUrl:photo});
     }
 
     function SaveEdit(){
@@ -56,15 +60,17 @@ function Comment({listID, commentID, length, index, username, text, photo}){
     }
 
     function DeleteClick(){
-        if(index === 0){
-            dispatch({type:"DELETE_FIRST", length});
-        }
         commentService.deleteCommentByPlaylistID({
             commentID,
             listID,
             username: current_username
         }).then(() => {
-            dispatch({type:"DELETE", index, length});
+            if(index === 0){
+                dispatch({type:"DELETE_FIRST", length});
+            }
+            else { 
+                dispatch({type:"DELETE", index, length});
+            }
         })
     }
 

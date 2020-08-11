@@ -13,7 +13,7 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
 
     const [createDropdownVisible, setCreateDropdownVisible] = useState(false);
     const [edit,setEdit] = useState(true);
-    const [comment,setComment] = useState('');
+    const [comment,setComment] = useState(text);
     const [newText,setNewText]=useState({
         commentID:null,
         videoID:null,
@@ -21,9 +21,6 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
         userComment: '',
         profileUrl:''
     });
-
- 
-    
 
     const toggleDropdown = () => {
         setCreateDropdownVisible(!createDropdownVisible);
@@ -39,7 +36,9 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
     }
 
     function EditClick(){
+        setComment(text);
         setEdit(false);
+        setNewText({commentID, videoID, username, userComment: comment, profileUrl:photo});
     }
 
     function SaveEdit(){
@@ -62,15 +61,17 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
     }
 
     function DeleteClick(){
-        if(index === 0){
-            dispatch({type:"DELETE_FIRST", length});
-        }
         commentService.deleteCommentByVideoID({
             commentID,
             videoID,
             username: current_username
         }).then(() => {
-            dispatch({type:"DELETE", index, length});
+            if(index === 0){
+                dispatch({type:"DELETE_FIRST", length});
+            }
+            else{
+                dispatch({type:"DELETE", index, length});
+            }   
         })
     }
 

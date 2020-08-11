@@ -24,6 +24,7 @@ function Comments({listID}) {
     function handleChange(e) {
         setCommentText(e.target.value);
         setNewText({username:current_username,userComment:e.target.value,profileUrl:pic});
+        console.log(comments);
     }
 
     function InputClick(e) {
