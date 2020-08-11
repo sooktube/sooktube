@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.SOOKTUBE.dao.ListCommentGetDAO">
+
+	<select id="getCommentsandProfile"
+		    	resultType="com.SOOKTUBE.model.ListCommentGetDTO">
+		    	
+		SELECT `commentID`, `listID`, `userComment`, listComments.`username`, `commentDate`, `profilepic` as profileUrl
+		FROM listComments, user
+		WHERE `listID` = #{listID}
+			AND user.`username` = listComments.`username`
+		    	
+	</select>
+
+
+</mapper>

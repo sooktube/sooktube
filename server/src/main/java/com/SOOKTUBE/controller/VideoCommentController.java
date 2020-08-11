@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.SOOKTUBE.dao.ProfileDAO;
 import com.SOOKTUBE.dao.VideoCommentDAO;
+import com.SOOKTUBE.dao.VideoCommentGetDAO;
 import com.SOOKTUBE.model.VideoCommentDTO;
+import com.SOOKTUBE.model.VideoCommentGetDTO;
+import com.SOOKTUBE.service.GCSService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,8 +24,16 @@ import lombok.RequiredArgsConstructor;
 @MapperScan(basePackages = "com.SOOKTUBE.dao")
 public class VideoCommentController {
 	
+	private final GCSService gcsService;
+	
 	@Autowired
 	VideoCommentDAO videocommentDAO;
+	
+	@Autowired
+	VideoCommentGetDAO videocommentgetDAO;
+	
+	@Autowired
+	ProfileDAO profileDAO;
 	
 	//new comment
 	@CrossOrigin
@@ -69,11 +81,19 @@ public class VideoCommentController {
 	//select comments
 	@CrossOrigin
 	@RequestMapping(value = "/api/video/comment/videoID/{videoID}", method = RequestMethod.GET)
-	public VideoCommentDTO[] getVideoComment(@PathVariable("videoID") final int videoID) throws Exception {
+	public VideoCommentGetDTO[] getVideoComment(@PathVariable("videoID") final int videoID) throws Exception {
 		
-		VideoCommentDTO[] res = videocommentDAO.getCommentsByVideoID(videoID);
+		VideoCommentGetDTO[] comments = videocommentgetDAO.getCommentsandProfile(videoID);
 		
-		return res;
+		for (int i = 0; i < comments.length; i ++) {
+			
+			String profilepic = comments[i].getProfileUrl();
+			
+			comments[i].setProfileUrl(gcsService.getVideobyVIDEOtable(profilepic));
+		}
+		
+		
+		return comments;
 		
 	}
 
