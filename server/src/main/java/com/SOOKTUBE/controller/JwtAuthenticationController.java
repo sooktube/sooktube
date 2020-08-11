@@ -116,7 +116,7 @@ public class JwtAuthenticationController {
 		update.setUsername(user.getUsername());
 		update.setPassword(bcryptEncoder.encode(user.getPassword()));
 		update.setProfilepic(user.getProfilepic());
-		update.setPicpath(gcsService.generateDefaultProfilePic(user.getUsername(), user.getProfilepic()));
+		update.setPicpath(gcsService.generateDefaultProfilePic(user.getProfilepic()));
 		
 		profileDAO.updateUserinfo(update);
 		

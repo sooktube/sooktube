@@ -55,7 +55,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		
 		String username = user.getUsername();
 		String profilepic = user.getProfilepic();
-		String picPath = gcsService.generateURLforProfilePic(username, profilepic);
+		//String picPath = gcsService.generateURLforProfilePic(username, profilepic);
 		
 		if (profilepic.equals("defaultProfile.jpeg")) {
 			newUser.setPicpath(gcsService.getVideobyVIDEOtable("defaultProfile.jpeg"));
@@ -63,8 +63,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 		}
 		
 		else {
-			newUser.setPicpath(picPath);
-			profilepic = username + profilepic + "PROFILE";
+			//newUser.setPicpath(picPath);
+			//profilepic = username + profilepic + "PROFILE";
 			newUser.setProfilepic(profilepic);
 		}
 		
