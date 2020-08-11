@@ -4,7 +4,10 @@ import {RiChatUploadLine,BsThreeDotsVertical} from "react-icons/all";
 
 export const CommentBox = styled.div`
     width:100%;
-    margin-top:2%;
+    margin-top: 1rem;
+    overflow: auto;
+    border-radius: 15px;
+    height: 48%;
     background:#ffffff;
     display:block;
     padding-top:1%;
@@ -26,7 +29,7 @@ export const CommentContainer= styled.div`
 export const CommentTitle = styled.div`
     position:static;
     font-size:2.6vh;
-    font-weight:550;
+    font-weight:bold;
     margin-top:1.4em;
     margin-left:1em;
     margin-bottom:1em;
@@ -37,7 +40,7 @@ export const Photo = styled.img`
     width:5vh;
     height:5vh;
     border-radius:2.5vh;
-    margin-left:0.3em;
+    margin-left:1rem;
 `;
 
 export const TextBox = styled.div`
@@ -46,32 +49,34 @@ export const TextBox = styled.div`
 `;
 
 export const EditInput = styled.input`
-    margin-left:1.5em;
-    width:70%;
-    border-top:0px;
-    border-left:0px;
-    border-right:0px;
-    &:focus{
-        outline:none;
+    font-size:2.5vh;
+    padding-bottom: 0.3em;
+    width: 75%;
+    margin-left: 1em;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom: 2px solid ${MAIN.BORDER_COLOR};
+    &:focus {
+      outline: none;
+      transition: border-color 0.5s ease;  
+      border-bottom: 3px solid ${MAIN.BASE_COLOR};
     }
 `;
 
-export const SaveButton = styled.button`
-    border:none;
-    font-size:1.8vh;
-    margin-left:1.5em;
-    padding: 0.3em 0.6em 0.3em 0.6em;
-    font-weight:500;
-    color:white;
-    background-color:#adb5bd;
-    border-radius:2px;
+export const SaveButton = styled(RiChatUploadLine)`
+    width: 5vw;
+    height: 5vh;
+    padding-top: 0;
+    text-align: center;
+    border-radius: 50%;
+    color: #a9a9a9;
     &:hover {
-        background-color:#ced4da;
+	  cursor:pointer;
     }
 `;
 
 export const Username = styled.div`
-    position:static;
     font-weight:500;
     font-size:2.2vh;
     margin-bottom:0.5em;
@@ -87,13 +92,13 @@ export const AddCommentWrapper = styled.div`
     display: flex;
     color: darkgray;
     &:focus-within {
-      color: ${MAIN.MAIN_THEME_COLOR};
+      color: ${MAIN.BASE_COLOR};
     }
 `;
 export const UserProfile = styled.img`
     width:5vh;
     height:5vh;
-    margin-left:1em;
+    margin-left:1rem;
     margin-top: 0.2em;
     border-radius:2.5vh;
 `;
@@ -111,7 +116,7 @@ export const TextInput = styled.input`
     &:focus {
       outline: none;
       transition: border-color 0.5s ease;  
-      border-bottom: 3px solid ${MAIN.MAIN_THEME_COLOR};
+      border-bottom: 3px solid ${MAIN.BASE_COLOR};
     }
 `;
 
@@ -122,7 +127,7 @@ export const SubmitButton = styled(RiChatUploadLine)`
     text-align: center;
     border-radius: 50%;
     &:hover {
-	cursor:pointer;
+	  cursor:pointer;
     }
 `;
 
@@ -130,20 +135,19 @@ export const DotIcon = styled(BsThreeDotsVertical)`
     width: 4vw;
     height: 4vh;
     float:right;
+    color: #a9a9a9;
     &:hover {
 	cursor:pointer;
     }
 `;
 
- 
 export const CreateDropdownContent = styled.div`
     position: absolute;
     margin-top: 2.2em;
-    right: 5px;
-    
-    border-radius: 2%;
+    right: 2em;
     z-index: 200;
-    box-shadow: -0.05px -0.05px 5px grey ;
+    border-radius: 15px;
+    box-shadow: -0.05px -0.05px 10px rgba(0,0,0,0.2) ;
 `;
 
 export const EditButton = styled.button`

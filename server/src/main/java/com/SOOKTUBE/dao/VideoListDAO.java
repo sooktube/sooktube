@@ -23,6 +23,8 @@ public interface VideoListDAO {
 	
 	String getUsernameofList(int listID);
 	
+	VideoListDTO[] getVideoListbyUser(String username) throws Exception;
+	
 	//insert new videoList
 	int newList(VideoListDTO list) throws Exception;
 	int newListInfo(VideoListDTO list) throws Exception;
@@ -38,7 +40,12 @@ public interface VideoListDAO {
 	int revertRecommend(VideoListDTO list) throws Exception;
 	int revertDisrecommend(VideoListDTO list) throws Exception;
 	
+	//delete video list
+	int deleteVideolist(int listID) throws Exception;
+	
 
+	//update video list
+	int updatelistDesc(VideoListDTO videolist) throws Exception;
 	
 	
 	//delete video

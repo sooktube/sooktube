@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.9.12.202003180620-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[false]]></enableImports>
+	<configs>
+	</configs>
+	<autoconfigs>
+		<config>java:com.SOOKTUBE.controller.ListCommentController</config>
+		<config>java:com.SOOKTUBE.controller.VideoCommentController</config>
+		<config>java:com.SOOKTUBE.controller.VideoLikeController</config>
+		<config>java:com.SOOKTUBE.controller.ListLikeController</config>
+		<config>java:com.SOOKTUBE.controller.ListRecommendController</config>
+		<config>java:com.SOOKTUBE.SpringBootSOOKTUBEApplication</config>
+		<config>java:com.SOOKTUBE.controller.VideoController</config>
+		<config>java:com.SOOKTUBE.controller.VideoListController</config>
+		<config>java:com.SOOKTUBE.controller.GCSController</config>
+	</autoconfigs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

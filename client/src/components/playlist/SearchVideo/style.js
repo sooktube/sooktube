@@ -24,24 +24,24 @@ export const SearchInput = styled.input`
 `;
 
 export const SearchComment = styled.div`
-    font-size: 1.2em;
-    margin-top: 1em;
-    line-height: 1.2em;
     div {
-      color: ${MAIN.DARK_TEXT_COLOR};
+        font-size: 1.2em;
+        margin-top: 1em;
+        line-height: 1.2em;
+        color: ${MAIN.DARK_TEXT_COLOR};
     }
 `;
 
 export const Like = styled(IoIosHeart)`
     width: 1em;
     height: 1em;
-    color: ${MAIN.MAIN_THEME_COLOR};
+    color: ${MAIN.BASE_COLOR};
 `;
 
 export const Dislike = styled(IoMdHeartDislike)`
     width: 1em;
     height: 1em;
-    color: ${MAIN.MAIN_THEME_COLOR};
+    color: ${MAIN.BASE_COLOR};
 `
 
 export const SearchResult = styled.div`

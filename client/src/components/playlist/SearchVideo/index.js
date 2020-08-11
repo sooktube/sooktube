@@ -3,6 +3,7 @@ import * as S from './style';
 import {playlistService} from "../../../services";
 import SearchListItem from "./SearchListItem";
 import {useSelector} from "react-redux";
+import RecommendVideoList from "../RecommendVideoList";
 
 function SearchVideo({listID}) {
     const [keyword, setKeyword] = useState('');
@@ -18,7 +19,6 @@ function SearchVideo({listID}) {
         if(keyword) {
             playlistService.searchVideoByTitle(listID, username, keyword)
                 .then(response => {
-                    console.log(response);
                     setSearchResult(response);
                 })
         }
@@ -31,12 +31,18 @@ function SearchVideo({listID}) {
                            onChange={handleChange}
                            placeholder="검색어를 입력하세요."/>
             <S.SearchComment>
-                재생목록에 추가하고 싶은 영상은 <S.Like/> 추가하고 싶지 않은 영상은 <S.Dislike/> 버튼을 눌러주세요. <br/>
+                <div> 재생목록에 추가하고 싶은 영상은 <S.Like/>, 추가하고 싶지 않은 영상은 <S.Dislike/>을 눌러주세요. <br/> </div>
+                {!keyword &&
+                    <div> 다른 사용자들은 이런 영상이 추가되길 원해요🤗 </div>
+                }
             </S.SearchComment>
+            {!keyword &&
+                <RecommendVideoList listID={listID} username={username}/>
+            }
             {keyword && searchResult &&
                 <S.SearchResult>
-                    {searchResult.map((result, index) =>
-                        <SearchListItem key={index}
+                    {searchResult.map(result =>
+                        <SearchListItem key={result.videoID}
                                         videoID={result.videoID}
                                         url={result.videoPath}
                                         title={result.videoTitle}
@@ -46,6 +52,7 @@ function SearchVideo({listID}) {
                                         disrecommended={result.disrecommended}
                                         recCount={result.recCount}
                                         disrecCount={result.disrecCount}
+                                        inVideoList={result.inVideoList}
                         />
                     )}
                 </S.SearchResult>

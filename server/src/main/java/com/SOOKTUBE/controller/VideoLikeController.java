@@ -1,5 +1,7 @@
 package com.SOOKTUBE.controller;
 
+import java.util.List;
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -9,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.SOOKTUBE.dao.VideoDAO;
 import com.SOOKTUBE.dao.VideoLikeDAO;
+import com.SOOKTUBE.model.VideoDTO;
 import com.SOOKTUBE.model.VideoLikeDTO;
+import com.SOOKTUBE.service.GCSService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,9 +25,13 @@ import lombok.RequiredArgsConstructor;
 @MapperScan(basePackages = "com.SOOKTUBE.dao")
 public class VideoLikeController {
 	
+	 private final GCSService gcsService;
 	
 	@Autowired
 	private VideoLikeDAO videoLikeDAO;
+	
+	@Autowired
+	private VideoDAO videoDAO;
 	
 	//user likes a video
 	@CrossOrigin
@@ -96,6 +105,58 @@ public class VideoLikeController {
 		
 		return count;
 		
+	}
+	
+	//get liked videos by user
+	@CrossOrigin
+	@RequestMapping(value = "/api/liked/video/byUsername/{username}", method = RequestMethod.GET)
+	public VideoDTO[] getlikedVideo(@PathVariable("username") final String username) throws Exception {
+		
+		List<Integer> videoID = videoLikeDAO.getlikeVideos(username);
+		
+
+		VideoDTO[] res = new VideoDTO[videoID.size()];
+
+		for (int i = 0; i < videoID.size(); i++) {
+			
+			VideoDTO video = videoDAO.getDescbyVideoID(videoID.get(i));
+			
+			res[i] = video;
+			
+			res[i].setLike(videoLikeDAO.likeCount(videoID.get(i)));
+			res[i].setDislike(videoLikeDAO.dislikeCount(videoID.get(i)));
+			
+			res[i].setVideoPath(gcsService.getVideobyVIDEOtable(res[i].getUploadFileName()));
+		
+		}
+		
+		return res;
+		
+	}
+	
+	//get disliked videos by user
+	@CrossOrigin
+	@RequestMapping(value = "/api/disliked/video/byUsername/{username}", method = RequestMethod.GET)
+	public VideoDTO[] getdislikedVideo(@PathVariable("username") final String username) throws Exception {
+		
+		List<Integer> videoID = videoLikeDAO.getDislikeVideos(username);
+		
+		VideoDTO[] res = new VideoDTO[videoID.size()];
+		
+		for(int i = 0; i < videoID.size(); i++) {
+			
+			VideoDTO video = videoDAO.getDescbyVideoID(videoID.get(i));
+			
+			res[i] = video;
+			
+			res[i].setLike(videoLikeDAO.likeCount(videoID.get(i)));
+			res[i].setDislike(videoLikeDAO.dislikeCount(videoID.get(i)));
+			
+			res[i].setVideoPath(gcsService.getVideobyVIDEOtable(res[i].getUploadFileName()));
+			
+		}
+		
+		return res;
 	}
 	
 

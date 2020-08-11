@@ -23,11 +23,9 @@
 		    <select id="getVideoList"
 		    resultType="com.SOOKTUBE.model.VideoListDTO">
     		
-			SELECT videoList.`listID`, `videoID`, `listName`, `listDesc`, videoList.`username`, `isPublic`, `thumbnail`
-			FROM videoList, listInfo, user
-			WHERE videoList.`listID` = listInfo.`listID`
-				AND
-					videoList.`username` = user.`username`
+			SELECT 
+			     `listID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`
+			FROM listInfo
     		
     		</select>
     		
@@ -39,6 +37,18 @@
 			     `listID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`
 			FROM listInfo
 			WHERE listInfo.`listID` = #{listID}
+
+    		
+    		</select>
+    		
+    		<select id="getVideoListbyUser"
+    		parameterType="String"
+		    resultType="com.SOOKTUBE.model.VideoListDTO">
+    		
+			SELECT 
+			     `listID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`
+			FROM listInfo
+			WHERE listInfo.`username` = #{username}
 
     		
     		</select>
@@ -195,6 +205,7 @@
 		         WHERE `listID` = #{listID}
 		         AND `videoID` = #{videoID}
 		    </update>
+		    
 
     <delete id="deleteVideoFromlist">
     	DELETE FROM videoList
@@ -202,5 +213,21 @@
     	AND listID = #{listID}
     </delete>
 
+    <delete id="deleteVideolist">
+    	DELETE FROM listInfo
+    	WHERE listID = #{listID}
+    </delete>
+    
+    <update id="updatelistDesc" parameterType="com.SOOKTUBE.model.VideoListDTO">
+    
+    UPDATE listInfo
+    	SET `listName` = #{listName}
+    	, `listDesc` = #{listDesc}
+    	, `isPublic` = #{isPublic}
+    	, `thumbnail` = #{thumbnail}
+    	
+    	WHERE `listID` = #{listID}
+    
+    </update>
 
 </mapper>

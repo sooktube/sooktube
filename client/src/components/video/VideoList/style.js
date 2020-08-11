@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const VideoListWrapper = styled.main`
-    padding: 0.5rem 0.5rem 0.5rem 1rem; 
-    margin-top: 1rem;
+    padding: 1rem;
     border-radius: 15px;
     width: 100%;
     background-color: transparent;

@@ -17,10 +17,10 @@ export const HeaderLogo = styled(NavLink)`
     padding-top: 1vh;
     padding-bottom: 0.5em;
     letter-spacing: 0.2em;
-    color: ${MAIN.MAIN_THEME_COLOR};
+    color: ${MAIN.BASE_COLOR};
     &:hover {
         text-decoration: none;
-        color: ${MAIN.MAIN_THEME_COLOR};
+        color: ${MAIN.BASE_COLOR};
     }
 `;
 

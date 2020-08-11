@@ -1,5 +1,7 @@
 package com.SOOKTUBE.model;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,5 +18,7 @@ public class VideoCommentDTO {
 	
 	private String userComment;
 	private String username;
+	
+	private Timestamp commentDate;
 
 }

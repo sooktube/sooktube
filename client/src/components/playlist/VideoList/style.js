@@ -11,6 +11,7 @@ export const IsVideo = styled.div`
 `;
 
 export const VideoListWrapper = styled.section`
+  margin: 0;
 	height: 100%;
 `;
 

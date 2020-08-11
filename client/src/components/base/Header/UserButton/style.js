@@ -14,7 +14,7 @@ export const Username = styled.div`
 
 export const ArrowDown = styled(TiArrowSortedDown)`
     margin: 0.5em 0 0 0.1em;
-    color: ${MAIN.MAIN_THEME_COLOR};
+    color: ${MAIN.BASE_COLOR};
     &:hover {
         color: ${MAIN.DARK_ON_HOVER};
     }
@@ -22,14 +22,14 @@ export const ArrowDown = styled(TiArrowSortedDown)`
 
 export const PlusMenu = styled(FiPlus)`
     margin-top: 0.5em;
-    color: ${MAIN.MAIN_THEME_COLOR};
+    color: ${MAIN.BASE_COLOR};
 `;
 
 export const UserIcon = styled(FaRegUserCircle)`
     height: 2em;
     width: 2em;
     margin: 0 0.2em 0 0;
-    color: ${MAIN.MAIN_THEME_COLOR};
+    color: ${MAIN.BASE_COLOR};
 `;
 
 export const UserDropdownContent = styled.div`

@@ -66,7 +66,7 @@ export const InputDesc = styled.textarea`
 
 export const Label = styled.label`
   padding: 0.3em 1em 0.5em 1em;
-	background:  ${MAIN.MAIN_THEME_COLOR};
+	background:  ${MAIN.BASE_COLOR};
 	display:inline;
 	border-radius: 30px;
 	color: white;
@@ -128,7 +128,7 @@ export const TextCheck2 = styled.div`
 `;
 
 export const UploadButton = styled.button`
-	background:  ${MAIN.MAIN_THEME_COLOR};
+	background:  ${MAIN.BASE_COLOR};
 	border-radius: 25px;
 	color:white;
 	float:right;

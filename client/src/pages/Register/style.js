@@ -23,7 +23,7 @@ export const RegisterLogo = styled.div`
 	align-items: center;
 	justify-content: center; 
     padding: 0;
-    color: ${MAIN.MAIN_THEME_COLOR};
+    color: ${MAIN.BASE_COLOR};
     letter-spacing: 0.1em;
     font-weight:bold;
     margin-top: 1em;
@@ -85,7 +85,7 @@ export const Rsubmit = styled.button`
     position:static; 
     margin: 0; 
     padding: 0;
-    background-color: ${MAIN.MAIN_THEME_COLOR};
+    background-color: ${MAIN.BASE_COLOR};
     border: none;
     color: white;
     &:hover {

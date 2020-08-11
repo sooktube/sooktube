@@ -7,6 +7,7 @@ import dummy_card_image from '../../../../public/images/dummy_card_img.jpg';
 function PlaylistCard({ listID }) {
     const username = useSelector(state => state.authentication.username);
     const [loading, setLoading] = useState(true);
+
     const [card, setCard] = useState({
         thumbnail: null,
         listName: null,
@@ -39,7 +40,7 @@ function PlaylistCard({ listID }) {
             }
             <S.CardInfo>
                 <S.CardTitle> {card.listName} </S.CardTitle>
-                <S.Seperator/>
+                <S.Separator/>
                 <S.CardDesc> {card.listDesc} </S.CardDesc>
                 <S.CardAuthor>
                     <div> by {card.username} </div>

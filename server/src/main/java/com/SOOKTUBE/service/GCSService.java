@@ -211,7 +211,113 @@ public class GCSService {
 				    
 				    return res;
 		 }
-		
+
+			  
+
+			  public String generateURLforProfilePic(
+					  String username, String profilepic) {
+				    // String projectId = "my-project-id";
+				    // String bucketName = "my-bucket";
+				    // String objectName = "my-object";
+				  
+				  //String[] res = new String[2];
+				  
+
+				  
+				  AppIdentityService appIdentityService = AppIdentityServiceFactory.getAppIdentityService();
+
+				  Credentials credentials =
+				      AppEngineCredentials.newBuilder()
+				          .setAppIdentityService(appIdentityService)
+				          .build();
+
+				  String projectId = "soktube";
+				  String bucketName = "soktube.appspot.com";
+				  
+				  //업로드 날짜 저장
+				  String fileName = username + profilepic + "PROFILE";
+				  System.out.println(fileName);
+				  
+				  //res[0] = fileName;
+
+
+				   Storage storage = StorageOptions.newBuilder().setProjectId(projectId).setCredentials(credentials).build().getService();
+
+				    // Define Resource
+				    BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of(bucketName, fileName)).build();
+
+				    // Generate Signed URL
+				    Map<String, String> extensionHeaders = new HashMap<>();
+				    extensionHeaders.put("Content-Type", "image/jpeg");
+
+				    URL url =
+				        storage.signUrl(
+				            blobInfo,
+				            15,
+				            TimeUnit.MINUTES,
+				            Storage.SignUrlOption.httpMethod(HttpMethod.PUT),
+				            Storage.SignUrlOption.withExtHeaders(extensionHeaders),
+				            Storage.SignUrlOption.withV4Signature());
+				    
+				    
+				    //res[1] = url.toString();
+				    
+				    System.out.println(url);
+				    
+				    return url.toString();
+		 }
+			  
+			  public String generateDefaultProfilePic(String profilepic) {
+				    // String projectId = "my-project-id";
+				    // String bucketName = "my-bucket";
+				    // String objectName = "my-object";
+				  
+				  //String[] res = new String[2];
+				  
+
+				  
+				  AppIdentityService appIdentityService = AppIdentityServiceFactory.getAppIdentityService();
+
+				  Credentials credentials =
+				      AppEngineCredentials.newBuilder()
+				          .setAppIdentityService(appIdentityService)
+				          .build();
+
+				  String projectId = "soktube";
+				  String bucketName = "soktube.appspot.com";
+				  
+				  //업로드 날짜 저장
+				  //String fileName = username + profilepic + "PROFILE";
+				  //System.out.println(fileName);
+				  
+				  //res[0] = fileName;
+
+
+				   Storage storage = StorageOptions.newBuilder().setProjectId(projectId).setCredentials(credentials).build().getService();
+
+				    // Define Resource
+				    BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of(bucketName, profilepic)).build();
+
+				    // Generate Signed URL
+				    Map<String, String> extensionHeaders = new HashMap<>();
+				    extensionHeaders.put("Content-Type", "image/jpeg");
+
+				    URL url =
+				        storage.signUrl(
+				            blobInfo,
+				            15,
+				            TimeUnit.MINUTES,
+				            Storage.SignUrlOption.httpMethod(HttpMethod.PUT),
+				            Storage.SignUrlOption.withExtHeaders(extensionHeaders),
+				            Storage.SignUrlOption.withV4Signature());
+				    
+				    
+				    //res[1] = url.toString();
+				    
+				    System.out.println(url);
+				    
+				    return url.toString();
+		 }
 	  
 	  
  

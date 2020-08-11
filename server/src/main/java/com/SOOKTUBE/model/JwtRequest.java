@@ -10,6 +10,8 @@ public class JwtRequest implements Serializable {
 	private String username;
 	private String password;
 	private String userID;
+	private String profilepic;
+	private String picpath;
 	
 	//need default constructor for JSON Parsing
 	public JwtRequest()
@@ -17,10 +19,12 @@ public class JwtRequest implements Serializable {
 		
 	}
 
-	public JwtRequest(String userID, String username, String password) {
+	public JwtRequest(String userID, String username, String password, String profilepic, String picpath) {
 		this.setUserID(userID);
 		this.setUsername(username);
 		this.setPassword(password);
+		this.setProfilepic(profilepic);
+		this.setPicpath(picpath);
 	}
 
 	public String getUsername() {
@@ -46,4 +50,22 @@ public class JwtRequest implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getProfilepic() {
+		return profilepic;
+	}
+
+	public void setProfilepic(String profilepic) {
+		this.profilepic = profilepic;
+	}
+
+
+	public String getPicpath() {
+		return picpath;
+	}
+
+	public void setPicpath(String picpath) {
+		this.picpath = picpath;
+	}
+	 
 }

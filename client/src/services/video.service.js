@@ -86,7 +86,7 @@ function getVideoFileByFileName(uploadFileName) {
 }
 
 
-function getVideoInfoByVideoID(videoID,username) {
+function getVideoInfoByVideoID(videoID, username) {
     return axios({
         method: 'GET',
         url: `https://soktube.appspot.com/api/video/desc/url/ID/${videoID}/${username}`,
@@ -145,10 +145,10 @@ function updateVideoByVideoID(input, videoID) {
 function getLikeCountByVideoID(videoID) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/like/dislike/videoID/${videoID}`,
+        url: `https://soktube.uc.r.appspot.com/api/like/dislike/count/videoID/${videoID}`,
     })
         .then(response => {
-            return response;
+            return response.data;
         })
         .catch(error => {
             return error;

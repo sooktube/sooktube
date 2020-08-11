@@ -1,5 +1,7 @@
 package com.SOOKTUBE.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.SOOKTUBE.model.ListLikeDTO;
@@ -26,5 +28,9 @@ public interface ListLikeDAO {
 	int countLike(int listID) throws Exception;
 	//count dislike
 	int countDislike(int listID) throws Exception;
+	
+	//get liked disliked list by user
+	List<Integer> getlikedListbyUser(String username) throws Exception;
+	List<Integer> getdislikedListbyUser(String username) throws Exception;
 
 }

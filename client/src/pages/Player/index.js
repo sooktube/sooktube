@@ -29,9 +29,13 @@ function Player(){
     });
 
     useEffect(() => {
-        videoService.getVideoInfoByVideoID(videoID)
+        videoService.getVideoInfoByVideoID(videoID, username)
             .then(response => {
                 setVideoInfo(response);
+                return videoService.getLikeCountByVideoID(videoID)
+            })
+            .then(response => {
+                setVideoInfo(videoInfo => ({...videoInfo, likeCount: response[0], dislikeCount: response[1]}));
                 setLoading(false);
             })
 

@@ -10,9 +10,22 @@
 		    
 		    </insert>
 
+
+		    <insert id = "disrecommendVideoInList">
+		    	INSERT INTO disrecommendVideo_list(`listID`, `videoID`, `username`)
+		    	VALUES(#{listID}, #{videoID}, #{username})
 		    
-		    <delete id = "disrecommendVideoInList">
+		    </insert>
+		    
+		    <delete id = "revertRecommend">
 		    	DELETE FROM recommendVideo_list
+		    	WHERE `listID` = #{listID}
+		    		AND `videoID` = #{videoID}
+		    			AND `username` = #{username}
+		    </delete>
+
+		    <delete id = "revertDisrecommend">
+		    	DELETE FROM disrecommendVideo_list
 		    	WHERE `listID` = #{listID}
 		    		AND `videoID` = #{videoID}
 		    			AND `username` = #{username}
@@ -28,5 +41,45 @@
 		    			AND `username` = #{username}
 		    	
 		    	</select>
+
+		    <select id="getDisrecommendedVideo"
+		    	resultType="com.SOOKTUBE.model.RecommendDTO">
+		    	
+		    	SELECT `listID`, `videoID`, `username`
+		    	FROM disrecommendVideo_list
+		    	WHERE `listID` = #{listID}
+		    		AND `videoID` = #{videoID}
+		    			AND `username` = #{username}
+		    	
+		    	</select>	
+		    	
+		    <select id="recCount"
+		    	resultType="Integer">
+		    	
+		    	SELECT `like`
+		    	FROM videoList
+		    	WHERE `listID` = #{listID}
+		    		AND `videoID` = #{videoID}
+		    	
+		    	</select>	
+		    	
+		    <select id="disrecCount"
+		    	resultType="Integer">
+		    	
+		    	SELECT `dislike`
+		    	FROM videoList
+		    	WHERE `listID` = #{listID}
+		    		AND `videoID` = #{videoID}
+		    	
+		    	</select>    
+		    	
+		    <select id="getRecommendedbyUser"
+		    		resultType="com.SOOKTUBE.model.RecommendDTO">
+		    		
+		    		SELECT `listID`, `videoID`, `username`
+		    		FROM recommendVideo_list
+		    		WHERE `username` = #{username}
+		    		
+		    </select>	
 </mapper>
 

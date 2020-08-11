@@ -40,6 +40,18 @@
 
     		
     		</select>
+    		
+    		<select id="getVideoListbyUser"
+    		parameterType="String"
+		    resultType="com.SOOKTUBE.model.VideoListDTO">
+    		
+			SELECT 
+			     `listID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`
+			FROM listInfo
+			WHERE listInfo.`username` = #{username}
+
+    		
+    		</select>
 
 
     		<select id="getVideoListbyVideoID"
@@ -201,5 +213,21 @@
     	AND listID = #{listID}
     </delete>
 
+    <delete id="deleteVideolist">
+    	DELETE FROM listInfo
+    	WHERE listID = #{listID}
+    </delete>
+    
+    <update id="updatelistDesc" parameterType="com.SOOKTUBE.model.VideoListDTO">
+    
+    UPDATE listInfo
+    	SET `listName` = #{listName}
+    	, `listDesc` = #{listDesc}
+    	, `isPublic` = #{isPublic}
+    	, `thumbnail` = #{thumbnail}
+    	
+    	WHERE `listID` = #{listID}
+    
+    </update>
 
 </mapper>

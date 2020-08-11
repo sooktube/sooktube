@@ -57,6 +57,24 @@
     	WHERE `videoID` = #{videoID}
     	
     </select>
+    
+    <select id="getlikeVideos"
+    		resultType = "Integer">
+    
+    		SELECT `videoID`
+    		FROM videoLike
+    		WHERE `username` = #{username}
+    
+    </select>
+    
+    <select id="getDislikeVideos"
+    		resultType = "Integer">
+    		
+    		SELECT `videoID`
+    		FROM videoDislike
+    		WHERE `username` = #{username}
+    
+    </select>
 
     <delete id="revertLike"> 
     	DELETE FROM videoLike

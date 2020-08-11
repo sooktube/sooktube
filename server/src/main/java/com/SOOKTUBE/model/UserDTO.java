@@ -4,6 +4,8 @@ public class UserDTO {
 	private String username;
 	private String password;
 	private String userID;
+	private String profilepic;
+	private String picpath;
 
 	public String getUsername() {
 		return username;
@@ -28,4 +30,22 @@ public class UserDTO {
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
+
+	public String getProfilepic() {
+		return profilepic;
+	}
+
+	public void setProfilepic(String profilepic) {
+		this.profilepic = profilepic;
+	}
+
+
+	public String getPicpath() {
+		return picpath;
+	}
+
+	public void setPicpath(String picpath) {
+		this.picpath = picpath;
+	}
+
 }

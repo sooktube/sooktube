@@ -74,9 +74,10 @@ public class GCSController {
 	
 	//get videos by videoID
     //modified
+    //return whether user liked/disliked video
     @CrossOrigin
-	@RequestMapping(value = "/api/video/desc/url/ID/{videoID}", method = RequestMethod.GET)
-	public VideoDTO getURLfromGCSbyVideoID(@PathVariable("videoID") final int videoID) throws Exception {
+	@RequestMapping(value = "/api/video/desc/url/ID/{videoID}/{username}", method = RequestMethod.GET)
+	public VideoDTO getURLfromGCSbyVideoID(@PathVariable("videoID") final int videoID, @PathVariable("username") final String username) throws Exception {
 		
     	VideoDTO video = videoDAO.getDescbyVideoID(videoID);
     	
@@ -84,14 +85,20 @@ public class GCSController {
 
 		String url = gcsService.getVideobyVIDEOtable(fileName);
 		
-		video.setLike(videoLikeDAO.likeCount(videoID));
-		video.setDislike(videoLikeDAO.dislikeCount(videoID));
+		if(videoLikeDAO.selectLikeVideo(videoID, username) != null) {
+			video.setLike(1);
+		}
 		
+		else if(videoLikeDAO.selectDislikeVideo(videoID, username) != null) {
+			video.setDislike(-1);
+		}
+
 		video.setVideoPath(url);
 		
 		return video;
 		
 	}
+    
 	
 	
 	//get videos by username
