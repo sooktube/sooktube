@@ -3,6 +3,7 @@ package com.SOOKTUBE.dao;
 import org.apache.ibatis.annotations.Param;
 
 import com.SOOKTUBE.model.VideoCommentDTO;
+import com.SOOKTUBE.model.VideoCommentGetDTO;
 
 public interface VideoCommentDAO {
 	

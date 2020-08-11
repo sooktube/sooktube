@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SOOKTUBE.dao.ListCommentDAO;
+import com.SOOKTUBE.dao.ListCommentGetDAO;
 import com.SOOKTUBE.model.ListCommentDTO;
+import com.SOOKTUBE.model.ListCommentGetDTO;
+import com.SOOKTUBE.service.GCSService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,8 +23,13 @@ import lombok.RequiredArgsConstructor;
 @MapperScan(basePackages = "com.SOOKTUBE.dao")
 public class ListCommentController {
 	
+	private final GCSService gcsService;
+	
 	@Autowired
 	ListCommentDAO listcommentDAO;
+	
+	@Autowired
+	ListCommentGetDAO listcommentgetDAO;
 	
 	//new comment
 	@CrossOrigin
@@ -71,11 +79,18 @@ public class ListCommentController {
 	//get comment by listID
 	@CrossOrigin
 	@RequestMapping(value = "/api/list/comment/listID/{listID}", method = RequestMethod.GET)
-	public ListCommentDTO[] getListcomments(@PathVariable("listID") final int listID) throws Exception {
+	public ListCommentGetDTO[] getListcomments(@PathVariable("listID") final int listID) throws Exception {
 		
-		ListCommentDTO[] res = listcommentDAO.getCommentsByListID(listID);
+		ListCommentGetDTO[] comments = listcommentgetDAO.getCommentsandProfile(listID);
 		
-		return res;
+		for(int i = 0; i < comments.length; i++) {
+			
+			String profilepic = comments[i].getProfileUrl();
+			
+			comments[i].setProfileUrl(gcsService.getVideobyVIDEOtable(profilepic));
+		}
+		
+		return comments;
 		
 		
 	}
