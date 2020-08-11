@@ -64,7 +64,7 @@ function CommentBox({videoID}){
             {comments.map((comment,index) =>
                 <Comment
                     key={index}
-                    videoID = {p_videoID}
+                    videoID = {videoID}
                     commentID = {comment.commentID}
                     length={comments.length}
                     index={index}
