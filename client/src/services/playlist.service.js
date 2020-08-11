@@ -15,7 +15,9 @@ export const playlistService ={
     cancelRecommendVideoInPlaylist,
     disrecommendVideoInPlaylist,
     cancelDisrecommendVideoInPlaylist,
-    addVideoToPlaylist
+    addVideoToPlaylist,
+    getPlaylistListByUsername,
+    getPlaylistListLikedByUsername
 }
 
 function getPlaylistUploadURL(input) {
@@ -88,10 +90,12 @@ function UploadPlaylistInfo(input) {
     })
 }
 
-function getPlaylistInfoByListID(listID) {
+function getPlaylistInfoByListID(listID,username) {
+    console.log(listID);
+    console.log(username)
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/videolist/desc/thumbnail/${listID}`
+        url: `https://soktube.uc.r.appspot.com/api/videolist/desc/thumbnail/${listID}/${username}`
     })
         .then(response => {
             return response.data[0];
@@ -220,3 +224,32 @@ function addVideoToPlaylist({listID, videoID, username}) {
             return error;
         })
 }
+
+function getPlaylistListByUsername(username) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.uc.r.appspot.com/api/video/list/by/username/${username}`,
+    })
+      .then(response => {
+          return response.data;
+      })
+      .catch(error => {
+          return null;
+      })
+}
+
+function getPlaylistListLikedByUsername(username) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.uc.r.appspot.com/api/liked/list/byUser/${username}`,
+    })
+      .then(response => {
+          return response.data;
+      })
+      .catch(error => {
+          return null;
+      })
+}
+
+
+

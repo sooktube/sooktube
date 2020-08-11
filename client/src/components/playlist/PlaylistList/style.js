@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const VideoListWrapper = styled.main`
-    padding: 0.5rem 0.5rem 0.5rem 1rem; 
+    padding: 0.5rem 0.5rem 0.5rem 3rem; 
     margin-top: 1rem;
     border-radius: 15px;
     width: 100%;
@@ -16,7 +16,7 @@ export const VideoType = styled.div`
 `;
 
 export const LikedVideoListWrapper = styled.div`
-    padding: 0.5rem 0.5rem 0.5rem 5rem; 
+    padding: 0.5rem 0.5rem 0.5rem 7rem; 
     margin-top: 1rem;
     border-radius: 15px;
     width: 100%;

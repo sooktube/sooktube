@@ -1,26 +1,28 @@
-import React,{useState,useRef,createContext,useEffect,useContext} from 'react';
+import React,{ useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as S from "./style";
 import useDropdownOutsideClick from "../../../hooks/useDropdownOutsideClick";
-import { CommentProvider, useCommentState,useCommentDispatch,useTextState ,useTextDispatch} from "../CommentContext";
-import { useDispatch, useSelector } from 'react-redux';
-import {commentActions} from "../../../actions";
+import {commentService} from "../../../services/comment.service";
 
 
 
-function Comment({length,username1, username, text, photo}){
+function Comment({videoID, commentID, length, c_index, username, text, photo}){
 
     const real_username = useSelector(state => state.authentication.username);
-
     const comments = useSelector(state => state.comment);
-    const dispatch=useDispatch();
-    const index=username1;
-    let inputText=text;
-    const username2=username;
-    const last = length;
+    const dispatch = useDispatch();
+
+    const c_videoID = videoID;
+    const c_commentID = commentID;
+    const c_length = length;
+    const index = c_index;
+    const c_username = username;
+
+
     const [createDropdownVisible, setCreateDropdownVisible] = useState(false);
     const [edit,setEdit] = useState(true);
     const [comment,setComment] = useState('');
-    const [newText1,setNewText1]=useState({username:'',text:'',photo:''});
+    const [newText,setNewText]=useState({commentID:null,videoID:null,username:'',userComment:'',profileUrl:''});
 
 
  
@@ -36,34 +38,52 @@ function Comment({length,username1, username, text, photo}){
 
     function handleChange(e) {
         setComment(e.target.value);
-        setNewText1({username:username2,text:e.target.value,photo:'https://storage.googleapis.com/sttbucket2020/sunset.jpg'});
+        setNewText({commentID:c_commentID,videoID:c_videoID,username:c_username,userComment:e.target.value,profileUrl:photo});
     }
 
     function EditClick(){
         setEdit(false);
     }
+
     function SaveEdit(){
-        dispatch({type:"EDIT",value:newText1,index:index,length:last});
-        console.log(comments);
-        setEdit(true);
+        if(comment == ''){
+            alert('한 글자 이상 입력해주세요.');
+        }
+        if(comment != ''){
+            dispatch({type:"EDIT",value:newText,index:index,length:c_length});
+            const c_text = { userComment: newText.userComment };
+            commentService.updateCommentByVideoID({
+                comment: c_text,
+                commentID: c_commentID,
+                videoID: c_videoID,
+                username: real_username
+            })
+            .then(response => {
+                console.log(response);
+            })
+            console.log(comments);
+            setEdit(true);
+    }
     }
 
     function DeleteClick(){
-        setNewText1({username:username2,text:inputText,photo:'https://storage.googleapis.com/sttbucket2020/sunset.jpg'});
         if(index==0){
-            dispatch({type:"DELETE_FIRST",length:last});
+            dispatch({type:"DELETE_FIRST", length:c_length});
         }
         else{
-            dispatch({type:"DELETE",index:index,length:last});
-
+            dispatch({type:"DELETE", index:index, length:c_length});
         }
+        commentService.deleteCommentByVideoID({
+            commentID: c_commentID,
+            videoID: c_videoID,
+            username: real_username
+        }).then(response => {
+            console.log(response);
+        })
         console.log(comments);
     }
 
-    useEffect(()=>{
-        const q='댓글하나박스 마운트'
-        console.log(q);
-    },);
+    
 
 
     return(
@@ -71,9 +91,9 @@ function Comment({length,username1, username, text, photo}){
             <S.Photo src={photo}/>
             {edit && <S.TextBox>
                 <S.Username>{username}</S.Username>
-                <S.Text>{inputText}</S.Text>
+                <S.Text>{text}</S.Text>
             </S.TextBox>}
-            {(real_username==username)&& edit && <S.DotIcon onClick={toggleDropdown}/> }
+            {(real_username == username) && edit && <S.DotIcon onClick={toggleDropdown}/> }
             {!edit && <S.EditInput value={comment} onChange={handleChange}/>}
             {!edit && <S.SaveButton onClick={SaveEdit}>저장</S.SaveButton>}
 

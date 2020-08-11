@@ -100,3 +100,27 @@ export const InvalidFeedback = styled.div`
     font-size: 1.5vh;
     margin-top: 0.2em;
 `;
+
+export const Label = styled.label`
+    padding: 0.3em 1em 0.5em 1em;
+    background:  ${MAIN.MAIN_THEME_COLOR};
+    width:100px;
+    height:100px;
+	border-radius: 50px;
+	color: white;
+	font-weight: 300;
+	font-size: 1rem;
+	transition: all 0.2s ease-in;
+	cursor: pointer;
+	outline: none;
+	border: none;
+	&:hover {
+    background-color: ${MAIN.BRIGHT_ON_HOVER};
+  }
+`;
+
+export const UploadInput = styled.input`
+    width:0;
+    height:0;
+    background-color: ${MAIN.MAIN_THEME_COLOR};
+`;

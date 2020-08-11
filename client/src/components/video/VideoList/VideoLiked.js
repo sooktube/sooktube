@@ -2,11 +2,11 @@ import React from 'react';
 import * as S from './style';
 import VideoListItem from "./VideoListItem";
 
-function VideoList({videoList, length}) {
+function VideoLikedList({videoList, length}) {
    
     return (
-        <S.VideoListWrapper>
-            <S.VideoType>My Videos  {length} </S.VideoType>
+        <S.LikedVideoListWrapper>
+            <S.VideoType>Videos I've liked  {length} </S.VideoType>
             {videoList.map(video =>
                 <VideoListItem  key={video.videoID}
                                 videoID={video.videoID}
@@ -17,8 +17,8 @@ function VideoList({videoList, length}) {
                                 url={video.videoPath}
                 />
             )}
-        </S.VideoListWrapper>
+        </S.LikedVideoListWrapper>
     );
 }
 
-export default VideoList;
+export default VideoLikedList;
