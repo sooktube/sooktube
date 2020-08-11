@@ -1,0 +1,99 @@
+$bg: #000;
+$tabs: 4;
+$c-width: 1190px;
+$c-height: 400px;
+$marker-width: 36px;
+$indent: 23px;
+$marker-height: $c-height/$tabs;
+$tab-color: #f2eee5 #f4c2c2 #fce488 #ADD8E6;
+$easing: cubic-bezier(.11, .65, .04, 1);
+$slide-time: 1.2s;
+$content-time: $slide-time/3;
+
+@mixin transition ($prop, $time) {
+    -webit-transition: $prop $time $easing;
+    transition: $prop $time $easing;
+}
+
+
+    
+
+    
+    .container {
+        position: static;
+        margin-left:0px;
+        margin-top:30px;
+        
+        counter-reset: tab-counter $tabs + 1;
+        
+        input[type=radio] {
+            display: none;
+            
+            @for $i from 1 through $tabs { 
+                &:checked + label ~ label:nth-child(#{2*$i}) {
+                    
+                    
+                    width: ($tabs - $i)*$marker-width + $indent+10;
+                    
+                    & .content {
+                        
+                        @include transition(opacity, $content-time);
+                        opacity: 0;
+                        pointer-events: none;
+                    }
+                }
+                
+                & + label {
+                    height:80%;
+                    position: absolute;
+                    min-height:80%;
+                    box-shadow: 0px 0px 0px -2px $bg;
+                    cursor: pointer;
+                    @include transition(width, $slide-time);
+                    overflow-y: scroll;
+
+                    &::-webkit-scrollbar { 
+                        display: none; 
+                    }
+    
+                    
+                    &:nth-child(2) {
+                        box-shadow: none;
+                        
+                    }
+
+                    &:nth-child(#{2*$i}) {
+                        
+                        $color: nth($tab-color, $tabs - $i + 1);
+                        width: $c-width - ($i - 1)*$marker-width;
+                        background: $color;
+                        
+                        @if ($i > 1) {
+                            &:after {
+                                position: absolute;
+                                content: '';
+                                top: percentage(($tabs - $i)*(100/$tabs)/100);
+                                left: 100%;
+                                width: $marker-width - $indent;
+                                height: $marker-height;
+                                border-radius: 0 $marker-height/10 $marker-height/10 0;
+                                background: $color;
+                                box-shadow: 3px 0px 6px -3px $bg;
+                            }
+                        }
+                    }
+                    
+                    .content {
+                        -ms-overflow-style: none;
+                        position: static;
+                        counter-increment: tab-counter -1;
+                        
+                        
+                        /*&:after {
+                            
+                        }*/
+                    }
+                }
+            } 
+        }
+    }

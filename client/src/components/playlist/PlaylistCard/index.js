@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import * as S from './style';
+import { useSelector } from 'react-redux';
 import {playlistService} from "../../../services";
 import dummy_card_image from '../../../../public/images/dummy_card_img.jpg';
-import {useSelector} from "react-redux";
 
 function PlaylistCard({ listID }) {
+    const username = useSelector(state => state.authentication.username);
     const [loading, setLoading] = useState(true);
-    const {username} = useSelector(state => state.authentication.username);
 
     const [card, setCard] = useState({
         thumbnail: null,
         listName: null,
-        listDesc: null,
+        listDesc: null, 
         username: null,
         like: null,
         dislike: null

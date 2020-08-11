@@ -5,13 +5,13 @@ import Header from "../../components/base/Header";
 import VideoPlayer from "../../components/common/VideoPlayer";
 import CommentBox from "./Comments";
 import DeleteVideo from "../UploadVideo/DeleteVideo";
-import {videoService} from "../../services";
-import { CommentProvider } from './CommentContext';
-import {useSelector} from "react-redux";
+import {videoService, commentService} from "../../services";
+import {useSelector,useDispatch} from "react-redux";
 
 function Player(){
     const { videoID } = useParams();
     const { username } = useParams();
+    const dispatch = useDispatch();
 
     const [loading, setLoading] = useState(true);
     const loginUsername = useSelector(state => state.authentication.username);
@@ -38,11 +38,18 @@ function Player(){
                 setVideoInfo(videoInfo => ({...videoInfo, likeCount: response[0], dislikeCount: response[1]}));
                 setLoading(false);
             })
+
+        commentService.getCommentInfoByVideoID(videoID)
+        .then(response => {
+            console.log(response);
+            dispatch({type:'INIT',value:response});
+        })    
     },[])
 
 
     return(
-        <CommentProvider>
+        <>
+       
             <Header/>
             {!loading &&
             <S.VideoWrapper>
@@ -68,11 +75,12 @@ function Player(){
                     <S.VideoDesc> {videoInfo.videoDesc} </S.VideoDesc>
                 </S.VideoContainer>
                 <hr/>
-                <CommentBox c_username={username}/>
+                <CommentBox p_videoID={videoID}/>
             </S.VideoWrapper>
             }
+        </>
 
-        </CommentProvider>
+      
     );
 }
 

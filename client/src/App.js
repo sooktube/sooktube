@@ -13,6 +13,7 @@ import StyleReset from "./components/style/StyleReset";
 import Playlist from "./pages/Playlist";
 import UserVideoList from "./pages/User/UserVideoList";
 import UpdateVideo from "./pages/UploadVideo/UpdateVideo";
+import Mypage from './pages/Mypage';
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                 <Route exact path='/@:username/video' component={UserVideoList}/>
                 <Route exact path='/@:username/video/:videoID' component={Player}/>
                 <Route path='/@:username/video/update/:videoID' component={UpdateVideo}/>
+                <Route path='/mypage' component={Mypage}/>
                 <Redirect from="*" to="/" />
             </Switch>
             </GlobalLayoutStyle>

@@ -8,7 +8,8 @@ export const userService = {
     getUsername,
     getUserID,
     checkUserID,
-    checkUsername
+    checkUsername,
+    getUserProfilePic
 };
 
 function login(user) {
@@ -116,4 +117,18 @@ function handleResponse(response) {
 
         return data;
     });
+}
+
+function getUserProfilePic(username) {
+    console.log(username);
+    return axios({
+        method: 'GET',
+        url: `https://soktube.uc.r.appspot.com/api/user/profile/picture/${username}`
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
 }

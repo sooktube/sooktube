@@ -1,22 +1,72 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as S from "./style";
 import Comment from "./Comment";
-import AddComment from "./AddComment";
-import comments from './dummy_comments';
+import {commentService} from "../../../services/comment.service";
+import {userService} from "../../../services/user.service";
 
-function Comments() {
+function Comments({listID}) {
+
+    const real_username = useSelector(state => state.authentication.username);
+    const comments = useSelector(state => state.comment);
+    const dispatch = useDispatch();
+
+    const playlistID = listID;
+    const [commentText, setCommentText] = useState('');
+    const [newText, setNewText] = useState({username:'',userComment:'',profileUrl:''});
+    const [pic, setPic] =useState('');
+
+    useEffect(()=>{
+        userService.getUserProfilePic(real_username)
+        .then(response => {
+            setPic(response);
+        })
+    })
+
+    function handleChange(e) {
+        setCommentText(e.target.value);
+        setNewText({username:real_username,userComment:e.target.value,profileUrl:pic});
+        console.log(comments);
+    }
+
+    function InputClick(e) {
+        if(commentText === ''){
+            alert('한 글자 이상 입력해주세요.');
+        }
+        if(commentText !== ''){
+            dispatch({type:'ADD',value:newText});
+            commentService.uploadCommentByPlaylistID({
+                listID: playlistID,
+                username: real_username,
+                userComment: newText.userComment
+            }).then(() => {
+                setCommentText('');
+            })
+        }
+    }
+
     return(
-        <S.CommentsWrapper>
+        <>
+        <S.CommentBox>
             <S.CommentTitle>Comments  {comments.length}</S.CommentTitle>
-            <AddComment/>
-            {comments.map(
-                (comment,index) => (<Comment
-                    key={index}
-                    username={comment.username}
-                    text={comment.text}
-                    photo={comment.photo}/>)
+            <S.AddCommentWrapper>
+            <S.UserProfile src={pic}/>
+            <S.TextInput placeholder="댓글 추가" value={commentText}
+                         onChange={handleChange}/>
+            <S.SubmitButton onClick={InputClick} />
+            </S.AddCommentWrapper>
+            {comments.map((comment,index) =>
+                <Comment key={index}
+                         listID = {playlistID}
+                         commentID = {comment.commentID}
+                         length={comments.length}
+                         c_index={index}
+                         username={comment.username}
+                         text={comment.userComment}
+                         photo={comment.profileUrl}/>
             )}
-        </S.CommentsWrapper>
+        </S.CommentBox>
+        </>
     );
 }
 

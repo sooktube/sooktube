@@ -7,12 +7,12 @@ export const VideoWrapper = styled.div`
     padding:14px;
     border-bottom:1.7px solid #ced4da;
     display:flex;
+    width:95%;
     color: ${MAIN.DARK_TEXT_COLOR};
     background-color:transparent;
-    width:95%;
 `;
 
-export const Video = styled.video`
+export const Thumbnail = styled.img`
     width: 150px;
     height: 84px;
     cursor: pointer;
