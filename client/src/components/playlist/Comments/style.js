@@ -24,9 +24,6 @@ export const CommentContainer= styled.div`
     text-align:left;
     vertical-align:top;
     padding:1vh;
-    &:focus-within {
-      color: ${MAIN.BASE_COLOR};
-    }
 `;
 
 export const CommentTitle = styled.div`

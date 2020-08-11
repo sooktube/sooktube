@@ -6,7 +6,6 @@ import {commentService} from "../../../services/comment.service";
 
 function Comment({listID, commentID, length, index, username, text, photo}){
     const current_username = useSelector(state => state.authentication.username);
-    const comments = useSelector(state => state.comment);
     const dispatch = useDispatch();
 
     const [createDropdownVisible, setCreateDropdownVisible] = useState(false);
@@ -83,7 +82,7 @@ function Comment({listID, commentID, length, index, username, text, photo}){
                     <S.CreateDropdownContent ref={contentRef}>
                         <S.EditButton  onClick={EditClick}> 수정 </S.EditButton>
                         <S.EditButton  onClick={() => {
-                            if(window.confirm('영상을 삭제하시겠습니까?')) DeleteClick()}}> 삭제</S.EditButton>
+                            if(window.confirm('댓글을 삭제하시겠습니까?')) DeleteClick()}}> 삭제</S.EditButton>
                     </S.CreateDropdownContent>
             }
         </S.CommentContainer>
