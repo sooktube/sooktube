@@ -30,7 +30,7 @@ function CommentBox({videoID}){
         if(commentText === ''){
             alert('한 글자 이상 입력해주세요.');
         }
-        if(commentText !== ''){
+        else {
             commentService.uploadCommentByVideoID({
                 videoID,
                 username: currentUsername,

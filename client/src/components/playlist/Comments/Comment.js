@@ -10,14 +10,16 @@ function Comment({listID, commentID, length, index, username, text, photo}){
 
     const [createDropdownVisible, setCreateDropdownVisible] = useState(false);
     const [edit,setEdit] = useState(true);
-    const [comment,setComment] = useState('');
+    const [comment,setComment] = useState(text);
     const [newText,setNewText]=useState({
         commentID:null,
-        videoID:null,
+        listID:null, 
         username:'',
         userComment: '',
         profileUrl:''
     });
+
+    
 
     const toggleDropdown = () => {
         setCreateDropdownVisible(!createDropdownVisible);
@@ -33,7 +35,9 @@ function Comment({listID, commentID, length, index, username, text, photo}){
     }
 
     function EditClick(){
+        setComment(text);
         setEdit(false);
+        setNewText({commentID, listID, username, userComment: text, profileUrl:photo});
     }
 
     function SaveEdit(){

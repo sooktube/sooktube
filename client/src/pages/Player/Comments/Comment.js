@@ -10,8 +10,15 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
 
     const [createDropdownVisible, setCreateDropdownVisible] = useState(false);
     const [edit,setEdit] = useState(true);
-    const [comment,setComment] = useState('');
-    const [newText,setNewText]=useState({commentID:null,videoID:null,username:'',userComment:'',profileUrl:''});
+
+    const [comment,setComment] = useState(text);
+    const [newText,setNewText]=useState({
+        commentID:null,
+        videoID:null,
+        username:'',
+        userComment: '',
+        profileUrl:''
+    });
 
     const toggleDropdown = () => {
         setCreateDropdownVisible(!createDropdownVisible);
@@ -23,18 +30,20 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
 
     function handleChange(e) {
         setComment(e.target.value);
-        setNewText({commentID,videoID,username,userComment:e.target.value,profileUrl:photo});
+        setNewText({commentID, videoID, username, userComment: e.target.value, profileUrl:photo});
     }
 
     function EditClick(){
+        setComment(text);
         setEdit(false);
+        setNewText({commentID, videoID, username, userComment: comment, profileUrl:photo});
     }
 
     function SaveEdit(){
         if(comment === ''){
             alert('한 글자 이상 입력해주세요.');
         }
-        if(comment !== ''){
+        else{
             const c_text = { userComment: newText.userComment };
             commentService.updateCommentByVideoID({
                 comment: c_text,
@@ -58,9 +67,7 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
             if(index === 0){
                 dispatch({type:"DELETE_FIRST", length});
             }
-            else{
-                dispatch({type:"DELETE", index:index, length});
-            }
+            else dispatch({type:"DELETE", index:index, length});
         })
     }
 

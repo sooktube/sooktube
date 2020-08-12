@@ -9,7 +9,10 @@ export const userService = {
     getUserID,
     checkUserID,
     checkUsername,
-    getUserProfilePic
+    getUserProfilePic,
+    getProfilePicUploadUrl,
+    UploadUserProfilePic,
+    getProfileUrlByProfilepic
 };
 
 function login(user) {
@@ -70,6 +73,7 @@ function logout() {
 }
 
 function register(user) {
+    console.log(user);
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -131,3 +135,50 @@ function getUserProfilePic(username) {
             return error;
         })
 }
+
+function getProfilePicUploadUrl(profilepic) {
+    return axios({
+        method: 'POST',
+        url: `https://soktube.uc.r.appspot.com/api/profile/upload/${profilepic}`
+        })
+        .then((response) => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        });
+}
+
+function UploadUserProfilePic(input) {
+    console.log(input.uploadURL);
+    console.log(input.imageFile);
+    return axios({
+        method: 'PUT',
+        url: input.uploadURL,
+        headers: {
+            'Content-Type': 'image/jpeg',
+        },
+        data: input.imageFile
+        })
+        .then((response) => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        });
+}
+
+function getProfileUrlByProfilepic(profilepic) {
+    console.log(profilepic);
+    return axios({
+        method: 'GET',
+        url: `https://soktube.uc.r.appspot.com/api/profile/get/${profilepic}`
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}
+

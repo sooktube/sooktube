@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {MAIN} from "../../components/style/Main";
+import img from "../../../public/defaultProfile.png";
 
 export const MainBackground = styled.div`
     height: 450px;
@@ -12,7 +13,7 @@ export const RegisterForm = styled.div`
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-    margin-top: 5em;
+    margin-top: 3em;
 `;
 
 export const RegisterLogo = styled.div`
@@ -101,26 +102,40 @@ export const InvalidFeedback = styled.div`
     margin-top: 0.2em;
 `;
 
+export const LabelBox = styled.div`
+    display: flex;
+	align-items: center;
+    justify-content: center; 
+    flex-direction:column;
+    width:100%;
+`;
+
 export const Label = styled.label`
-    padding: 0.3em 1em 0.5em 1em;
-    background:  ${MAIN.MAIN_THEME_COLOR};
-    width:100px;
-    height:100px;
-	border-radius: 50px;
-	color: white;
-	font-weight: 300;
+    padding: 5em 1em 0.1em 1.4em;
+    background-image : url(${props => props.img!=null ? props.img : img});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width:90px;
+    height:90px;
+	border-radius:45px;
+    color: black;
+	font-weight: 400;
 	font-size: 1rem;
 	transition: all 0.2s ease-in;
 	cursor: pointer;
 	outline: none;
 	border: none;
-	&:hover {
-    background-color: ${MAIN.BRIGHT_ON_HOVER};
-  }
 `;
 
 export const UploadInput = styled.input`
     width:0;
     height:0;
     background-color: ${MAIN.MAIN_THEME_COLOR};
+`;
+
+export const AddText =  styled.div`
+    margin-top: 0.5em;
+    font-size: 2vh;
+    font-weight:bold;
 `;

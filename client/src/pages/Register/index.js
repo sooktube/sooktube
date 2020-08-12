@@ -10,7 +10,9 @@ function Register() {
         userID: '',
         username: '',
         password: '',
-        passwordChk: ''
+        passwordChk: '',
+        profilepic: 'defaultProfile.jpeg',
+        profileUploadURL: null
     });
 
     const [validate, setValidate] = useState({
@@ -25,6 +27,8 @@ function Register() {
         username: ''
     });
 
+    let userImage = null;
+    const [imageURL, setImageURL] = useState(null);
     const [submitted, setSubmitted] = useState(false);
 
     const dispatch = useDispatch();
@@ -69,6 +73,7 @@ function Register() {
 
     function validateUserID(e) {
         const { name, value } = e.target;
+        console.log(user);
         setIsDuplicate(isDuplicate => ({...isDuplicate, [name]: false}));
         setUser(user => ({...user, [name]: value}));
         if (EmailValidator.validate(value)){
@@ -101,7 +106,7 @@ function Register() {
         e.preventDefault();
         setSubmitted(true);
 
-        const userSubmit = { userID: user.userID, username: user.username, password: user.password };
+        const userSubmit = { userID: user.userID, username: user.username, password: user.password, profilepic: user.profilepic };
         if ((validate.username && validate.userID && validate.password)
             && (user.password === user.passwordChk)
             && (!isDuplicate.username && !isDuplicate.userID)){
@@ -110,18 +115,38 @@ function Register() {
     }
 
     function fileSelect(event){
-        ;
+        const time = new Date().getTime().toString();
+        const imageFile = event.target.files[0];
+        const filename = 'profile' + time + event.target.files[0].name;
+        setUser({...user, profilepic : filename });
+        userService.getProfilePicUploadUrl(filename)
+        .then(response => {
+            userService.UploadUserProfilePic({
+                uploadURL : response,
+                imageFile : imageFile
+            }).then(() => {
+                userService.getProfileUrlByProfilepic(filename)
+                .then(response => {
+                    userImage = response;
+                    setImageURL(userImage);
+                })
+            })
+        })
     }
-
+   
+    
     return (
         <S.MainBackground>
          <S.RegisterForm className="register">
             <form name="form" onSubmit={handleSubmit}>
                 <S.RegisterLogo> SOOKTUBE </S.RegisterLogo> 
-                <S.FormGroupA>
-                        <S.Label>
+                <S.LabelBox>
+                <S.Label img={imageURL} >
                             <S.UploadInput type="file" onChange={fileSelect}/>
-                        </S.Label>
+                </S.Label>
+                <S.AddText>Add Profile Photo</S.AddText>
+                </S.LabelBox>
+                <S.FormGroupA>
                     <S.LabelName> Email </S.LabelName>
                     <S.InputR type="text"
                             name="userID"
@@ -143,7 +168,7 @@ function Register() {
                 </S.FormGroupA>
                 <S.FormGroupB>
                     <S.LabelName> Nickname </S.LabelName>
-                    <S.LabelName2> 다른 유저와 중복되지 않는 별명으로 입력해주세요. (2자 ~ 16자) </S.LabelName2>
+                    <S.LabelName2> 다른 유저와 중복되지 않는 별명으로 입력해주세요. (2자 ~ 10자) </S.LabelName2>
                     <S.InputR
                         type="text"
                         name="username"

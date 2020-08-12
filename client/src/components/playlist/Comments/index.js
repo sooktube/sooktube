@@ -24,13 +24,14 @@ function Comments({listID}) {
     function handleChange(e) {
         setCommentText(e.target.value);
         setNewText({username:current_username,userComment:e.target.value,profileUrl:pic});
+        console.log(comments);
     }
 
     function InputClick(e) {
         if(commentText === ''){
             alert('한 글자 이상 입력해주세요.');
         }
-        if(commentText !== ''){
+        else {
             commentService.uploadCommentByPlaylistID({
                 listID,
                 username: current_username,
