@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from "./style";
 import {history} from "../../../../helpers";
 import RecommendButton from "../../RecommendVideo/RecommendButton";
+import DisrecommendButton from "../../RecommendVideo/DisrecommendButton";
 
 function VideoListItem({inVideoList, checkInPlaylist, videoID, url, title, username, date, recommended, disrecommended, recCount, disrecCount}){
     function handleClick() {
@@ -26,7 +27,11 @@ function VideoListItem({inVideoList, checkInPlaylist, videoID, url, title, usern
                                  username={username}
                                  recommended={recommended}
                                  recCount={recCount}/>
-                <div> <S.Disrecommned on={disrecommended}/> {disrecCount} </div>
+                <DisrecommendButton videoID={videoID}
+                                    inVideoList={inVideoList}
+                                    username={username}
+                                    disrecommended={disrecommended}
+                                    disrecCount={disrecCount}/>
             </S.VideoLike>
         </S.VideoWrapper>
     );

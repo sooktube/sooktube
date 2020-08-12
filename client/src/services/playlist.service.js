@@ -182,7 +182,7 @@ function cancelRecommendVideoInPlaylist({listID, videoID, username}) {
 
 function disrecommendVideoInPlaylist({listID, videoID, username}) {
     return axios({
-        method: 'DELEE',
+        method: 'POST',
         url: `https://soktube.uc.r.appspot.com/api/video/list/dislike/${listID}/${videoID}/${username}`,
     })
         .then(response => {
@@ -195,7 +195,7 @@ function disrecommendVideoInPlaylist({listID, videoID, username}) {
 
 function cancelDisrecommendVideoInPlaylist({listID, videoID, username}) {
     return axios({
-        method: 'DELEE',
+        method: 'DELETE',
         url: `https://soktube.uc.r.appspot.com/api/video/list/revert/dislike/${listID}/${videoID}/${username}`,
     })
         .then(response => {
