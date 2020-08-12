@@ -17,7 +17,10 @@ export const playlistService ={
     cancelDisrecommendVideoInPlaylist,
     addVideoToPlaylist,
     getPlaylistListByUsername,
-    getPlaylistListLikedByUsername
+    getPlaylistListLikedByUsername,
+    getLikeCountByListID,
+    likePlaylist,
+    cancelLikePlaylist
 }
 
 function getPlaylistUploadURL(input) {
@@ -249,5 +252,41 @@ function getPlaylistListLikedByUsername(username) {
       })
 }
 
+function getLikeCountByListID(listID) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.uc.r.appspot.com/api/like/dislike/count/listID/${listID}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return null;
+        })
+}
 
+function likePlaylist(listID, username) {
+    return axios({
+        method: 'POST',
+        url: `https://soktube.uc.r.appspot.com/api/video/list/likeList/${listID}/${username}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}
 
+function cancelLikePlaylist(listID, username) {
+    return axios({
+        method: 'DELETE',
+        url: `https://soktube.uc.r.appspot.com/api/video/list/revert/like/${listID}/${username}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}

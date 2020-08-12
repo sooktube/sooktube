@@ -48,16 +48,14 @@ export const Separator = styled.div`
     background-color: ${MAIN.BASE_COLOR}
 `;
 
-
-export const CardAuthor = styled.div`
-    font-size: 1rem;
-    font-family: Georgia, sans-serif;
-    font-style: italic;
-    padding: 1em;
+export const CardBottom = styled.div`
+    font-size: 1.2rem;
+    padding: 0 1em;
     display: flex;
     justify-content: space-between;
 `;
-export const CardHeart = styled(FiHeart)`
-    margin-right: 0.2em;
-    width: 1em;
+
+export const CardAuthor = styled.div`
+    font-family: Georgia, sans-serif;
+    font-style: italic;
 `;

@@ -3,6 +3,7 @@ import * as S from './style';
 import { useSelector } from 'react-redux';
 import {playlistService} from "../../../services";
 import dummy_card_image from '../../../../public/images/dummy_card_img.jpg';
+import LikePlaylistButton from "./LikePlaylistButton";
 
 function PlaylistCard({ listID }) {
     const username = useSelector(state => state.authentication.username);
@@ -14,7 +15,8 @@ function PlaylistCard({ listID }) {
         listDesc: null, 
         username: null,
         like: null,
-        dislike: null
+        dislike: null,
+        likeCount: null
     })
     const [thumbnailImgURL, setThumbnailImgURL] = useState(null);
 
@@ -22,11 +24,18 @@ function PlaylistCard({ listID }) {
         playlistService.getPlaylistInfoByListID(listID, username)
             .then(response => {
                 setCard(response);
-                setLoading(false);
                 return playlistService.getPlaylistImgByFileName(response.thumbnail)
             })
             .then(response => {
                 setThumbnailImgURL(response);
+                return playlistService.getLikeCountByListID(listID)
+            })
+            .then(response => {
+                setCard(card => ({
+                    ...card,
+                    likeCount: response[0]
+                }))
+                setLoading(false);
             })
     },[])
 
@@ -42,10 +51,10 @@ function PlaylistCard({ listID }) {
                 <S.CardTitle> {card.listName} </S.CardTitle>
                 <S.Separator/>
                 <S.CardDesc> {card.listDesc} </S.CardDesc>
-                <S.CardAuthor>
-                    <div> by {card.username} </div>
-                    <div> <S.CardHeart/> {card.listLike} </div>
-                </S.CardAuthor>
+                <S.CardBottom>
+                    <S.CardAuthor> by {card.username} </S.CardAuthor>
+                    <LikePlaylistButton like={card.like} likeCount={card.likeCount}/>
+                </S.CardBottom>
             </S.CardInfo>
         </S.CardWrapper>
         }
