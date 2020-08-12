@@ -78,8 +78,9 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
 
             {createDropdownVisible &&
             <S.CreateDropdownContent ref={contentRef}>
-                <S.EditButton  onClick={EditClick}> 수정 </S.EditButton>
-                <S.EditButton  onClick={DeleteClick}> 삭제</S.EditButton>
+                <S.EditButton onClick={EditClick}> 수정 </S.EditButton>
+                <S.EditButton onClick={() => {
+                    if(window.confirm('댓글을 삭제하시겠습니까?')) DeleteClick()}}> 삭제</S.EditButton>
             </S.CreateDropdownContent>
             }
         </S.CommentContainer>
