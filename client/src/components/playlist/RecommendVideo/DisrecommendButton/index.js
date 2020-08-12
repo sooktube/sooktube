@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {playlistService} from "../../../../services";
-import styled from "styled-components";
-import {IoIosHeartDislike} from "react-icons/all";
 import {useParams} from 'react-router-dom';
+import * as S from './style';
 
 function DisrecommendButton({inVideoList, videoID, username, disrecommended, disrecCount}) {
     const {listID} = useParams();
@@ -62,17 +61,9 @@ function DisrecommendButton({inVideoList, videoID, username, disrecommended, dis
         }
     }
 
-    const Recommend = styled(IoIosHeartDislike)`
-        width: 3rem;
-        height: 2.2rem;
-        margin-right: 1em;
-        cursor: pointer;
-        color: ${props => props.on === 1 ? '#71A6C6' : '#cecece'}
-    `;
-
     return (
         <div>
-            <Recommend on={rec.disrecommended} onClick={toggleRecommend}/>
+            <S.Recommend on={rec.disrecommended} onClick={toggleRecommend}/>
             {rec.disrecCount}
         </div>
     );
