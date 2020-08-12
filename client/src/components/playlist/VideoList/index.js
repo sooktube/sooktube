@@ -1,26 +1,25 @@
 import React from 'react';
-import {useParams} from 'react-router-dom';
-import * as S from "./style";
+import * as S from './style';
 import VideoListItem from "./VideoListItem";
-import {useSelector} from "react-redux";
 
-function VideoList() {
-    const {listID} = useParams();
-    const {videoList} = useSelector(state => state.playlist);
-
+function VideoList({videoList}) {
     return (
         <S.VideoListWrapper>
-            {!videoList
-                ? <S.IsVideo> 재생목록이 비어있군요🤔 </S.IsVideo>
-                : videoList.map((video, index) =>
-                    <VideoListItem
-                        key={index}
-                        url={video.url}
-                        title={video.title}/>
-                )
-            }
+            {videoList.map(result =>
+                <VideoListItem key={result.videoID}
+                                videoID={result.videoID}
+                                url={result.videoPath}
+                                title={result.videoTitle}
+                                username={result.username}
+                                date={result.videoDate.substr(0,10)}
+                                recommended={result.recommended}
+                                disrecommended={result.disrecommended}
+                                recCount={result.recCount}
+                                disrecCount={result.disrecCount}
+                                inVideoList={result.inVideoList}/>
+            )}
         </S.VideoListWrapper>
     );
 }
 
-export default VideoList
+export default VideoList;

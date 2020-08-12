@@ -4,14 +4,14 @@ export const VideoListWrapper = styled.main`
     padding: 1rem;
     border-radius: 15px;
     width: 100%;
+    height: 50rem;
     background-color: transparent;
 `;
 
 export const VideoType = styled.div`
     font-size: 1.7rem;
     font-weight:bold;
-    margin-left:25px;
-    margin-bottom:18px;
+    margin-left: 1em;
 `;
 
 export const LikedVideoListWrapper = styled.div`

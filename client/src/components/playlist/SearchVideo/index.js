@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import * as S from './style';
 import {playlistService} from "../../../services";
-import SearchListItem from "./SearchListItem";
+import VideoList from "../VideoList";
 import {useSelector} from "react-redux";
 import RecommendVideoList from "../RecommendVideoList";
 
@@ -36,26 +36,9 @@ function SearchVideo({listID}) {
                     <div> 다른 사용자들은 이런 영상이 추가되길 원해요🤗 </div>
                 }
             </S.SearchComment>
-            {!keyword &&
-                <RecommendVideoList listID={listID} username={username}/>
-            }
+            {!keyword && <RecommendVideoList listID={listID} username={username}/>}
             {keyword && searchResult &&
-                <S.SearchResult>
-                    {searchResult.map(result =>
-                        <SearchListItem key={result.videoID}
-                                        videoID={result.videoID}
-                                        url={result.videoPath}
-                                        title={result.videoTitle}
-                                        username={result.username}
-                                        date={result.videoDate.substr(0,10)}
-                                        recommended={result.recommended}
-                                        disrecommended={result.disrecommended}
-                                        recCount={result.recCount}
-                                        disrecCount={result.disrecCount}
-                                        inVideoList={result.inVideoList}
-                        />
-                    )}
-                </S.SearchResult>
+                <VideoList videoList={searchResult}/>
             }
             {keyword && (!searchResult || searchResult.length === 0) &&
                 <S.InvalidSearchFeedback> 검색 결과가 없습니다. </S.InvalidSearchFeedback>

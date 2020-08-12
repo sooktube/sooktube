@@ -1,11 +1,31 @@
 import React from 'react';
 import * as S from "./style";
+import {history} from "../../../../helpers";
+import RecommendButton from "../../RecommendVideo/RecommendButton";
 
-function VideoListItem({title}){
+function VideoListItem({inVideoList, videoID, url, title, username, date, recommended, disrecommended, recCount, disrecCount}){
+    function handleClick() {
+        history.push(`/@${username}/video/${videoID}`);
+    }
     return(
-        <S.VideoInfoWrapper>
-            <S.VideoTitle> {title} </S.VideoTitle>
-        </S.VideoInfoWrapper>
+        <S.VideoWrapper>
+            <S.Video src={url} onClick={handleClick}/>
+            <S.VideoInfo>
+                <S.VideoTitle>{title} <S.InVideoList count={recCount + disrecCount}/></S.VideoTitle>
+                <S.VideoDetail>
+                    <div> {username} </div>
+                    <div> {date} </div>
+                </S.VideoDetail>
+            </S.VideoInfo>
+            <S.VideoLike>
+                <RecommendButton videoID={videoID}
+                                 inVideoList={inVideoList}
+                                 username={username}
+                                 recommended={recommended}
+                                 recCount={recCount}/>
+                <div> <S.Disrecommned on={disrecommended}/> {disrecCount} </div>
+            </S.VideoLike>
+        </S.VideoWrapper>
     );
 }
 

@@ -7,7 +7,7 @@ export const CommentBox = styled.div`
     margin-top: 1rem;
     overflow: auto;
     border-radius: 15px;
-    height: 48%;
+    height: 25rem;
     background:#ffffff;
     display:block;
     padding-top:1%;
