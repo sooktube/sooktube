@@ -24,7 +24,7 @@ function PlaylistVideo({ listID }) {
                 {!loading &&
                     <>
                     {videoList
-                    ? <VideoList videoList={videoList} checkInPlaylist={false}/>
+                    ? <VideoList videoList={videoList}/>
                     : <S.IsVideo> 재생목록이 비어있군요🤔 </S.IsVideo>
                     }
                     </>

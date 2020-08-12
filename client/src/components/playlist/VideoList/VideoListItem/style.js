@@ -57,5 +57,5 @@ export const InVideoList = styled(TiInputChecked)`
     color: forestgreen;
     width: 1.5em;
     height: 1.5em;
-    display: ${props => (props.count >= 5 && props.checkInPlaylist) ? 'inline-block' : 'none'};
+    display: ${props => (props.count >= 5 && props.checkplaylist) ? 'inline-block' : 'none'};
 `;

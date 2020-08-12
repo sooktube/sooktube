@@ -2,12 +2,12 @@ import React from 'react';
 import * as S from './style';
 import VideoListItem from "./VideoListItem";
 
-function VideoList({videoList, checkInPlaylist}) {
+function VideoList({videoList, checkplaylist}) {
     return (
         <S.VideoListWrapper>
             {videoList.map(result =>
                 <VideoListItem key={result.videoID}
-                               checkInPlaylist={checkInPlaylist}
+                               checkplaylist={checkplaylist}
                                videoID={result.videoID}
                                url={result.videoPath}
                                title={result.videoTitle}
