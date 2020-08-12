@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {playlistService} from "../../../services";
-import VideoList from "../../video/VideoList";
+import VideoList from "../VideoList";
 
 function RecommendVideoList({listID, username}) {
     const [videoList, setVideoList] = useState(null);
@@ -10,7 +10,7 @@ function RecommendVideoList({listID, username}) {
             .then(response => {
                 setVideoList(response);
             })
-    })
+    },[])
 
     return (
         <>
