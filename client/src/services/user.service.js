@@ -120,7 +120,6 @@ function handleResponse(response) {
 }
 
 function getUserProfilePic(username) {
-    console.log(username);
     return axios({
         method: 'GET',
         url: `https://soktube.uc.r.appspot.com/api/user/profile/picture/${username}`

@@ -27,7 +27,6 @@ function getCommentInfoByVideoID(videoID) {
 
 
 function uploadCommentByVideoID(input) {
-    console.log(input);
     return axios({
         method: 'POST',
         url: 'https://soktube.appspot.com/api/video/comment',
@@ -47,7 +46,6 @@ function uploadCommentByVideoID(input) {
 
 
  function updateCommentByVideoID(input) {
-    console.log(input);
     return axios({
         method: 'PUT',
         url: `https://soktube.uc.r.appspot.com/api/video/comment/update/${input.commentID}/${input.videoID}/${input.username}`,
@@ -65,7 +63,6 @@ function uploadCommentByVideoID(input) {
 }
 
 function deleteCommentByVideoID(input){
-    console.log(input);
     return axios({
         method: 'DELETE',
         url: `https://soktube.appspot.com/api/video/comment/delete/${input.commentID}/${input.videoID}/${input.username}`,
@@ -92,7 +89,6 @@ function getCommentInfoByPlaylistID(listID) {
 }
 
 function uploadCommentByPlaylistID(input) {
-    console.log(input);
     return axios({
         method: 'POST',
         url: 'https://soktube.appspot.com/api/list/comment',
@@ -111,7 +107,6 @@ function uploadCommentByPlaylistID(input) {
  }
 
  function updateCommentByPlaylistID(input) {
-    console.log(input);
     return axios({
         method: 'PUT',
         url: `https://soktube.uc.r.appspot.com/api/list/comment/update/${input.commentID}/${input.listID}/${input.username}`,
@@ -129,7 +124,6 @@ function uploadCommentByPlaylistID(input) {
 }
 
 function deleteCommentByPlaylistID(input){
-    console.log(input);
     return axios({
         method: 'DELETE',
         url: `https://soktube.appspot.com/api/list/comment/delete/${input.commentID}/${input.listID}/${input.username}`,

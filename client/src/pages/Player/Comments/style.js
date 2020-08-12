@@ -130,7 +130,7 @@ export const DotIcon = styled(BsThreeDotsVertical)`
     }
 `;
 
- 
+
 export const CreateDropdownContent = styled.div`
     position: absolute;
     margin-top: 2.2em;

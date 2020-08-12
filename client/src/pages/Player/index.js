@@ -41,11 +41,9 @@ function Player(){
 
         commentService.getCommentInfoByVideoID(videoID)
         .then(response => {
-            console.log(response);
             dispatch({type:'INIT',value:response});
         })    
     },[])
-
 
     return(
         <>
@@ -75,7 +73,7 @@ function Player(){
                     <S.VideoDesc> {videoInfo.videoDesc} </S.VideoDesc>
                 </S.VideoContainer>
                 <hr/>
-                <CommentBox p_videoID={videoID}/>
+                <CommentBox videoID={videoID}/>
             </S.VideoWrapper>
             }
         </>

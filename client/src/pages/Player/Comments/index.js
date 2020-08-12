@@ -5,80 +5,65 @@ import Comment from "./Comment";
 import {commentService} from "../../../services/comment.service";
 import {userService} from "../../../services/user.service";
 
-function CommentBox({p_videoID}){
-    
-    const real_username = useSelector(state => state.authentication.username);
+function CommentBox({videoID}){
+    const currentUsername = useSelector(state => state.authentication.username);
     const comments = useSelector(state => state.comment);
     const dispatch = useDispatch();
 
-    const real_videoID = p_videoID;
     const [commentText, setCommentText] = useState('');
     const [newText,setNewText] = useState({username:'',userComment:'',profileUrl:''});
     const [pic, setPic] = useState('');
 
-
     useEffect(()=>{
-        userService.getUserProfilePic(real_username)
-        .then( response => {
-            setPic(response);
-            console.log(pic);
-        })
+        userService.getUserProfilePic(currentUsername)
+            .then(response => {
+                setPic(response);
+            })
     })
-    
-    
 
     function handleChange(e) {
         setCommentText(e.target.value);
-        setNewText({username:real_username,userComment:e.target.value,profileUrl:pic});
-        console.log(comments);
+        setNewText({username:currentUsername,userComment:e.target.value,profileUrl:pic});
     }
 
     function InputClick(e) {
-        if(commentText == ''){
+        if(commentText === ''){
             alert('한 글자 이상 입력해주세요.');
         }
-        if(commentText!=''){
-            dispatch({type:'ADD',value:newText});
+        if(commentText !== ''){
             commentService.uploadCommentByVideoID({
-                videoID: real_videoID,
-                username: real_username,
+                videoID,
+                username: currentUsername,
                 userComment: newText.userComment
-            }).then(response => {
-                console.log(response);
+            }).then(() => {
+                dispatch({type:'ADD',value:newText});
+                setCommentText('');
             })
         }
-        console.log(comments);
-        setCommentText('');
     }
 
-   
-
     return(
-        <>
         <S.CommentBox>
             <S.CommentTitle>Comments  {comments.length}</S.CommentTitle>
             <S.AddCommentWrapper>
-            <S.UserProfile src={pic}/>
-            <S.TextInput
-                         placeholder="댓글 추가" value={commentText}
-                         onChange={handleChange}
-                         />
-            <S.SubmitButton onClick={InputClick} />
+                <S.UserProfile src={pic}/>
+                <S.TextInput placeholder="댓글 추가"
+                             value={commentText}
+                             onChange={handleChange}/>
+                <S.SubmitButton onClick={InputClick} />
             </S.AddCommentWrapper>
             {comments.map((comment,index) =>
                 <Comment
                     key={index}
-                    videoID = {real_videoID}
+                    videoID = {videoID}
                     commentID = {comment.commentID}
                     length={comments.length}
-                    c_index={index}
+                    index={index}
                     username={comment.username}
                     text={comment.userComment}
-                    photo={comment.profileUrl}
-                    />   
+                    photo={comment.profileUrl}/>
             )}
         </S.CommentBox>
-        </>
     );
 }
 

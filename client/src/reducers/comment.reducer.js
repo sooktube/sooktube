@@ -1,14 +1,4 @@
-
-
-
-const initial_comment = [
-    {username:'hye',userComment:'I hope you think of me high',photo:'https://storage.googleapis.com/sttbucket2020/sunset.jpg'},
-    {username:'hajung',userComment:'when you are with someone else',photo:'https://storage.googleapis.com/sttbucket2020/sunset.jpg'},
-    {username:'jua',userComment:'today i called to tell you that im changing',photo:'https://storage.googleapis.com/sttbucket2020/sunset.jpg'},
-    {username:'hyerin',userComment:'dumb di dumb di dumb di di dumb',photo:'https://storage.googleapis.com/sttbucket2020/sunset.jpg'}
-];
-
-export function comment(state=initial_comment, action) {
+export function comment(state=[], action) {
     switch (action.type) {
     case 'INIT':
         return action.value;

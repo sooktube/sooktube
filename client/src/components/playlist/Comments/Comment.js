@@ -56,15 +56,15 @@ function Comment({listID, commentID, length, index, username, text, photo}){
     }
 
     function DeleteClick(){
-        if(index === 0){
-            dispatch({type:"DELETE_FIRST", length});
-        }
         commentService.deleteCommentByPlaylistID({
             commentID,
             listID,
             username: current_username
         }).then(() => {
-            dispatch({type:"DELETE", index, length});
+            if(index === 0){
+                dispatch({type:"DELETE_FIRST", length});
+            }
+            else dispatch({type:"DELETE", index, length});
         })
     }
 
