@@ -27,7 +27,6 @@ export const CommentTitle = styled.div`
     font-size:2.6vh;
     font-weight:550;
     margin-bottom:1em;
-    
 `;
 
 export const Photo = styled.img`
@@ -86,13 +85,13 @@ export const AddCommentWrapper = styled.div`
       color: ${MAIN.BASE_COLOR};
     }
 `;
+
 export const UserProfile = styled.img`
     width:5vh;
     height:5vh;
     margin-top: 0.2em;
     border-radius:2.5vh;
 `;
-
 
 export const TextInput = styled.input`
     font-size:2.5vh;
@@ -117,7 +116,7 @@ export const SubmitButton = styled(RiChatUploadLine)`
     text-align: center;
     border-radius: 50%;
     &:hover {
-	cursor:pointer;
+	  cursor:pointer;
     }
 `;
 
@@ -125,17 +124,16 @@ export const DotIcon = styled(BsThreeDotsVertical)`
     width: 4vw;
     height: 4vh;
     float:right;
+    color: ${MAIN.BORDER_COLOR};
     &:hover {
-	cursor:pointer;
+	  cursor:pointer;
     }
 `;
-
 
 export const CreateDropdownContent = styled.div`
     position: absolute;
     margin-top: 2.2em;
-    right: 5px;
-    
+    right: 3em;
     border-radius: 2%;
     z-index: 200;
     box-shadow: -0.05px -0.05px 5px grey ;
@@ -152,6 +150,6 @@ export const EditButton = styled.button`
     border:none;
     &:hover {
         text-decoration: none;
-        background-color: #dee2e6;
+        background-color: #f1f1f1;
     }
 `;
