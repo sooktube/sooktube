@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import * as S from './style';
-import VideoList from "../../../components/video/VideoList";
+import VideoList from "../../../components/playlist/VideoList";
 import RecommendVideoButton from "../RecommendVideoButton";
 import {playlistService} from "../../../services";
 import {useSelector} from "react-redux";
@@ -24,7 +24,7 @@ function PlaylistVideo({ listID }) {
                 {!loading &&
                     <>
                     {videoList
-                    ? <VideoList videoList={videoList}/>
+                    ? <VideoList videoList={videoList} checkInPlaylist={false}/>
                     : <S.IsVideo> 재생목록이 비어있군요🤔 </S.IsVideo>
                     }
                     </>

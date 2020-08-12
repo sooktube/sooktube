@@ -14,7 +14,7 @@ function RecommendVideoList({listID, username}) {
 
     return (
         <>
-            {videoList && videoList.length > 0 && <VideoList videoList={videoList}/>}
+            {videoList && videoList.length > 0 && <VideoList videoList={videoList} checkInPlaylist={true}/>}
         </>
     );
 }

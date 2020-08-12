@@ -38,7 +38,7 @@ function SearchVideo({listID}) {
             </S.SearchComment>
             {!keyword && <RecommendVideoList listID={listID} username={username}/>}
             {keyword && searchResult &&
-                <VideoList videoList={searchResult}/>
+                <VideoList videoList={searchResult} checkInPlaylist={true}/>
             }
             {keyword && (!searchResult || searchResult.length === 0) &&
                 <S.InvalidSearchFeedback> 검색 결과가 없습니다. </S.InvalidSearchFeedback>

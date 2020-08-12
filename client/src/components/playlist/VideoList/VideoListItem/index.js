@@ -3,7 +3,7 @@ import * as S from "./style";
 import {history} from "../../../../helpers";
 import RecommendButton from "../../RecommendVideo/RecommendButton";
 
-function VideoListItem({inVideoList, videoID, url, title, username, date, recommended, disrecommended, recCount, disrecCount}){
+function VideoListItem({inVideoList, checkInPlaylist, videoID, url, title, username, date, recommended, disrecommended, recCount, disrecCount}){
     function handleClick() {
         history.push(`/@${username}/video/${videoID}`);
     }
@@ -11,7 +11,10 @@ function VideoListItem({inVideoList, videoID, url, title, username, date, recomm
         <S.VideoWrapper>
             <S.Video src={url} onClick={handleClick}/>
             <S.VideoInfo>
-                <S.VideoTitle>{title} <S.InVideoList count={recCount + disrecCount}/></S.VideoTitle>
+                <S.VideoTitle>
+                    {title}
+                    <S.InVideoList checkInPlaylist={checkInPlaylist} count={recCount + disrecCount}/>
+                </S.VideoTitle>
                 <S.VideoDetail>
                     <div> {username} </div>
                     <div> {date} </div>
