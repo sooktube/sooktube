@@ -1,8 +1,7 @@
 import React from 'react';
 import * as S from "./style";
 import {history} from "../../../../helpers";
-import RecommendButton from "../../RecommendVideo/RecommendButton";
-import DisrecommendButton from "../../RecommendVideo/DisrecommendButton";
+import RecommendVideo from "../../RecommendVideo";
 
 function VideoListItem({inVideoList, checkplaylist, videoID, url, title, username, date, recommended, disrecommended, recCount, disrecCount}){
     function handleClick() {
@@ -22,16 +21,13 @@ function VideoListItem({inVideoList, checkplaylist, videoID, url, title, usernam
                 </S.VideoDetail>
             </S.VideoInfo>
             <S.VideoLike>
-                <RecommendButton videoID={videoID}
-                                 inVideoList={checkplaylist ? inVideoList : 1}
-                                 username={username}
-                                 recommended={recommended}
-                                 recCount={recCount}/>
-                <DisrecommendButton videoID={videoID}
-                                    inVideoList={checkplaylist ? inVideoList : 1}
-                                    username={username}
-                                    disrecommended={disrecommended}
-                                    disrecCount={disrecCount}/>
+                <RecommendVideo videoID={videoID}
+                                inVideoList={checkplaylist ? inVideoList : 1}
+                                username={username}
+                                recommended={recommended}
+                                recCount={recCount}
+                                disrecommended={disrecommended}
+                                disrecCount={disrecCount}/>
             </S.VideoLike>
         </S.VideoWrapper>
     );
