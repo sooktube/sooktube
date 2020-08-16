@@ -191,16 +191,19 @@ public class VideoListController {
 	@RequestMapping(value = "/api/video/list/like/{listID}/{videoID}/{username}", method = RequestMethod.POST)
 	public int[] likeaList(@PathVariable("listID") final int listID, @PathVariable("videoID") final int videoID, 
 			@PathVariable("username") final String username) throws Exception {
-
-		
-		if(recommendDAO.getDisrecommendedVideo(videoID, listID, username) != null) {
-			recommendDAO.revertDisrecommend(videoID, listID, username);
-		}
-		
 		
 		VideoListDTO videolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
 		
 		int[] res = new int[2];
+
+		
+		if(recommendDAO.getDisrecommendedVideo(videoID, listID, username) != null) {
+			recommendDAO.revertDisrecommend(videoID, listID, username);
+			videoListDAO.revertDisrecommend(videolist);
+		}
+		
+		
+
 		
 		if (username.equals(videoListDAO.getUsernameofList(listID).toString())) {
 			videoListDAO.editLikeSet5(videolist);
@@ -222,8 +225,10 @@ public class VideoListController {
 			}
 			
 			//return count(like) and count(like+dislike)
-			res[0] = videolist.getLike() + 1;
-			res[1] = videolist.getDislike();
+			VideoListDTO newvideolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
+			
+			res[0] = newvideolist.getLike();
+			res[1] = newvideolist.getDislike();
 			
 			/*
 			 * if(res[0] + res[1] < 0) {
@@ -258,8 +263,11 @@ public class VideoListController {
 		
 		//videoListDAO.revertRecommend(videolist);
 		
-		res[0] = videolist.getLike() - 1;
-		res[1] = videolist.getDislike();
+		//get new videolist
+		VideoListDTO newvideolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
+		
+		res[0] = newvideolist.getLike();
+		res[1] = newvideolist.getDislike();
 		
 		/*
 		 * if(res[0] + res[1] < 0) {
@@ -281,16 +289,17 @@ public class VideoListController {
 	public int[] dislikeaList(@PathVariable("listID") final int listID, @PathVariable("videoID") final int videoID,
 			@PathVariable("username") final String username) throws Exception {
 		
-		if(recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
-			recommendDAO.revertRecommend(videoID, listID, username);
-		}
-		
 		VideoListDTO videolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
 		
 		int[] res = new int[2];
+		
+		if(recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
+			recommendDAO.revertRecommend(videoID, listID, username);
+			videoListDAO.revertRecommend(videolist);
+		}
+		
 
-		
-		
+
 		
 		if (recommendDAO.getDisrecommendedVideo(videoID, listID, username) == null) {
 			
@@ -300,9 +309,11 @@ public class VideoListController {
 		}
 		
 	
-		//return count(like) and count(like+dislike)
-		res[0] = videolist.getLike();
-		res[1] = videolist.getDislike() - 1;
+		//get new videolist
+		VideoListDTO newvideolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
+		
+		res[0] = newvideolist.getLike();
+		res[1] = newvideolist.getDislike();
 		
 		/*
 		 * if(res[0] + res[1] < 0) {
@@ -313,6 +324,7 @@ public class VideoListController {
 		 * 
 		 * }
 		 */
+
 		
 		return res;
 	}
@@ -334,9 +346,11 @@ public class VideoListController {
 			videoListDAO.revertDisrecommend(videolist);
 		}
 		//videoListDAO.revertDisrecommend(videolist);
+		//get new videolist
+		VideoListDTO newvideolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
 		
-		res[0] = videolist.getLike();
-		res[1] = videolist.getDislike() + 1;
+		res[0] = newvideolist.getLike();
+		res[1] = newvideolist.getDislike();
 		
 		/*
 		 * if(res[0] + res[1] < 0) {

@@ -36,7 +36,10 @@ public class VideoLikeController {
 	//user likes a video
 	@CrossOrigin
 	@RequestMapping(value = "/api/like/video/{videoID}/{username}", method = RequestMethod.POST)
-	public VideoLikeDTO userLikesVideo(@PathVariable("videoID") final int videoID, @PathVariable("username") final String username) throws Exception {
+	public int[] userLikesVideo(@PathVariable("videoID") final int videoID, @PathVariable("username") final String username) throws Exception {
+		
+		//return like count
+		int[] likeres = new int[2];
 		
 		if(videoLikeDAO.selectDislikeVideo(videoID, username) != null) {
 			videoLikeDAO.revertDislike(videoID, username);
@@ -44,20 +47,28 @@ public class VideoLikeController {
 		
 		videoLikeDAO.likeaVideo(videoID, username);
 		
-		VideoLikeDTO res = videoLikeDAO.selectLikeVideo(videoID, username);
 		
-		return res;
+		likeres[0] = videoLikeDAO.likeCount(videoID);
+		likeres[1] = videoLikeDAO.dislikeCount(videoID);
+		
+		return likeres;
 		
 	}
 	
 	//revert like
 	@CrossOrigin
 	@RequestMapping(value = "/api/like/video/revert/{videoID}/{username}", method = RequestMethod.DELETE)
-	public String revertLike(@PathVariable("videoID") final int videoID, @PathVariable("username") final String username) throws Exception {
+	public int[] revertLike(@PathVariable("videoID") final int videoID, @PathVariable("username") final String username) throws Exception {
+		
+		//return like count
+		int[] likeres = new int[2];
 		
 		videoLikeDAO.revertLike(videoID, username);
 		
-		return "like reverted";
+		likeres[0] = videoLikeDAO.likeCount(videoID);
+		likeres[1] = videoLikeDAO.dislikeCount(videoID);
+		
+		return likeres;
 		
 	}
 	
@@ -66,7 +77,12 @@ public class VideoLikeController {
 	//user dislikes a video
 	@CrossOrigin
 	@RequestMapping(value = "/api/dislike/video/{videoID}/{username}", method = RequestMethod.POST)
-	public VideoLikeDTO userDislikesVideo(@PathVariable("videoID") final int videoID, @PathVariable("username") final String username) throws Exception {
+	public int[] userDislikesVideo(@PathVariable("videoID") final int videoID, @PathVariable("username") final String username) throws Exception {
+		
+		
+		//return like count
+		int[] likeres = new int[2];
+		
 		
 		if(videoLikeDAO.selectLikeVideo(videoID, username) != null) {
 			videoLikeDAO.revertLike(videoID, username);
@@ -74,19 +90,26 @@ public class VideoLikeController {
 		
 		videoLikeDAO.dislikeaVideo(videoID, username);
 		
-		VideoLikeDTO res = videoLikeDAO.selectDislikeVideo(videoID, username);
+		likeres[0] = videoLikeDAO.likeCount(videoID);
+		likeres[1] = videoLikeDAO.dislikeCount(videoID);
 		
-		return res;
+		return likeres;
 	}
 	
 	//revert dislike
 	@CrossOrigin
 	@RequestMapping(value = "/api/dislike/video/revert/{videoID}/{username}", method = RequestMethod.DELETE)
-	public String reverDislike(@PathVariable("videoID") final int videoID, @PathVariable("username") final String username) throws Exception {
+	public int[] reverDislike(@PathVariable("videoID") final int videoID, @PathVariable("username") final String username) throws Exception {
+		
+		//return like count
+		int[] likeres = new int[2];
 		
 		videoLikeDAO.revertDislike(videoID, username);
 		
-		return "dislike reverted";
+		likeres[0] = videoLikeDAO.likeCount(videoID);
+		likeres[1] = videoLikeDAO.dislikeCount(videoID);
+		
+		return likeres;
 		
 	}
 	

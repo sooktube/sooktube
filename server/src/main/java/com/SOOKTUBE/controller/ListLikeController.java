@@ -36,34 +36,44 @@ public class ListLikeController {
 	//user likes a video list
 	@CrossOrigin
 	@RequestMapping(value = "/api/video/list/likeList/{listID}/{username}", method = RequestMethod.POST)
-	public ListLikeDTO userLikesList(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception {
+	public int[] userLikesList(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception {
 		
 		if(listlikeDAO.selectDislikeList(listID, username) != null) {
 			listlikeDAO.revertDislike(listID, username);
 		}
 		
+		
 		listlikeDAO.likeaList(listID, username);
 		
-		ListLikeDTO res = listlikeDAO.selectLikeList(listID, username);
+		int[] listlike = new int[2];
 		
-		return res;
+		listlike[0] = listlikeDAO.countLike(listID);
+		listlike[1] = listlikeDAO.countDislike(listID);
+		
+		return listlike;
+		
 	}
 	
 	//revert like
 	@CrossOrigin
 	@RequestMapping(value = "/api/video/list/revert/like/{listID}/{username}", method = RequestMethod.DELETE)
-	public String revertLike(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception {
+	public int[] revertLike(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception {
 		
 		listlikeDAO.revertLike(listID, username);
 		
-		return "like reverted";
+		int[] listlike = new int[2];
+		
+		listlike[0] = listlikeDAO.countLike(listID);
+		listlike[1] = listlikeDAO.countDislike(listID);
+		
+		return listlike;
 		
 	}
 	
 	//user dislikes a video list
 	@CrossOrigin
 	@RequestMapping(value = "/api/video/list/dislikeList/{listID}/{username}", method = RequestMethod.POST)
-	public ListLikeDTO userDislikesList(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception {
+	public int[] userDislikesList(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception {
 		
 		if (listlikeDAO.selectLikeList(listID, username) != null) {
 			listlikeDAO.revertLike(listID, username);
@@ -71,19 +81,30 @@ public class ListLikeController {
 		
 		listlikeDAO.dislikeaList(listID, username);
 		
-		ListLikeDTO res = listlikeDAO.selectDislikeList(listID, username);
+		int[] listlike = new int[2];
 		
-		return res;
+		listlike[0] = listlikeDAO.countLike(listID);
+		listlike[1] = listlikeDAO.countDislike(listID);
+		
+		return listlike;
+		
 	}
 	
 	//revert dislike
 	@CrossOrigin
 	@RequestMapping(value = "/api/video/list/revert/dislike/{listID}/{username}", method = RequestMethod.DELETE)
-	public String revertDislike(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception {
+	public int[] revertDislike(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception {
 		
 		listlikeDAO.revertDislike(listID, username);
+
 		
-		return "dislike reverted";
+		int[] listlike = new int[2];
+		
+		listlike[0] = listlikeDAO.countLike(listID);
+		listlike[1] = listlikeDAO.countDislike(listID);
+		
+		return listlike;
+		
 	}
 	
 	//count videoList's like, dislike 
