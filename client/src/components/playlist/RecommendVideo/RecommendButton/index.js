@@ -14,7 +14,6 @@ function RecommendButton({inVideoList, videoID, username, recommended, recCount,
             await setRecommend(1);
             playlistService.recommendVideoInPlaylist({listID, videoID, username})
                 .then(response => {
-                    console.log("추천 버튼 누름", response);
                     setCount({
                         recommended: response[0],
                         disrecommended: response[1]
@@ -31,7 +30,6 @@ function RecommendButton({inVideoList, videoID, username, recommended, recCount,
                     return playlistService.recommendVideoInPlaylist({listID, videoID, username})
                 })
                 .then(response => {
-                    console.log(response);
                     setCount({
                         recommended: response[0],
                         disrecommended: response[1]
@@ -51,7 +49,6 @@ function RecommendButton({inVideoList, videoID, username, recommended, recCount,
                     })
                     setLoading(false);
                 })
-
         }
     }
 

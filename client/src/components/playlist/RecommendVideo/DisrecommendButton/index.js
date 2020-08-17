@@ -14,7 +14,6 @@ function DisrecommendButton({inVideoList, videoID, username, disrecommended, dis
             await setDisrecommend(1);
             playlistService.disrecommendVideoInPlaylist({listID, videoID, username})
                 .then(response => {
-                    console.log("비추천 버튼 누름", response);
                     setCount({
                         recommended: response[0],
                         disrecommended: response[1]
