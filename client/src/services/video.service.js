@@ -11,7 +11,11 @@ export const videoService = {
     deleteVideoByVideoID,
     updateVideoByVideoID,
     getLikeCountByVideoID,
-    getVideoLikedByUsername
+    getVideoLikedByUsername,
+    likeVideo,
+    cancelLikeVideo,
+    dislikeVideo,
+    cancelDislikeVideo
 };
 
 function getVideoUploadURL(input) {
@@ -166,4 +170,56 @@ function getVideoLikedByUsername(username) {
       .catch(error => {
           return null;
       })
+}
+
+function likeVideo({videoID, username}) {
+    return axios({
+        method: 'POST',
+        url: `https://soktube.uc.r.appspot.com/api/like/video/${videoID}/${username}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return null;
+        })
+}
+
+function cancelLikeVideo({videoID, username}) {
+    return axios({
+        method: 'DELETE',
+        url: `https://soktube.uc.r.appspot.com/api/like/video/revert/${videoID}/${username}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return null;
+        })
+}
+
+function dislikeVideo({videoID, username}) {
+    return axios({
+        method: 'POST',
+        url: `https://soktube.uc.r.appspot.com/api/dislike/video/${videoID}/${username}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return null;
+        })
+}
+
+function cancelDislikeVideo({videoID, username}) {
+    return axios({
+        method: 'DELETE',
+        url: `https://soktube.uc.r.appspot.com/api/dislike/video/revert/${videoID}/${username}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return null;
+        })
 }

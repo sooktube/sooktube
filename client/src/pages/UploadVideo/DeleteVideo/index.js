@@ -9,6 +9,7 @@ function DeleteVideo({videoID}) {
 
     const StyledButton = styled.div`
         margin-right: 1em;
+        margin-top: 0.5em;
         cursor: pointer;
         &:hover {
           text-decoration: underline;
