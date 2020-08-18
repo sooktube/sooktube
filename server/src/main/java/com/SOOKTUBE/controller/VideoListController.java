@@ -1,5 +1,7 @@
 package com.SOOKTUBE.controller;
 
+import java.util.List;
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.SOOKTUBE.dao.ListLikeDAO;
 import com.SOOKTUBE.dao.RecommendDAO;
+import com.SOOKTUBE.dao.VideoDAO;
+import com.SOOKTUBE.dao.VideoLikeDAO;
 import com.SOOKTUBE.dao.VideoListDAO;
-import com.SOOKTUBE.model.RecommendDTO;
+import com.SOOKTUBE.model.VideoDTO;
 import com.SOOKTUBE.model.VideoListDTO;
 import com.SOOKTUBE.service.GCSService;
 
@@ -34,6 +38,12 @@ public class VideoListController {
 	
 	@Autowired
 	private ListLikeDAO listlikeDAO;
+	
+	@Autowired
+	private VideoDAO videoDAO;
+	
+	@Autowired
+	private VideoLikeDAO videoLikeDAO;
 	
 	//get all videoList from DB
 	@CrossOrigin
@@ -206,10 +216,18 @@ public class VideoListController {
 
 		
 		if (username.equals(videoListDAO.getUsernameofList(listID).toString())) {
+			
+			if(recommendDAO.getRecommendedVideo(videoID, listID, username) == null) {
+				
 			videoListDAO.editLikeSet5(videolist);
 			recommendDAO.recommendVideoInList(videoID, listID, username);
-			res[0] = 10;
-			res[1] = videolist.getDislike();
+			
+		}
+			
+			VideoListDTO newvideolist = videoListDAO.getVideoListbyVideoID(videoID, listID);
+			
+			res[0] = newvideolist.getLike();
+			res[1] = newvideolist.getDislike();
 			
 
 		}
@@ -384,6 +402,64 @@ public class VideoListController {
 		
 		return res;
 	}
+	
+	
+	//user deletes video from video list when it is created by {username}
+	@CrossOrigin
+	@RequestMapping(value = "/api/video/list/delete/video/{username}/{listID}/{videoID}", method = RequestMethod.DELETE)
+	public VideoDTO[] deleteVideoFromVideolist(@PathVariable("username") final String username, @PathVariable("listID") final int listID,
+			@PathVariable("videoID") final int videoID) throws Exception {
+		
+		if (username.equals(videoListDAO.getUsernameofList(listID).toString())) {
+			
+			videoListDAO.deleteVideoFromlist(videoID, listID);
+		}
+		
+    	List<String> fileName = videoListDAO.getFileNamebylistID(listID);
+		
+		VideoDTO[] res = videoDAO.getDescbyListID(listID);
+
+		
+		for(int i = 0; i < res.length; i++) {
+			
+			int newvideoID = res[i].getVideoID();
+			
+			res[i].setVideoPath(gcsService.getVideobyVIDEOtable(fileName.get(i)));
+			
+			res[i].setLike(0);
+			res[i].setDislike(0);
+			
+			res[i].setRecommended(0);
+			res[i].setDisrecommended(0);
+			
+			if (videoLikeDAO.selectLikeVideo(newvideoID, username) != null) {
+				res[i].setLike(1);
+			}
+			
+			else if (videoLikeDAO.selectDislikeVideo(newvideoID, username) != null) {
+				res[i].setDislike(-1);
+			}
+			
+			if (recommendDAO.getRecommendedVideo(newvideoID, listID, username) != null) {
+				res[i].setRecommended(1);
+			}
+			else if (recommendDAO.getDisrecommendedVideo(newvideoID, listID, username) != null) {
+				res[i].setDisrecommended(-1);
+			}
+
+			res[i].setRecCount(recommendDAO.recCount(newvideoID, listID));
+			res[i].setDisrecCount(recommendDAO.disrecCount(newvideoID, listID));
+
+		}
+		
+		
+		
+		return res;
+		
+	}
+		
+	
+	
 	
 	
 }
