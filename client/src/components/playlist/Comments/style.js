@@ -70,9 +70,10 @@ export const SaveButton = styled(RiChatUploadLine)`
     padding-top: 0;
     text-align: center;
     border-radius: 50%;
-    color: #a9a9a9;
+    color: #868e96;
     &:hover {
-	  cursor:pointer;
+      cursor:pointer;
+      color:${MAIN.BASE_COLOR};
     }
 `;
 
@@ -137,7 +138,8 @@ export const DotIcon = styled(BsThreeDotsVertical)`
     float:right;
     color: #a9a9a9;
     &:hover {
-	cursor:pointer;
+	    cursor:pointer;
+        color:#868e96;
     }
 `;
 

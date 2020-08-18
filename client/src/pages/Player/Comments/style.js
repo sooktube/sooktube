@@ -46,22 +46,24 @@ export const EditInput = styled.input`
     border-top:0px;
     border-left:0px;
     border-right:0px;
+    border-bottom: 2px solid ${MAIN.BORDER_COLOR};
     &:focus{
         outline:none;
+        transition: border-color 0.5s ease; 
+        border-bottom: 3px solid ${MAIN.BASE_COLOR};
     }
 `;
 
-export const SaveButton = styled.button`
-    border:none;
-    font-size:2.2vh;
-    margin-left:1.5em;
-    padding: 0.8em 1.3em 0.8em 1.3em;
-    font-weight:500;
-    color:white;
-    background-color:#adb5bd;
-    border-radius:2px;
+export const SaveButton = styled(RiChatUploadLine)`
+    width: 5vw;
+    height: 5vh;
+    padding-top: 0;
+    text-align: center;
+    border-radius: 50%;
+    color: #868e96;
     &:hover {
-        background-color:#ced4da;
+      cursor:pointer;
+      color:${MAIN.BASE_COLOR};
     }
 `;
 
@@ -116,7 +118,8 @@ export const SubmitButton = styled(RiChatUploadLine)`
     text-align: center;
     border-radius: 50%;
     &:hover {
-	  cursor:pointer;
+      cursor:pointer;
+      color:${MAIN.BASE_COLOR};
     }
 `;
 
@@ -127,6 +130,7 @@ export const DotIcon = styled(BsThreeDotsVertical)`
     color: ${MAIN.BORDER_COLOR};
     &:hover {
 	  cursor:pointer;
+      color:#868e96;
     }
 `;
 

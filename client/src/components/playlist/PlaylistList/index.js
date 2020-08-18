@@ -2,10 +2,10 @@ import React from 'react';
 import * as S from './style';
 import PlaylistListItem from "./PlaylistListItem";
 
-function PlaylistList({playlistList, length}) {
+function PlaylistList({playlistList}) {
+    
     return (
         <S.VideoListWrapper>
-            <S.VideoType>My Playlists  {length} </S.VideoType>
             {playlistList.map(playlist =>
                 <PlaylistListItem  key={playlist.listID}
                                    listID={playlist.listID}

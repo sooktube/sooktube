@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { MAIN } from '../../components/style/Main';
+import { MAIN } from '../../../components/style/Main';
 import {FaCheck} from "react-icons/all";
 
 export const MainBackground = styled.div`

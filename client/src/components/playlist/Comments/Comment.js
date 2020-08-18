@@ -81,7 +81,7 @@ function Comment({listID, commentID, length, index, username, text, photo}){
             </S.TextBox>}
             {current_username === username && edit && <S.DotIcon onClick={toggleDropdown}/> }
             {!edit && <S.EditInput value={comment} onChange={handleChange}/>}
-            {!edit && <S.SaveButton onClick={SaveEdit}>저장</S.SaveButton>}
+            {!edit && <S.SaveButton onClick={SaveEdit}/>}
             {createDropdownVisible &&
                     <S.CreateDropdownContent ref={contentRef}>
                         <S.EditButton  onClick={EditClick}> 수정 </S.EditButton>
