@@ -7,11 +7,6 @@ export const UserButtonWrapper = styled.div`
     display: flex;
 `;
 
-export const Username = styled.div`
-    color: ${MAIN.TEXT_COLOR};
-    padding: 0.5em 0 0 0.2em;
-`;
-
 export const ArrowDown = styled(TiArrowSortedDown)`
     margin: 0.5em 0 0 0.1em;
     color: ${MAIN.BASE_COLOR};

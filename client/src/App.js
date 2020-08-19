@@ -15,6 +15,7 @@ import UserVideoList from "./pages/User/UserVideoList";
 import UpdateVideo from "./pages/UploadVideo/UpdateVideo";
 import UpdatePlaylist from "./pages/UploadPlaylist/UpdatePlaylist";
 import Mypage from './pages/Mypage';
+import Search from "./components/base/search";
 
 function App() {
     return (
@@ -34,6 +35,7 @@ function App() {
                 <Route exact path='/@:username/video/:videoID' component={Player}/>
                 <Route path='/@:username/video/update/:videoID' component={UpdateVideo}/>
                 <Route path='/@:username/playlist/update/:listID' component={UpdatePlaylist}/>
+                <Route path='/search/:type' component={Search}/>
                 <Route path='/mypage' component={Mypage}/>
                 <Redirect from="*" to="/" />
             </Switch>
