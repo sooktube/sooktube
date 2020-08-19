@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const VideoListWrapper = styled.main`
+export const PlaylistListWrapper = styled.main`
     padding: 1rem;
     border-radius: 15px;
     width: 100%;

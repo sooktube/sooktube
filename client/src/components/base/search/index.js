@@ -4,6 +4,7 @@ import {history} from "../../../helpers";
 import {Switch, Route, useRouteMatch, useParams, useLocation} from 'react-router-dom';
 import Header from "../Header";
 import SearchResult from "./SearchResult";
+import SearchTypeToggleButton from "./SearchTypeToggleButton";
 
 function Search() {
     const { url } = useRouteMatch();
@@ -25,17 +26,19 @@ function Search() {
     const query = useQuery();
 
     return (
-        <>
+        <S.SearchWrapper>
             <Header/>
-            <S.SearchVideoWrapper>
+            <S.KeywordInputWrapper>
                 <S.SearchInput name="keyword"
                                value={keyword}
                                onChange={handleChange}
                                placeholder="검색어를 입력하세요."/>
-            </S.SearchVideoWrapper>
-
-            <SearchResult query={query.get("query")}/>
-        </>
+            </S.KeywordInputWrapper>
+            <S.SearchResultContainer>
+                <SearchTypeToggleButton setKeyword={setKeyword}/>
+                <SearchResult query={query.get("query")}/>
+            </S.SearchResultContainer>
+        </S.SearchWrapper>
     );
 }
 

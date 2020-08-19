@@ -5,7 +5,7 @@ import PlaylistListItem from "./PlaylistListItem";
 function PlaylistList({playlistList}) {
     
     return (
-        <S.VideoListWrapper>
+        <S.PlaylistListWrapper>
             {playlistList.map(playlist =>
                 <PlaylistListItem  key={playlist.listID}
                                    listID={playlist.listID}
@@ -16,7 +16,7 @@ function PlaylistList({playlistList}) {
                                    url={playlist.url}
                 />
             )}
-        </S.VideoListWrapper>
+        </S.PlaylistListWrapper>
     );
 }
 

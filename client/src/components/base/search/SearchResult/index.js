@@ -3,35 +3,47 @@ import * as S from './style';
 import {useParams} from 'react-router-dom';
 import {searchService} from "../../../../services/search.service";
 import VideoList from "../../../video/VideoList";
+import PlaylistList from "../../../playlist/PlaylistList";
 
 function SearchResult({ query }) {
     const { type } = useParams();
-    const [searchResult, setSearchResult] = useState(null);
+    const [videoSearchResult, setVideoSearchResult] = useState(null);
+    const [playlistSearchResult, setPlaylistSearchResult] = useState(null);
 
     useEffect(()=> {
-        console.log(query);
         if(type === 'video' && query) {
             searchService.searchVideoTitle(query)
                 .then(response => {
-                    console.log(response);
-                    setSearchResult(response);
+                    setVideoSearchResult(response);
                 })
         }
         else if (type === 'playlist' && query) {
             searchService.searchPlaylistTitle(query)
                 .then(response => {
-                    setSearchResult(response);
+                    setPlaylistSearchResult(response);
                 })
         }
     }, [query]);
 
     return (
-        <>
-            {searchResult
-                ? <VideoList videoList={searchResult} checkplaylist={true}/>
-                : <S.SearchResultComment> 검색 결과가 없습니다. </S.SearchResultComment>
+        <S.SearchResultContainer>
+            {type === 'video' && query &&
+                <>
+                {videoSearchResult && videoSearchResult.length > 0
+                    ? <VideoList videoList={videoSearchResult} checkplaylist={true}/>
+                    : <S.SearchResultComment> 검색 결과가 없습니다. </S.SearchResultComment>
+                }
+                </>
             }
-        </>
+            {type === 'playlist' && query &&
+                <>
+                {playlistSearchResult && playlistSearchResult.length > 0
+                    ? <PlaylistList playlistList={playlistSearchResult}/>
+                    : <S.SearchResultComment> 검색 결과가 없습니다. </S.SearchResultComment>
+                }
+            </>
+            }
+        </S.SearchResultContainer>
     );
 }
 
