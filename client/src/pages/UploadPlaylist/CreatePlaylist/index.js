@@ -2,9 +2,9 @@ import React, {useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import * as S from "./style";
 import { useState, useRef } from 'react';
-import Header from "../../components/base/Header";
-import {playlistService} from "../../services/playlist.service";
-import {history} from "../../helpers";
+import Header from "../../../components/base/Header";
+import {playlistService} from "../../../services/playlist.service";
+import {history} from "../../../helpers";
 
 function CreatePlaylist(){
     const [text,setText]=useState(' ');

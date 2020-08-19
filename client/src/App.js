@@ -6,13 +6,14 @@ import Main from "./pages/Main";
 import Register from "./pages/Register";
 import PrivateRoute from "./components/common/PrivateRoute";
 import GlobalLayoutStyle from "./components/style/GlobalLayout";
-import CreatePlaylist from "./pages/CreatePlaylist";
+import CreatePlaylist from "./pages/UploadPlaylist/CreatePlaylist";
 import CreateVideo from "./pages/UploadVideo/CreateVideo";
 import Player from "./pages/Player";
 import StyleReset from "./components/style/StyleReset";
 import Playlist from "./pages/Playlist";
 import UserVideoList from "./pages/User/UserVideoList";
 import UpdateVideo from "./pages/UploadVideo/UpdateVideo";
+import UpdatePlaylist from "./pages/UploadPlaylist/UpdatePlaylist";
 import Mypage from './pages/Mypage';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                 <Route exact path='/@:username/video' component={UserVideoList}/>
                 <Route exact path='/@:username/video/:videoID' component={Player}/>
                 <Route path='/@:username/video/update/:videoID' component={UpdateVideo}/>
+                <Route path='/@:username/playlist/update/:listID' component={UpdatePlaylist}/>
                 <Route path='/mypage' component={Mypage}/>
                 <Redirect from="*" to="/" />
             </Switch>

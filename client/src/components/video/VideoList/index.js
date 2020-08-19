@@ -2,11 +2,10 @@ import React from 'react';
 import * as S from './style';
 import VideoListItem from "./VideoListItem";
 
-function VideoList({videoList, length}) {
+function VideoList({videoList}) {
    
     return (
         <S.VideoListWrapper>
-            <S.VideoType>My Videos  {length} </S.VideoType>
             {videoList.map(video =>
                 <VideoListItem  key={video.videoID}
                                 videoID={video.videoID}

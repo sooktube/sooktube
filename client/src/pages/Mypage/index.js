@@ -3,30 +3,18 @@ import {useSelector} from "react-redux";
 import './style.scss';
 import Header from "../../components/base/Header";
 import VideoList from "../../components/video/VideoList";
-import NotFound from "../../components/video/VideoList";
-import VideoLikedList from "../../components/video/VideoList/VideoLiked";
 import PlaylistList from "../../components/playlist/PlaylistList";
-import PlaylistLikedList from "../../components/playlist/PlaylistList/PlaylistLiked";
 import {videoService, playlistService} from "../../services";
-import notFound from '../../components/video/VideoList/notFound';
+
 
 
 function Mypage(){
-
     const username = useSelector(state => state.authentication.username);
 
     const [videoInfo, setVideoInfo] = useState(null);
     const [playlistInfo, setPlaylistInfo] = useState(null);
     const [videoLiked, setVideoLiked] = useState(null);
     const [playlistLiked, setPlaylistLiked] = useState(null);
-
-    const [videolistLength, setVideolistLength] = useState(0);
-    const [playlistLength, setPlaylistLength] = useState(0);
-    const [videolikedlength,setVideoLikedLength] = useState(0);
-    const [playlistlikedlength, setPlaylistLikedLength] = useState(0);
-  
-  
-
 
 
     useEffect(() => {
@@ -35,9 +23,7 @@ function Mypage(){
                 setVideoInfo(response);
                 console.log(response);
                 setVideolistLength(response.length);
-            });
-
-        
+            }); 
     },[])
 
     function clickMyPlaylist(){
@@ -48,7 +34,6 @@ function Mypage(){
                 setPlaylistLength(response.length);
             });
     }
-
 
     function clickVideoLiked(){
         videoService.getVideoLikedByUsername(username)
@@ -67,53 +52,85 @@ function Mypage(){
                 setPlaylistLikedLength(response.length);
             });
     }
+    const tabLink = document.querySelectorAll(".tab-menu-link");
+    const tabContent = document.querySelectorAll(".tab-bar-content");
+
+    tabLink.forEach((el) => {
+        el.addEventListener("click", activeTab);
+    });
+
+    function activeTab(el) {
+        const btnTarget = el.currentTarget;
+        const content = btnTarget.dataset.content;
+
+        tabContent.forEach((el) => {
+            el.classList.remove("active");
+        });
+
+        tabLink.forEach((el) => {
+            el.classList.remove("active");
+        });
+
+        document.querySelector("#" + content).classList.add("active");
+        btnTarget.classList.add("active");
+    }
 
     
 
     return(
         <>
         <Header/>
-        
-       
-        <div className="container">
-        <input type="radio" name="tabs" id="tab_3" onClick={clickPlaylistLiked}/>
-        <label for="tab_3">
-            <div className="content">
-                {playlistLiked &&
-                    <PlaylistLikedList playlistList={playlistLiked} length={playlistlikedlength}/>
-                }
-
-            </div>
-        </label>
-        <input type="radio" name="tabs" id="tab_2" onClick={clickVideoLiked}/>
-        <label for="tab_2">
-            <div className="content">
-                {videoLiked &&
-                    <VideoLikedList videoList={videoLiked} length={videolikedlength}/>
-                }
+        <main class="main">
+        <div class="container">
+            <div class="tab">
+                <div class="tab-menu">
+                <button class="tab-menu-link active" data-content="first">
+                    <span data-title="first">MY VIDEOS</span>
+                </button>
+                <button class="tab-menu-link" data-content="second" onClick={clickMyPlaylist}>
+                    <span data-title="second">MY PLAYLISTS</span>
+                </button>
+                <button class="tab-menu-link" data-content="third" onClick={clickVideoLiked}>
+                    <span data-title="third">LIKED VIDEOS</span>
+                </button>
+                <button class="tab-menu-link" data-content="fourth" onClick={clickPlaylistLiked}>
+                    <span data-title="fourth">LIKED PLAYLISTS</span>
+                </button>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-bar-content active" id="first">
+                        <div class="texts">
+                            {videoInfo &&
+                                <VideoList videoList={videoInfo} />
+                            }
             
+                        </div>
+                    </div>
+                    <div class="tab-bar-content" id="second">
+                        <div class="texts">
+                            {playlistInfo &&
+                                <PlaylistList playlistList={playlistInfo} />
+                            }
+                        </div>
+                    </div>
+                    <div class="tab-bar-content" id="third">
+                        <div class="texts">
+                            {videoLiked &&
+                                <VideoList videoList={videoLiked} />
+                            }
+                        </div>
+                    </div>
+                    <div class="tab-bar-content" id="fourth">
+                        <div class="texts">
+                            {playlistLiked &&
+                                <PlaylistList playlistList={playlistLiked} />
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
-        </label>
-        <input type="radio" name="tabs" id="tab_1" onClick={clickMyPlaylist}/>
-        <label for="tab_1">
-            <div className="content">
-                {playlistInfo &&
-                    <PlaylistList playlistList={playlistInfo} length={playlistLength}/>
-                }
-
-            </div>
-        </label>
-        <input type="radio" name="tabs" id="tab_0"/>
-        <label for="tab_0">
-            <div className="content">
-                {videoInfo &&
-                    <VideoList videoList={videoInfo} length={videolistLength}/>
-                }
-            </div>
-        </label>
         </div>
-        
-        
+        </main>
         </>
     )
 }

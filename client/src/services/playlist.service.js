@@ -20,7 +20,9 @@ export const playlistService ={
     getPlaylistListLikedByUsername,
     getLikeCountByListID,
     likePlaylist,
-    cancelLikePlaylist
+    cancelLikePlaylist,
+    updatePlaylistByListID,
+    deletePlaylist
 }
 
 function getPlaylistUploadURL(input) {
@@ -282,6 +284,36 @@ function cancelLikePlaylist(listID, username) {
     return axios({
         method: 'DELETE',
         url: `https://soktube.uc.r.appspot.com/api/video/list/revert/like/${listID}/${username}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}
+
+function updatePlaylistByListID(input, listID) {
+    return axios({
+        method: 'PUT',
+        url: `https://soktube.uc.r.appspot.com/api/video/list/update/${listID}`,
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: qs.stringify(input)
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}
+
+function deletePlaylist(listID) {
+    return axios({
+        method: 'DELETE',
+        url: `https://soktube.uc.r.appspot.com/api/video/list/delete/${listID}`,
     })
         .then(response => {
             return response.data;

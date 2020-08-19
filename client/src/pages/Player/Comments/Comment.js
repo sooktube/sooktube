@@ -81,7 +81,7 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
             </S.TextBox>}
             {(currentUsername === username) && edit && <S.DotIcon onClick={toggleDropdown}/> }
             {!edit && <S.EditInput value={comment} onChange={handleChange}/>}
-            {!edit && <S.SaveButton onClick={SaveEdit}>저장</S.SaveButton>}
+            {!edit && <S.SaveButton onClick={SaveEdit}/>}
 
             {createDropdownVisible &&
             <S.CreateDropdownContent ref={contentRef}>
