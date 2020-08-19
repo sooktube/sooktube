@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {MAIN} from "../../../components/style/Main";
+import {MAIN} from "../../style/Main";
 import {RiChatUploadLine,BsThreeDotsVertical} from "react-icons/all";
 
 export const CommentBox = styled.div`

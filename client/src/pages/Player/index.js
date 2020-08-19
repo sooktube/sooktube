@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import * as S from "./style";
 import Header from "../../components/base/Header";
-import CommentBox from "./Comments";
+import CommentBox from "../../components/player/Comments";
 import VideoInfo from "../../components/player/VideoInfo";
 import {videoService, commentService} from "../../services";
 import {useDispatch} from "react-redux";

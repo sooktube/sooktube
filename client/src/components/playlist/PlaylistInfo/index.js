@@ -1,6 +1,6 @@
 import React from 'react';
-import PlaylistCard from "../../../components/playlist/PlaylistCard";
-import Comments from "../../../components/playlist/Comments";
+import PlaylistCard from "../PlaylistCard";
+import Comments from "../Comments";
 import * as S from './style';
 
 function PlaylistInfo({ listID }) {

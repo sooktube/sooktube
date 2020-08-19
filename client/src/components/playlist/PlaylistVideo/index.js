@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import * as S from './style';
-import VideoList from "../../../components/playlist/VideoList";
+import VideoList from "../VideoList";
 import RecommendVideoButton from "../RecommendVideoButton";
 import {playlistService} from "../../../services";
 import {useSelector} from "react-redux";

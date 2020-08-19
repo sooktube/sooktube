@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import * as S from './style';
-import Modal from "../../../components/common/Modal";
-import SearchVideo from "../../../components/playlist/SearchVideo";
+import Modal from "../../common/Modal";
+import SearchVideo from "../SearchVideo";
 
 function RecommendVideoButton({listID}) {
     const [modalVisible, setModalVisible] = useState(false);

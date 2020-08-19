@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {MAIN} from "../../../components/style/Main";
+import {MAIN} from "../../style/Main";
 
 export const PlaylistVideoWrapper = styled.div`
    width: 58%;
