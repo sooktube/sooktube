@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import search from "../../../../public/search.png";
 
 export const SearchVideoWrapper = styled.div`
-    margin: 2em auto;
+    margin: 2em auto 1em auto;
     text-align:center;
     overflow: auto;
 `;
