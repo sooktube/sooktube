@@ -35,7 +35,7 @@ body {
   width: 100%;
   height: auto;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.7rem;
 }
 
 .title {
@@ -86,6 +86,7 @@ body {
         color: $color-blue-gray;
         background: $color-white;
         transition: all 0.3s ease;
+        border-radius: 15px 15px 0 0;
 
         &:focus {
             outline:none;
@@ -100,8 +101,7 @@ body {
           height: auto;
           z-index: 2;
         }
-        
-
+      
         &.active {
           bottom: 0px;
           z-index: 0;
@@ -120,6 +120,7 @@ body {
       padding: 1rem 0;
       overflow: hidden;
       background: $color-white;
+      border-radius: 0 0 15px 15px;
 
       &-content {
         display: none;

@@ -13,7 +13,8 @@ export const CardWrapper = styled.div`
     position: relative;
     height: 34vh;
     width: 12vw;
-    margin-left: -0.2em;
+    margin-left: 0.5em;
+    margin-bottom:5.4vh;
     z-index: 2;
     transform: perspective(500px) rotateY(22deg);
     transition: all 0.2s ease;
@@ -36,16 +37,30 @@ export const CardImg = styled.img`
     margin: 0;
     display: inline-block;
     border: 0.4em solid #fff;
+    &:hover{
+        cursor:pointer;
+    }
 `;
 
 export const CardInfo = styled.div`
+    position: relative;
     padding: 0.5em 0 0 0;
     height: 7vh;
 `;
+
+export const likeCount = styled.div`
+    width: 5em;
+    margin-top:2.9vh;
+    margin-left:10px;
+    float:right;
+`;
+
 export const CardTitle = styled.div`
     width: 5em;
     padding-left: 0.2em;
+    float:left;
 `;
+
 
 export const CardHeart = styled(FiHeart)`
     margin: -3em 0 0 10vw;
