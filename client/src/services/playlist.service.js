@@ -22,7 +22,8 @@ export const playlistService ={
     likePlaylist,
     cancelLikePlaylist,
     updatePlaylistByListID,
-    deletePlaylist
+    deletePlaylist,
+    getAllPlaylist
 }
 
 function getPlaylistUploadURL(input) {
@@ -320,5 +321,18 @@ function deletePlaylist(listID) {
         })
         .catch(error => {
             return error;
+        })
+}
+
+function getAllPlaylist(username) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.uc.r.appspot.com/api/video/list/${username}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return null;
         })
 }
