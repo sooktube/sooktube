@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from "./style";
 import {history} from "../../../../helpers";
+import {playlistService} from "../../../../services";
 
-function CardShelf({listID,listName,like,url}) {
+function CardShelf({listID, listName, url}) {
+    const [like,setLike] = useState(0);
+
+    useEffect(()=>{
+        playlistService.getLikeCountByListID(listID)
+        .then((response=>{
+            console.log(response[0]);
+            setLike(response[0]);
+        }))
+    });
 
     function handleClick(){
         history.push(`/playlist/${listID}`);

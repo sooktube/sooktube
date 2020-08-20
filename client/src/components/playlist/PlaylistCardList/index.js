@@ -24,7 +24,6 @@ function PlaylistCardList() {
                 <CardShelf  key={list.listID}
                                 listID={list.listID}
                                 listName={list.listName}
-                                like={list.like}
                                 url={list.url}
                 />
             )}
