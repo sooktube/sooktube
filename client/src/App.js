@@ -36,7 +36,7 @@ function App() {
                 <Route path='/@:username/video/update/:videoID' component={UpdateVideo}/>
                 <Route path='/@:username/playlist/update/:listID' component={UpdatePlaylist}/>
                 <Route path='/search/:type' component={Search}/>
-                <Route path='/mypage' component={Mypage}/>
+                <Route exact path='/@:username' component={Mypage}/>
                 <Redirect from="*" to="/" />
             </Switch>
             </GlobalLayoutStyle>

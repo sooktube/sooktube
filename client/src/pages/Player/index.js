@@ -48,7 +48,9 @@ function Player(){
             <Header/>
             {!loading &&
                 <S.VideoWrapper>
-                    <VideoInfo {...videoInfo}/>
+                    <S.VideoMainContainer>
+                        <VideoInfo {...videoInfo}/>
+                    </S.VideoMainContainer>
                     <hr/>
                     <CommentBox videoID={videoID}/>
                 </S.VideoWrapper>

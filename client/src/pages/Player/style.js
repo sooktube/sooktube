@@ -10,6 +10,10 @@ export const VideoWrapper = styled.div`
     padding: 1rem 1.5rem;
 `;
 
+export const VideoMainContainer = styled.div`
+    display: flex;
+`
+
 export const VideoLike = styled.div`
     font-size: 1.3em;
     margin-left: auto;
