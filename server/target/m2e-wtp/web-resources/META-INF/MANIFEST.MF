@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
-Implementation-Title: server
+Implementation-Title: serverDeploy
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: vane8
 Implementation-Vendor-Id: com.SOOKTUBE
 Build-Jdk: 1.8.0_241
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
- ot-starter-parent/server
+ ot-starter-parent/serverDeploy
 Created-By: Maven Integration for Eclipse
 
