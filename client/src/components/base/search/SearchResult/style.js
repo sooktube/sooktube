@@ -2,10 +2,9 @@ import styled from 'styled-components';
 
 export const SearchResultContainer = styled.div`
     background-color: #fff;
-    width: 90rem;
+    width: 90%;
     min-height: 47rem;
-    position: relative;
-    left: 1rem;
+    margin-left: 1%;
     border-radius: 15px;
 `;
 export const SearchResultComment = styled.div`

@@ -28,12 +28,10 @@ function Search() {
     return (
         <S.SearchWrapper>
             <Header/>
-            <S.KeywordInputWrapper>
-                <S.SearchInput name="keyword"
-                               value={keyword}
-                               onChange={handleChange}
-                               placeholder="검색어를 입력하세요."/>
-            </S.KeywordInputWrapper>
+            <S.SearchInput name="keyword"
+                           value={keyword}
+                           onChange={handleChange}
+                           placeholder="검색어를 입력하세요."/>
             <S.SearchResultContainer>
                 <SearchTypeToggleButton setKeyword={setKeyword}/>
                 <SearchResult query={query.get("query")}/>
