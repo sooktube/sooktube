@@ -21,8 +21,6 @@ function Mypage(){
         videoService.getVideoListByUsername(username)
             .then(response => {
                 setVideoInfo(response);
-                console.log(response);
-                setVideolistLength(response.length);
             }); 
     },[])
 
@@ -30,8 +28,6 @@ function Mypage(){
         playlistService.getPlaylistListByUsername(username)
             .then(response => {
                 setPlaylistInfo(response);
-                console.log(response);
-                setPlaylistLength(response.length);
             });
     }
 
@@ -39,8 +35,6 @@ function Mypage(){
         videoService.getVideoLikedByUsername(username)
             .then(response => {
                 setVideoLiked(response);
-                console.log(response);
-                setVideoLikedLength(response.length);
             });
     }
 
@@ -48,8 +42,6 @@ function Mypage(){
         playlistService.getPlaylistListLikedByUsername(username)
             .then(response => {
                 setPlaylistLiked(response);
-                console.log(response);
-                setPlaylistLikedLength(response.length);
             });
     }
     const tabLink = document.querySelectorAll(".tab-menu-link");
@@ -80,48 +72,48 @@ function Mypage(){
     return(
         <>
         <Header/>
-        <main class="main">
-        <div class="container">
-            <div class="tab">
-                <div class="tab-menu">
-                <button class="tab-menu-link active" data-content="first">
+        <main className="main">
+        <div className="container">
+            <div className="tab">
+                <div className="tab-menu">
+                <button className="tab-menu-link active" data-content="first">
                     <span data-title="first">MY VIDEOS</span>
                 </button>
-                <button class="tab-menu-link" data-content="second" onClick={clickMyPlaylist}>
+                <button className="tab-menu-link" data-content="second" onClick={clickMyPlaylist}>
                     <span data-title="second">MY PLAYLISTS</span>
                 </button>
-                <button class="tab-menu-link" data-content="third" onClick={clickVideoLiked}>
+                <button className="tab-menu-link" data-content="third" onClick={clickVideoLiked}>
                     <span data-title="third">LIKED VIDEOS</span>
                 </button>
-                <button class="tab-menu-link" data-content="fourth" onClick={clickPlaylistLiked}>
+                <button className="tab-menu-link" data-content="fourth" onClick={clickPlaylistLiked}>
                     <span data-title="fourth">LIKED PLAYLISTS</span>
                 </button>
                 </div>
-                <div class="tab-bar">
-                    <div class="tab-bar-content active" id="first">
-                        <div class="texts">
+                <div className="tab-bar">
+                    <div className="tab-bar-content active" id="first">
+                        <div className="texts">
                             {videoInfo &&
                                 <VideoList videoList={videoInfo} />
                             }
             
                         </div>
                     </div>
-                    <div class="tab-bar-content" id="second">
-                        <div class="texts">
+                    <div className="tab-bar-content" id="second">
+                        <div className="texts">
                             {playlistInfo &&
                                 <PlaylistList playlistList={playlistInfo} />
                             }
                         </div>
                     </div>
-                    <div class="tab-bar-content" id="third">
-                        <div class="texts">
+                    <div className="tab-bar-content" id="third">
+                        <div className="texts">
                             {videoLiked &&
                                 <VideoList videoList={videoLiked} />
                             }
                         </div>
                     </div>
-                    <div class="tab-bar-content" id="fourth">
-                        <div class="texts">
+                    <div className="tab-bar-content" id="fourth">
+                        <div className="texts">
                             {playlistLiked &&
                                 <PlaylistList playlistList={playlistLiked} />
                             }
