@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.SOOKTUBE.dao.VideoRecommendDAO">
+
+	<select id="getVideoandList"
+			parameterType="Integer"
+			resultType="com.SOOKTUBE.model.VideoRecommendDTO">
+	
+	
+			SELECT videoList.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, listInfo.`listID`, `listName`
+			FROM VIDEO, listInfo, videoList
+            WHERE videoList.`listID` = listInfo.`listID`
+            AND VIDEO.`videoID` = videoList.`videoID`
+            AND listInfo.`listID` IN (SELECT videoList.`listID`
+										FROM videoList, listInfo
+										WHERE videoList.`listID` = listInfo.`listID`
+										AND videoList.`videoID` = #{videoID})	
+	 		
+	</select>
+	
+	<select id="recommendVideoByUploader"
+			parameterType = "Integer"
+			resultType="com.SOOKTUBE.model.RecommendUploaderDTO">
+			
+			
+			SELECT `videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`
+			FROM VIDEO
+			WHERE `username` IN (SELECT `username`
+						FROM VIDEO
+						WHERE videoID= #{videoID})		
+			
+	</select>
+	
+</mapper>
