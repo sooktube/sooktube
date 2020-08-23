@@ -28,6 +28,8 @@ public class VideoListDTO {
 	
 	private String url;
 	private String uploadFileName;
+	
+	private int copied;
 
 
 }

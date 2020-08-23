@@ -15,5 +15,8 @@ public class ListInfoDTO {
 	private String listName;
 	private String listDesc;
 	private int isPublic;
+	private String thumbnail;
+	private String username;
+	private int copied;
 
 }

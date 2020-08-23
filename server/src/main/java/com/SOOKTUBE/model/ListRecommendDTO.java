@@ -44,5 +44,7 @@ public class ListRecommendDTO {
 	
 	private int recCount;
 	private int disrecCount;
+	
+	private int copied;
 
 }

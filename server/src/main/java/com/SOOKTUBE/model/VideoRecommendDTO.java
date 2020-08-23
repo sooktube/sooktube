@@ -25,5 +25,6 @@ public class VideoRecommendDTO {
 	
 	private int listID;
 	private String listName;
+	private String listDesc;
 	
 }

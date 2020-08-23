@@ -6,8 +6,8 @@
       <select id="selectRecommendedVideo"
             resultType="com.SOOKTUBE.model.ListRecommendDTO">
             
-            SELECT listInfo.`listID`, `listName`, `listDesc`, listInfo.`username` as listUsername, `isPublic`, `thumbnail`,
-              VIDEO.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username` as videoUsername, `uploadFileName`
+            SELECT listInfo.`listID`, `listName`, `listDesc`, listInfo.`username` as listUsername, `isPublic`, `thumbnail`, 
+              VIDEO.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username` as videoUsername, `uploadFileName`, `copied`
             FROM listInfo, VIDEO, videoList
             WHERE listInfo.`listID` = #{listID}
             AND VIDEO.`videoID` = #{videoID}
