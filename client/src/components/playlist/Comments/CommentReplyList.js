@@ -35,7 +35,7 @@ function CommentReplyList({userPic, listID, commentID}){
                 username: currentUsername,
                 userComment: newReply.userComment
             },commentID,count+1)
-            .then((response) => {
+            .then(() => {
                 dispatch({type:'ADD',value:newReply});
                 setReplyComment('');
             })
