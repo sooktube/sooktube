@@ -49,14 +49,14 @@ export const CardInfo = styled.div`
 `;
 
 export const likeCount = styled.div`
-    width: 5em;
+    width: 4.8em;
     margin-top:2.9vh;
     margin-left:10px;
     float:right;
 `;
 
 export const CardTitle = styled.div`
-    width: 5em;
+    width: 6em;
     padding-left: 0.2em;
     float:left;
 `;

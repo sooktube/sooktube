@@ -1,24 +1,34 @@
-import React,{ useState, useRef } from 'react';
+import React,{ useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as S from "./style";
 import useDropdownOutsideClick from "../../../hooks/useDropdownOutsideClick";
 import {commentService} from "../../../services/comment.service";
+import CommentReplyList from "./CommentReplyList";
 
-function Comment({videoID, commentID, length, index, username, text, photo}){
+function Comment({videoID, commentID, length, index, username, userComment, profileUrl, userPic}){
     const currentUsername = useSelector(state => state.authentication.username);
+    const comments = useSelector(state => state.comment);
     const dispatch = useDispatch();
 
     const [createDropdownVisible, setCreateDropdownVisible] = useState(false);
-    const [edit,setEdit] = useState(true);
-
-    const [comment,setComment] = useState(text);
+    const [edit, setEdit] = useState(true);
+    const [reply, setReply] = useState(false);
+    const [commentCount, setCommentCount] = useState(0);
+   
+    const [comment,setComment] = useState(userComment);
     const [newText,setNewText]=useState({
         commentID:null,
         videoID:null,
         username:'',
         userComment: '',
-        profileUrl:''
+        profileUrl:'',
+        parent:0
     });
+
+    useEffect(()=>{
+        const replyComment = comments.filter(comment=>comment.parent===commentID);
+        setCommentCount(replyComment.length);
+    },[comments]);
 
     const toggleDropdown = () => {
         setCreateDropdownVisible(!createDropdownVisible);
@@ -30,13 +40,13 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
 
     function handleChange(e) {
         setComment(e.target.value);
-        setNewText({commentID, videoID, username, userComment: e.target.value, profileUrl:photo});
+        setNewText({commentID, videoID, username, userComment: e.target.value, profileUrl, parent:0});
     }
 
     function EditClick(){
-        setComment(text);
+        setComment(userComment);
         setEdit(false);
-        setNewText({commentID, videoID, username, userComment: comment, profileUrl:photo});
+        setNewText({commentID, videoID, username, userComment: comment, profileUrl, parent:0});
     }
 
     function SaveEdit(){
@@ -44,9 +54,9 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
             alert('한 글자 이상 입력해주세요.');
         }
         else{
-            const c_text = { userComment: newText.userComment };
+            const text = { userComment: newText.userComment };
             commentService.updateCommentByVideoID({
-                comment: c_text,
+                comment: text,
                 commentID,
                 videoID,
                 username: currentUsername
@@ -62,6 +72,7 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
         commentService.deleteCommentByVideoID({
             commentID,
             videoID,
+            seq: 1,
             username: currentUsername
         }).then(() => {
             if(index === 0){
@@ -71,14 +82,22 @@ function Comment({videoID, commentID, length, index, username, text, photo}){
         })
     }
 
+    function ReplyClick(){
+        setReply(!reply);
+    }
+
 
     return(
         <S.CommentContainer>
-            <S.Photo src={photo}/>
-            {edit && <S.TextBox>
+            <S.Photo src={profileUrl}/>
+            {edit && 
+            <S.TextBox>
                 <S.Username>{username}</S.Username>
-                <S.Text>{text}</S.Text>
+                <S.Text>{userComment}</S.Text>
+            <S.ReplyButton onClick={ReplyClick}>REPLY {commentCount}</S.ReplyButton>
+                {reply && <CommentReplyList userPic ={userPic} videoID={videoID} commentID={commentID}/>}
             </S.TextBox>}
+            
             {(currentUsername === username) && edit && <S.DotIcon onClick={toggleDropdown}/> }
             {!edit && <S.EditInput value={comment} onChange={handleChange}/>}
             {!edit && <S.SaveButton onClick={SaveEdit}/>}
