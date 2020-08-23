@@ -14,5 +14,8 @@ public interface ListCopyDAO {
 	
 	//select
 	int isCopiedFrom(int copyTo) throws Exception;
-
+	
+	//update like
+	int editLike10(int listID) throws Exception;
+	
 }

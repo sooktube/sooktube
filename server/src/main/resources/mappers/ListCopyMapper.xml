@@ -14,6 +14,13 @@
     		
     </insert>
     
+	<update id="editLike10" parameterType="int">
+
+		        UPDATE videoList
+		           SET `like` = 10
+		         WHERE `listID` = #{listID}
+	</update>
+    
     <insert id="newcopyList"
     		parameterType="com.SOOKTUBE.model.ListInfoDTO"
     		useGeneratedKeys="true" 

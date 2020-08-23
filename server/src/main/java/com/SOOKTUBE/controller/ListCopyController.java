@@ -36,6 +36,7 @@ public class ListCopyController {
 	public void copyList(@PathVariable("copyFrom") final int copyFrom, @PathVariable("copyTo") final int copyTo) throws Exception {
 		
 		listcopyDAO.copyList(copyTo, copyFrom);
+		listcopyDAO.editLike10(copyTo);
 		listcopyDAO.insertCopyInfo(copyTo, copyFrom);
 		
 	}
