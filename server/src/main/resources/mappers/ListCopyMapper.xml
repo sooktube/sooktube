@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.SOOKTUBE.dao.ListCopyDAO">
+
+
+	<insert id="copyList"
+		    parameterType="Integer">
+		    
+		    INSERT INTO videoList (`listID`, `videoID`, `username`) 
+			SELECT #{copyTo}, `videoID`, `username`
+			FROM videoList
+    		WHERE `listID` = #{copyFrom}
+    		
+    </insert>
+    
+    <insert id="newcopyList"
+    		parameterType="com.SOOKTUBE.model.ListInfoDTO"
+    		useGeneratedKeys="true" 
+		    keyProperty="listID">
+    		
+		    INSERT INTO listInfo(`listName`, `listDesc`, `isPublic`, `thumbnail`, `username`, `copied`)
+		    VALUES (#{listName}, #{listDesc}, 0,  #{thumbnail}, #{username}, 1)
+    
+    </insert>
+    
+    
+    <insert id="insertCopyInfo"
+    		parameterType="Integer"
+    		useGeneratedKeys="true"
+    		keyProperty="copyID">
+    
+    		INSERT INTO COPY(`copyFrom`, `copyTo`)
+    		VALUES (#{copyFrom}, #{copyTo})
+    		
+    </insert>
+    
+	<select id="isCopiedFrom"
+		    	resultType="Integer">
+		    	
+		    SELECT `copyFrom`
+		    FROM COPY
+		    WHERE `copyTo` = #{copyTo}
+		    
+	</select>
+
+</mapper>
+
