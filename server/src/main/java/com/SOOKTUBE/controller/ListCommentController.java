@@ -42,6 +42,20 @@ public class ListCommentController {
 		
 	}
 	
+	//recomment
+	@CrossOrigin
+	@RequestMapping(value = "/api/list/recomment/{parent}/{seq}", method = RequestMethod.POST)
+	public ListCommentDTO recommenList(@PathVariable("parent") final int parent, @PathVariable("seq") final int seq, ListCommentDTO comment) throws Exception {
+		
+		comment.setParent(parent);
+		comment.setSeq(seq);
+		
+		listcommentDAO.recommentList(comment);
+		
+		return comment;
+		
+	}
+	
 	
 	//update comment
 	@CrossOrigin
@@ -66,13 +80,27 @@ public class ListCommentController {
 	
 	//delete comment
 	@CrossOrigin
-	@RequestMapping(value = "/api/list/comment/delete/{commentID}/{listID}/{username}", method = RequestMethod.DELETE)
-	public String deleteListComment(@PathVariable("commentID") int commentID, @PathVariable("listID") final int listID,
-			@PathVariable("username") final String username) throws Exception {
+	@RequestMapping(value = "/api/list/comment/delete/{commentID}/{listID}/{seq}/{username}", method = RequestMethod.DELETE)
+	public ListCommentGetDTO[] deleteListComment(@PathVariable("commentID") int commentID, @PathVariable("listID") final int listID,
+			@PathVariable("seq") final int seq, @PathVariable("username") final String username) throws Exception {
 		
-		listcommentDAO.deleteListComment(commentID, listID, username);
+		listcommentDAO.deleteListComment(commentID, listID, username, seq);
 		
-		return "deleted";
+		if (listcommentDAO.checkComment(listID, commentID) != null) {
+			
+			listcommentDAO.deleteRecomment(listID, commentID);
+		}
+		
+		ListCommentGetDTO[] comments = listcommentgetDAO.getCommentsandProfile(listID);
+		
+		for(int i = 0; i < comments.length; i++) {
+			
+			String profilepic = comments[i].getProfileUrl();
+			
+			comments[i].setProfileUrl(gcsService.getVideobyVIDEOtable(profilepic));
+		}
+		
+		return comments;
 		
 	}
 	

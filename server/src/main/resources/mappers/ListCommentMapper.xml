@@ -8,8 +8,18 @@
             useGeneratedKeys="true"
             keyProperty="commentID">
             
-            INSERT INTO listComments(`listID`, `username`, `userComment`, `commentDate`)
-            VALUES(#{listID}, #{username}, #{userComment}, CURRENT_TIMESTAMP)
+            INSERT INTO listComments(`listID`, `username`, `userComment`, `commentDate`, `seq`)
+            VALUES(#{listID}, #{username}, #{userComment}, CURRENT_TIMESTAMP, 1)
+            
+    </insert>
+
+    <insert id="recommentList"
+            parameterType="com.SOOKTUBE.model.ListCommentDTO"
+            useGeneratedKeys="true"
+            keyProperty="commentID">
+            
+            INSERT INTO listComments (`listID`, `username`, `userComment`, `commentDate`, `parent`, `seq`) 
+			VALUES (#{listID}, #{username}, #{userComment}, CURRENT_TIMESTAMP, #{parent} , #{seq})
             
     </insert>
     
@@ -34,6 +44,16 @@
 		    	
 	</select>
 	
+	<select id="checkComment"
+			resultType = "com.SOOKTUBE.model.ListCommentDTO">
+	
+			SELECT `commentID`
+			FROM listComments
+			WHERE `listID` = #{listID}
+			AND `parent` = #{parent}
+				
+	</select>
+	
 	<select id="getCommentsByListID"
 		    	resultType="com.SOOKTUBE.model.ListCommentDTO">
 		    	
@@ -48,6 +68,14 @@
 		WHERE `commentID` = #{commentID}
 		    AND `listID` = #{listID}
 		    	AND `username` = #{username}
+		    	AND `seq` = #{seq}
+    </delete>
+    
+    <delete id="deleteRecomment">
+		DELETE FROM listComments
+		WHERE `listID` = #{listID}
+		AND `parent` = #{parent}
+    
     </delete>
 
 </mapper>

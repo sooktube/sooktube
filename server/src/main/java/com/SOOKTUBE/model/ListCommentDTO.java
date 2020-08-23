@@ -20,5 +20,8 @@ public class ListCommentDTO {
 	private String username;
 	
 	private Timestamp commentDate;
+	
+	private int parent;
+	private int seq;
 
 }

@@ -41,17 +41,14 @@ public class VideoRecommendController {
 		
 		int size = res.length;
 		
-		
-		  for(int i = 0; i < size; i++) {
-		  
-		  String fileName = res[i].getUploadFileName();
-		  String url = gcsService.getVideobyVIDEOtable(fileName); 
-		  res[i].setVideoPath(url);
-		  
-		  }
-		 
+		for(int i = 0; i < size; i++) {
+			
+			res[i].setVideoPath(gcsService.getVideobyVIDEOtable(res[i].getUploadFileName()));
+		}
 		
 		return res;
+		
+		
 		
 	}
 	

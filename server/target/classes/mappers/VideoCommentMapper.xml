@@ -8,8 +8,18 @@
             useGeneratedKeys="true"
             keyProperty="commentID">
             
-            INSERT INTO videoComments(`videoID`, `username`, `userComment`, `commentDate`)
-            VALUES(#{videoID}, #{username}, #{userComment}, CURRENT_TIMESTAMP)
+            INSERT INTO videoComments(`videoID`, `username`, `userComment`, `commentDate`, `seq`)
+            VALUES(#{videoID}, #{username}, #{userComment}, CURRENT_TIMESTAMP, 1)
+            
+    </insert>
+    
+    <insert id="recommentVideo"
+            parameterType="com.SOOKTUBE.model.VideoCommentDTO"
+            useGeneratedKeys="true"
+            keyProperty="commentID">
+            
+            INSERT INTO videoComments (`videoID`, `username`, `userComment`, `commentDate`, `parent`, `seq`) 
+			VALUES (#{videoID}, #{username}, #{userComment}, CURRENT_TIMESTAMP, #{parent} , #{seq})
             
     </insert>
     
@@ -34,6 +44,16 @@
 		    	
 	</select>
 	
+	<select id="checkComment"
+			resultType = "com.SOOKTUBE.model.VideoCommentDTO">
+	
+			SELECT `commentID`
+			FROM videoComments
+			WHERE `videoID` = #{videoID}
+			AND `parent` = #{parent}
+				
+	</select>
+	
 	<select id="getCommentsByVideoID"
 		    	resultType="com.SOOKTUBE.model.VideoCommentDTO">
 		    	
@@ -43,11 +63,21 @@
 		    	
 	</select>
 	
+
+	
     <delete id="deleteVideoComment"> 
     	DELETE FROM videoComments
 		WHERE `commentID` = #{commentID}
 		    AND `videoID` = #{videoID}
 		    	AND `username` = #{username}
+		    	AND `seq` = #{seq}
+    </delete>
+    
+    <delete id="deleteRecomment">
+		DELETE FROM videoComments
+		WHERE `videoID` = #{videoID}
+		AND `parent` = #{parent}
+    
     </delete>
 
 </mapper>

@@ -45,6 +45,21 @@ public class VideoCommentController {
 		return comment;
 	}
 	
+	//recomment
+	@CrossOrigin
+	@RequestMapping(value = "/api/video/recomment/{parent}/{seq}", method = RequestMethod.POST)
+	public VideoCommentDTO recommentVideo(@PathVariable("parent") final int parent, @PathVariable("seq") final int seq, VideoCommentDTO comment) throws Exception {
+		
+		comment.setParent(parent);
+		comment.setSeq(seq);
+		
+		videocommentDAO.recommentVideo(comment);
+		
+		return comment;
+	}
+	
+	
+	
 	//update comment
 	@CrossOrigin
 	@RequestMapping(value = "/api/video/comment/update/{commentID}/{videoID}/{username}", method = RequestMethod.PUT)
@@ -68,13 +83,26 @@ public class VideoCommentController {
 	
 	//delete comment
 	@CrossOrigin
-	@RequestMapping(value = "/api/video/comment/delete/{commentID}/{videoID}/{username}", method = RequestMethod.DELETE)
-	public String deleteComment(@PathVariable("commentID") final int commentID, @PathVariable("videoID") final int videoID,
-			@PathVariable("username") final String username) throws Exception {
+	@RequestMapping(value = "/api/video/comment/delete/{commentID}/{videoID}/{seq}/{username}", method = RequestMethod.DELETE)
+	public VideoCommentGetDTO[] deleteComment(@PathVariable("commentID") final int commentID, @PathVariable("videoID") final int videoID,
+			@PathVariable("seq") final int seq, @PathVariable("username") final String username) throws Exception {
 		
-		videocommentDAO.deleteVideoComment(commentID, videoID, username);
+		videocommentDAO.deleteVideoComment(commentID, videoID, username, seq);
 		
-		return "deleted";
+		if(videocommentDAO.checkComment(videoID, commentID) != null) {
+			videocommentDAO.deleteRecomment(videoID, commentID);
+		}
+		
+		VideoCommentGetDTO[] comments = videocommentgetDAO.getCommentsandProfile(videoID);
+		
+		for (int i = 0; i < comments.length; i ++) {
+			
+			String profilepic = comments[i].getProfileUrl();
+			
+			comments[i].setProfileUrl(gcsService.getVideobyVIDEOtable(profilepic));
+		}
+		
+		return comments;
 		
 	}
 	

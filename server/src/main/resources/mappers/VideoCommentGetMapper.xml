@@ -6,10 +6,12 @@
 	<select id="getCommentsandProfile"
 		    	resultType="com.SOOKTUBE.model.VideoCommentGetDTO">
 		    	
-		SELECT `commentID`, `videoID`, `userComment`, videoComments.`username`, `commentDate`, `profilepic` as profileUrl
+		SELECT `commentID`, `videoID`, `userComment`, videoComments.`username`, `commentDate`, `parent`, `seq`,
+				`profilepic` as profileUrl
 		FROM videoComments, user
 		WHERE `videoID` = #{videoID}
 			AND user.`username` = videoComments.`username`
+		ORDER BY IF(ISNULL(`parent`), `commentID`, `parent`), `seq`;
 		    	
 	</select>
 

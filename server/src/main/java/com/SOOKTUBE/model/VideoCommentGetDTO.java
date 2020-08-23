@@ -22,5 +22,8 @@ public class VideoCommentGetDTO {
 	private Timestamp commentDate;
 	
 	private String profileUrl;
+	
+	private int parent;
+	private int seq;
 
 }
