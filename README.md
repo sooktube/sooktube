@@ -9,4 +9,10 @@
 
 # 주요 기능
 
-# 구현
+# 사용 기술
+
+1. FRONTEND - react
+
+2. BACKEND - spring
+
+3. DB/Server - AWS rds/Google Cloud Platform App Engine Standard
