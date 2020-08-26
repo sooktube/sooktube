@@ -31,12 +31,16 @@ export const CardWrapper = styled.div`
     background-color: #fff;
 `;
 
-export const CardImg = styled.img`
+export const CardImg = styled.div`
     height: 25vh;
     width: inherit;
     margin: 0;
     display: inline-block;
     border: 0.4em solid #fff;
+    background-image : url(${props => props.src});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     &:hover{
         cursor:pointer;
     }

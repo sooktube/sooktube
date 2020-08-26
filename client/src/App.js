@@ -15,6 +15,7 @@ import UpdateVideo from "./pages/UploadVideo/UpdateVideo";
 import UpdatePlaylist from "./pages/UploadPlaylist/UpdatePlaylist";
 import Mypage from './pages/Mypage';
 import Search from "./components/base/search";
+import CopyPlaylist from "./pages/UploadPlaylist/CopyPlaylist";
 
 function App() {
     return (
@@ -35,6 +36,7 @@ function App() {
                 <Route path='/@:username/playlist/update/:listID' component={UpdatePlaylist}/>
                 <Route path='/search/:type' component={Search}/>
                 <Route exact path='/@:username' component={Mypage}/>
+                <PrivateRoute path='/copy/playlist/:listID' component={CopyPlaylist}/>
                 <Redirect from="*" to="/" />
             </Switch>
             </GlobalLayoutStyle>

@@ -16,7 +16,7 @@ function PlaylistCardList() {
       .then(response=>{
         dispatch({type:'INIT_MAIN',value:response});
       })
-  })
+  },[])
 
     return (
       <PlaylistWrapper>

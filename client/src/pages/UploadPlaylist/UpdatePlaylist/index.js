@@ -11,7 +11,6 @@ function UpdatePlaylist(){
     const { listID } = useParams();
     const [text, setText]=useState(' ');
     const [imageURL, setImageURL] = useState(null);
-    const [isUploaded, setIsUploaded] = useState(false);
     const inputCheck = useRef(null);
     let imageFile, uploadURL;
 
@@ -56,10 +55,9 @@ function UpdatePlaylist(){
             setInput({...input,thumbnail: name});
             uploadURL = response[1];
             playlistService.UploadPlaylistFile(uploadURL,imageFile)
-            .then(response => {
+            .then(() => {
                 playlistService.getPlaylistImgByFileName(name)
                 .then(response =>{
-                    setIsUploaded(true);
                     setImageURL(response);
                 })
             })
@@ -78,13 +76,10 @@ function UpdatePlaylist(){
         if(!input.listDesc){
             return alert("재생목록에 대한 설명을 입력해주세요.");
         }
-        if(!isUploaded){
-            return alert("재생목록 대표 이미지가 아직 업로드 되지 않았습니다.")
-        }
         if(input.listName && input.listDesc){
             playlistService.updatePlaylistByListID(
                 input, listID
-            ).then(response => {
+            ).then(() => {
                 history.push(`/playlist/${listID}`);
             })
         }
