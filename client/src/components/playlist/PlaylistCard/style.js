@@ -52,10 +52,6 @@ export const CardDesc = styled.div`
     line-height: 1.5em;
 `;
 
-
-
-
-
 export const CardBottom = styled.div`
     font-size: 1.2rem;
     padding: 0 1em;
@@ -105,12 +101,6 @@ export const Separator = styled.div`
     width: 5em;
     background-color: ${MAIN.BASE_COLOR}
 `;
-
-
-
-
-
-
 
 export const CardAuthor = styled.div`
     font-family: Georgia, sans-serif;
