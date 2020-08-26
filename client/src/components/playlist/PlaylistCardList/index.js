@@ -20,13 +20,13 @@ function PlaylistCardList() {
 
     return (
       <PlaylistWrapper>
-            {playlists.map(list =>
-                <CardShelf  key={list.listID}
-                                listID={list.listID}
-                                listName={list.listName}
-                                url={list.url}
-                />
-            )}
+          {playlists &&playlists.map(list =>
+              <CardShelf  key={list.listID}
+                              listID={list.listID}
+                              listName={list.listName}
+                              url={list.url}
+              />
+          )}
       </PlaylistWrapper>
     );
 }

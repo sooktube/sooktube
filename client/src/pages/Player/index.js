@@ -6,6 +6,7 @@ import CommentBox from "../../components/player/Comments";
 import VideoInfo from "../../components/player/VideoInfo";
 import {videoService, commentService} from "../../services";
 import {useDispatch} from "react-redux";
+import RelatedContents from "../../components/player/RelatedContents";
 
 function Player(){
     const { videoID } = useParams();
@@ -50,6 +51,7 @@ function Player(){
                 <S.VideoWrapper>
                     <S.VideoMainContainer>
                         <VideoInfo {...videoInfo}/>
+                        <RelatedContents/>
                     </S.VideoMainContainer>
                     <hr/>
                     <CommentBox videoID={videoID}/>

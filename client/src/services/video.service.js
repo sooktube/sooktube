@@ -15,7 +15,8 @@ export const videoService = {
     likeVideo,
     cancelLikeVideo,
     dislikeVideo,
-    cancelDislikeVideo
+    cancelDislikeVideo,
+    getRelatedVideoListInPlaylist
 };
 
 function getVideoUploadURL(input) {
@@ -221,5 +222,19 @@ function cancelDislikeVideo({videoID, username}) {
         })
         .catch(error => {
             return null;
+        })
+}
+
+//동영상이 어떤 재생목록에 추가되어 있는 경우, 해당 재생목록의 추천 + 비추천 수가 5 이상인 다른 영상들 리턴
+function getRelatedVideoListInPlaylist(videoID) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.uc.r.appspot.com/api/video/inlist/${videoID}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
         })
 }
