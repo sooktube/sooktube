@@ -36,6 +36,8 @@ public class VideoDTO {
 	
 	private int inVideoList; //if in 1 not 0
 
+
+
 }
 
 /*

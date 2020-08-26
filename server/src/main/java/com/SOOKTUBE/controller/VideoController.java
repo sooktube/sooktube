@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SOOKTUBE.dao.RecommendDAO;
@@ -102,108 +103,203 @@ public class VideoController {
     //search Videos by its title
     //modified
     @CrossOrigin
-    @RequestMapping(value = "/api/video/search/title/{videoTitle}/listID/{listID}/user/{username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/video/search/title/{videoTitle}/listID/{listID}/user/{username}/{orderBy}", method = RequestMethod.GET)
     public VideoDTO[] searchbyTitle(@PathVariable("videoTitle") final String videoTitle, @PathVariable("listID") final int listID,
-    		@PathVariable("username") final String username) throws Exception {
+    		@PathVariable("username") final String username, @PathVariable("orderBy") final String orderBy,
+    		@RequestParam(required = false, defaultValue = "0") int offset, @RequestParam(required = false, defaultValue = "100") int limit) throws Exception {
     	
-    	VideoDTO[] searchRes = videoDAO.searchVideobyTitle(videoTitle);
+    	String order;
     	
-		//List<String> fileName = videoDAO.getURLfromTitle(videoTitle);
+    	if (orderBy.equals("newest")) {
+    		
+    		order = "videoDate";
+    		
+        	VideoDTO[] searchRes = videoDAO.searchVideobyTitle(videoTitle, order, limit, offset);
+        	
+    		//List<String> fileName = videoDAO.getURLfromTitle(videoTitle);
 
-		for(int i = 0; i < searchRes.length; i++) {
-			
-			searchRes[i].setVideoPath(gcsService.getVideobyVIDEOtable(searchRes[i].getUploadFileName()));
-			
-			int videoID = searchRes[i].getVideoID();
-			
-			if (videoDAO.findVideoinList(videoID, listID) != null) { //if searchres already exists in a video list
-				
-				searchRes[i].setInVideoList(1);
-				searchRes[i].setListID(listID);
-				
-				if(recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
-					searchRes[i].setRecommended(1);
-				}
-				
-				else if(recommendDAO.getDisrecommendedVideo(videoID, listID, username) != null) {
-					searchRes[i].setDisrecommended(-1);
-				}
-				
-				
-				searchRes[i].setRecCount(recommendDAO.recCount(videoID, listID));
-				searchRes[i].setDisrecCount(recommendDAO.disrecCount(videoID, listID));
-				
-			}
-			
-			searchRes[i].setLike(videolikeDAO.likeCount(searchRes[i].getVideoID()));
-			searchRes[i].setDislike(videolikeDAO.dislikeCount(searchRes[i].getVideoID()));
+    		for(int i = 0; i < searchRes.length; i++) {
+    			
+    			searchRes[i].setVideoPath(gcsService.getVideobyVIDEOtable(searchRes[i].getUploadFileName()));
+    			
+    			int videoID = searchRes[i].getVideoID();
+    			
+    			if (videoDAO.findVideoinList(videoID, listID) != null) { //if searchres already exists in a video list
+    				
+    				searchRes[i].setInVideoList(1);
+    				searchRes[i].setListID(listID);
+    				
+    				if(recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
+    					searchRes[i].setRecommended(1);
+    				}
+    				
+    				else if(recommendDAO.getDisrecommendedVideo(videoID, listID, username) != null) {
+    					searchRes[i].setDisrecommended(-1);
+    				}
+    				
+    				
+    				searchRes[i].setRecCount(recommendDAO.recCount(videoID, listID));
+    				searchRes[i].setDisrecCount(recommendDAO.disrecCount(videoID, listID));
+    				
+    			}
+    			
+    			searchRes[i].setLike(videolikeDAO.likeCount(searchRes[i].getVideoID()));
+    			searchRes[i].setDislike(videolikeDAO.dislikeCount(searchRes[i].getVideoID()));
 
-		}
+    		}
+        	
+        	return searchRes;
+        	
+    	}
     	
-    	return searchRes;
+    	else if (orderBy.equals("like")) {
+    		
+    		order = "like";
+    		
+        	VideoDTO[] searchRes = videoDAO.searchVideobyTitle(videoTitle, order, limit, offset);
+        	
+    		//List<String> fileName = videoDAO.getURLfromTitle(videoTitle);
+
+    		for(int i = 0; i < searchRes.length; i++) {
+    			
+    			searchRes[i].setVideoPath(gcsService.getVideobyVIDEOtable(searchRes[i].getUploadFileName()));
+    			
+    			int videoID = searchRes[i].getVideoID();
+    			
+    			if (videoDAO.findVideoinList(videoID, listID) != null) { //if searchres already exists in a video list
+    				
+    				searchRes[i].setInVideoList(1);
+    				searchRes[i].setListID(listID);
+    				
+    				if(recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
+    					searchRes[i].setRecommended(1);
+    				}
+    				
+    				else if(recommendDAO.getDisrecommendedVideo(videoID, listID, username) != null) {
+    					searchRes[i].setDisrecommended(-1);
+    				}
+    				
+    				
+    				searchRes[i].setRecCount(recommendDAO.recCount(videoID, listID));
+    				searchRes[i].setDisrecCount(recommendDAO.disrecCount(videoID, listID));
+    				
+    			}
+    			
+    			searchRes[i].setLike(videolikeDAO.likeCount(searchRes[i].getVideoID()));
+    			searchRes[i].setDislike(videolikeDAO.dislikeCount(searchRes[i].getVideoID()));
+
+    		}
+        	
+        	return searchRes;
+    	}
+    	
+    	else {
+    		
+    		return null;
+    		
+    	}
+
     	
     }
-    
-    //search videos by its title and listID
-	/*
-	 * @CrossOrigin
-	 * 
-	 * @RequestMapping(value =
-	 * "/api/allvideo/search/listID/{listID}/username/{username}/{videoTitle}",
-	 * method = RequestMethod.GET) public VideoDTO[]
-	 * searchbyTitleandlistID(@PathVariable("listID") final int
-	 * listID, @PathVariable("username") final String username,
-	 * 
-	 * @PathVariable("videoTitle") final String videoTitle) throws Exception {
-	 * 
-	 * VideoDTO[] searchRes = videoDAO.searchVideobyTitle(videoTitle);
-	 * 
-	 * }
-	 */
+
     
     
 	//search video by title from videolist
 	@CrossOrigin
-	@RequestMapping(value = "/api/video/list/listID/{listID}/user/{username}/search/title/{videoTitle}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/video/list/listID/{listID}/user/{username}/search/title/{videoTitle}/{orderBy}", method = RequestMethod.GET)
 	public VideoDTO[] searchVideoFromvideoList(@PathVariable("listID") final int listID, @PathVariable("videoTitle") final String videoTitle,
-			@PathVariable("username") final String username) throws Exception {
+			@PathVariable("username") final String username, @PathVariable("orderBy") final String orderBy,
+			@RequestParam(required = false, defaultValue = "0") int offset, @RequestParam(required = false, defaultValue = "100") int limit) throws Exception {
 		
+		String order;
 		
-		VideoDTO[] res = videoDAO.searchVideobyTitleformList(videoTitle, listID);
-		
-		for(int i = 0; i < res.length; i++) {
-			
-			int videoID = res[i].getVideoID();
-			
-			res[i].setVideoPath(gcsService.getVideobyVIDEOtable(res[i].getUploadFileName()));
-			
-			res[i].setLike(0);
-			res[i].setDislike(0);
-			
-			res[i].setRecommended(0);
-			res[i].setDisrecommended(0);
-			
-			if (videolikeDAO.selectLikeVideo(videoID, username) != null) {
-				res[i].setLike(1);
-			}
-			
-			else if (videolikeDAO.selectDislikeVideo(videoID, username) != null) {
-				res[i].setDislike(-1);
-			}
-			
-			if (recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
-				res[i].setRecommended(1);
-			}
-			else if (recommendDAO.getDisrecommendedVideo(videoID, listID, username) != null) {
-				res[i].setDisrecommended(-1);
-			}
-			
-			res[i].setRecCount(recommendDAO.recCount(videoID, listID));
-			res[i].setDisrecCount(recommendDAO.disrecCount(videoID, listID));
+		if (orderBy.equals("newest")) {
 
+			order = "videoDate";
+			
+			VideoDTO[] res = videoDAO.searchVideobyTitleformList(videoTitle, listID, order, limit, offset);
+			
+			for(int i = 0; i < res.length; i++) {
+				
+				int videoID = res[i].getVideoID();
+				
+				res[i].setVideoPath(gcsService.getVideobyVIDEOtable(res[i].getUploadFileName()));
+				
+				res[i].setLike(0);
+				res[i].setDislike(0);
+				
+				res[i].setRecommended(0);
+				res[i].setDisrecommended(0);
+				
+				if (videolikeDAO.selectLikeVideo(videoID, username) != null) {
+					res[i].setLike(1);
+				}
+				
+				else if (videolikeDAO.selectDislikeVideo(videoID, username) != null) {
+					res[i].setDislike(-1);
+				}
+				
+				if (recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
+					res[i].setRecommended(1);
+				}
+				else if (recommendDAO.getDisrecommendedVideo(videoID, listID, username) != null) {
+					res[i].setDisrecommended(-1);
+				}
+				System.out.println(videoID);
+				System.out.println(listID);
+				res[i].setRecCount(recommendDAO.recCount(videoID, listID));
+				res[i].setDisrecCount(recommendDAO.disrecCount(videoID, listID));
+
+			}
+			
+			return res;
 		}
 		
-		return res;
+		else if (orderBy.equals("like")) {
+			
+			order = "like";
+			
+			VideoDTO[] res = videoDAO.searchVideobyTitleformList(videoTitle, listID, order, limit, offset);
+			
+			for(int i = 0; i < res.length; i++) {
+				
+				int videoID = res[i].getVideoID();
+				
+				res[i].setVideoPath(gcsService.getVideobyVIDEOtable(res[i].getUploadFileName()));
+				
+				res[i].setLike(0);
+				res[i].setDislike(0);
+				
+				res[i].setRecommended(0);
+				res[i].setDisrecommended(0);
+				
+				if (videolikeDAO.selectLikeVideo(videoID, username) != null) {
+					res[i].setLike(1);
+				}
+				
+				else if (videolikeDAO.selectDislikeVideo(videoID, username) != null) {
+					res[i].setDislike(-1);
+				}
+				
+				if (recommendDAO.getRecommendedVideo(videoID, listID, username) != null) {
+					res[i].setRecommended(1);
+				}
+				else if (recommendDAO.getDisrecommendedVideo(videoID, listID, username) != null) {
+					res[i].setDisrecommended(-1);
+				}
+				
+				res[i].setRecCount(recommendDAO.recCount(videoID, listID));
+				res[i].setDisrecCount(recommendDAO.disrecCount(videoID, listID));
+
+			}
+			
+			return res;
+		}
+		
+		else {
+			return null;
+		}
+
 		
 	}
 

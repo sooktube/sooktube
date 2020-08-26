@@ -9,15 +9,43 @@
 	
 	
 			SELECT videoList.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, listInfo.`listID`, `listName`
+					, `listDesc`
 			FROM VIDEO, listInfo, videoList
-            WHERE videoList.`listID` = listInfo.`listID`
-            AND VIDEO.`videoID` = videoList.`videoID`
-            AND listInfo.`listID` IN (SELECT videoList.`listID`
+            WHERE listInfo.`listID` IN (SELECT videoList.`listID`
 										FROM videoList, listInfo
 										WHERE videoList.`listID` = listInfo.`listID`
-										AND videoList.`videoID` = #{videoID})	
+                                        AND videoList.`like` + videoList.`dislike` &gt;= 5
+										AND videoList.`videoID` = #{videoID})
+			AND videoList.`videoID` NOT IN (#{videoID})
+            AND videoList.`listID` = listInfo.`listID`
+            AND VIDEO.`videoID` = videoList.`videoID`
+			AND videoList.`like` + videoList.`dislike` &gt;= 5
+	
 	 		
 	</select>
+	
+	<select id="listIDinvideo"
+			parameterType="Integer"
+			resultType = "Integer">
+	
+			SELECT videoList.`listID`
+			FROM videoList, listInfo
+			WHERE videoList.`listID` = listInfo.`listID`
+			AND videoList.`videoID` = #{videoID}
+			
+	</select>
+	
+	<select id="getLikeDislike"
+			parameterType="Integer"
+			resultType="Integer">
+			
+			SELECT `like`, `dislike`
+			FROM videoList
+			WHERE `listID` = #{listID}
+			AND `videoID` = #{videoID}
+			
+	</select>
+
 	
 	<select id="recommendVideoByUploader"
 			parameterType = "Integer"

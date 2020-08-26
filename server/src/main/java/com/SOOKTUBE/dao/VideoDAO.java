@@ -17,13 +17,21 @@ public interface VideoDAO {
 	VideoDTO getDescbyVideoID(int videoID) throws Exception;
 	VideoDTO[] getDescbyUser(String username) throws Exception;
 	VideoDTO getDescbyFile(String uploadFileName) throws Exception;
+	VideoDTO[] getDescbyUserOrderBy(@Param("username") String username, @Param("order") String order,
+									@Param("limit") int limit, @Param("offset") int offset) throws Exception;;
 	
 	String getURLfromFilename(String uploadFileName) throws Exception;
 	List<String> getURLfromTitle(String videoTitle) throws Exception;
 	
 	VideoDTO[] getDescbyListID(int listID) throws Exception;
-	VideoDTO[] getDescbyListIDGTEQ5(int listID) throws Exception;
-	VideoDTO[] getDescbyListBetween0and5(int listID) throws Exception;
+	VideoDTO[] getDescbyListIDOrderBy(@Param("listID") int listID, @Param("order") String order,
+									@Param("limit") int limit, @Param("offset") int offset) throws Exception;
+	
+	VideoDTO[] getDescbyListIDGTEQ5(@Param("listID") int listID, @Param("order") String order,
+			@Param("limit") int limit, @Param("offset") int offset) throws Exception;
+	
+	VideoDTO[] getDescbyListBetween0and5(@Param("listID") int listID, @Param("order") String order,
+			@Param("limit") int limit, @Param("offset") int offset) throws Exception;
 	
 	
 	//update
@@ -35,8 +43,12 @@ public interface VideoDAO {
 	
 	
 	//search
-	VideoDTO[] searchVideobyTitle(String search) throws Exception;
-	VideoDTO[] searchVideobyTitleformList(@Param("videoTitle") String videoTitle, @Param("listID") int listID) throws Exception;
+	VideoDTO[] searchVideobyTitle(@Param("videoTitle") String search, @Param("order") String order,
+			@Param("limit") int limit, @Param("offset") int offset) throws Exception;
+	
+	VideoDTO[] searchVideobyTitleformList(@Param("videoTitle") String videoTitle, @Param("listID") int listID,
+			@Param("order") String order, @Param("limit") int limit, @Param("offset") int offset) throws Exception;
+	
 	VideoDTO findVideoinList(@Param("videoID") int videoID, @Param("listID") int listID) throws Exception;
 	
 

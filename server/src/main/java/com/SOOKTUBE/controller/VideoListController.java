@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SOOKTUBE.dao.ListLikeDAO;
@@ -47,28 +48,70 @@ public class VideoListController {
 	
 	//get all videoList from DB
 	@CrossOrigin
-	@RequestMapping(value = "/api/video/list/{username}", method = RequestMethod.GET)
-    public VideoListDTO[] getVideoList(@PathVariable("username") final String username) throws Exception {
+	@RequestMapping(value = "/api/video/list/{username}/{orderBy}", method = RequestMethod.GET)
+    public VideoListDTO[] getVideoList(@PathVariable("username") final String username, @PathVariable("orderBy") final String orderBy,
+    		@RequestParam(required = false, defaultValue = "0") int offset, @RequestParam(required = false, defaultValue = "100") int limit) throws Exception {
     	
-    	VideoListDTO[] res = videoListDAO.getVideoList();
-    	
-    	for(int i = 0; i < res.length; i++) {
+		String order;
+		
+		if (orderBy.equals("newest")) {
+			
+			order = "listID";
+			
+			VideoListDTO[] res = videoListDAO.getVideoListOrderby(limit, offset, order);
+			
+	    	for(int i = 0; i < res.length; i++) {
+	    		
+	    		int listID = res[i].getListID();
+	    		
+	    		if(listlikeDAO.selectLikeList(listID, username) != null) {
+	    			res[i].setLike(1);
+	    		}
+	    		
+	    		else if(listlikeDAO.selectDislikeList(listID, username) != null) {
+	    			res[i].setDislike(-1);
+	    		}
+	    		
+	    		res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
+	    		
+	    	}
+	    	
+	    	return res;
+		}
+		
+		else if(orderBy.equals("like")) {
+			
+			order = "like";
+			
+			VideoListDTO[] res = videoListDAO.getVideoListOrderby(limit, offset, order);
+			
+	    	for(int i = 0; i < res.length; i++) {
+	    		
+	    		int listID = res[i].getListID();
+	    		
+	    		if(listlikeDAO.selectLikeList(listID, username) != null) {
+	    			res[i].setLike(1);
+	    		}
+	    		
+	    		else if(listlikeDAO.selectDislikeList(listID, username) != null) {
+	    			res[i].setDislike(-1);
+	    		}
+	    		
+	    		res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
+	    		
+	    	}
+
     		
-    		int listID = res[i].getListID();
-    		
-    		if(listlikeDAO.selectLikeList(listID, username) != null) {
-    			res[i].setLike(1);
-    		}
-    		
-    		else if(listlikeDAO.selectDislikeList(listID, username) != null) {
-    			res[i].setDislike(-1);
-    		}
-    		
-    		res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
-    		
-    	}
-    	
-    	return res;
+    		return res;
+		}
+		
+		else {
+			
+			return null;
+		}
+		
+		
+		
     }
 	
 	
@@ -172,23 +215,57 @@ public class VideoListController {
 	//search video list by its title
 	//modified
 	@CrossOrigin
-	@RequestMapping(value = "/api/video/list/search/name/{listName}", method = RequestMethod.GET)
-	public VideoListDTO[] searchListbyName(@PathVariable("listName") final String listName) throws Exception {
+	@RequestMapping(value = "/api/video/list/search/name/{listName}/{orderBy}", method = RequestMethod.GET)
+	public VideoListDTO[] searchListbyName(@PathVariable("listName") final String listName, 
+			@PathVariable("orderBy") final String orderBy,
+			@RequestParam(required = false, defaultValue = "0") int offset, @RequestParam(required = false, defaultValue = "100") int limit) throws Exception {
 		
-
-		VideoListDTO[] searchRes = videoListDAO.searchListbyTitle(listName);
+		String order;
 		
+		if (orderBy.equals("newest")) {
+			
+			order = "listID";
+			
+			VideoListDTO[] searchRes = videoListDAO.searchListbyTitle(listName, order, limit, offset);
+			
 
-		for(int i = 0; i < searchRes.length; i++) {
-			
-			searchRes[i].setUrl(gcsService.getVideobyVIDEOtable(searchRes[i].getThumbnail()));
-			
-			searchRes[i].setLike(listlikeDAO.countLike(searchRes[i].getListID()));
-			searchRes[i].setDislike(listlikeDAO.countDislike(searchRes[i].getListID()));
+			for(int i = 0; i < searchRes.length; i++) {
+				
+				searchRes[i].setUrl(gcsService.getVideobyVIDEOtable(searchRes[i].getThumbnail()));
+				
+				searchRes[i].setLike(listlikeDAO.countLike(searchRes[i].getListID()));
+				searchRes[i].setDislike(listlikeDAO.countDislike(searchRes[i].getListID()));
+				
+			}
+		
+			return searchRes;
 			
 		}
-	
-		return searchRes;
+		
+		else if (orderBy.equals("like")) {
+			
+			order = "like";
+			
+			VideoListDTO[] searchRes = videoListDAO.searchListbyTitle(listName, order, limit, offset);
+			
+
+			for(int i = 0; i < searchRes.length; i++) {
+				
+				searchRes[i].setUrl(gcsService.getVideobyVIDEOtable(searchRes[i].getThumbnail()));
+				
+				searchRes[i].setLike(listlikeDAO.countLike(searchRes[i].getListID()));
+				searchRes[i].setDislike(listlikeDAO.countDislike(searchRes[i].getListID()));
+				
+			}
+		
+			return searchRes;
+		}
+		
+		else {
+			 return null;
+		}
+
+
 		}
 	
 	
@@ -386,21 +463,59 @@ public class VideoListController {
 	
 	//get video list by username
 	@CrossOrigin
-	@RequestMapping(value = "/api/video/list/by/username/{username}", method = RequestMethod.GET)
-	public VideoListDTO[] getlistbyusername(@PathVariable("username") final String username) throws Exception {
+	@RequestMapping(value = "/api/video/list/by/username/{username}/{orderBy}", method = RequestMethod.GET)
+	public VideoListDTO[] getlistbyusername(@PathVariable("username") final String username
+			, @PathVariable("orderBy") final String orderBy,
+			@RequestParam(required = false, defaultValue = "0") int offset, @RequestParam(required = false, defaultValue = "100") int limit) throws Exception {
 		
-		VideoListDTO[] res = videoListDAO.getVideoListbyUser(username);
+		String order;
 		
-		for(int i = 0; i < res.length; i++) {
+		if(orderBy.equals("newest")) {
 			
-			res[i].setLike(listlikeDAO.countLike(res[i].getListID()));
-			res[i].setDislike(listlikeDAO.countDislike(res[i].getListID()));
+			order = "listID";
 			
-			res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
+			VideoListDTO[] res = videoListDAO.getVideoListbyUser(username, order, limit, offset);
+			
+			for(int i = 0; i < res.length; i++) {
+				
+				res[i].setLike(listlikeDAO.countLike(res[i].getListID()));
+				res[i].setDislike(listlikeDAO.countDislike(res[i].getListID()));
+				
+				res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
+				
+			}
+			
+			return res;
+		}
+		
+		else if (orderBy.equals("like")) {
+			
+			order = "like";
+			
+			VideoListDTO[] res = videoListDAO.getVideoListbyUser(username, order, limit, offset);
+			
+			for(int i = 0; i < res.length; i++) {
+				
+				res[i].setLike(listlikeDAO.countLike(res[i].getListID()));
+				res[i].setDislike(listlikeDAO.countDislike(res[i].getListID()));
+				
+				res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
+				
+			}		
+    		
+    		return res;
 			
 		}
 		
-		return res;
+		else {
+			
+			return null;
+				
+		}
+		
+		
+		
+
 	}
 	
 	

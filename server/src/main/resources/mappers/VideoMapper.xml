@@ -32,7 +32,32 @@
     		
     		</select>
     		
+        <select id="getDescbyUserOrderBy" 
+    		resultType="com.SOOKTUBE.model.VideoDTO">
     		
+    		SELECT `videoID`, `videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`, `videoPath`, `like`
+    		FROM VIDEO
+    		WHERE `username` = #{username, jdbcType=VARCHAR}
+    		
+    		ORDER BY
+        		<choose>
+            		<when test="order == 'videoDate'">
+                		`videoDate`
+            		</when>
+            		<when test="order == 'like'">
+                		`like`
+            		</when>
+
+        		</choose>
+       		DESC
+    		
+    		<if test='limit != null and offset != null'>
+    		LIMIT #{limit} OFFSET #{offset}
+    		</if>
+    		
+    		</select>
+    		
+    		    		
     	        <select id="getDescbyFile" 
     		parameterType="String" 
     		resultType="com.SOOKTUBE.model.VideoDTO">
@@ -57,17 +82,66 @@
     		
     		</select>
 
-         <select id="getDescbyListIDGTEQ5" 
+         <select id="getDescbyListIDOrderBy" 
     		parameterType="Integer" 
     		resultType="com.SOOKTUBE.model.VideoDTO">
     		
-            SELECT listInfo.`listID`, VIDEO.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, `videoPath`
+    		SELECT listInfo.`listID`, VIDEO.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, `videoPath`,
+    					videoList.`like`, videoList.`dislike`
     		FROM VIDEO, listInfo, videoList
     		WHERE listInfo.`listID` = #{listID}
     			AND
     				videoList.`videoID` = VIDEO.`videoID`
     			AND listInfo.`listID` = videoList.`listID`
-                AND videoList.`like` + videoList.`dislike` &gt;= 5;
+    		
+    		
+    		ORDER BY
+        		<choose>
+            		<when test="order == 'videoDate'">
+                		`videoDate`
+            		</when>
+            		<when test="order == 'like'">
+                		videoList.`like` + videoList.`dislike`
+            		</when>
+
+        		</choose>
+       		DESC
+    		
+    		<if test='limit != null and offset != null'>
+    		LIMIT #{limit} OFFSET #{offset}
+    		</if>
+    		
+    		</select>
+
+
+         <select id="getDescbyListIDGTEQ5" 
+    		parameterType="Integer" 
+    		resultType="com.SOOKTUBE.model.VideoDTO">
+    		
+            SELECT listInfo.`listID`, VIDEO.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, `videoPath`,
+            		videoList.`like`, videoList.`dislike`
+    		FROM VIDEO, listInfo, videoList
+    		WHERE listInfo.`listID` = #{listID}
+    			AND
+    				videoList.`videoID` = VIDEO.`videoID`
+    			AND listInfo.`listID` = videoList.`listID`
+                AND videoList.`like` + videoList.`dislike` &gt;= 5
+                
+    		ORDER BY
+        		<choose>
+            		<when test="order == 'videoDate'">
+                		`videoDate`
+            		</when>
+            		<when test="order == 'like'">
+                		videoList.`like` + videoList.`dislike`
+            		</when>
+
+        		</choose>
+       		DESC
+    		
+    		<if test='limit != null and offset != null'>
+    		LIMIT #{limit} OFFSET #{offset}
+    		</if>
     		
     		</select>
 
@@ -77,13 +151,30 @@
     		resultType="com.SOOKTUBE.model.VideoDTO">
     		<!-- 0이상 5 미만 -->
     		
-            SELECT listInfo.`listID`, VIDEO.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, `videoPath`
+            SELECT listInfo.`listID`, VIDEO.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, `videoPath`,
+            				videoList.`like`, videoList.`dislike`
     		FROM VIDEO, listInfo, videoList
     		WHERE listInfo.`listID` = #{listID}
     			AND
     				videoList.`videoID` = VIDEO.`videoID`
     			AND listInfo.`listID` = videoList.`listID`
                 AND videoList.like + videoList.dislike BETWEEN 0 AND 4
+                
+    		ORDER BY
+        		<choose>
+            		<when test="order == 'videoDate'">
+                		`videoDate`
+            		</when>
+            		<when test="order == 'like'">
+                		videoList.`like` + videoList.`dislike`
+            		</when>
+
+        		</choose>
+       		DESC
+    		
+    		<if test='limit != null and offset != null'>
+    		LIMIT #{limit} OFFSET #{offset}
+    		</if>
     		
     		</select>
     		   
@@ -133,20 +224,56 @@
     			parameterType="String"
     			resultType="com.SOOKTUBE.model.VideoDTO">
     			
-    			SELECT `videoID`, `videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`, `videoPath`
+    			SELECT `videoID`, `videoTitle`, `videoDesc`, `videoDate`, `username`, `uploadFileName`, `videoPath`, `like`
     			FROM VIDEO
     			WHERE `videoTitle` LIKE CONCAT('%',#{videoTitle},'%')
+    			
+	    		ORDER BY
+	        		<choose>
+	            		<when test="order == 'videoDate'">
+	                		`videoDate`
+	            		</when>
+	            		<when test="order == 'like'">
+	                		`like`
+	            		</when>
+	
+	        		</choose>
+	       		DESC
+	    		
+	    		<if test='limit != null and offset != null'>
+	    		LIMIT #{limit} OFFSET #{offset}
+	    		</if>
 
     			</select>
     			
     	<select id="searchVideobyTitleformList"
     			resultType="com.SOOKTUBE.model.VideoDTO">
     			
-    			SELECT DISTINCT listInfo.`listID`, videoList.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, `videoPath`
-    			FROM VIDEO, listInfo, videoList
-    			WHERE `videoTitle` LIKE CONCAT('%',#{videoTitle},'%')
-                AND listInfo.listID = #{listID}
-                AND VIDEO.videoID = videoList.videoID
+    			SELECT DISTINCT videoList.`listID`, videoList.`videoID`, `videoTitle`, `videoDesc`, `videoDate`, VIDEO.`username`, `uploadFileName`, `videoPath`,
+    							videoList.`like`, videoList.`dislike`
+    			FROM VIDEO, videoList
+    			WHERE `videoTitle` LIKE CONCAT('%', #{videoTitle}, '%')
+                AND videoList.`listID` = #{listID}
+                AND VIDEO.`videoID` = videoList.`videoID`
+                AND VIDEO.`videoID` IN (SELECT `videoID`
+										FROM videoList 
+                                        WHERE `listID` = #{listID})
+
+	    		ORDER BY
+	        		<choose>
+	            		<when test="order == 'videoDate'">
+	                		`videoDate`
+	            		</when>
+	            		<when test="order == 'like'">
+	                		videoList.`like` + videoList.`dislike`
+	            		</when>
+	
+	        		</choose>
+	       		DESC
+	    		
+	    		<if test='limit != null and offset != null'>
+	    		LIMIT #{limit} OFFSET #{offset}
+	    		</if>
 
     			</select>
     			

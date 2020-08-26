@@ -28,6 +28,31 @@
 			FROM listInfo
     		
     		</select>
+
+		    <select id="getVideoListOrderby"
+		    resultType="com.SOOKTUBE.model.VideoListDTO">
+    		
+			SELECT 
+			     `listID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`, `copied`
+			FROM listInfo
+			
+    		ORDER BY
+        		<choose>
+            		<when test="order == 'listID'">
+                		`listID`
+            		</when>
+            		<when test="order == 'like'">
+                		`like`
+            		</when>
+
+        		</choose>
+       		DESC
+    		
+    		<if test='limit != null and offset != null'>
+    		LIMIT #{limit} OFFSET #{offset}
+    		</if>
+    		    		
+    		</select>
     		
     		<select id="getVideoListbyID"
     		parameterType="Integer"
@@ -46,9 +71,25 @@
 		    resultType="com.SOOKTUBE.model.VideoListDTO">
     		
 			SELECT 
-			     `listID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`, `copied`
+			     `listID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`, `copied`, `like`
 			FROM listInfo
 			WHERE listInfo.`username` = #{username}
+			
+    		ORDER BY
+        		<choose>
+            		<when test="order == 'listID'">
+                		`listID`
+            		</when>
+            		<when test="order == 'like'">
+                		`like`
+            		</when>
+
+        		</choose>
+       		DESC
+    		
+    		<if test='limit != null and offset != null'>
+    		LIMIT #{limit} OFFSET #{offset}
+    		</if>
 
     		
     		</select>
@@ -139,9 +180,25 @@
     			parameterType="String"
     			resultType="com.SOOKTUBE.model.VideoListDTO">
     			
-    			SELECT `listID`, `listName`, `listDesc`, listInfo.`username`, `isPublic`, `thumbnail`, `copied`
+    			SELECT `listID`, `listName`, `listDesc`, listInfo.`username`, `isPublic`, `thumbnail`, `copied`, `like`
     			FROM listInfo
     			WHERE `listName` LIKE CONCAT('%',#{listName},'%')
+    			
+	    		ORDER BY
+	        		<choose>
+	            		<when test="order == 'listID'">
+	                		`listID`
+	            		</when>
+	            		<when test="order == 'like'">
+	                		`like`
+	            		</when>
+	
+	        		</choose>
+	       		DESC
+	    		
+	    		<if test='limit != null and offset != null'>
+	    		LIMIT #{limit} OFFSET #{offset}
+	    		</if>
 
     			
     			</select>  

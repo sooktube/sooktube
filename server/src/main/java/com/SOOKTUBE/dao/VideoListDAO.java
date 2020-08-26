@@ -23,14 +23,17 @@ public interface VideoListDAO {
 	
 	String getUsernameofList(int listID);
 	
-	VideoListDTO[] getVideoListbyUser(String username) throws Exception;
+	VideoListDTO[] getVideoListbyUser(@Param("username") String username, @Param("order") String order,
+			@Param("limit") int limit, @Param("offset") int offset) throws Exception;
+	VideoListDTO[] getVideoListOrderby(@Param("limit") int limit, @Param("offset") int offset, @Param("order") String order) throws Exception;
 	
 	//insert new videoList
 	int newList(VideoListDTO list) throws Exception;
 	int newListInfo(VideoListDTO list) throws Exception;
 	
 	//search
-	VideoListDTO[] searchListbyTitle(String listName) throws Exception;
+	VideoListDTO[] searchListbyTitle(@Param("listName") String listName, @Param("order") String order,
+			@Param("limit") int limit, @Param("offset") int offset) throws Exception;
 	
 	//like&dislike(recommend)
 	int editLike(VideoListDTO list) throws Exception;
