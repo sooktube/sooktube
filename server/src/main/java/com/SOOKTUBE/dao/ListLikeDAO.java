@@ -10,8 +10,10 @@ public interface ListLikeDAO {
 	
 	//insert like
 	int likeaList(@Param("listID") int listID, @Param("username") String username) throws Exception;
+	int likeaList2(int listID) throws Exception;
 	//insert dislike
 	int dislikeaList(@Param("listID") int listID, @Param("username") String username) throws Exception;
+	int dislikeaList2(int listID) throws Exception;
 	
 
 	//select like
@@ -21,8 +23,10 @@ public interface ListLikeDAO {
 	
 	//revert like
 	int revertLike(@Param("listID") int listID, @Param("username") String username) throws Exception;
+	int revertLike2(int listID) throws Exception;
 	//revert dislike
 	int revertDislike(@Param("listID") int listID, @Param("username") String username) throws Exception;
+	int revertDislike2(int listID) throws Exception;
 	
 	//count like
 	int countLike(int listID) throws Exception;

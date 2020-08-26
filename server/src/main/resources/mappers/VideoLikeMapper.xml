@@ -11,12 +11,27 @@
     </insert>
 
 
+    <update id="likeaVideo2" parameterType="int">
+            
+			UPDATE VIDEO
+			SET `like` = `like` + 1 
+			WHERE (`videoID` = #{videoID});
+    </update>
+
+
     <insert id="dislikeaVideo">
             
             INSERT INTO videoDislike(`videoID`, `username`)
             VALUES(#{videoID}, #{username})
             
     </insert>    
+
+    <update id="dislikeaVideo2" parameterType="int">
+            
+			UPDATE VIDEO
+			SET `dislike` = `dislike` + 1 
+			WHERE (`videoID` = #{videoID});
+    </update>
 
 	<select id="selectLikeVideo"
 		    resultType="com.SOOKTUBE.model.VideoLikeDTO">
@@ -82,6 +97,14 @@
     	AND
     		`username` = #{username}
     </delete>
+    
+    <update id="revertLike2" parameterType="int">
+            
+			UPDATE VIDEO
+			SET `like` = `like` - 1 
+			WHERE (`videoID` = #{videoID});
+			
+    </update>
 
     <delete id="revertDislike"> 
     	DELETE FROM videoDislike
@@ -89,5 +112,13 @@
     	AND
     		`username` = #{username}
     </delete>
+
+    <update id="revertDislike2" parameterType="int">
+            
+			UPDATE VIDEO
+			SET `dislike` = `dislike` - 1 
+			WHERE (`videoID` = #{videoID});
+			
+    </update>
 
 </mapper>

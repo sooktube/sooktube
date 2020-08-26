@@ -10,6 +10,13 @@
             
     </insert>
 
+    <update id="likeaList2" parameterType="int">
+            
+			UPDATE listInfo
+			SET `like` = `like` + 1 
+			WHERE (`listID` = #{listID});
+    </update>
+
 
     <insert id="dislikeaList">
             
@@ -17,6 +24,13 @@
             VALUES(#{listID}, #{username})
             
     </insert>    
+
+    <update id="dislikeaList2" parameterType="int">
+            
+			UPDATE listInfo
+			SET `dislike` = `dislike` + 1 
+			WHERE (`listID` = #{listID});
+    </update>
 
 	<select id="selectLikeList"
 		    resultType="com.SOOKTUBE.model.ListLikeDTO">
@@ -83,11 +97,27 @@
     		`username` = #{username}
     </delete>
 
+    <update id="revertLike2" parameterType="int">
+            
+			UPDATE listInfo
+			SET `like` = `like` - 1 
+			WHERE (`listID` = #{listID});
+			
+    </update>
+
     <delete id="revertDislike"> 
     	DELETE FROM listDislike
     	WHERE `listID` = #{listID}
     	AND
     		`username` = #{username}
     </delete>
+    
+    <update id="revertDislike2" parameterType="int">
+            
+			UPDATE listInfo
+			SET `dislike` = `dislike` - 1 
+			WHERE (`listID` = #{listID});
+			
+    </update>
     
 </mapper>

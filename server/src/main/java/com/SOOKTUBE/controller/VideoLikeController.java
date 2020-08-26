@@ -46,6 +46,7 @@ public class VideoLikeController {
 		}
 		
 		videoLikeDAO.likeaVideo(videoID, username);
+		videoLikeDAO.likeaVideo2(videoID);
 		
 		
 		likeres[0] = videoLikeDAO.likeCount(videoID);
@@ -64,6 +65,7 @@ public class VideoLikeController {
 		int[] likeres = new int[2];
 		
 		videoLikeDAO.revertLike(videoID, username);
+		videoLikeDAO.revertLike2(videoID);
 		
 		likeres[0] = videoLikeDAO.likeCount(videoID);
 		likeres[1] = videoLikeDAO.dislikeCount(videoID);
@@ -89,6 +91,7 @@ public class VideoLikeController {
 		}
 		
 		videoLikeDAO.dislikeaVideo(videoID, username);
+		videoLikeDAO.dislikeaVideo2(videoID);
 		
 		likeres[0] = videoLikeDAO.likeCount(videoID);
 		likeres[1] = videoLikeDAO.dislikeCount(videoID);
@@ -105,6 +108,7 @@ public class VideoLikeController {
 		int[] likeres = new int[2];
 		
 		videoLikeDAO.revertDislike(videoID, username);
+		videoLikeDAO.revertDislike2(videoID);
 		
 		likeres[0] = videoLikeDAO.likeCount(videoID);
 		likeres[1] = videoLikeDAO.dislikeCount(videoID);

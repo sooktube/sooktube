@@ -44,6 +44,7 @@ public class ListLikeController {
 		
 		
 		listlikeDAO.likeaList(listID, username);
+		listlikeDAO.likeaList2(listID);
 		
 		int[] listlike = new int[2];
 		
@@ -60,6 +61,7 @@ public class ListLikeController {
 	public int[] revertLike(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception {
 		
 		listlikeDAO.revertLike(listID, username);
+		listlikeDAO.revertLike2(listID);
 		
 		int[] listlike = new int[2];
 		
@@ -80,6 +82,7 @@ public class ListLikeController {
 		}
 		
 		listlikeDAO.dislikeaList(listID, username);
+		listlikeDAO.dislikeaList2(listID);
 		
 		int[] listlike = new int[2];
 		
@@ -96,6 +99,7 @@ public class ListLikeController {
 	public int[] revertDislike(@PathVariable("listID") final int listID, @PathVariable("username") final String username) throws Exception {
 		
 		listlikeDAO.revertDislike(listID, username);
+		listlikeDAO.revertDislike2(listID);
 
 		
 		int[] listlike = new int[2];

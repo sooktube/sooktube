@@ -10,8 +10,10 @@ public interface VideoLikeDAO {
 	
 	//insert like
 	int likeaVideo(@Param("videoID") int videoID, @Param("username") String username) throws Exception;
+	int likeaVideo2(int videoID) throws Exception;
 	//insert dislike
 	int dislikeaVideo(@Param("videoID") int videoID, @Param("username") String username) throws Exception;
+	int dislikeaVideo2(int videoID) throws Exception;
 	
 
 	//select like
@@ -21,13 +23,17 @@ public interface VideoLikeDAO {
 	
 	//revert like
 	int revertLike(@Param("videoID") int videoID, @Param("username") String username) throws Exception;
+	int revertLike2(int videoID) throws Exception;
 	//revert dislike
 	int revertDislike(@Param("videoID") int videoID, @Param("username") String username) throws Exception;
+	int revertDislike2(int videoID) throws Exception;
 	
 	//like count
 	int likeCount(int videoID) throws Exception;
 	//dislike count
 	int dislikeCount(int videoID) throws Exception;
+	
+	
 	
 	
 	//get like videos by user
