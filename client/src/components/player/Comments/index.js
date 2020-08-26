@@ -10,24 +10,32 @@ function CommentBox({videoID}){
     const comments = useSelector(state => state.comment);
     const dispatch = useDispatch();
 
-    const [commentText, setCommentText] = useState('');
-    const [newText,setNewText] = useState({username:'',userComment:'',profileUrl:''});
-    const [pic, setPic] = useState('');
+    const [comment, setComment] = useState('');
+    const [userPic, setUserPic] = useState('');
+    const [commentCount, setCommentCount] = useState(0);
+    const [newText,setNewText] = useState({username:'',userComment:'',profileUrl:'',parent:null});
 
     useEffect(()=>{
         userService.getUserProfilePic(currentUsername)
             .then(response => {
-                setPic(response);
+                setUserPic(response);
             })
     })
 
+    useEffect(()=>{
+        const originalComment = comments.filter(comment=>comment.parent===0);
+        setCommentCount(originalComment.length);
+    },[comments]);
+
+    
+
     function handleChange(e) {
-        setCommentText(e.target.value);
-        setNewText({username:currentUsername,userComment:e.target.value,profileUrl:pic});
+        setComment(e.target.value);
+        setNewText({username:currentUsername, userComment:e.target.value, profileUrl:userPic, parent:0});
     }
 
     function InputClick(e) {
-        if(commentText === ''){
+        if(comment === ''){
             alert('한 글자 이상 입력해주세요.');
         }
         else {
@@ -37,22 +45,23 @@ function CommentBox({videoID}){
                 userComment: newText.userComment
             }).then(() => {
                 dispatch({type:'ADD',value:newText});
-                setCommentText('');
+                setComment('');
             })
         }
     }
 
     return(
         <S.CommentBox>
-            <S.CommentTitle>Comments  {comments.length}</S.CommentTitle>
+            <S.CommentTitle>Comments  {commentCount}</S.CommentTitle>
             <S.AddCommentWrapper>
-                <S.UserProfile src={pic}/>
+                <S.UserProfile src={userPic}/>
                 <S.TextInput placeholder="댓글 추가"
-                             value={commentText}
+                             value={comment}
                              onChange={handleChange}/>
                 <S.SubmitButton onClick={InputClick} />
             </S.AddCommentWrapper>
             {comments.map((comment,index) =>
+            (comment.parent === 0) &&
                 <Comment
                     key={index}
                     videoID = {videoID}
@@ -60,8 +69,9 @@ function CommentBox({videoID}){
                     length={comments.length}
                     index={index}
                     username={comment.username}
-                    text={comment.userComment}
-                    photo={comment.profileUrl}/>
+                    userComment={comment.userComment}
+                    profileUrl={comment.profileUrl}
+                    userPic={userPic}/>
             )}
         </S.CommentBox>
     );

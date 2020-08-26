@@ -9,7 +9,9 @@ export const commentService={
     getCommentInfoByPlaylistID,
     uploadCommentByPlaylistID,
     updateCommentByPlaylistID,
-    deleteCommentByPlaylistID
+    deleteCommentByPlaylistID,
+    uploadReplyByVideoID,
+    uploadReplyByListID
 }
 
 function getCommentInfoByVideoID(videoID) {
@@ -65,7 +67,7 @@ function uploadCommentByVideoID(input) {
 function deleteCommentByVideoID(input){
     return axios({
         method: 'DELETE',
-        url: `https://soktube.appspot.com/api/video/comment/delete/${input.commentID}/${input.videoID}/${input.username}`,
+        url: `https://soktube.appspot.com/api/video/comment/delete/${input.commentID}/${input.videoID}/${input.seq}/${input.username}`,
     })
         .then(response => {
             return response.data;
@@ -126,7 +128,7 @@ function uploadCommentByPlaylistID(input) {
 function deleteCommentByPlaylistID(input){
     return axios({
         method: 'DELETE',
-        url: `https://soktube.appspot.com/api/list/comment/delete/${input.commentID}/${input.listID}/${input.username}`,
+        url: `https://soktube.appspot.com/api/list/comment/delete/${input.commentID}/${input.listID}/${input.seq}/${input.username}`,
     })
         .then(response => {
             return response.data;
@@ -135,3 +137,39 @@ function deleteCommentByPlaylistID(input){
             return error;
         })
 }
+
+function uploadReplyByVideoID(input,parent,seq) {
+    return axios({
+        method: 'POST',
+        url: `https://soktube.appspot.com/api/video/recomment/${parent}/${seq}`,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: qs.stringify(input),
+        })
+        .then(response => {
+            console.log(response);
+            return response.data;
+        })
+        .catch(error => {
+             return error;
+        });
+ }
+
+ function uploadReplyByListID(input,parent,seq) {
+    return axios({
+        method: 'POST',
+        url: `https://soktube.appspot.com/api/list/recomment/${parent}/${seq}`,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: qs.stringify(input),
+        })
+        .then(response => {
+            console.log(response);
+            return response.data;
+        })
+        .catch(error => {
+             return error;
+        });
+ }
