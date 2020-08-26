@@ -134,10 +134,10 @@ function searchVideoByTitle(listID, username, keyword) {
         })
 }
 
-function getGTEQ0LT5VideoList(listID, username) {
+function getGTEQ0LT5VideoList({listID, username, orderBy, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/0/LT/5/${listID}/${username}`,
+        url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/0/LT/5/${listID}/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
             return response.data;
@@ -147,10 +147,10 @@ function getGTEQ0LT5VideoList(listID, username) {
         })
 }
 
-function getGTEQ5VideoList(listID, username) {
+function getGTEQ5VideoList({listID, username, orderBy, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/5/${listID}/${username}`,
+        url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/5/${listID}/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
             return response.data;
@@ -229,10 +229,10 @@ function addVideoToPlaylist({listID, videoID, username}) {
         })
 }
 
-function getPlaylistListByUsername(username) {
+function getPlaylistListByUsername({username, orderBy, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/list/by/username/${username}`,
+        url: `/api/video/list/by/username/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
       .then(response => {
           return response.data;
@@ -324,10 +324,10 @@ function deletePlaylist(listID) {
         })
 }
 
-function getAllPlaylist(username) {
+function getAllPlaylist({username, orderBy, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/list/${username}`,
+        url: `https://soktube.uc.r.appspot.com/api/video/list/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
             return response.data;

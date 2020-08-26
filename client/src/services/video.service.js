@@ -104,10 +104,10 @@ function getVideoInfoByVideoID(videoID, username) {
         })
 }
 
-function getVideoListByUsername(username) {
+function getVideoListByUsername({username, order, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/desc/url/user/${username}`,
+        url: `https://soktube.uc.r.appspot.com/api/video/desc/url/user/${username}/${order}?limit=${limit}&offset=${offset}`,
     })
       .then(response => {
           return response.data;

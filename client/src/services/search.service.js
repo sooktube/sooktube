@@ -5,10 +5,10 @@ export const searchService = {
     searchPlaylistTitle
 };
 
-function searchVideoTitle(keyword) {
+function searchVideoTitle({ keyword, listID, username, orderBy, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/search/title/${keyword}/listID/1/user/test123`,
+        url: `https://soktube.uc.r.appspot.com/api/video/search/title/${keyword}/listID/${listID}/user/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
             return response.data;
@@ -18,10 +18,10 @@ function searchVideoTitle(keyword) {
         })
 }
 
-function searchPlaylistTitle(keyword) {
+function searchPlaylistTitle({keyword, orderBy, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/list/search/name/${keyword}`,
+        url: `https://soktube.uc.r.appspot.com/api/video/list/search/name/${keyword}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
             return response.data;
