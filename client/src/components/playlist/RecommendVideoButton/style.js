@@ -15,6 +15,24 @@ export const AddVideoComment = styled.span`
     margin-left: 0.2em;
 `;
 
+export const CopyButton = styled.button`
+    float:right;
+    background:transparent;
+    margin-right:1.7em;
+    font-size: 1rem;
+    font-weight:500;
+    border-radius:5px;
+    padding:0.5em 1em 0.5em 1em;
+    color:white;
+    background-color: ${MAIN.BASE_COLOR};
+    &:focus{
+        outline:none;
+    }
+    &:hover{
+        background-color:${MAIN.BRIGHT_ON_HOVER};
+    }
+`;
+
 
 export const PlusButton = styled(FaPlus)`
     color: ${MAIN.BASE_COLOR};

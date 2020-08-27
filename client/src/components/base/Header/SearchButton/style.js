@@ -14,7 +14,7 @@ export const SearchIcon = styled(FaSearch)`
     height: 2rem;
     cursor: pointer;
     position: relative;
-    top: 0.5em;
+    
     left: 0.5em;
     color: ${MAIN.BASE_COLOR};
     &:hover {

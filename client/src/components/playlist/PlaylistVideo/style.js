@@ -17,6 +17,6 @@ export const IsVideo = styled.div`
 	position: relative;
 	font-size: 1.3rem;
 	width: inherit;
-	top:30%;
+	top:7%;
 	text-align: center;
 `;

@@ -23,7 +23,10 @@ export const playlistService ={
     cancelLikePlaylist,
     updatePlaylistByListID,
     deletePlaylist,
-    getAllPlaylist
+    getAllPlaylist,
+    uploadCopyPlaylistInfo,
+    copyPlaylistVideo,
+    getOriginalListID
 }
 
 function getPlaylistUploadURL(input) {
@@ -328,6 +331,46 @@ function getAllPlaylist({username, orderBy, limit, offset}) {
     return axios({
         method: 'GET',
         url: `https://soktube.uc.r.appspot.com/api/video/list/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return null;
+        })
+}
+
+function uploadCopyPlaylistInfo(input) {
+    return axios({
+        method: 'POST',
+        url: `https://soktube.uc.r.appspot.com/api/video/list/copy/newcopy`,
+        data: qs.stringify(input)
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}
+
+function copyPlaylistVideo(copyFrom, copyTo) {
+    return axios({
+        method: 'POST',
+        url: `https://soktube.uc.r.appspot.com/api/video/list/copy/${copyFrom}/${copyTo}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}
+
+function getOriginalListID(listID) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.uc.r.appspot.com/api/video/copy/isCopiedFrom/${listID}`,
     })
         .then(response => {
             return response.data;

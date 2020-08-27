@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {MdEdit, MdDelete, BsThreeDotsVertical} from "react-icons/all";
+import {AiOutlineLink, BsThreeDotsVertical} from "react-icons/all";
 import {MAIN} from "../../style/Main";
 
 export const CardWrapper = styled.div`
@@ -11,26 +11,53 @@ export const CardWrapper = styled.div`
     box-shadow:  10px 10px 20px #d3d3d9, -12px -12px 20px #ffffff;
 `;
 
-export const CardImage = styled.img`
+export const CardImage = styled.div`
     width: 50%;
     height: 100%;
     border-radius: 15px;
+    background-image : url(${props => props.src});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 `;
 
 export const CardInfo = styled.div`
    height: 100%;
    width: 50%;
    flex-flow:column;
+   position: relative;
 `;
 
 export const CardTitle = styled.div`
+    position:relative;
+    display:inline-block;
+    vertical-align:bottom;
     margin-top: 1em;
-    padding: 1.5em 1em 2em 1em;
-    height: 3rem;
+    padding: 1em 1em 0 1em;
+    height: 10vh;
     font-size: 1.5rem;
     width: 100%;
     text-align: center;
     color: ${MAIN.DARK_TEXT_COLOR};
+    font-weight: bold;
+`;
+
+export const Text = styled.div`
+    position:absolute;
+    bottom:0;
+    left:0;
+    padding:0 1em 0.3em 1em;
+    text-align:center;
+    width:100%;
+`;
+
+
+export const CardCopied = styled.div`
+    margin-top:0.5em;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+    color: #868e96;
     font-weight: bold;
 `;
 
@@ -45,11 +72,31 @@ export const EditWrapper = styled.div`
 `;
 
 export const CardDesc = styled.div`
-    font-size: 1rem;
     margin-top: 1rem;
-    height: 13.5rem;
+    height: 13.3rem;
+    margin-bottom:0.01em;
     padding: 1em;
     line-height: 1.5em;
+`;
+
+export const OriginalPageText = styled.span`
+    color:#868e96;
+    font-weight: 400;
+`;
+
+export const OriginalLink = styled(AiOutlineLink)`
+    width: 1.8vw;
+    height:3.3vh;
+    color:#868e96;
+    &:hover{
+        cursor:pointer;
+    }
+`;
+
+export const CardBottomWrapper = styled.div`
+    position:absolute;
+    bottom:0.5rem;
+    width:100%;
 `;
 
 export const CardBottom = styled.div`
@@ -96,7 +143,7 @@ export const EditButton = styled.button`
 `;
 
 export const Separator = styled.div`
-    margin: 1em auto 1em auto;
+    margin: 0.9em auto 1em auto;
     height: 0.2em;
     width: 5em;
     background-color: ${MAIN.BASE_COLOR}

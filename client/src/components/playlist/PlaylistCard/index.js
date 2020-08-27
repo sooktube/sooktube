@@ -9,9 +9,11 @@ import {history} from "../../../helpers";
 
 function PlaylistCard({ listID }) {
     const username = useSelector(state => state.authentication.username);
+
     const [loading, setLoading] = useState(true);
     const [createDropdownVisible, setCreateDropdownVisible] = useState(false);
-
+    const [originalListID, setOriginalListID] = useState(0);
+   
     const [card, setCard] = useState({
         thumbnail: null,
         listName: null,
@@ -19,7 +21,8 @@ function PlaylistCard({ listID }) {
         username: null,
         like: null,
         dislike: null,
-        likeCount: null
+        likeCount: null,
+        copied:null
     })
     const [thumbnailImgURL, setThumbnailImgURL] = useState(null);
 
@@ -40,6 +43,10 @@ function PlaylistCard({ listID }) {
                 }))
                 setLoading(false);
             })
+        playlistService.getOriginalListID(listID)
+            .then(response => {
+                setOriginalListID(response);
+            })
     },[])
 
     const toggleDropdown = () => {
@@ -55,9 +62,13 @@ function PlaylistCard({ listID }) {
 
     function DeleteClick(){
         playlistService.deletePlaylist(listID)
-        .then(response => {
+        .then(() => {
             history.push(`/mypage`);
         })
+    }
+
+    function OriginalPage(){
+        window.location.replace(`/playlist/${originalListID}`);
     }
 
     return (
@@ -69,12 +80,20 @@ function PlaylistCard({ listID }) {
                 : <S.CardImage src={dummy_card_image} alt="no_image"/>
             }
             <S.CardInfo>
-                <S.CardTitle> {card.listName} </S.CardTitle>
+                <S.CardTitle> 
+                    <S.Text>{card.listName.length > 26 ? card.listName.slice(0,26)+'...' : card.listName}</S.Text> 
+                </S.CardTitle>
+                {(card.copied === 1) && <S.CardCopied> 복사본 </S.CardCopied>}
                 <S.Separator/>
-                <S.CardDesc> {card.listDesc} </S.CardDesc>
-                
-        
-               
+                <S.CardDesc>
+                    {(card.copied === 1) && 
+                    <>
+                    <S.OriginalPageText>Original Page Link</S.OriginalPageText> 
+                    <S.OriginalLink onClick={OriginalPage}/>
+                    </>}
+                    <div>{card.listDesc.length > 110 ? card.listDesc.slice(0,110)+'...' : card.listDesc} </div>
+                </S.CardDesc> 
+                <S.CardBottomWrapper>
                 <S.CardBottom>
                     <S.CardAuthor> by {card.username} </S.CardAuthor>
                     <S.EditWrapper>
@@ -88,7 +107,7 @@ function PlaylistCard({ listID }) {
                             if(window.confirm('재생목록을 삭제하시겠습니까?')) DeleteClick()}}> 삭제</S.EditButton>
                     </S.CreateDropdownContent>}
                 </S.CardBottom>
-               
+                </S.CardBottomWrapper>
             </S.CardInfo>
         </S.CardWrapper>
         }

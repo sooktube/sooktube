@@ -13,7 +13,7 @@ export const PlaylistButton = styled(BsBookmarkFill)`
     position: relative;
     left: -2em;
     top: 1em;
-    width: 100px;
+    width: 115px;
     height: 50px;
     cursor: pointer;
     color: ${props => props.on === "playlist" ? '#71A6C6' : '#ADAEAF'}
