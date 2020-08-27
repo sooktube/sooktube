@@ -12,7 +12,7 @@ function PlaylistCardList() {
   
 
   useEffect(()=>{
-    playlistService.getAllPlaylist({username, orderBy: "newest", limit: 10, offset: 0})
+    playlistService.getAllPlaylist({orderBy: "newest", limit: 10, offset: 0})
       .then(response => {
         console.log(response);
         dispatch({type:'INIT_MAIN',value:response});

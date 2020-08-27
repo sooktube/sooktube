@@ -327,10 +327,10 @@ function deletePlaylist(listID) {
         })
 }
 
-function getAllPlaylist({username, orderBy, limit, offset}) {
+function getAllPlaylist({orderBy, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/list/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
+        url: `https://soktube.uc.r.appspot.com/api/video/list/${orderBy}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
             return response.data;
