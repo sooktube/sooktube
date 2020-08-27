@@ -48,8 +48,8 @@ public class VideoListController {
 	
 	//get all videoList from DB
 	@CrossOrigin
-	@RequestMapping(value = "/api/video/list/{username}/{orderBy}", method = RequestMethod.GET)
-    public VideoListDTO[] getVideoList(@PathVariable("username") final String username, @PathVariable("orderBy") final String orderBy,
+	@RequestMapping(value = "/api/video/list/{orderBy}", method = RequestMethod.GET)
+    public VideoListDTO[] getVideoList(@PathVariable("orderBy") final String orderBy,
     		@RequestParam(required = false, defaultValue = "0") int offset, @RequestParam(required = false, defaultValue = "100") int limit) throws Exception {
     	
 		String order;
@@ -64,13 +64,8 @@ public class VideoListController {
 	    		
 	    		int listID = res[i].getListID();
 	    		
-	    		if(listlikeDAO.selectLikeList(listID, username) != null) {
-	    			res[i].setLike(1);
-	    		}
-	    		
-	    		else if(listlikeDAO.selectDislikeList(listID, username) != null) {
-	    			res[i].setDislike(-1);
-	    		}
+	    		res[i].setLike(listlikeDAO.countLike(listID));
+	    		res[i].setDislike(listlikeDAO.countDislike(listID));
 	    		
 	    		res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
 	    		
@@ -89,13 +84,8 @@ public class VideoListController {
 	    		
 	    		int listID = res[i].getListID();
 	    		
-	    		if(listlikeDAO.selectLikeList(listID, username) != null) {
-	    			res[i].setLike(1);
-	    		}
-	    		
-	    		else if(listlikeDAO.selectDislikeList(listID, username) != null) {
-	    			res[i].setDislike(-1);
-	    		}
+	    		res[i].setLike(listlikeDAO.countLike(listID));
+	    		res[i].setDislike(listlikeDAO.countDislike(listID));
 	    		
 	    		res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
 	    		
