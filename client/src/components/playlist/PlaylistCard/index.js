@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import {playlistService} from "../../../services";
 import dummy_card_image from '../../../../public/images/dummy_card_img.jpg';
 import LikePlaylistButton from "./LikePlaylistButton";
-import useDropdownOutsideClick from "../../../hooks/useDropdownOutsideClick";
+import index from "../../../hooks/useDropdownOutsideClick";
 import {history} from "../../../helpers";
 
 function PlaylistCard({ listID }) {
@@ -54,7 +54,7 @@ function PlaylistCard({ listID }) {
     };
     const contentRef = useRef(null);
     
-    useDropdownOutsideClick(contentRef, setCreateDropdownVisible);
+    index(contentRef, setCreateDropdownVisible);
 
     function EditClick(){
         history.push(`/@${card.username}/playlist/update/${listID}`);
