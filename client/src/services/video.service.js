@@ -16,7 +16,8 @@ export const videoService = {
     cancelLikeVideo,
     dislikeVideo,
     cancelDislikeVideo,
-    getRelatedVideoListInPlaylist
+    getRelatedVideoListInPlaylist,
+    getRelatedVideoListByUploader
 };
 
 function getVideoUploadURL(input) {
@@ -230,6 +231,19 @@ function getRelatedVideoListInPlaylist(videoID) {
     return axios({
         method: 'GET',
         url: `https://soktube.uc.r.appspot.com/api/video/inlist/${videoID}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}
+
+function getRelatedVideoListByUploader(videoID) {
+    return axios({
+        method: 'GET',
+        url: `https://soktube.uc.r.appspot.com/api/video/recommend/byUploader/${videoID}`,
     })
         .then(response => {
             return response.data;

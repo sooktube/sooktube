@@ -4,8 +4,6 @@ import {MAIN} from "../../style/Main";
 import {Link} from "react-router-dom";
 
 export const VideoInfoContainer = styled.div`
-    margin-top: 1rem;
-    width: calc(95%);
     margin-left: auto;
     margin-right: auto;
     @media (max-width: 767px) {
@@ -14,7 +12,7 @@ export const VideoInfoContainer = styled.div`
         margin-right: auto;
     }
     padding-bottom: 2em;
-    border-bottom: 1.5px solid #dddfe1;
+    border-bottom: 1.7px solid #ced4da
 `;
 
 export const VideoTitle = styled.div`

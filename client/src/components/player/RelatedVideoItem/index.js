@@ -1,14 +1,14 @@
 import React from 'react';
 import * as S from './style';
-import {history} from "../../../../helpers";
+import {history} from "../../../helpers";
 
-function RelatedVideoList({ video }) {
+function RelatedVideoItem({ video }) {
 
     function handleClick() {
         history.push(`/@${video.username}/video/${video.videoID}`)
     }
 
-    console.log(video)
+    const date = video.videoDate.replaceAll("-", ".").slice(0,10);
     return (
         <S.VideoWrapper>
             <S.Video src={video.videoPath} onClick={handleClick}/>
@@ -17,11 +17,11 @@ function RelatedVideoList({ video }) {
                 <S.VideoDescription>{video.videoDesc.slice(0, 150)} ... </S.VideoDescription>
                 <S.VideoDetail>
                     <div> {video.username} </div>
-                    <div> {video.videoDate} </div>
+                    <div> {date} </div>
                 </S.VideoDetail>
             </S.VideoInfo>
         </S.VideoWrapper>
     );
 }
 
-export default RelatedVideoList;
+export default RelatedVideoItem;

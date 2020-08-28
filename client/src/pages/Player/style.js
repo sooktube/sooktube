@@ -8,10 +8,11 @@ export const VideoWrapper = styled.div`
     border-radius: 20px;
     margin-top: 2rem;
     padding: 1rem 1.5rem;
+    display: flex;
 `;
 
 export const VideoMainContainer = styled.div`
-    display: flex;
+    width: 65%;
 `
 
 export const VideoLike = styled.div`
@@ -46,4 +47,8 @@ export const EditButton = styled(Link)`
 export const Separator = styled.div`
     margin: 0 1em;
     color: #e5e5e5;
+`;
+
+export const RelatedContentsWrapper = styled.div`
+    width: 33%;
 `;

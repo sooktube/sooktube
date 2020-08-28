@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useParams, Switch, Route} from "react-router-dom";
 import * as S from "./style";
 import Header from "../../components/base/Header";
 import CommentBox from "../../components/player/Comments";
 import VideoInfo from "../../components/player/VideoInfo";
 import {videoService, commentService} from "../../services";
 import {useDispatch} from "react-redux";
-import RelatedContents from "../../components/player/RelatedContents";
+import RelatedContentsInPlaylist from "../../components/player/RelatedContentsInPlaylist";
+import RelatedContentsByUploader from "../../components/player/RelatedContentsByUploader";
 import VideoTabs from "../../components/player/VideoTabs";
 
 function Player(){
-    const { videoID } = useParams();
-    const { username } = useParams();
+    const { videoID, username, tab } = useParams();
     const dispatch = useDispatch();
 
     const [loading, setLoading] = useState(true);
@@ -52,12 +52,19 @@ function Player(){
                 <S.VideoWrapper>
                     <S.VideoMainContainer>
                         <VideoInfo {...videoInfo}/>
-                        <div>
-                            <VideoTabs username={username} videoID={videoID} tab={tab}/>
-                            <RelatedContents/>
-                        </div>
+                        <CommentBox videoID={videoID}/>
                     </S.VideoMainContainer>
-                    <CommentBox videoID={videoID}/>
+                    <S.RelatedContentsWrapper>
+                        <VideoTabs username={username} videoID={videoID} tab={tab}/>
+                        <Switch>
+                            <Route exact path={`/@${username}/video/${videoID}`}>
+                                <RelatedContentsInPlaylist videoID={videoID}/>
+                            </Route>
+                            <Route path={`/@${username}/video/${videoID}/uploader`}>
+                                <RelatedContentsByUploader videoID={videoID}/>
+                            </Route>
+                        </Switch>
+                    </S.RelatedContentsWrapper>
                 </S.VideoWrapper>
             }
         </>

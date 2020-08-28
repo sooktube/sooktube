@@ -1,20 +1,18 @@
 import styled from 'styled-components'
-import {MAIN} from "../../../style/Main";
+import {MAIN} from "../../style/Main";
 import {IoIosHeart, IoMdHeartDislike} from "react-icons/all";
 import {Link} from 'react-router-dom';
 
 export const VideoWrapper = styled.div`
-    padding:14px;
-    border-bottom:1.7px solid #ced4da;
+    border-bottom: 1.7px solid #ced4da;
+    padding: 1em 0;
     display:flex;
     color: ${MAIN.DARK_TEXT_COLOR};
-    background-color:transparent;
-    width:95%;
 `;
 
 export const Video = styled.video`
-    width: 150px;
-    height: 84px;
+    width: 50%;
+    height: 75%;
     cursor: pointer;
     display:inline-block;
 `;
