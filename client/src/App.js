@@ -13,10 +13,9 @@ import StyleReset from "./components/style/StyleReset";
 import Playlist from "./pages/Playlist";
 import UpdateVideo from "./pages/UploadVideo/UpdateVideo";
 import UpdatePlaylist from "./pages/UploadPlaylist/UpdatePlaylist";
-import Mypage from './pages/Mypage';
+import Mypage from './pages/User';
 import Search from "./components/base/search";
 import CopyPlaylist from "./pages/UploadPlaylist/CopyPlaylist";
-import FallbackItem from "./components/main/FallbackCardList/FallbackItem";
 import FallbackCardList from "./components/main/FallbackCardList";
 
 function App() {
@@ -33,13 +32,13 @@ function App() {
                 <PrivateRoute path='/create/playlist' component={CreatePlaylist}/>
                 <PrivateRoute path='/create/video' component={CreateVideo}/>
                 <Route path='/playlist/:listID' component={Playlist}/>
-                <Route exact path='/@:username/video/:videoID/:tab' component={Player}/>
-                <Route path='/@:username/video/update/:videoID' component={UpdateVideo}/>
+                <Route exact path='/@:username/video/:videoID' component={Player}/>
+                <Route path='/@:username/video/:videoID/:tab' component={Player}/>
+                <Route path='/@:username/video/:videoID/update' component={UpdateVideo}/>
                 <Route path='/@:username/playlist/update/:listID' component={UpdatePlaylist}/>
                 <Route path='/search/:type' component={Search}/>
                 <Route exact path='/@:username' component={Mypage}/>
                 <PrivateRoute path='/copy/playlist/:listID' component={CopyPlaylist}/>
-                <Route path="/test" component={FallbackCardList}/>
                 <Redirect from="*" to="/" />
             </Switch>
             </GlobalLayoutStyle>

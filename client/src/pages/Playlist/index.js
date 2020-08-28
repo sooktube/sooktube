@@ -8,13 +8,9 @@ import Header from "../../components/base/Header";
 import * as S from './style';
 import { commentService } from "../../services/comment.service";
 
-
 function Playlist() {
-
     const { listID } = useParams();
     const dispatch = useDispatch();
-
-
 
     useEffect(() => {
         commentService.getCommentInfoByPlaylistID(listID)
@@ -24,7 +20,6 @@ function Playlist() {
         })    
     },[])
 
-    
     return (
         <>
             <Header/>

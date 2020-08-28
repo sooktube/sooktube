@@ -6,8 +6,6 @@ import VideoList from "../../components/video/VideoList";
 import PlaylistList from "../../components/playlist/PlaylistList";
 import {videoService, playlistService} from "../../services";
 
-
-
 function Mypage(){
     const username = useSelector(state => state.authentication.username);
 
@@ -18,14 +16,14 @@ function Mypage(){
 
 
     useEffect(() => {
-        videoService.getVideoListByUsername(username)
+        videoService.getVideoListByUsername({username})
             .then(response => {
                 setVideoInfo(response);
             }); 
     },[])
 
     function clickMyPlaylist(){
-        playlistService.getPlaylistListByUsername(username)
+        playlistService.getPlaylistListByUsername({username})
             .then(response => {
                 setPlaylistInfo(response);
             });
@@ -44,6 +42,7 @@ function Mypage(){
                 setPlaylistLiked(response);
             });
     }
+
     const tabLink = document.querySelectorAll(".tab-menu-link");
     const tabContent = document.querySelectorAll(".tab-bar-content");
 
@@ -66,8 +65,6 @@ function Mypage(){
         document.querySelector("#" + content).classList.add("active");
         btnTarget.classList.add("active");
     }
-
-    
 
     return(
         <>
@@ -95,7 +92,7 @@ function Mypage(){
                             {videoInfo &&
                                 <VideoList videoList={videoInfo} />
                             }
-            
+
                         </div>
                     </div>
                     <div className="tab-bar-content" id="second">

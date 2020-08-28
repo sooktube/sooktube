@@ -236,7 +236,7 @@ function addVideoToPlaylist({listID, videoID, username}) {
 function getPlaylistListByUsername({username, orderBy, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `/api/video/list/by/username/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
+        url: `/api/video/list/by/username/${username}/newest?limit=100&offset=0`,
     })
       .then(response => {
           return response.data;
