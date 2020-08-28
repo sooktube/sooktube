@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useRef } from 'react';
 import {useDispatch} from "react-redux";
 
-function useInfiniteScroll({items, hasMoreItems, ratio, action, ref}) {
+function useInfiniteScroll({items, hasMoreItems, ratio, action}) {
     const dispatch = useDispatch();
     const lastItems = useRef([]);
 

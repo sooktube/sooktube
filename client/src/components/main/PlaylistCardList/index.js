@@ -33,9 +33,7 @@ function PlaylistCardList() {
         items: playlists,
         hasMoreItems: hasMorePlaylists,
         ratio: 0.7,
-        action: playlistActions.loadPlaylists(opts),
-        opts,
-        id: "listID"
+        action: playlistActions.loadPlaylists(opts)
     });
 
     return (
