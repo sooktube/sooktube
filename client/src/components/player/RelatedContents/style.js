@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-export const RelatedContentsTab = styled.div`
+export const RelatedContents = styled.div`
     width: 50%;
     margin-left: 1.5em;
+    margin-top: 1rem;
 `;
 
 export const RelatedVideoComment = styled.div`

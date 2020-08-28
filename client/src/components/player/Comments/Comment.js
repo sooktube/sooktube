@@ -1,9 +1,9 @@
 import React,{ useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as S from "./style";
-import index from "../../../hooks/useDropdownOutsideClick";
 import {commentService} from "../../../services/comment.service";
 import CommentReplyList from "./CommentReplyList";
+import useDropdownOutsideClick from "../../../hooks/useDropdownOutsideClick";
 
 function Comment({videoID, commentID, length, index, username, userComment, profileUrl, userPic}){
     const currentUsername = useSelector(state => state.authentication.username);
@@ -36,7 +36,7 @@ function Comment({videoID, commentID, length, index, username, userComment, prof
 
     const contentRef = useRef(null);
 
-    index(contentRef, setCreateDropdownVisible);
+    useDropdownOutsideClick(contentRef, setCreateDropdownVisible);
 
     function handleChange(e) {
         setComment(e.target.value);

@@ -1,7 +1,7 @@
 import React,{ useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as S from "./style";
-import index from "../../../hooks/useDropdownOutsideClick";
+import useDropdownOutsideClick from "../../../hooks/useDropdownOutsideClick";
 import {commentService} from "../../../services/comment.service";
 
 function CommentReply({videoID, commentID, index, length, profileUrl, username, userComment, parent, seq}){
@@ -27,7 +27,7 @@ function CommentReply({videoID, commentID, index, length, profileUrl, username, 
 
     const contentRef = useRef(null);
 
-    index(contentRef, setCreateDropdownVisible);
+    useDropdownOutsideClick(contentRef, setCreateDropdownVisible);
 
     function handleChange(e) {
         setComment(e.target.value);

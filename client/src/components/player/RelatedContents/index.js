@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import * as S from './style';
 import {videoService} from "../../../services";
 import { useParams } from 'react-router-dom';
-import RelatedVideoItem from "./RelatedVideoItem";
+import VideoTabs from "../VideoTabs";
 
 function RelatedContents() {
     const [videoList, setVideoList] = useState(null);
-    const { videoID, tab } = useParams();
-    console.log(tab);
+    const { username, videoID, tab } = useParams();
+
     useEffect(() => {
         videoService.getRelatedVideoListInPlaylist(videoID)
             .then(response => {
@@ -16,16 +16,10 @@ function RelatedContents() {
             })
     }, [])
 
-    const [activeTabIndex, setActiveTabIndex] = useState(0);
-
     return (
-        <S.RelatedContentsTab>
-            <S.RelatedContentsTab activeTabIndex={activeTabIndex}>
-                {videoList && videoList.map(video =>
-                    <RelatedVideoItem video={video} key={video.videoID}/>
-                )}
-            </S.RelatedContentsTab>
-        </S.RelatedContentsTab>
+        <S.RelatedContents>
+
+        </S.RelatedContents>
     );
 }
 

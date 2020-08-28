@@ -5,25 +5,16 @@ import {Link} from "react-router-dom";
 
 export const VideoInfoContainer = styled.div`
     margin-top: 1rem;
-    @media (max-width: 1919px) {
-    width: calc(60% - 1rem);
-    }
-    @media (max-width: 1440px) {
-    width: calc(50% - 1rem);
-    }
-    @media (max-width: 1312px) {
-    width: calc(50% - 1rem);
-    }
-    @media (max-width: 944px) {
-    width: calc(80% - 1rem);
+    width: calc(95%);
     margin-left: auto;
     margin-right: auto;
-    }
     @media (max-width: 767px) {
-    width: calc(100% - 2rem);
-    margin-left: auto;
-    margin-right: auto;
+        width: calc(100% - 2rem);
+        margin-left: auto;
+        margin-right: auto;
     }
+    padding-bottom: 2em;
+    border-bottom: 1.5px solid #dddfe1;
 `;
 
 export const VideoTitle = styled.div`
