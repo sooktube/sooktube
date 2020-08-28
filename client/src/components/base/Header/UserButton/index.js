@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {UserButtonWrapper} from './style';
 import DropdownUser from "./DropdownUser";
 import DropdownCreate from "./DropdownCreate";

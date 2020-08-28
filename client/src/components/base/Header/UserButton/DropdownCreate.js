@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import {StyledLink, DropdownPlusBtn, CreateDropdownContent, CreateDropdownMenu, ArrowDown, PlusMenu} from './style';
-import index from "../../../../hooks/useDropdownOutsideClick";
+import useDropdownOutsideClick from "../../../../hooks/useDropdownOutsideClick";
 
 function DropdownCreate() {
     const [createDropdownVisible, setCreateDropdownVisible] = useState(false);
@@ -10,7 +10,7 @@ function DropdownCreate() {
     };
 
     const contentRef = useRef(null);
-    index(contentRef, setCreateDropdownVisible);
+    useDropdownOutsideClick(contentRef, setCreateDropdownVisible);
 
     return (
         <>
