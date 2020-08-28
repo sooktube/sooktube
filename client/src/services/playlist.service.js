@@ -26,7 +26,8 @@ export const playlistService ={
     getAllPlaylist,
     uploadCopyPlaylistInfo,
     copyPlaylistVideo,
-    getOriginalListID
+    getOriginalListID,
+    deleteVideoInPlaylist
 }
 
 function getPlaylistUploadURL(input) {
@@ -124,10 +125,10 @@ function getVideoListByListID(listID) {
         })
 }
 
-function searchVideoByTitle(listID, username, keyword) {
+function searchVideoByTitle({keyword, listID, username, orderBy, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/search/title/${keyword}/listID/${listID}/user/${username}`,
+        url: `https://soktube.uc.r.appspot.com/api/video/search/title/${keyword}/listID/${listID}/user/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
             return response.data;
@@ -377,5 +378,18 @@ function getOriginalListID(listID) {
         })
         .catch(error => {
             return null;
+        })
+}
+
+function deleteVideoInPlaylist(username, listID, videoID) {
+    return axios({
+        method: 'DELETE',
+        url: `https://soktube.uc.r.appspot.com/api/video/list/delete/video/${username}/${listID}/${videoID}`,
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
         })
 }

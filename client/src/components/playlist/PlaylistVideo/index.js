@@ -3,7 +3,7 @@ import * as S from './style';
 import VideoList from "../VideoList";
 import RecommendVideoButton from "../RecommendVideoButton";
 import {playlistService} from "../../../services";
-import {useSelector} from "react-redux";
+import {useSelector,useDispatch} from "react-redux";
 
 function PlaylistVideo({ listID }) {
     const current_username = useSelector(state => state.authentication.username);
@@ -15,7 +15,7 @@ function PlaylistVideo({ listID }) {
     const [copied, setCopied] = useState(0);
 
     useEffect(() => {
-        playlistService.getGTEQ5VideoList(listID, current_username)
+        playlistService.getGTEQ5VideoList({listID, current_username, orderBy:'like',limit: 10,offset:0}) 
             .then(response => {
                 setVideoList(response);
                 setLoading(false);
@@ -34,7 +34,7 @@ function PlaylistVideo({ listID }) {
                 {!loading &&
                     <>
                     { videoList.length === 0 && <S.IsVideo> 재생목록이 비어있군요🤔 </S.IsVideo>}
-                    <VideoList videoList={videoList}/>
+                    <VideoList username={username} listID={listID} playlist={1} videoList={videoList}/>
                     </>
                  }
         </S.PlaylistVideoWrapper>
