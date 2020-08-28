@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 
 function useInfiniteScroll({items, hasMoreItems, ratio, action, ref}) {
     const dispatch = useDispatch();
-    const lastIdCount = useRef([]);
+    const lastItems = useRef([]);
 
     const loadItems = useCallback(() => {
         const { clientHeight, scrollHeight } = document.documentElement;
@@ -11,10 +11,12 @@ function useInfiniteScroll({items, hasMoreItems, ratio, action, ref}) {
         const scrollRatio = window.scrollY / minusClientHeight; // 현재 스크롤 비율을 소수점 단위로 계산(0 ~ 0.5 ~ 1)
 
         if (scrollRatio > ratio && hasMoreItems) {
+            // 스크롤링으로 가져온 게시물 중 마지막 게시물이 lastItems 배열에 포함되어 있는지 확인
+            // 이미 포함되어 있었던 게시물이라면, 스크롤링을 또 할 필요가 없음
             const lastItem = items[items.length - 1];
-            if(!lastIdCount.current.includes(lastItem)) {
+            if(!lastItems.current.includes(lastItem)) {
                 dispatch(action);
-                lastIdCount.current.push(lastItem);
+                lastItems.current.push(lastItem);
             }
         }
     }, [action, dispatch, hasMoreItems, items, ratio])
