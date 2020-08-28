@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import {FiHeart} from "react-icons/all";
 
 export const CardImageWrapper = styled.div`
     display: block;

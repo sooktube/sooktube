@@ -16,7 +16,6 @@ import UpdatePlaylist from "./pages/UploadPlaylist/UpdatePlaylist";
 import Mypage from './pages/User';
 import Search from "./components/base/search";
 import CopyPlaylist from "./pages/UploadPlaylist/CopyPlaylist";
-import FallbackCardList from "./components/main/FallbackCardList";
 
 function App() {
     return (
@@ -24,10 +23,11 @@ function App() {
             <GlobalLayoutStyle>
             <StyleReset/>
             {alert.message &&
-                <div className={`alert ${alert.type}`}>{alert.message}</div>
+                <div className={`alert start ${alert.type}`}>{alert.message}</div>
             }
             <Switch>
                 <Route exact path='/' component={Main}/>
+                <Route path='/recent' component={Main}/>
                 <Route path='/register' component={Register}/>
                 <PrivateRoute path='/create/playlist' component={CreatePlaylist}/>
                 <PrivateRoute path='/create/video' component={CreateVideo}/>

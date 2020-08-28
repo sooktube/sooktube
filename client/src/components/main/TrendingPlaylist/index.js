@@ -5,18 +5,18 @@ import { playlistActions } from "../../../actions";
 import FallbackCardList from "../FallbackCardList";
 import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
 
-const CardItem = lazy(() => import('./CardItem'));
+const CardItem = lazy(() => import('../CardItem'));
 
-function PlaylistCardList() {
+function TrendingPlaylist() {
     const dispatch = useDispatch();
 
-    const playlists = useSelector(state => state.playlist.playlists);
-    const hasMorePlaylists = useSelector(state => state.playlist.hasMorePlaylists);
-    const showFallbackCardList = useSelector(state => state.playlist.showFallbackPlaylists);
-    const offset = useSelector(state => state.playlist.offset);
+    const playlists = useSelector(state => state.playlist.trendingPlaylists);
+    const hasMorePlaylists = useSelector(state => state.playlist.hasMoreTrendingPlaylists);
+    const showFallbackCardList = useSelector(state => state.playlist.showFallbackTrendingPlaylists);
+    const offset = useSelector(state => state.playlist.trendingOffset);
 
     const [opts, setOpts] = useState({
-        orderBy: "newest",
+        orderBy: "like",
         limit: 12,
         offset: offset
     })
@@ -26,14 +26,14 @@ function PlaylistCardList() {
     }, [offset])
 
     useEffect(() => {
-        dispatch(playlistActions.loadPlaylists(opts));
+        dispatch(playlistActions.loadTrendingPlaylists(opts));
     },[])
 
     useInfiniteScroll({
         items: playlists,
         hasMoreItems: hasMorePlaylists,
         ratio: 0.7,
-        action: playlistActions.loadPlaylists(opts)
+        action: playlistActions.loadTrendingPlaylists(opts)
     });
 
     return (
@@ -53,4 +53,4 @@ function PlaylistCardList() {
     );
 }
 
-export default PlaylistCardList;
+export default TrendingPlaylist;
