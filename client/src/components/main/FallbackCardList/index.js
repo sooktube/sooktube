@@ -7,7 +7,7 @@ const FallbackCardList = () => {
           {Array(8)
               .fill()
               .map(() => (
-                  <FallbackItem/>
+                  <FallbackItem key={Math.floor(Math.random() * 100000) + "Fallback"}/>
               ))}
       </>
     );

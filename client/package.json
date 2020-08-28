@@ -19,6 +19,7 @@
     "babel-loader": "^8.0.0",
     "core-js": "^3.6.5",
     "html-webpack-plugin": "latest",
+    "immer": "^7.0.8",
     "mini-css-extract-plugin": "latest",
     "moment": "^2.27.0",
     "node-sass": "^4.14.1",
@@ -37,7 +38,8 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.1.1",
     "styled-components.macro": "^1.0.0",
-    "styled-reset": "^4.2.1"
+    "styled-reset": "^4.2.1",
+    "immer": "latest"
   },
   "scripts": {
     "build": "webpack --mode production",

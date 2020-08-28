@@ -1,4 +1,4 @@
-import {userConstants, videoConstants} from "../constants";
+import {videoConstants} from "../constants";
 import {videoService} from "../services";
 
 export const videoActions = {

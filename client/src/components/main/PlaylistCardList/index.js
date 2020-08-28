@@ -1,29 +1,45 @@
-import React,{ useEffect, lazy, Suspense } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {PlaylistWrapper} from "./style";
-import {playlistService} from "../../../services";
+import React, { useEffect, useState, lazy, Suspense } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import * as S from './style';
+import { playlistActions } from "../../../actions";
 import FallbackCardList from "../FallbackCardList";
+import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
 
 const CardItem = lazy(() => import('./CardItem'));
 
 function PlaylistCardList() {
-    const playlists = useSelector(state => state.mainPlaylist);
     const dispatch = useDispatch();
 
+    const playlists = useSelector(state => state.playlist.playlists);
+    const hasMorePlaylists = useSelector(state => state.playlist.hasMorePlaylists);
+    const showFallbackCardList = useSelector(state => state.playlist.showFallbackPlaylists);
+    const offset = useSelector(state => state.playlist.offset);
 
-    useEffect(()=>{
-    playlistService.getAllPlaylist({orderBy: "newest", limit: 8, offset: 0})
-      .then(response => {
-        console.log(response);
-        dispatch({type:'INIT_MAIN',value:response});
-      })
+    const [opts, setOpts] = useState({
+        orderBy: "newest",
+        limit: 12,
+        offset: offset
+    })
 
+    useEffect(() => {
+        setOpts({...opts, offset})
+    }, [offset])
+
+    useEffect(() => {
+        dispatch(playlistActions.loadPlaylists(opts));
     },[])
 
-    const showFallbackCardList = true;
+    useInfiniteScroll({
+        items: playlists,
+        hasMoreItems: hasMorePlaylists,
+        ratio: 0.7,
+        action: playlistActions.loadPlaylists(opts),
+        opts,
+        id: "listID"
+    });
 
     return (
-    <PlaylistWrapper>
+    <S.PlaylistWrapper>
         <Suspense fallback="">
               {playlists.map(list =>
                   <CardItem  key={list.listID}
@@ -35,7 +51,7 @@ function PlaylistCardList() {
               )}
         </Suspense>
         {showFallbackCardList && <FallbackCardList/>}
-    </PlaylistWrapper>
+    </S.PlaylistWrapper>
     );
 }
 
