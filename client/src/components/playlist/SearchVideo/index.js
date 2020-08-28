@@ -17,7 +17,7 @@ function SearchVideo({listID}) {
 
     useEffect(() =>{
         if(keyword) {
-            playlistService.searchVideoByTitle(listID, username, keyword)
+            playlistService.searchVideoByTitle({keyword, listID, username, orderBy:'like',limit:'10',offset:0}) 
                 .then(response => {
                     setSearchResult(response);
                 })

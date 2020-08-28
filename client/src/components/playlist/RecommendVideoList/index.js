@@ -6,8 +6,8 @@ function RecommendVideoList({listID, username}) {
     const [videoList, setVideoList] = useState(null);
 
     useEffect(() => {
-        playlistService.getGTEQ0LT5VideoList(listID, username)
-            .then(response => {
+        playlistService.getGTEQ0LT5VideoList({listID, username, orderBy:'like',limit:10, offset:0})
+            .then(response => { 
                 setVideoList(response);
             })
     },[])

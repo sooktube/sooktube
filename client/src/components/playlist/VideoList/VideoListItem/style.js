@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {MAIN} from "../../../style/Main";
-import {IoIosHeart, IoMdHeartDislike, TiInputChecked} from "react-icons/all";
+import {AiOutlineDelete, IoMdHeartDislike, TiInputChecked} from "react-icons/all";
 
 export const VideoWrapper = styled.div`
     padding:14px;
@@ -27,9 +27,18 @@ export const VideoTitle = styled.div`
 export const VideoInfo = styled.div`
     font-size: 2vh;
     margin-left: 1em;
+    width:50%;
     cursor: pointer;
     div {
       margin-right: 1em;
+    }
+`;
+
+export const DeleteButton = styled(AiOutlineDelete)`
+    width:1.1rem;
+    height:1.2rem;
+    &:hover{
+        color:#adb5bd;
     }
 `;
 
