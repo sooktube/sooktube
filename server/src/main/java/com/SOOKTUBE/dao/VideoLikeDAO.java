@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.SOOKTUBE.model.VideoDTO;
 import com.SOOKTUBE.model.VideoLikeDTO;
 
 public interface VideoLikeDAO {
@@ -38,7 +39,9 @@ public interface VideoLikeDAO {
 	
 	//get like videos by user
 	List<Integer> getlikeVideos(String username) throws Exception;
+	VideoDTO[] getLikevideoDesc(@Param("username") String username, @Param("limit") int limit, @Param("offset") int offset) throws Exception;
 	//get dislike videos by user
 	List<Integer> getDislikeVideos(String username) throws Exception;
+	VideoDTO[] getdisLikevideoDesc(@Param("username") String username, @Param("limit") int limit, @Param("offset") int offset) throws Exception;
 	
 }

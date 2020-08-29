@@ -90,7 +90,36 @@
     		WHERE `username` = #{username}
     
     </select>
+    
+	<select id="getLikevideoDesc"
+			resultType="com.SOOKTUBE.model.VideoDTO">
+					
+			SELECT VIDEO.`videoID`, VIDEO.`videoTitle`, VIDEO.`videoDesc`, VIDEO.`videoDate`, VIDEO.`username`, VIDEO.`uploadFileName`, VIDEO.`like`, VIDEO.`dislike`
+			FROM VIDEO
+			WHERE VIDEO.`videoID` IN (SELECT `videoID` from videoLike where `username` = #{username})
+    		
+    		<if test='limit != null and offset != null'>
+    		LIMIT #{limit} OFFSET #{offset}
+    		</if>
+			
+			
+	</select>
 
+
+	<select id="getdisLikevideoDesc"
+			resultType="com.SOOKTUBE.model.VideoDTO">
+					
+			SELECT VIDEO.`videoID`, VIDEO.`videoTitle`, VIDEO.`videoDesc`, VIDEO.`videoDate`, VIDEO.`username`, VIDEO.`uploadFileName`, VIDEO.`like`, VIDEO.`dislike`
+			FROM VIDEO
+			WHERE VIDEO.`videoID` IN (SELECT `videoID` from videoDislike where `username` = #{username})
+    		
+    		<if test='limit != null and offset != null'>
+    		LIMIT #{limit} OFFSET #{offset}
+    		</if>
+			
+			
+	</select>
+	
     <delete id="revertLike"> 
     	DELETE FROM videoLike
     	WHERE `videoID` = #{videoID}

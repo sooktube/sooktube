@@ -42,6 +42,32 @@
     			`username` = #{username}
     		
     </select>
+    
+	<select id="getLikeListDesc"
+			resultType= "com.SOOKTUBE.model.VideoListDTO">
+			
+			SELECT listInfo.`listID`, listInfo.`listName`, listInfo.`listDesc`, listInfo.`username`, listInfo.`thumbnail`, listInfo.`isPublic`, listInfo.`copied`, listInfo.`like`, listInfo.`dislike`
+			FROM listInfo
+			WHERE listInfo.`listID` IN (SELECT `listID` FROM listLike WHERE `username` = #{username})
+			
+			<if test='limit != null and offset != null'>
+    		LIMIT #{limit} OFFSET #{offset}
+    		</if>
+			
+	</select>
+	
+	<select id="getdisLikeListDesc"
+			resultType= "com.SOOKTUBE.model.VideoListDTO">
+			
+			SELECT listInfo.`listID`, listInfo.`listName`, listInfo.`listDesc`, listInfo.`username`, listInfo.`thumbnail`, listInfo.`isPublic`, listInfo.`copied`, listInfo.`like`, listInfo.`dislike`
+			FROM listInfo
+			WHERE listInfo.`listID` IN (SELECT `listID` FROM listDislike WHERE `username` = #{username})
+			
+			<if test='limit != null and offset != null'>
+    		LIMIT #{limit} OFFSET #{offset}
+    		</if>
+			
+	</select>
 
 	<select id="selectDislikeList"
 		    resultType="com.SOOKTUBE.model.ListLikeDTO">

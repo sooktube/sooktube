@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SOOKTUBE.dao.VideoDAO;
 import com.SOOKTUBE.dao.VideoLikeDAO;
 import com.SOOKTUBE.model.VideoDTO;
-import com.SOOKTUBE.model.VideoLikeDTO;
 import com.SOOKTUBE.service.GCSService;
 
 import lombok.RequiredArgsConstructor;
@@ -137,53 +137,52 @@ public class VideoLikeController {
 	//get liked videos by user
 	@CrossOrigin
 	@RequestMapping(value = "/api/liked/video/byUsername/{username}", method = RequestMethod.GET)
-	public VideoDTO[] getlikedVideo(@PathVariable("username") final String username) throws Exception {
+	public Object[] getlikedVideo(@PathVariable("username") final String username,
+			@RequestParam(required = false, defaultValue = "0") int offset, @RequestParam(required = false, defaultValue = "100") int limit) throws Exception {
 		
-		List<Integer> videoID = videoLikeDAO.getlikeVideos(username);
+		//List<Integer> videoID = videoLikeDAO.getlikeVideos(username);
+		
+		Object withTotal[] = new Object[2];
 		
 
-		VideoDTO[] res = new VideoDTO[videoID.size()];
+		VideoDTO[] res = videoLikeDAO.getLikevideoDesc(username, limit, offset);
+		VideoDTO[] res1 = videoLikeDAO.getLikevideoDesc(username, 100, 0);
 
-		for (int i = 0; i < videoID.size(); i++) {
-			
-			VideoDTO video = videoDAO.getDescbyVideoID(videoID.get(i));
-			
-			res[i] = video;
-			
-			res[i].setLike(videoLikeDAO.likeCount(videoID.get(i)));
-			res[i].setDislike(videoLikeDAO.dislikeCount(videoID.get(i)));
+		for (int i = 0; i < res.length; i++) {
 			
 			res[i].setVideoPath(gcsService.getVideobyVIDEOtable(res[i].getUploadFileName()));
-		
 		}
 		
-		return res;
+		withTotal[0] = res1.length;
+		withTotal[1] = res;
+		
+		return withTotal;
 		
 	}
 	
 	//get disliked videos by user
 	@CrossOrigin
 	@RequestMapping(value = "/api/disliked/video/byUsername/{username}", method = RequestMethod.GET)
-	public VideoDTO[] getdislikedVideo(@PathVariable("username") final String username) throws Exception {
+	public Object[] getdislikedVideo(@PathVariable("username") final String username,
+			@RequestParam(required = false, defaultValue = "0") int offset, @RequestParam(required = false, defaultValue = "100") int limit) throws Exception {
 		
-		List<Integer> videoID = videoLikeDAO.getDislikeVideos(username);
+		//List<Integer> videoID = videoLikeDAO.getDislikeVideos(username);
 		
-		VideoDTO[] res = new VideoDTO[videoID.size()];
+		Object withTotal[] = new Object[2];
 		
-		for(int i = 0; i < videoID.size(); i++) {
-			
-			VideoDTO video = videoDAO.getDescbyVideoID(videoID.get(i));
-			
-			res[i] = video;
-			
-			res[i].setLike(videoLikeDAO.likeCount(videoID.get(i)));
-			res[i].setDislike(videoLikeDAO.dislikeCount(videoID.get(i)));
+		VideoDTO[] res = videoLikeDAO.getdisLikevideoDesc(username, limit, offset);
+		VideoDTO[] res1 = videoLikeDAO.getdisLikevideoDesc(username, 100, 0);
+		
+		for(int i = 0; i < res.length; i++) {
 			
 			res[i].setVideoPath(gcsService.getVideobyVIDEOtable(res[i].getUploadFileName()));
 			
 		}
 		
-		return res;
+		withTotal[0] = res1.length;
+		withTotal[1] = res;
+		
+		return withTotal;
 	}
 	
 

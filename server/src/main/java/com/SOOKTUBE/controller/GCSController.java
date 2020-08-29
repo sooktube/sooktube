@@ -127,7 +127,7 @@ public class GCSController {
     //newest & order by like
     @CrossOrigin
 	@RequestMapping(value = "/api/video/desc/url/user/{username}/{orderBy}", method = RequestMethod.GET)
-	public VideoDTO[] getURLfromGCSbyUsername(@PathVariable("username") final String username
+	public Object[] getURLfromGCSbyUsername(@PathVariable("username") final String username
 			, @PathVariable("orderBy") final String orderBy
 			, @RequestParam(required = false, defaultValue = "0") int offset, @RequestParam(required = false, defaultValue = "100") int limit) throws Exception{
     	
@@ -135,9 +135,12 @@ public class GCSController {
 
     	if (orderBy.equals("newest")) {
     		
+			Object withTotal[]=new Object[2];
+    		
     		order = "videoDate";
     		
     		VideoDTO[] videobyDate = videoDAO.getDescbyUserOrderBy(username, order, limit, offset);
+    		VideoDTO[] videobyDate1 = videoDAO.getDescbyUserOrderBy(username, order, 100, 0);
     		
     		
     		for(int i = 0; i < videobyDate.length; i++) {
@@ -148,14 +151,20 @@ public class GCSController {
 
     		}
     		
-    		return videobyDate;
+			withTotal[0] = videobyDate1.length;
+			withTotal[1] = videobyDate;
+			
+			return withTotal;
     	}
     	
     	else if (orderBy.equals("like")) {
     		
+			Object withTotal[]=new Object[2];
+    		
     		order = "like";
     		
     		VideoDTO[] videobyLike = videoDAO.getDescbyUserOrderBy(username, order, limit, offset);
+    		VideoDTO[] videobyLike1 = videoDAO.getDescbyUserOrderBy(username, order, 100, 0);
     		
     		for(int i = 0; i < videobyLike.length; i++) {
     			
@@ -168,9 +177,10 @@ public class GCSController {
     		}
 
     		
-
-	        
-	        return videobyLike;
+			withTotal[0] = videobyLike1.length;
+			withTotal[1] = videobyLike;
+			
+			return withTotal;
         }
     	
     	else {

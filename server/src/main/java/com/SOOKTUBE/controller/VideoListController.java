@@ -454,7 +454,7 @@ public class VideoListController {
 	//get video list by username
 	@CrossOrigin
 	@RequestMapping(value = "/api/video/list/by/username/{username}/{orderBy}", method = RequestMethod.GET)
-	public VideoListDTO[] getlistbyusername(@PathVariable("username") final String username
+	public Object[] getlistbyusername(@PathVariable("username") final String username
 			, @PathVariable("orderBy") final String orderBy,
 			@RequestParam(required = false, defaultValue = "0") int offset, @RequestParam(required = false, defaultValue = "100") int limit) throws Exception {
 		
@@ -462,9 +462,12 @@ public class VideoListController {
 		
 		if(orderBy.equals("newest")) {
 			
+			Object withTotal[]=new Object[2];
+			
 			order = "listID";
 			
 			VideoListDTO[] res = videoListDAO.getVideoListbyUser(username, order, limit, offset);
+			VideoListDTO[] res1 = videoListDAO.getVideoListbyUser(username, order, 100, 0);
 			
 			for(int i = 0; i < res.length; i++) {
 				
@@ -472,17 +475,24 @@ public class VideoListController {
 				res[i].setDislike(listlikeDAO.countDislike(res[i].getListID()));
 				
 				res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
+
 				
 			}
 			
-			return res;
+			withTotal[0] = res1.length;
+			withTotal[1] = res;
+			
+			return withTotal;
 		}
 		
 		else if (orderBy.equals("like")) {
 			
+			Object withTotal[]=new Object[2];
+			
 			order = "like";
 			
 			VideoListDTO[] res = videoListDAO.getVideoListbyUser(username, order, limit, offset);
+			VideoListDTO[] res1 = videoListDAO.getVideoListbyUser(username, order, 100, 0);
 			
 			for(int i = 0; i < res.length; i++) {
 				
@@ -492,8 +502,11 @@ public class VideoListController {
 				res[i].setUrl(gcsService.getVideobyVIDEOtable(res[i].getThumbnail()));
 				
 			}		
-    		
-    		return res;
+			
+			withTotal[0] = res1.length;
+			withTotal[1] = res;
+			
+			return withTotal;
 			
 		}
 		
