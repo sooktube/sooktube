@@ -99,7 +99,7 @@
     		parameterType="Integer"
 		    resultType="com.SOOKTUBE.model.VideoListDTO">
     		
-			SELECT videoList.`listID`, videoList.`videoID`, `listName`, `listDesc`, videoList.`username`, `isPublic`, `thumbnail`, `like`, `dislike`, `copied`
+			SELECT videoList.`listID`, videoList.`videoID`, `listName`, `listDesc`, videoList.`username`, `isPublic`, `thumbnail`, videoList.`like`, videoList.`dislike`, `copied`
 			FROM videoList, listInfo
 			WHERE videoList.`listID` = #{listID}
 			AND `videoID` = #{videoID}
