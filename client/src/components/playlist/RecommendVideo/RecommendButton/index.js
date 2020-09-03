@@ -55,10 +55,10 @@ function RecommendButton({inVideoList, videoID, username, recommended, recCount,
     }
 
     return (
-        <div>
+        <S.RecommendWrapper>
             <S.Recommend on={recommended} onClick={toggleRecommend}/>
-            {recCount}
-        </div>
+            <span> {recCount} </span>
+        </S.RecommendWrapper>
     );
 }
 

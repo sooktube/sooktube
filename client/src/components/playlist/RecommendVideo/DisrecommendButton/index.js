@@ -52,10 +52,10 @@ function DisrecommendButton({inVideoList, videoID, username, disrecommended, dis
     }
 
     return (
-        <div>
-            <S.Recommend on={disrecommended} onClick={toggleRecommend}/>
-            {disrecCount}
-        </div>
+        <S.DisrecommendWrapper>
+            <S.Disrecommend on={disrecommended} onClick={toggleRecommend}/>
+            <span> {disrecCount} </span>
+        </S.DisrecommendWrapper>
     );
 }
 
