@@ -33,7 +33,7 @@
 		    resultType="com.SOOKTUBE.model.VideoListDTO">
     		
 			SELECT 
-			     `listID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`, `copied`
+			     `listID`, `listName`, `listDesc`, `username`, `isPublic`, `thumbnail`, `copied`, `like`
 			FROM listInfo
 			
     		ORDER BY
@@ -47,6 +47,13 @@
 
         		</choose>
        		DESC
+       		<choose>
+       		
+       			<when test="order == 'like'">
+       				, `listID`
+       				DESC
+       			</when>
+       		</choose>
     		
     		<if test='limit != null and offset != null'>
     		LIMIT #{limit} OFFSET #{offset}
@@ -86,6 +93,13 @@
 
         		</choose>
        		DESC
+       		<choose>
+       		
+       			<when test="order == 'like'">
+       				, `listID`
+       				DESC
+       			</when>
+       		</choose>
     		
     		<if test='limit != null and offset != null'>
     		LIMIT #{limit} OFFSET #{offset}
@@ -195,6 +209,13 @@
 	
 	        		</choose>
 	       		DESC
+	       		<choose>
+	       		
+	       			<when test="order == 'like'">
+	       				, `listID`
+	       				DESC
+	       			</when>
+	       		</choose>
 	    		
 	    		<if test='limit != null and offset != null'>
 	    		LIMIT #{limit} OFFSET #{offset}
