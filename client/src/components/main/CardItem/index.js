@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { memo } from 'react';
 import * as S from "./style";
 import { Link } from 'react-router-dom'
 import {IoIosHeart} from "react-icons/all";
@@ -26,4 +26,4 @@ function CardItem({listID, listName, listDesc, src, like}) {
     );
 }
 
-export default CardItem;
+export default memo(CardItem);

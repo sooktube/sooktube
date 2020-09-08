@@ -16,6 +16,8 @@ import UpdatePlaylist from "./pages/UploadPlaylist/UpdatePlaylist";
 import Mypage from './pages/User';
 import Search from "./components/base/search";
 import CopyPlaylist from "./pages/UploadPlaylist/CopyPlaylist";
+import FallbackCardList from "./components/main/FallbackCardList";
+import FallbackPlaylistCard from "./components/playlist/FallbackPlaylistCard";
 
 function App() {
     return (
@@ -39,6 +41,7 @@ function App() {
                 <Route path='/search/:type' component={Search}/>
                 <Route exact path='/@:username' component={Mypage}/>
                 <PrivateRoute path='/copy/playlist/:listID' component={CopyPlaylist}/>
+                <Route exact path="/fallback" component={FallbackPlaylistCard}/>
                 <Redirect from="*" to="/" />
             </Switch>
             </GlobalLayoutStyle>

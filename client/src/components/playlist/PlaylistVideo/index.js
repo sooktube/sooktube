@@ -17,6 +17,7 @@ function PlaylistVideo({ listID }) {
     useEffect(() => {
         playlistService.getGTEQ5VideoList({listID, current_username, orderBy:'like',limit: 10,offset:0}) 
             .then(response => {
+                console.log(response);
                 setVideoList(response);
                 setLoading(false);
             })
@@ -34,7 +35,10 @@ function PlaylistVideo({ listID }) {
                 {!loading &&
                     <>
                     { videoList.length === 0 && <S.IsVideo> 재생목록이 비어있군요🤔 </S.IsVideo>}
-                    <VideoList username={username} listID={listID} playlist={1} videoList={videoList}/>
+                    <VideoList username={username}
+                               listID={listID}
+                               playlist={1}
+                               videoList={videoList}/>
                     </>
                  }
         </S.PlaylistVideoWrapper>

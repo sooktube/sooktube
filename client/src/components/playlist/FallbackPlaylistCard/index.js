@@ -1,12 +1,13 @@
 import React, { memo } from 'react';
 import { Skeleton } from "@material-ui/lab";
 import * as S from './style';
+import {MAIN} from "../../style/Main";
 
-const FallbackItem = () => {
+function FallbackPlaylistCard() {
     return (
         <S.CardWrapper>
-            <Skeleton width={'200px'}
-                      height={'200px'}
+            <Skeleton width={'50%'}
+                      height={'100%'}
                       variant="rect"
                       style={{
                           margin: 0,
@@ -16,17 +17,16 @@ const FallbackItem = () => {
                       height={'18px'}
                       variant="text"
                       style={{
-                          margin: '5px 0 0 5px'
+                          marginRight: "25%"
                       }}/>
-            <Skeleton width={'22px'}
-                      height={'22px'}
-                      variant="circle"
+            <Skeleton width={'50%'}
+                      height={'16px'}
+                      variant="text"
                       style={{
-                          float: 'right',
-                          marginRight: '5px'
+                          margin: '3em 0 0.5em 0'
                       }}/>
         </S.CardWrapper>
     );
-};
+}
 
-export default memo(FallbackItem);
+export default memo(FallbackPlaylistCard);

@@ -14,9 +14,8 @@ export const PlaylistVideoWrapper = styled.div`
 
 export const IsVideo = styled.div`
 	color: ${MAIN.DARK_TEXT_COLOR};
+	font-size: 18px;
 	position: relative;
-	font-size: 1.3rem;
-	width: inherit;
-	top:7%;
+	top: 40%;
 	text-align: center;
 `;
