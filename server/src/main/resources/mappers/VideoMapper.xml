@@ -50,6 +50,12 @@
 
         		</choose>
        		DESC
+       			<choose>
+       				<when test="order == 'like'">
+       					, `videoDate`
+       					DESC
+       				</when>
+       			</choose>
     		
     		<if test='limit != null and offset != null'>
     		LIMIT #{limit} OFFSET #{offset}
@@ -108,6 +114,12 @@
 
         		</choose>
        		DESC
+       			<choose>
+       				<when test="order == 'like'">
+       					, `videoDate`
+       					DESC
+       				</when>
+       			</choose>       		
     		
     		<if test='limit != null and offset != null'>
     		LIMIT #{limit} OFFSET #{offset}
@@ -140,6 +152,12 @@
 
         		</choose>
        		DESC
+       			<choose>
+       				<when test="order == 'like'">
+       					, `videoDate`
+       					DESC
+       				</when>
+       			</choose>
     		
     		<if test='limit != null and offset != null'>
     		LIMIT #{limit} OFFSET #{offset}
@@ -173,6 +191,12 @@
 
         		</choose>
        		DESC
+       			<choose>
+       				<when test="order == 'like'">
+       					, `videoDate`
+       					DESC
+       				</when>
+       			</choose>       		
     		
     		<if test='limit != null and offset != null'>
     		LIMIT #{limit} OFFSET #{offset}
@@ -241,6 +265,12 @@
 	
 	        		</choose>
 	       		DESC
+       			<choose>
+       				<when test="order == 'like'">
+       					, `videoDate`
+       					DESC
+       				</when>
+       			</choose>	       		
 	    		
 	    		<if test='limit != null and offset != null'>
 	    		LIMIT #{limit} OFFSET #{offset}
@@ -272,6 +302,12 @@
 	
 	        		</choose>
 	       		DESC
+       			<choose>
+       				<when test="order == 'like'">
+       					, `videoDate`
+       					DESC
+       				</when>
+       			</choose>	       		
 	    		
 	    		<if test='limit != null and offset != null'>
 	    		LIMIT #{limit} OFFSET #{offset}
