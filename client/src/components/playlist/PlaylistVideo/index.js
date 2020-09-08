@@ -3,10 +3,10 @@ import * as S from './style';
 import VideoList from "../VideoList";
 import RecommendVideoButton from "../RecommendVideoButton";
 import {playlistService} from "../../../services";
-import {useSelector,useDispatch} from "react-redux";
+import { useSelector } from "react-redux";
 
 function PlaylistVideo({ listID }) {
-    const current_username = useSelector(state => state.authentication.username);
+    const currentUsername = useSelector(state => state.authentication.username);
 
     const [videoList, setVideoList] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -15,13 +15,12 @@ function PlaylistVideo({ listID }) {
     const [copied, setCopied] = useState(0);
 
     useEffect(() => {
-        playlistService.getGTEQ5VideoList({listID, current_username, orderBy:'like',limit: 10,offset:0}) 
+        playlistService.getGTEQ5VideoList({listID, username: currentUsername, orderBy:'like',limit: 10,offset:0})
             .then(response => {
-                console.log(response);
                 setVideoList(response);
                 setLoading(false);
             })
-        playlistService.getPlaylistInfoByListID(listID, current_username)
+        playlistService.getPlaylistInfoByListID(listID, currentUsername)
             .then(response => {
                 setIsPublic(response.isPublic);
                 setUsername(response.username);
@@ -34,7 +33,7 @@ function PlaylistVideo({ listID }) {
             <RecommendVideoButton listID={listID} isPublic={ispublic} username={username} copied={copied}/>
                 {!loading &&
                     <>
-                    { videoList.length === 0 && <S.IsVideo> 재생목록이 비어있군요🤔 </S.IsVideo>}
+                    {videoList.length === 0 && <S.IsVideo> 재생목록이 비어있군요🤔 </S.IsVideo>}
                     <VideoList username={username}
                                listID={listID}
                                playlist={1}

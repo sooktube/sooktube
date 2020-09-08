@@ -10,23 +10,58 @@ function FallbackPlaylistCard() {
                       height={'100%'}
                       variant="rect"
                       style={{
-                          margin: 0,
-                          padding: 0
+                          display: 'inline-block',
                       }}/>
-            <Skeleton width={'100px'}
-                      height={'18px'}
+            <Skeleton width={'30%'}
+                      height={'24px'}
                       variant="text"
                       style={{
-                          marginRight: "25%"
+                          position: 'relative',
+                          top: '-80%',
+                          left: '60%'
                       }}/>
-            <Skeleton width={'50%'}
+            <Skeleton width={'45%'}
                       height={'16px'}
                       variant="text"
                       style={{
-                          margin: '3em 0 0.5em 0'
+                          position: 'relative',
+                          top: '-70%',
+                          left: '53%'
+                      }}/>
+            <Skeleton width={'45%'}
+                      height={'16px'}
+                      variant="text"
+                      style={{
+                          position: 'relative',
+                          top: '-70%',
+                          left: '53%'
+                      }}/>
+            <Skeleton width={'35%'}
+                      height={'16px'}
+                      variant="text"
+                      style={{
+                          position: 'relative',
+                          top: '-70%',
+                          left: '53%'
+                      }}/>
+            <Skeleton width={'25%'}
+                      height={'24px'}
+                      variant="text"
+                      style={{
+                          position: 'relative',
+                          top: '-35%',
+                          left: '53%'
+                      }}/>
+            <Skeleton width={'10%'}
+                      height={'10%'}
+                      variant="circle"
+                      style={{
+                          position: 'relative',
+                          top: '-45%',
+                          left: '88%'
                       }}/>
         </S.CardWrapper>
     );
 }
 
-export default memo(FallbackPlaylistCard);
+export default FallbackPlaylistCard;

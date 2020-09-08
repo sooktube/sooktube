@@ -6,6 +6,7 @@ import dummy_card_image from '../../../../public/images/dummy_card_img.jpg';
 import LikePlaylistButton from "./LikePlaylistButton";
 import useDropdownOutsideClick from "../../../hooks/useDropdownOutsideClick";
 import {history} from "../../../helpers";
+import FallbackPlaylistCard from "../FallbackPlaylistCard";
 
 function PlaylistCard({ listID }) {
     const username = useSelector(state => state.authentication.username);
@@ -70,8 +71,9 @@ function PlaylistCard({ listID }) {
 
     return (
         <>
-        {!loading &&
-        <S.CardWrapper>
+        {loading
+        ? <FallbackPlaylistCard/>
+        : <S.CardWrapper>
             {thumbnailImgURL
                 ? <S.CardImage src={thumbnailImgURL} alt="card_thumbnail"/>
                 : <S.CardImage src={dummy_card_image} alt="no_image"/>
