@@ -2,7 +2,8 @@ import React from 'react';
 import * as S from './style';
 import { Skeleton } from "@material-ui/lab";
 
-function FallbackItem() {
+function FallbackItem({ marginLeft }) {
+    console.log(marginLeft);
     return (
       <S.Wrapper>
           <Skeleton width={'150px'}
@@ -22,8 +23,8 @@ function FallbackItem() {
                         height={'1em'}
                         variant={'text'}
                         style={{
-                            marginTop: '3em',
-                            marginLeft: '-3em',
+                            marginTop: '3.5em',
+                            marginLeft: `${marginLeft}em`,
                             display: 'inline-block'
                         }}
               />
@@ -31,7 +32,7 @@ function FallbackItem() {
                         height={'1em'}
                         variant={'text'}
                         style={{
-                            marginTop: '3em',
+                            marginTop: '3.5em',
                             marginLeft: '1em',
                             display: 'inline-block'
                         }}

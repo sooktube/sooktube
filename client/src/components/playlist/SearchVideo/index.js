@@ -47,7 +47,7 @@ function SearchVideo({listID}) {
             </S.SearchComment>
             {!keyword && <RecommendVideoList listID={listID} username={username}/>}
             {keyword && loading &&
-                <FallbackVideoList/>
+                <FallbackVideoList marginLeft={-3}/>
             }
             {keyword && !loading && searchResult &&
                 <VideoList videoList={searchResult} checkplaylist={1}/>

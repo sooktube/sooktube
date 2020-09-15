@@ -1,13 +1,14 @@
 import React from 'react';
 import FallbackItem from "./FallbackItem";
 
-function FallbackVideoList() {
+function FallbackVideoList({ marginLeft }) {
   return (
       <>
-        {Array(3)
+        {Array(5)
             .fill()
             .map(() => (
-                <FallbackItem key={Math.floor(Math.random() * 100000) + "Fallback"}/>
+                <FallbackItem key={Math.floor(Math.random() * 100000) + "Fallback"}
+                              marginLeft={marginLeft}/>
             ))}
       </>
   );

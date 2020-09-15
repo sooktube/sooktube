@@ -26,7 +26,7 @@ function RecommendVideoList({listID, username}) {
                 color: `${MAIN.DARK_TEXT_COLOR}`
             }}> 다른 사용자들은 이런 영상이 추가되길 원해요🤗 </div>
             {loading
-              ? <FallbackVideoList/>
+              ? <FallbackVideoList marginLeft={-3}/>
               : <Fragment>
                     {videoList && videoList.length > 0 && <VideoList videoList={videoList}/>}
                 </Fragment>
