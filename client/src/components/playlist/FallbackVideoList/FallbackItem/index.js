@@ -3,7 +3,6 @@ import * as S from './style';
 import { Skeleton } from "@material-ui/lab";
 
 function FallbackItem({ marginLeft }) {
-    console.log(marginLeft);
     return (
       <S.Wrapper>
           <Skeleton width={'150px'}

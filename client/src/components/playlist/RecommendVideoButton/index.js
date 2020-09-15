@@ -12,6 +12,7 @@ function RecommendVideoButton({listID, isPublic, username, copied}) {
     const openModal = () => {
         setModalVisible(true)
     };
+
     const closeModal = () => {
         setModalVisible(false)
     };
@@ -19,21 +20,22 @@ function RecommendVideoButton({listID, isPublic, username, copied}) {
     function copyPlaylist(){
         history.push(`/copy/playlist/${listID}`);
     }
+
     return (
         <S.AddVideoButtonWrapper>
-            { (isPublic === 1 || current_username === username) && 
-            <S.PlusButton onClick={openModal}/>}
+            {(isPublic === 1 || current_username === username) &&
+                <S.PlusButton onClick={openModal}/>}
             {modalVisible &&
-            <Modal visible={modalVisible}
-                   onClose={closeModal}
-                   width="700px">
-                <SearchVideo listID={listID}/>
-            </Modal>
+                <Modal visible={modalVisible}
+                       onClose={closeModal}
+                       width="700px">
+                    <SearchVideo listID={listID}/>
+                </Modal>
             }
-            { (isPublic === 1 || current_username === username) &&
+            {(isPublic === 1 || current_username === username) &&
                 <>
-                <S.AddVideoComment> 재생목록에 추가하고 싶은 영상이 있나요? </S.AddVideoComment>
-                {( copied===0 ) && <S.CopyButton onClick={copyPlaylist}>PLAYLIST COPY</S.CopyButton>}
+                    <S.AddVideoComment> 재생목록에 추가하고 싶은 영상이 있나요? </S.AddVideoComment>
+                    {copied === 0  && <S.CopyButton onClick={copyPlaylist}>PLAYLIST COPY</S.CopyButton>}
                 </>
             }
         </S.AddVideoButtonWrapper>
