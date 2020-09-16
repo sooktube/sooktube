@@ -6,7 +6,7 @@ import FallbackVideoList from "../../playlist/FallbackVideoList";
 
 const VideoListItem = lazy(() => import("./VideoListItem"));
 
-function VideoList({ action, items, hasMoreItems, showFallbackItems, offset, marginLeft, checkplaylist, username, listID, playlist }) {
+function VideoList({ initAction, action, items, hasMoreItems, showFallbackItems, offset, marginLeft, checkplaylist, username, listID, playlist }) {
     const dispatch = useDispatch();
 
     const [opts, setOpts] = useState({
@@ -21,9 +21,9 @@ function VideoList({ action, items, hasMoreItems, showFallbackItems, offset, mar
         setOpts({...opts, offset})
     }, [offset])
 
-    useEffect(() => {
-        dispatch(action(opts));
-    }, []);
+    useEffect( () => {
+        dispatch(initAction(opts));
+    }, [listID]);
 
     useInfiniteScroll({
         items,

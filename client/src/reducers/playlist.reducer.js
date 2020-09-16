@@ -49,6 +49,13 @@ export function playlist(state = initialState, action) {
         draft.showFallbackRecentPlaylists = false;
         break;
       }
+      case playlistConstants.LOAD_PLAYLIST_VIDEO_INIT: {
+        draft.showFallbackVideos = true;
+        draft.hasMoreVideos = true;
+        draft.videos.length = 0;
+        draft.videoOffset = 0;
+        break;
+      }
       case playlistConstants.LOAD_PLAYLIST_VIDEO_REQUEST: {
         draft.showFallbackVideos = true;
         break;

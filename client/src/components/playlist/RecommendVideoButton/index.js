@@ -23,6 +23,7 @@ function RecommendVideoButton({listID, isPublic, username, copied}) {
 
     return (
         <S.AddVideoButtonWrapper>
+            {isPublic}
             {(isPublic === 1 || current_username === username) &&
                 <S.PlusButton onClick={openModal}/>}
             {modalVisible &&

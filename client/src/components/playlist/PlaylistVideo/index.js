@@ -28,7 +28,7 @@ function PlaylistVideo({ listID }) {
                 setCopied(response.copied);
                 setLoading(false);
             })
-    },[])
+    },[listID])
 
     return (
         <S.PlaylistVideoWrapper>
@@ -42,6 +42,7 @@ function PlaylistVideo({ listID }) {
                        listID={listID}
                        playlist={1}
                        action={playlistActions.loadPlaylistVideos}
+                       initAction={playlistActions.initPlaylistVideos}
                        items={items}
                        hasMoreItems={hasMoreItems}
                        showFallbackItems={showFallbackItems}
