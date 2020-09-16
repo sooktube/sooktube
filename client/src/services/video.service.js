@@ -7,11 +7,9 @@ export const videoService = {
     UploadVideoInfo,
     getVideoFileByFileName,
     getVideoInfoByVideoID,
-    getVideoListByUsername,
     deleteVideoByVideoID,
     updateVideoByVideoID,
     getLikeCountByVideoID,
-    getVideoLikedByUsername,
     likeVideo,
     cancelLikeVideo,
     dislikeVideo,
@@ -91,7 +89,6 @@ function getVideoFileByFileName(uploadFileName) {
         })
 }
 
-
 function getVideoInfoByVideoID(videoID, username) {
     return axios({
         method: 'GET',
@@ -103,19 +100,6 @@ function getVideoInfoByVideoID(videoID, username) {
         .catch(error => {
             return error;
         })
-}
-
-function getVideoListByUsername({username, orderBy, limit, offset}) {
-    return axios({
-        method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/desc/url/user/${username}/newest?limit=100&offset=0`,
-    })
-      .then(response => {
-          return response.data;
-      })
-      .catch(error => {
-          return null;
-      })
 }
 
 function deleteVideoByVideoID(videoID) {
@@ -159,19 +143,6 @@ function getLikeCountByVideoID(videoID) {
         .catch(error => {
             return error;
         })
-}
-
-function getVideoLikedByUsername(username) {
-    return axios({
-        method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/liked/video/byUsername/${username}`,
-    })
-      .then(response => {
-          return response.data;
-      })
-      .catch(error => {
-          return null;
-      })
 }
 
 function likeVideo({videoID, username}) {

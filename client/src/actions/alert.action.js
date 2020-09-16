@@ -1,6 +1,6 @@
 import { alertConstants } from '../constants';
 
-export const alertActions = {
+export const alertAction = {
     success,
     error,
     clear

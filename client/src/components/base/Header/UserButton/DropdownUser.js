@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import * as S from './style';
 import useDropdownOutsideClick from "../../../../hooks/useDropdownOutsideClick";
-import {userService} from "../../../../services";
+import {authService} from "../../../../services";
 import {history} from "../../../../helpers";
 
 function DropdownUser({username}) {
@@ -15,7 +15,7 @@ function DropdownUser({username}) {
     useDropdownOutsideClick(contentRef, setUserDropdownVisible);
 
     function handleClick() {
-        userService.logout();
+        authService.logout();
         history.push('/');
     }
 
