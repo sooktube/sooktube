@@ -10,7 +10,7 @@ export const AddVideoButtonWrapper = styled.div`
 export const IsPublicComment = styled.div`
     font-size: 1em;
     color: grey;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
 `
 export const AddVideoComment = styled.span`
     color: ${MAIN.DARK_TEXT_COLOR};
