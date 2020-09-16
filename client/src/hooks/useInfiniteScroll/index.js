@@ -8,7 +8,8 @@ function useInfiniteScroll({items, hasMoreItems, ratio, action}) {
     const loadItems = useCallback(() => {
         const { clientHeight, scrollHeight } = document.documentElement;
         const minusClientHeight = scrollHeight - clientHeight; // 스크롤 높이 - 브라우저 높이(보여지는 부분)
-        const scrollRatio = window.scrollY / minusClientHeight; // 현재 스크롤 비율을 소수점 단위로 계산(0 ~ 0.5 ~ 1)
+
+        const scrollRatio =  window.scrollY / minusClientHeight; // 현재 스크롤 비율을 소수점 단위로 계산(0 ~ 0.5 ~ 1)
 
         if (scrollRatio > ratio && hasMoreItems) {
             // 스크롤링으로 가져온 게시물 중 마지막 게시물이 lastItems 배열에 포함되어 있는지 확인

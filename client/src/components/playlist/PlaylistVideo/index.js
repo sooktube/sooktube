@@ -44,6 +44,7 @@ function PlaylistVideo({ listID }) {
                                action={playlistActions.loadPlaylistVideos}
                                initAction={playlistActions.initPlaylistVideos}
                                items={items}
+                               limit={5}
                                hasMoreItems={hasMoreItems}
                                showFallbackItems={showFallbackItems}
                                offset={offset}

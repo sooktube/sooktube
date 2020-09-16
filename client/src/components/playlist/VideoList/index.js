@@ -6,14 +6,14 @@ import FallbackVideoList from "../../playlist/FallbackVideoList";
 
 const VideoListItem = lazy(() => import("./VideoListItem"));
 
-function VideoList({ initAction, action, items, hasMoreItems, showFallbackItems, offset, marginLeft, checkplaylist, username, listID, playlist, isPublic }) {
+function VideoList({ initAction, action, items, hasMoreItems, showFallbackItems, offset, limit, marginLeft, checkplaylist, username, listID, playlist, isPublic }) {
     const dispatch = useDispatch();
 
     const [opts, setOpts] = useState({
         listID,
         username,
         orderBy: "newest",
-        limit: 5,
+        limit,
         offset: offset
     })
 

@@ -26,6 +26,7 @@ function RecommendVideoList({listID, username}) {
                        hasMoreItems={hasMoreRecVideos}
                        showFallbackItems={showFallbackRecVideos}
                        offset={recOffset}
+                       limit={20}
                        marginLeft={-3}
                        checkplaylist={0}
                        username={username}

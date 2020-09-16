@@ -8,7 +8,6 @@ export const playlistService ={
     UploadPlaylistInfo,
     getPlaylistInfoByListID,
     getVideoListByListID,
-    searchVideoByTitle,
     getGTEQ0LT5VideoList,
     getGTEQ5VideoList,
     recommendVideoInPlaylist,
@@ -122,19 +121,6 @@ function getVideoListByListID(listID) {
         })
         .catch(error => {
             return error;
-        })
-}
-
-function searchVideoByTitle({keyword, listID, username, orderBy, limit, offset}) {
-    return axios({
-        method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/search/title/${keyword}/listID/${listID}/user/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
-    })
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            return null;
         })
 }
 

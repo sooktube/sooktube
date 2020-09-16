@@ -1,34 +1,52 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {useCallback, useEffect, useState, lazy, Suspense, Fragment, createRef} from 'react';
 import * as S from './style';
 import debounce from 'lodash.debounce';
-import { playlistService } from "../../../services";
-import VideoList from "../VideoList";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { searchActions } from "../../../actions/search.action";
 import RecommendVideoList from "../RecommendVideoList";
 import FallbackVideoList from "../FallbackVideoList";
+import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
+const VideoListItem = lazy(() => import("../VideoList/VideoListItem"));
 
 function SearchVideo({listID}) {
+    const dispatch = useDispatch();
     const [keyword, setKeyword] = useState('');
-    const [searchResult, setSearchResult] = useState(null);
-    const [loading, setLoading] = useState(true);
     const username = useSelector(state => state.authentication.username);
+
+    const result = useSelector(state => state.search.searchVideos);
+    const hasMoreResults = useSelector(state => state.search.hasMoreSearchVideos);
+    const showFallbackItems = useSelector(state => state.search.showFallbackSearchVideos);
+    const offset = useSelector(state => state.search.searchOffset);
+
+    const [opts, setOpts] = useState({
+        listID,
+        username,
+        orderBy: "like",
+        limit: 20,
+        offset: offset
+    })
+
+    useEffect(() => {
+        setOpts({...opts, offset})
+    }, [offset]);
+
+    useInfiniteScroll({
+        items: result,
+        hasMoreItems: hasMoreResults,
+        ratio: 0.6,
+        action: searchActions.searchVideos({keyword, ...opts})
+    });
 
     function handleChange(e) {
         const { value } = e.target;
-        setLoading(true);
         setKeyword(value);
     }
 
     const updateSearch = useCallback(() => {
         if(keyword) {
-            playlistService.searchVideoByTitle({keyword, listID, username, orderBy:'like',limit:'10',offset:0})
-                .then(response => {
-                    setSearchResult(response);
-                    setLoading(false);
-                })
+            dispatch(searchActions.initSearchVideos({keyword, ...opts}));
         }
-    }, [keyword])
+    }, [listID, keyword])
 
     const delayedSearch = useCallback(debounce(updateSearch, 500),[keyword]);
 
@@ -36,8 +54,6 @@ function SearchVideo({listID}) {
         delayedSearch();
         return delayedSearch.cancel;
     }, [keyword])
-
-    //initAction, action, items, hasMoreItems, showFallbackItems, offset, marginLeft, checkplaylist, username, listID, playlist, isPublic
 
     return (
         <S.SearchVideoWrapper>
@@ -49,14 +65,33 @@ function SearchVideo({listID}) {
                 <div> 재생목록에 추가하고 싶은 영상은 <S.Like/>, 추가하고 싶지 않은 영상은 <S.Dislike/>을 눌러주세요. <br/> </div>
             </S.SearchComment>
             {!keyword && <RecommendVideoList listID={listID} username={username}/>}
-            {keyword && loading &&
-                <FallbackVideoList marginLeft={-3}/>
-            }
-            {keyword && !loading && searchResult &&
-                <VideoList videoList={searchResult} checkplaylist={1}/>
-            }
-            {keyword && !loading && (!searchResult || searchResult.length === 0) &&
-                <S.InvalidSearchFeedback> 검색 결과가 없습니다. </S.InvalidSearchFeedback>
+            <Suspense fallback="">
+                {keyword && !showFallbackItems && result.length === 0
+                    ? <S.InvalidSearchFeedback> 검색 결과가 없습니다. </S.InvalidSearchFeedback>
+                    : <Fragment>
+                        {result.map(result =>
+                            <VideoListItem key={result.videoID}
+                                           checkplaylist={1}
+                                           videoID={result.videoID}
+                                           url={result.videoPath}
+                                           title={result.videoTitle}
+                                           username={result.username}
+                                           date={result.videoDate.substr(0, 10)}
+                                           recommended={result.recommended}
+                                           disrecommended={result.disrecommended}
+                                           recCount={result.recCount}
+                                           disrecCount={result.disrecCount}
+                                           inVideoList={result.inVideoList}
+                                           listUsername={username}
+                                           listID={listID}
+                                           isPublic={1}
+                                           playlist={0}/>
+                        )}
+                    </Fragment>
+                }
+            </Suspense>
+            {keyword && showFallbackItems &&
+            <FallbackVideoList marginLeft={-3}/>
             }
         </S.SearchVideoWrapper>
     );
