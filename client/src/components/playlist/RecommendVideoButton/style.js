@@ -10,7 +10,7 @@ export const AddVideoButtonWrapper = styled.div`
 export const IsPublicComment = styled.div`
     font-size: 1em;
     color: grey;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 `
 export const AddVideoComment = styled.span`
     color: ${MAIN.DARK_TEXT_COLOR};
@@ -22,7 +22,6 @@ export const AddVideoComment = styled.span`
 
 export const CopyButton = styled.button`
     float:right;
-    background:transparent;
     margin-right:1.7em;
     font-size: 1rem;
     font-weight:500;

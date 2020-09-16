@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import * as S from './style';
 import VideoList from "../VideoList";
 import RecommendVideoButton from "../RecommendVideoButton";
@@ -33,21 +33,24 @@ function PlaylistVideo({ listID }) {
     return (
         <S.PlaylistVideoWrapper>
             {!loading &&
-                <RecommendVideoButton listID={listID}
-                                      isPublic={isPublic}
-                                      username={username}
-                                      copied={copied}/>
+                <Fragment>
+                    <RecommendVideoButton listID={listID}
+                                          isPublic={isPublic}
+                                          username={username}
+                                          copied={copied}/>
+                    <VideoList username={username}
+                               listID={listID}
+                               playlist={1}
+                               action={playlistActions.loadPlaylistVideos}
+                               initAction={playlistActions.initPlaylistVideos}
+                               items={items}
+                               hasMoreItems={hasMoreItems}
+                               showFallbackItems={showFallbackItems}
+                               offset={offset}
+                               isPublic={isPublic}
+                               marginLeft={0}/>
+                </Fragment>
             }
-            <VideoList username={currentUsername}
-                       listID={listID}
-                       playlist={1}
-                       action={playlistActions.loadPlaylistVideos}
-                       initAction={playlistActions.initPlaylistVideos}
-                       items={items}
-                       hasMoreItems={hasMoreItems}
-                       showFallbackItems={showFallbackItems}
-                       offset={offset}
-                       marginLeft={0}/>
         </S.PlaylistVideoWrapper>
     );
 }
