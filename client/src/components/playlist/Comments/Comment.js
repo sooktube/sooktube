@@ -94,10 +94,11 @@ function Comment({listID, commentID, length, index, username, userComment, profi
             <S.TextBox>
                 <S.Username>{username}</S.Username>
                 <S.Text>{userComment}</S.Text>
-            <S.ReplyButton onClick={ReplyClick}>REPLY {commentCount}</S.ReplyButton>
+            <S.ReplyButton onClick={ReplyClick}>
+                <S.ArrowDropdown/> REPLY {commentCount}
+            </S.ReplyButton>
                 {reply && <CommentReplyList userPic ={userPic} listID={listID} commentID={commentID}/>}
             </S.TextBox>}
-            
             {(currentUsername === username) && edit && <S.DotIcon onClick={toggleDropdown}/> }
             {!edit && <S.EditInput value={comment} onChange={handleChange}/>}
             {!edit && <S.SaveButton onClick={SaveEdit}/>}

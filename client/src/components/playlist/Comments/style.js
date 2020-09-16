@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {MAIN} from "../../style/Main";
-import {RiChatUploadLine,BsThreeDotsVertical} from "react-icons/all";
+import {RiChatUploadLine, BsThreeDotsVertical, IoMdArrowDropdown} from "react-icons/all";
 
 export const CommentBox = styled.div`
     width:100%;
@@ -16,15 +16,12 @@ export const CommentBox = styled.div`
 
 export const CommentTitle = styled.div`
     position:static;
-    font-size:2.6vh;
+    font-size: 1.1em;
     font-weight:bold;
     margin-top:1.4em;
     margin-left:1em;
     margin-bottom:1em;
-    
 `;
-
-
 
 export const AddCommentWrapper = styled.div`
     height: 3rem;
@@ -44,8 +41,8 @@ export const UserProfile = styled.img`
 `;
 
 export const TextInput = styled.input`
-    font-size:2.5vh;
-    padding-bottom: 0.3em;
+    font-size: 12px;
+    padding-bottom: 0.2em;
     width: 90%;
     margin-left: 1em;
     border-top-style: hidden;
@@ -104,14 +101,14 @@ export const Username = styled.div`
 
 export const Text = styled.div`
     color:black;
-    font-size:2.5vh;
+    font-size: 12px;
 `;
 
 export const ReplyButton = styled.button`
     display:block;
     margin-top:1em;
-    font-size:2.4vh;
-    font-weight:550;
+    font-size: 12px;
+    font-weight: 550;
     color: ${MAIN.BASE_COLOR};
     background:transparent;
     &:focus{
@@ -168,7 +165,7 @@ export const CreateDropdownContent = styled.div`
 
 export const EditButton = styled.button`
     padding: 1em 2em 1em 2em;
-    font-size: 1.8vh;
+    font-size: 12px;
     font-weight:400;
     color:#495057;
     background-color:white;
@@ -222,5 +219,10 @@ export const ReplySubmit = styled(RiChatUploadLine)`
       cursor:pointer;
       color:${MAIN.BASE_COLOR};
     }
+`;
+
+export const ArrowDropdown = styled(IoMdArrowDropdown)`
+    width: 1.5em;
+    height: 1.7em;
 `;
 
