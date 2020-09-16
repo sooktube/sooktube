@@ -4,6 +4,7 @@ import debounce from 'lodash.debounce';
 import { playlistService } from "../../../services";
 import VideoList from "../VideoList";
 import { useSelector } from "react-redux";
+import { searchActions } from "../../../actions/search.action";
 import RecommendVideoList from "../RecommendVideoList";
 import FallbackVideoList from "../FallbackVideoList";
 
@@ -35,6 +36,8 @@ function SearchVideo({listID}) {
         delayedSearch();
         return delayedSearch.cancel;
     }, [keyword])
+
+    //initAction, action, items, hasMoreItems, showFallbackItems, offset, marginLeft, checkplaylist, username, listID, playlist, isPublic
 
     return (
         <S.SearchVideoWrapper>

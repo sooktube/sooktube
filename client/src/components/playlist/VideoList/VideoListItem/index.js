@@ -19,7 +19,7 @@ function VideoListItem({inVideoList, checkplaylist, videoID, url, title, usernam
             window.location.replace(`/playlist/${listID}`);
         })
     }
-    console.log(listUsername, currentUsername);
+
     return(
         <S.VideoWrapper>
             <S.Video src={url} onClick={handleClick}/>
@@ -38,12 +38,12 @@ function VideoListItem({inVideoList, checkplaylist, videoID, url, title, usernam
             </S.VideoInfo>
             <S.VideoLike>
                 {isPublic === 1 && <RecommendVideo videoID={videoID}
-                                             inVideoList={checkplaylist ? inVideoList : 1}
-                                             username={username}
-                                             recommended={recommended}
-                                             recCount={recCount}
-                                             disrecommended={disrecommended}
-                                             disrecCount={disrecCount}/>}
+                                                   inVideoList={checkplaylist ? inVideoList : 1}
+                                                   username={username}
+                                                   recommended={recommended}
+                                                   recCount={recCount}
+                                                   disrecommended={disrecommended}
+                                                   disrecCount={disrecCount}/>}
             </S.VideoLike>
         </S.VideoWrapper>
     );

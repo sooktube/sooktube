@@ -152,7 +152,6 @@ function getGTEQ0LT5VideoList({listID, username, orderBy, limit, offset}) {
 }
 
 function getGTEQ5VideoList({listID, username, orderBy, limit, offset}) {
-    console.log(listID, username, orderBy, limit, offset);
     return axios({
         method: 'GET',
         url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/5/${listID}/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
