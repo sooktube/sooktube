@@ -23,7 +23,9 @@ function RecommendVideoButton({listID, isPublic, username, copied}) {
 
     return (
         <S.AddVideoButtonWrapper>
-            {isPublic}
+            {isPublic === 0 &&
+                <S.IsPublicComment> 이 재생목록은 제작자 외에는 수정할 수 없습니다. </S.IsPublicComment>
+            }
             {(isPublic === 1 || current_username === username) &&
                 <S.PlusButton onClick={openModal}/>}
             {modalVisible &&
