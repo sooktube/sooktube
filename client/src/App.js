@@ -13,10 +13,9 @@ import StyleReset from "./components/style/StyleReset";
 import Playlist from "./pages/Playlist";
 import UpdateVideo from "./pages/UploadVideo/UpdateVideo";
 import UpdatePlaylist from "./pages/UploadPlaylist/UpdatePlaylist";
-import Mypage from './pages/User';
+import MyPage from './pages/User';
 import Search from "./components/base/search";
 import CopyPlaylist from "./pages/UploadPlaylist/CopyPlaylist";
-import FallbackPlaylistCard from "./components/playlist/FallbackPlaylistCard";
 
 function App() {
     return (
@@ -30,17 +29,17 @@ function App() {
                 <Route exact path='/' component={Main}/>
                 <Route path='/recent' component={Main}/>
                 <Route path='/register' component={Register}/>
+                <Route path='/search/:type' component={Search}/>
                 <PrivateRoute path='/create/playlist' component={CreatePlaylist}/>
                 <PrivateRoute path='/create/video' component={CreateVideo}/>
                 <Route path='/playlist/:listID' component={Playlist}/>
                 <Route exact path='/@:username/video/:videoID' component={Player}/>
                 <Route path='/@:username/video/:videoID/:tab' component={Player}/>
-                <Route path='/@:username/video/:videoID/update' component={UpdateVideo}/>
-                <Route path='/@:username/playlist/update/:listID' component={UpdatePlaylist}/>
-                <Route path='/search/:type' component={Search}/>
-                <Route exact path='/@:username' component={Mypage}/>
+                <PrivateRoute path='/@:username/video/:videoID/update' component={UpdateVideo}/>
+                <PrivateRoute path='/@:username/playlist/update/:listID' component={UpdatePlaylist}/>
                 <PrivateRoute path='/copy/playlist/:listID' component={CopyPlaylist}/>
-                <Route exact path="/fallback" component={FallbackPlaylistCard}/>
+                <Route exact path='/@:username' component={MyPage}/>
+                <Route path='/@:username/:tab' component={MyPage}/>
                 <Redirect from="*" to="/" />
             </Switch>
             </GlobalLayoutStyle>

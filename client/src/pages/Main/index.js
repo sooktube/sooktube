@@ -11,15 +11,17 @@ function Main() {
     return (
         <>
             <Header/>
-            <MainTabs tab={location}/>
-            <Switch>
-                <Route exact path="/">
-                    <TrendingPlaylist/>
-                </Route>
-                <Route path="/recent">
-                    <RecentPlaylist/>
-                </Route>
-            </Switch>
+            <main>
+                <MainTabs tab={location}/>
+                <Switch>
+                    <Route exact path="/">
+                        <TrendingPlaylist/>
+                    </Route>
+                    <Route path="/recent">
+                        <RecentPlaylist/>
+                    </Route>
+                </Switch>
+            </main>
         </>
     )
 }
