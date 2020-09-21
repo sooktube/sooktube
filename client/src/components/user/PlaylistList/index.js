@@ -22,10 +22,10 @@ function PlaylistList({ action, total, items, showFallbackItems, username, order
     }, [username, orderBy])
 
     useEffect(() => {
-        dispatch(action({offset: 0, limit: 7, username: username, orderBy}));
+        dispatch(action({offset: 0, limit: 6, username: username, orderBy}));
     },[username, orderBy])
 
-    const { maxPage, handleChange } = usePagination({total, itemsPerPage: 7, action, opts});
+    const { maxPage, handleChange } = usePagination({total, itemsPerPage: 6, action, opts});
 
     return (
         <S.PlaylistWrapper>
@@ -39,7 +39,7 @@ function PlaylistList({ action, total, items, showFallbackItems, username, order
                                   src={item.url}/>
                 )}
             </Suspense>
-            {showFallbackItems && <FallbackCardList/>}
+            {showFallbackItems && <FallbackCardList total={6}/>}
             <S.PaginationPositioner>
                 <Pagination count={maxPage}
                             onChange={handleChange}
