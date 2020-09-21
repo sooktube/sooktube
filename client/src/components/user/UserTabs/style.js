@@ -4,13 +4,12 @@ import { Link } from 'react-router-dom';
 export const Wrapper = styled.div`
     width: 100%;
     height: auto;
-    padding: 2.4rem 0;
+    margin: 2.4rem auto 0 auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     max-width: 100%;
-    margin: 0 auto;
     border-bottom: 1.3px solid darken(#f4f4f4, 10);
     transition: all 0.3s ease;
 `;

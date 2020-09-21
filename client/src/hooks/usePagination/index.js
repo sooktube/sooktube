@@ -7,7 +7,6 @@ const usePagination = ({total, itemsPerPage, action, opts}) => {
 
     useEffect(() => {
         const begin = (page - 1) * itemsPerPage;
-        console.log({ ...opts, offset: begin, limit: itemsPerPage});
         dispatch(action({ ...opts, offset: begin, limit: itemsPerPage}));
     },[page])
 

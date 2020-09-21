@@ -20,10 +20,10 @@ function VideoList({ action, total, items, showFallbackItems, username, orderBy 
     }, [username, orderBy])
 
     useEffect(() => {
-        dispatch(action({offset: 0, limit: 1, username: username, orderBy: 'like'}));
+        dispatch(action({offset: 0, limit: 7, username: username, orderBy}));
     },[username, orderBy])
 
-    const { maxPage, handleChange } = usePagination({total, itemsPerPage: 1, action, opts});
+    const { maxPage, handleChange } = usePagination({total, itemsPerPage: 7, action, opts});
 
     return (
         <S.VideoListWrapper>
@@ -39,7 +39,16 @@ function VideoList({ action, total, items, showFallbackItems, username, orderBy 
                 )}
             </Suspense>
             {showFallbackItems && <FallbackVideoList/>}
-            <Pagination count={maxPage} onChange={handleChange} />
+            <S.PaginationPositioner>
+                <Pagination count={maxPage}
+                            onChange={handleChange}
+                            showFirstButton
+                            showLastButton
+                            style={{
+                                display: 'inline-block',
+                                margin: '1rem auto',
+                            }}/>
+            </S.PaginationPositioner>
         </S.VideoListWrapper>
     );
 }
