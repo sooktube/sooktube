@@ -35,16 +35,15 @@ export const VideoInfo = styled.div`
     font-size: 2vh;
     margin-left: 1em;
     cursor: pointer;
-    div {
-      margin-right: 1em;
-    }
     background-color:transparent;
 `;
 
 export const VideoDetail = styled.div`
     font-size: 1rem;
-    display: flex;
     margin-top: 2rem;
+    display: flex;
+    width: 15rem;
+    justify-content: space-between;
 `;
 
 

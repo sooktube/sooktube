@@ -34,6 +34,7 @@ function VideoList({ action, total, items, showFallbackItems, username, orderBy 
                                    title={item.videoTitle}
                                    desc={item.videoDesc}
                                    date={item.videoDate.substr(0,10)}
+                                   like={item.like}
                                    username={item.username}
                                    url={item.videoPath}/>
                 )}
