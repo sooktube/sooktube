@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useLocation, Switch, Route } from "react-router-dom";
 import {useSelector} from "react-redux";
-import './style.scss';
 
 //component
 import Header from "../../components/base/Header";

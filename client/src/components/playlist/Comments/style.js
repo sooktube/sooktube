@@ -109,6 +109,7 @@ export const ReplyButton = styled.button`
     margin-top:1em;
     font-size: 12px;
     font-weight: 550;
+    border: 0;
     color: ${MAIN.BASE_COLOR};
     background:transparent;
     &:focus{

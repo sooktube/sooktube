@@ -26,6 +26,7 @@ export const CopyButton = styled.button`
     font-size: 1rem;
     font-weight:500;
     border-radius:5px;
+    border: 0;
     padding:0.5em 1em 0.5em 1em;
     color:white;
     background-color: ${MAIN.BASE_COLOR};

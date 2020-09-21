@@ -1,26 +1,26 @@
 import axios from 'axios';
 
 export const userServices = {
-    getVideoListByUsername,
-    getVideoLikedByUsername,
-    getPlaylistListByUsername,
-    getPlaylistListLikedByUsername
+    getVideoByUsername,
+    getLikedVideoByUsername,
+    getPlaylistByUsername,
+    getLikedPlaylistByUsername
 };
 
-function getVideoListByUsername({username, orderBy, limit, offset}) {
+function getVideoByUsername({username, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/desc/url/user/${username}/newest?limit=100&offset=0`,
+        url: `https://soktube.uc.r.appspot.com/api/liked/video/byUsername/${username}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
             return response.data;
         })
         .catch(error => {
-            return null;
+            return error;
         })
 }
 
-function getVideoLikedByUsername(username) {
+function getLikedVideoByUsername(username) {
     return axios({
         method: 'GET',
         url: `https://soktube.uc.r.appspot.com/api/liked/video/byUsername/${username}`,
@@ -33,7 +33,7 @@ function getVideoLikedByUsername(username) {
         })
 }
 
-function getPlaylistListByUsername({username, orderBy, limit, offset}) {
+function getPlaylistByUsername({username, orderBy, limit, offset}) {
     return axios({
         method: 'GET',
         url: `/api/video/list/by/username/${username}/newest?limit=100&offset=0`,
@@ -46,7 +46,7 @@ function getPlaylistListByUsername({username, orderBy, limit, offset}) {
         })
 }
 
-function getPlaylistListLikedByUsername(username) {
+function getLikedPlaylistByUsername(username) {
     return axios({
         method: 'GET',
         url: `https://soktube.uc.r.appspot.com/api/liked/list/byUser/${username}`,

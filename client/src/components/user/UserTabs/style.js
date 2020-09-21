@@ -34,10 +34,9 @@ export const Tab = styled(Link)`
     border-bottom: ${props => props.active === 1 ? '2.5px solid #71A6C6' : '2.5px solid transparent'};
     color:  ${props => props.active === 1 ? '#252b46' : '#9194a1'};    
     
-    &:focus, &:hover {
+    &:focus {
         outline:none;
         text-decoration: none;
-        color: #9194a1;
     }
     
     &:hover {

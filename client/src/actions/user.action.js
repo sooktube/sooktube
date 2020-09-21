@@ -1,19 +1,15 @@
-import { searchConstants } from "../constants";
-import { playlistService, searchService } from "../services";
+import { userConstants } from "../constants";
+import { userServices } from "../services";
 
-export const searchActions = {
-    initRecommendedVideos,
-    loadRecommendedVideos,
-    initSearchVideos,
-    searchVideos
+export const userActions = {
+    initUploadedVideoOrderByLike,
+    loadUploadedVideoOrderByLike
 };
 
-
-
-function loadRecommendedVideos({ listID, username, orderBy, limit, offset }) {
+function initUploadedVideoOrderByLike({ orderBy, username, limit }) {
     return dispatch => {
         dispatch(request());
-        playlistService.getGTEQ0LT5VideoList({ listID, username, orderBy, limit, offset })
+        userServices.getVideoByUsername({ orderBy, username, limit, offset: 0 })
             .then(response => {
                     dispatch(success(response));
                 },
@@ -22,7 +18,25 @@ function loadRecommendedVideos({ listID, username, orderBy, limit, offset }) {
                 })
     }
 
-    function request() { return { type: searchConstants.LOAD_REC_VIDEOS_REQUEST }}
-    function success(data) { return { type: searchConstants.LOAD_REC_VIDEOS_SUCCESS, data }}
-    function failure(error) { return { type: searchConstants.LOAD_REC_VIDEOS_FAILURE, error }}
+    function request() { return { type: userConstants.LOAD_UPLOADED_VIDEO_LIKE_INIT }}
+    function success(data) { return { type: userConstants.LOAD_UPLOADED_VIDEO_LIKE_SUCCESS, data }}
+    function failure(error) { return { type: userConstants.LOAD_UPLOADED_VIDEO_LIKE_FAILURE, error }}
+}
+
+
+function loadUploadedVideoOrderByLike({ orderBy, username, limit, offset }) {
+    return dispatch => {
+        dispatch(request());
+        userServices.getVideoByUsername({ orderBy, username, limit, offset })
+            .then(response => {
+                    dispatch(success(response));
+                },
+                error =>{
+                    dispatch(failure(error));
+                })
+    }
+
+    function request() { return { type: userConstants.LOAD_UPLOADED_VIDEO_LIKE_REQUEST }}
+    function success(data) { return { type: userConstants.LOAD_UPLOADED_VIDEO_LIKE_SUCCESS, data }}
+    function failure(error) { return { type: userConstants.LOAD_UPLOADED_VIDEO_LIKE_FAILURE, error }}
 }

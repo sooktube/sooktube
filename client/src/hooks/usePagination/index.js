@@ -1,20 +1,23 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import {useDispatch} from "react-redux";
 
-const usePagination = (itemsPerPage) => {
+const usePagination = ({total, itemsPerPage, action, opts}) => {
+    const dispatch = useDispatch();
     const [page, setPage] = useState(1);
-    const [data, setData] = useState(null);
-    if (data == null) return { page, setData, currentData, maxPage, handleChange };
-    const maxPage = Math.ceil(data.length / itemsPerPage);
+
+    const maxPage = Math.ceil(total / itemsPerPage);
 
     const begin = (page - 1) * itemsPerPage;
-    const end = begin + itemsPerPage;
-    const currentData =  data.slice(begin, end);
+
+    useEffect(() => {
+        dispatch(action({ ...opts, offset: begin, limit: itemsPerPage}));
+    },[page])
 
     const handleChange = (event, value) => {
         setPage(value);
     };
 
-    return { page, setData, currentData, maxPage, handleChange };
+    return { page, maxPage, handleChange };
 };
 
 export default usePagination;
