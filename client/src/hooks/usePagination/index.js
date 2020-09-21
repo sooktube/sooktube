@@ -5,19 +5,21 @@ const usePagination = ({total, itemsPerPage, action, opts}) => {
     const dispatch = useDispatch();
     const [page, setPage] = useState(1);
 
-    const maxPage = Math.ceil(total / itemsPerPage);
-
-    const begin = (page - 1) * itemsPerPage;
-
     useEffect(() => {
+        const begin = (page - 1) * itemsPerPage;
+        console.log({ ...opts, offset: begin, limit: itemsPerPage});
         dispatch(action({ ...opts, offset: begin, limit: itemsPerPage}));
     },[page])
+
+    if(!total) return { maxPage, handleChange };
+
+    const maxPage = Math.ceil(total / itemsPerPage);
 
     const handleChange = (event, value) => {
         setPage(value);
     };
 
-    return { page, maxPage, handleChange };
+    return { maxPage, handleChange };
 };
 
 export default usePagination;

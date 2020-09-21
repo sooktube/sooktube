@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useLocation, Switch, Route } from "react-router-dom";
+import { useLocation, Switch, Route, useParams } from "react-router-dom";
 import {useSelector} from "react-redux";
 
 //component
@@ -12,7 +12,7 @@ import UploadedPlaylist from "../../components/user/UploadedPlaylist";
 
 
 function MyPage(){
-    const username = useSelector(state => state.authentication.username);
+    const { username } = useParams();
     const location = useLocation().pathname;
 
     return(
@@ -22,7 +22,7 @@ function MyPage(){
             <UserTabs username={username} tab={location}/>
             <Switch>
                 <Route exact path={`/@${username}/video`}>
-                    <UploadedVideo/>
+                    <UploadedVideo username={username}/>
                 </Route>
                 <Route exact path={`/@${username}/playlist`}>
                     <UploadedPlaylist/>

@@ -7,6 +7,7 @@ import { video } from './video.reducer';
 import { playlist } from './playlist.reducer';
 import {comment} from './comment.reducer';
 import { search } from './search.reducer';
+import { user} from "./user.reducer";
 
 const rootReducer = combineReducers({
   authentication,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   playlist,
   alert,
   comment,
-  search
+  search,
+  user
 });
 
 export default rootReducer;

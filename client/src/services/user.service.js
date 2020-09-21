@@ -7,10 +7,10 @@ export const userServices = {
     getLikedPlaylistByUsername
 };
 
-function getVideoByUsername({username, limit, offset}) {
+function getVideoByUsername({ orderBy, username, limit, offset }) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/liked/video/byUsername/${username}?limit=${limit}&offset=${offset}`,
+        url: `https://soktube.uc.r.appspot.com/api/video/desc/url/user/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
             return response.data;
