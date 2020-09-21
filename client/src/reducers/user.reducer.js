@@ -3,27 +3,46 @@ import { userConstants } from "../constants";
 
 const initialState = {
     //업로드한 영상
-    totalUploadedVideo: 0,
-    uploadedVideo: [],
-    showFallbackUploadedVideo: true
+    totalUploadedVideos: 0,
+    uploadedVideos: [],
+    showFallbackUploadedVideos: true,
+    //업로드한 재생목록
+    totalUploadedPlaylists: 0,
+    uploadedPlaylists: [],
+    showFallbackUploadedPlaylists: true,
 };
 
 export function user(state = initialState, action) {
     return immer(state, (draft) => {
         switch (action.type) {
             case userConstants.LOAD_UPLOADED_VIDEO_LIKE_REQUEST: {
-                draft.uploadedVideo = [];
-                draft.showFallbackUploadedVideo = true;
+                draft.uploadedVideos = [];
+                draft.showFallbackUploadedVideos = true;
                 break;
             }
             case userConstants.LOAD_UPLOADED_VIDEO_LIKE_SUCCESS: {
-                draft.totalUploadedVideo = action.total;
-                draft.uploadedVideo = action.data;
-                draft.showFallbackUploadedVideo = false;
+                draft.totalUploadedVideos = action.total;
+                draft.uploadedVideos = action.data;
+                draft.showFallbackUploadedVideos = false;
                 break;
             }
             case userConstants.LOAD_UPLOADED_VIDEO_LIKE_FAILURE: {
-                draft.showFallbackUploadedVideo = false;
+                draft.showFallbackUploadedVideos = false;
+                break;
+            }
+            case userConstants.LOAD_UPLOADED_PLAYLIST_REQUEST: {
+                draft.uploadedPlaylists = [];
+                draft.showFallbackUploadedPlaylists = true;
+                break;
+            }
+            case userConstants.LOAD_UPLOADED_PLAYLIST_SUCCESS: {
+                draft.totalUploadedPlaylists = action.total;
+                draft.uploadedPlaylists = action.data;
+                draft.showFallbackUploadedPlaylists = false;
+                break;
+            }
+            case userConstants.LOAD_UPLOADED_PLAYLIST_FAILURE: {
+                draft.showFallbackUploadedPlaylists = false;
                 break;
             }
             default:

@@ -2,10 +2,10 @@ import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as S from './style';
 import { playlistActions } from "../../../actions";
-import FallbackCardList from "../FallbackCardList";
+import FallbackCardList from "../../common/FallbackCardList";
 import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
 
-const CardItem = lazy(() => import('../CardItem'));
+const CardItem = lazy(() => import('../../common/PlaylistCard'));
 
 function TrendingPlaylist() {
     const dispatch = useDispatch();

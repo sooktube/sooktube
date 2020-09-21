@@ -29,20 +29,20 @@ function getLikedVideoByUsername(username) {
             return response.data;
         })
         .catch(error => {
-            return null;
+            return error;
         })
 }
 
 function getPlaylistByUsername({username, orderBy, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `/api/video/list/by/username/${username}/newest?limit=100&offset=0`,
+        url: `https://soktube.uc.r.appspot.com/api/video/list/by/username/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
             return response.data;
         })
         .catch(error => {
-            return null;
+            return error;
         })
 }
 
@@ -55,6 +55,6 @@ function getLikedPlaylistByUsername(username) {
             return response.data;
         })
         .catch(error => {
-            return null;
+            return error;
         })
 }

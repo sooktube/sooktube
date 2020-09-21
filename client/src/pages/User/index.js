@@ -25,13 +25,13 @@ function MyPage(){
                     <UploadedVideo username={username}/>
                 </Route>
                 <Route exact path={`/@${username}/playlist`}>
-                    <UploadedPlaylist/>
+                    <UploadedPlaylist username={username}/>
                 </Route>
                 <Route path={`/@${username}/like/video`}>
-                    <LikedVideo/>
+                    <LikedVideo username={username}/>
                 </Route>
                 <Route path={`/@${username}/like/playlist`}>
-                    <LikedPlaylist/>
+                    <LikedPlaylist username={username}/>
                 </Route>
             </Switch>
         </main>

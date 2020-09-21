@@ -7,9 +7,9 @@ import VideoList from "../VideoList";
 function UploadedVideo({ username}) {
     const [order, setOrder] = useState('like');
 
-    const totalOrderByLike = useSelector(state => state.user.totalUploadedVideo);
-    const VideoOrderByLike = useSelector(state => state.user.uploadedVideo);
-    const showFallbackUOrderByLike =  useSelector(state => state.user.showFallbackUploadedVideo);
+    const total = useSelector(state => state.user.totalUploadedVideos);
+    const videos = useSelector(state => state.user.uploadedVideos);
+    const showFallbackVideos =  useSelector(state => state.user.showFallbackUploadedVideos);
 
     const setLikeOrder = useCallback(() => setOrder('like'), []);
     const setNewestOrder = useCallback(() => setOrder('newest'), []);
@@ -22,15 +22,15 @@ function UploadedVideo({ username}) {
             </S.Tabs>
             {order === 'like'
                 ? <VideoList action={userActions.loadUploadedVideo}
-                             total={totalOrderByLike}
-                             items={VideoOrderByLike}
-                             showFallbackItems={showFallbackUOrderByLike}
+                             total={total}
+                             items={videos}
+                             showFallbackItems={showFallbackVideos}
                              orderBy='like'
                              username={username}/>
                 : <VideoList action={userActions.loadUploadedVideo}
-                             total={totalOrderByLike}
-                             items={VideoOrderByLike}
-                             showFallbackItems={showFallbackUOrderByLike}
+                             total={total}
+                             items={videos}
+                             showFallbackItems={showFallbackVideos}
                              orderBy='newest'
                              username={username}/>
             }
