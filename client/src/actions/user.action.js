@@ -3,7 +3,8 @@ import { userServices } from "../services";
 
 export const userActions = {
     loadUploadedVideo,
-    loadUploadedPlaylist
+    loadUploadedPlaylist,
+    loadLikedVideos
 };
 
 function loadUploadedVideo({ orderBy, username, limit, offset }) {
@@ -38,4 +39,21 @@ function loadUploadedPlaylist({ orderBy, username, limit, offset }) {
     function request() { return { type: userConstants.LOAD_UPLOADED_PLAYLIST_REQUEST }}
     function success(total, data) { return { type: userConstants.LOAD_UPLOADED_PLAYLIST_SUCCESS, total, data }}
     function failure(error) { return { type: userConstants.LOAD_UPLOADED_PLAYLIST_FAILURE, error }}
+}
+
+function loadLikedVideos({ username, limit, offset }) {
+    return dispatch => {
+        dispatch(request());
+        userServices.getLikedVideoByUsername({ username, limit, offset })
+            .then(response => {
+                    dispatch(success(response[0], response[1]));
+                },
+                error =>{
+                    dispatch(failure(error));
+                })
+    }
+
+    function request() { return { type: userConstants.LOAD_LIKED_VIDEO_REQUEST }}
+    function success(total, data) { return { type: userConstants.LOAD_LIKED_VIDEO_SUCCESS, total, data }}
+    function failure(error) { return { type: userConstants.LOAD_LIKED_VIDEO_FAILURE, error }}
 }

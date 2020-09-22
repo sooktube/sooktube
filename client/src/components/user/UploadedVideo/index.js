@@ -1,10 +1,10 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import { useSelector }  from "react-redux";
 import { userActions } from "../../../actions/user.action";
 import * as S from './style'
 import VideoList from "../VideoList";
 
-function UploadedVideo({ username}) {
+function UploadedVideo({ username }) {
     const [order, setOrder] = useState('like');
 
     const total = useSelector(state => state.user.totalUploadedVideos);

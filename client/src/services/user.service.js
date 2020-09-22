@@ -20,10 +20,10 @@ function getVideoByUsername({ orderBy, username, limit, offset }) {
         })
 }
 
-function getLikedVideoByUsername(username) {
+function getLikedVideoByUsername({ username, limit, offset }) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/liked/video/byUsername/${username}`,
+        url: `https://soktube.uc.r.appspot.com/api/liked/video/byUsername/${username}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
             return response.data;
