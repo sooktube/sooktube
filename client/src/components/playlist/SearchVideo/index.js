@@ -1,8 +1,8 @@
-import React, {useCallback, useEffect, useState, lazy, Suspense, Fragment, createRef} from 'react';
+import React, {useCallback, useEffect, useState, lazy, Suspense, Fragment} from 'react';
 import * as S from './style';
 import debounce from 'lodash.debounce';
 import {useDispatch, useSelector} from "react-redux";
-import { searchActions } from "../../../actions/search.action";
+import { searchActions } from "../../../actions";
 import RecommendVideoList from "../RecommendVideoList";
 import FallbackVideoList from "../FallbackVideoList";
 import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
@@ -13,10 +13,10 @@ function SearchVideo({listID}) {
     const [keyword, setKeyword] = useState('');
     const username = useSelector(state => state.authentication.username);
 
-    const result = useSelector(state => state.search.searchVideos);
-    const hasMoreResults = useSelector(state => state.search.hasMoreSearchVideos);
-    const showFallbackItems = useSelector(state => state.search.showFallbackSearchVideos);
-    const offset = useSelector(state => state.search.searchOffset);
+    const result = useSelector(state => state.search.searchVideosInPlaylist);
+    const hasMoreResults = useSelector(state => state.search.hasMoreSearchVideosInPlaylist);
+    const showFallbackItems = useSelector(state => state.search.showFallbackSearchVideosInPlaylist);
+    const offset = useSelector(state => state.search.searchOffsetInPlaylist);
 
     const [opts, setOpts] = useState({
         listID,

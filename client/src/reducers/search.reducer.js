@@ -2,14 +2,17 @@ import immer from "immer";
 import { searchConstants } from "../constants";
 
 const initialState = {
+    //추천 영상 목록
     recVideos: [],
     hasMoreRecVideos: true,
     showFallbackRecVideos: true,
     recOffset: 0,
-    searchVideos: [],
-    hasMoreSearchVideos: true,
-    showFallbackSearchVideos: true,
-    searchOffset: 0
+    //재생목록 내에서 검색 결과 목록
+    searchVideosInPlaylist: [],
+    hasMoreSearchVideosInPlaylist: true,
+    showFallbackSearchVideosInPlaylist: true,
+    searchOffsetInPlaylist: 0
+
 };
 
 export function search(state = initialState, action) {
@@ -18,7 +21,7 @@ export function search(state = initialState, action) {
             case searchConstants.LOAD_REC_VIDEOS_INIT: {
                 draft.showWFallbackRecVideos = true;
                 draft.hasMoreRecVideos = true;
-                draft.recVideos.length = [];
+                draft.recVideos = [];
                 draft.recOffset = 0;
                 break;
             }
@@ -38,25 +41,25 @@ export function search(state = initialState, action) {
                 break;
             }
             case searchConstants.SEARCH_VIDEOS_INIT: {
-                draft.showFallbackSearchVideos = true;
-                draft.hasMoreSearchVideos = true;
-                draft.searchVideos.length = [];
-                draft.searchOffset = 0;
+                draft.showFallbackSearchVideosInPlaylist = true;
+                draft.hasMoreSearchVideosInPlaylist = true;
+                draft.searchVideosInPlaylist = [];
+                draft.searchOffsetInPlaylist = 0;
                 break;
             }
             case searchConstants.SEARCH_VIDEOS_REQUEST: {
-                draft.showFallbackSearchVideos = true;
+                draft.showFallbackSearchVideosInPlaylist = true;
                 break;
             }
             case searchConstants.SEARCH_VIDEOS_SUCCESS: {
-                draft.hasMoreSearchVideos = (action.data.length === 20);
-                draft.searchVideos.push(...action.data);
-                draft.searchOffset = draft.searchOffset + 20;
-                draft.showFallbackSearchVideos = false;
+                draft.hasMoreSearchVideosInPlaylist = (action.data.length === 20);
+                draft.searchVideosInPlaylist.push(...action.data);
+                draft.searchOffsetInPlaylist = draft.searchOffsetInPlaylist + 20;
+                draft.showFallbackSearchVideosInPlaylist = false;
                 break;
             }
             case searchConstants.SEARCH_VIDEOS_FAILURE: {
-                draft.showFallbackSearchVideos = false;
+                draft.showFallbackSearchVideosInPlaylist = false;
                 break;
             }
             default:

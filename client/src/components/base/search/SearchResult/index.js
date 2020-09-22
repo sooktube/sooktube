@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import * as S from './style';
 import {useParams} from 'react-router-dom';
-import {searchService} from "../../../../services/search.service";
+import {searchService} from "../../../../services";
 import VideoList from "../../../video/VideoList";
 import PlaylistList from "../../../playlist/PlaylistList";
 
