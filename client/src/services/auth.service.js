@@ -12,7 +12,7 @@ export const authService = {
     getUserProfilePic,
     getProfilePicUploadUrl,
     UploadUserProfilePic,
-    getProfileUrlByProfilepic
+    getProfileUrlByProfilepic,
 };
 
 function login(user) {
@@ -31,8 +31,7 @@ function login(user) {
         });
 }
 
-function getUsername() {
-    let user = localStorage.getItem('user');
+function getUsername(user) {
     return axios({
         method: 'get',
         url: 'https://soktube.appspot.com/api/auth/myName',
@@ -73,7 +72,6 @@ function logout() {
 }
 
 function register(user) {
-    console.log(user);
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -150,8 +148,6 @@ function getProfilePicUploadUrl(profilepic) {
 }
 
 function UploadUserProfilePic(input) {
-    console.log(input.uploadURL);
-    console.log(input.imageFile);
     return axios({
         method: 'PUT',
         url: input.uploadURL,
@@ -169,7 +165,6 @@ function UploadUserProfilePic(input) {
 }
 
 function getProfileUrlByProfilepic(profilepic) {
-    console.log(profilepic);
     return axios({
         method: 'GET',
         url: `https://soktube.uc.r.appspot.com/api/profile/get/${profilepic}`
@@ -181,4 +176,3 @@ function getProfileUrlByProfilepic(profilepic) {
             return error;
         })
 }
-

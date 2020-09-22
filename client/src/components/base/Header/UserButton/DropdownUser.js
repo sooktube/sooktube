@@ -3,9 +3,11 @@ import * as S from './style';
 import useDropdownOutsideClick from "../../../../hooks/useDropdownOutsideClick";
 import {authService} from "../../../../services";
 import {history} from "../../../../helpers";
+import {useSelector} from "react-redux";
 
 function DropdownUser({username}) {
     const [userDropdownVisible, setUserDropdownVisible] = useState(false);
+    const profile = useSelector(state => state.authentication.profile);
 
     const toggleDropdown = () => {
         setUserDropdownVisible(!userDropdownVisible);
@@ -23,7 +25,8 @@ function DropdownUser({username}) {
         <>
             <S.UserDropdownMenu>
                 <S.DropdownUserBtn onClick={toggleDropdown}>
-                    <S.UserIcon/> <S.ArrowDown/>
+                    <S.UserProfile src={profile} alt={`${username} profile`}/>
+                    <S.ArrowDown/>
                 </S.DropdownUserBtn>
                 {userDropdownVisible &&
                     <S.UserDropdownContent ref={contentRef}>

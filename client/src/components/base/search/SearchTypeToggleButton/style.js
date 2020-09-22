@@ -11,7 +11,7 @@ export const ButtonWrapper = styled.div`
 
 export const PlaylistButton = styled(BsBookmarkFill)`
     position: relative;
-    left: -2em;
+    left: -2.7em;
     top: 1em;
     width: 115px;
     height: 50px;

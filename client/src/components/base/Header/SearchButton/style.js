@@ -10,11 +10,10 @@ export const SearchButtonWrapper = styled.div`
 `;
 
 export const SearchIcon = styled(FaSearch)`
-    width: 2rem;
-    height: 2rem;
+    width: 24px;
+    height: 24px;
     cursor: pointer;
     position: relative;
-    
     left: 0.5em;
     color: ${MAIN.BASE_COLOR};
     &:hover {

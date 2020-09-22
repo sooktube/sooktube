@@ -11,25 +11,31 @@ export const authAction = {
 
 function login(user) {
     return dispatch => {
-        dispatch(request({ user }));
+        let currentUsername = null;
+        dispatch(request());
         localStorage.clear();
         //nested Promise to get username
-        authService.login(user).then(
-                user => { authService.getUsername().then(
-                    username => {
-                        dispatch(success({ user: user, username: username }));
-                        history.push('/');
-                    })
-                },
-                error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(alertAction.error(error.toString()));
-                }
-            )
+        authService.login(user)
+            .then(user => {
+                return authService.getUsername(user)
+            })
+            .then(username => {
+                currentUsername = username;
+                return authService.getUserProfilePic(username)
+            })
+            .then(profile => {
+                localStorage.setItem('profile', profile);
+                dispatch(success({user, username: currentUsername, profile}));
+                history.push('/');
+            })
+            .catch(error => {
+                dispatch(failure(error.toString()));
+                dispatch(alertAction.error(error.toString()));
+            })
     };
 
-    function request(user) { return { type: authConstants.LOGIN_REQUEST, user } }
-    function success({user, username}) { return { type: authConstants.LOGIN_SUCCESS, user, username } }
+    function request() { return { type: authConstants.LOGIN_REQUEST} }
+    function success({user, username, profile}) { return { type: authConstants.LOGIN_SUCCESS, user, username, profile } }
     function failure(error) { return { type: authConstants.LOGIN_FAILURE, error } }
 }
 
