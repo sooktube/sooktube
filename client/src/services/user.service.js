@@ -46,10 +46,10 @@ function getPlaylistByUsername({username, orderBy, limit, offset}) {
         })
 }
 
-function getLikedPlaylistByUsername(username) {
+function getLikedPlaylistByUsername({username, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/liked/list/byUser/${username}`,
+        url: `https://soktube.uc.r.appspot.com/api/liked/list/byUser/${username}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
             return response.data;

@@ -10,10 +10,14 @@ const initialState = {
     totalUploadedPlaylists: 0,
     uploadedPlaylists: [],
     showFallbackUploadedPlaylists: true,
-    //좋아요한 영상
+    //좋아한 영상
     totalLikedVideos: 0,
     likedVideos: [],
     showFallbackLikedVideos: true,
+    //좋아한 재생목록
+    totalLikedPlaylists: 0,
+    likedPlaylists: [],
+    showFallbackLikedPlaylists: true,
 };
 
 export function user(state = initialState, action) {
@@ -62,6 +66,21 @@ export function user(state = initialState, action) {
             }
             case userConstants.LOAD_LIKED_VIDEO_FAILURE: {
                 draft.showFallbackLikedVideos = false;
+                break;
+            }
+            case userConstants.LOAD_LIKED_PLAYLISTS_REQUEST: {
+                draft.likedPlaylists = [];
+                draft.showFallbackLikedPlaylists = true;
+                break;
+            }
+            case userConstants.LOAD_LIKED_PLAYLISTS_SUCCESS: {
+                draft.totalLikedPlaylists = action.total;
+                draft.likedPlaylists = action.data;
+                draft.showFallbackLikedPlaylists = false;
+                break;
+            }
+            case userConstants.LOAD_LIKED_PLAYLISTS_FAILURE: {
+                draft.showFallbackLikedPlaylists = false;
                 break;
             }
             default:

@@ -4,7 +4,8 @@ import { userServices } from "../services";
 export const userActions = {
     loadUploadedVideo,
     loadUploadedPlaylist,
-    loadLikedVideos
+    loadLikedVideos,
+    loadLikedPlaylists
 };
 
 function loadUploadedVideo({ orderBy, username, limit, offset }) {
@@ -56,4 +57,21 @@ function loadLikedVideos({ username, limit, offset }) {
     function request() { return { type: userConstants.LOAD_LIKED_VIDEO_REQUEST }}
     function success(total, data) { return { type: userConstants.LOAD_LIKED_VIDEO_SUCCESS, total, data }}
     function failure(error) { return { type: userConstants.LOAD_LIKED_VIDEO_FAILURE, error }}
+}
+
+function loadLikedPlaylists({ username, limit, offset }) {
+    return dispatch => {
+        dispatch(request());
+        userServices.getLikedPlaylistByUsername({ username, limit, offset })
+            .then(response => {
+                    dispatch(success(response[0], response[1]));
+                },
+                error =>{
+                    dispatch(failure(error));
+                })
+    }
+
+    function request() { return { type: userConstants.LOAD_LIKED_PLAYLISTS_REQUEST }}
+    function success(total, data) { return { type: userConstants.LOAD_LIKED_PLAYLISTS_SUCCESS, total, data }}
+    function failure(error) { return { type: userConstants.LOAD_LIKED_PLAYLISTS_FAILURE, error }}
 }

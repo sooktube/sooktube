@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React from 'react';
 import { useSelector }  from "react-redux";
 import { userActions } from "../../../actions/user.action";
 import * as S from './style'
@@ -12,11 +12,10 @@ function LikedVideo({ username }) {
     return (
         <S.Wrapper>
             <VideoList action={userActions.loadLikedVideos}
-                         total={total}
-                         items={videos}
-                         showFallbackItems={showFallbackVideos}
-                         orderBy='like'
-                         username={username}/>
+                       total={total}
+                       items={videos}
+                       showFallbackItems={showFallbackVideos}
+                       username={username}/>
         </S.Wrapper>
     );
 }

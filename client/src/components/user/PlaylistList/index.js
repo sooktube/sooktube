@@ -1,10 +1,8 @@
 import React, { Suspense, useEffect, lazy, useState } from 'react';
 import * as S from './style';
 import {useDispatch} from "react-redux";
-import FallbackVideoList from "../../common/FallbackVideoList";
 import usePagination from "../../../hooks/usePagination";
 import { Pagination } from "@material-ui/lab";
-import FallbackPlaylistCard from "../../playlist/FallbackPlaylistCard";
 import FallbackCardList from "../../common/FallbackCardList";
 
 const PlaylistCard = lazy(() => import("../../common/PlaylistCard"));
