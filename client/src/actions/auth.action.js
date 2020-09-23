@@ -34,7 +34,7 @@ function login(user) {
             })
     };
 
-    function request() { return { type: authConstants.LOGIN_REQUEST} }
+    function request(user) { return { type: authConstants.LOGIN_REQUEST, user } }
     function success({user, username, profile}) { return { type: authConstants.LOGIN_SUCCESS, user, username, profile } }
     function failure(error) { return { type: authConstants.LOGIN_FAILURE, error } }
 }
