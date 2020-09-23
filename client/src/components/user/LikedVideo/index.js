@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector }  from "react-redux";
 import { userActions } from "../../../actions/user.action";
 import * as S from './style'
-import VideoList from "../VideoList";
+import VideoList from "../../video/VideoListWithPagination";
 
 function LikedVideo({ username }) {
     const total = useSelector(state => state.user.totalLikedVideos);

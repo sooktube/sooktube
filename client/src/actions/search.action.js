@@ -4,8 +4,10 @@ import { playlistService, searchService } from "../services";
 export const searchActions = {
     initRecommendedVideos,
     loadRecommendedVideos,
+    initSearchVideosInPlaylist,
+    searchVideosInPlaylist,
+    searchVideos,
     initSearchVideos,
-    searchVideos
 };
 
 function initRecommendedVideos({ listID, username, orderBy, limit, offset }) {
@@ -42,7 +44,7 @@ function loadRecommendedVideos({ listID, username, orderBy, limit, offset }) {
     function failure(error) { return { type: searchConstants.LOAD_REC_VIDEOS_FAILURE, error }}
 }
 
-function initSearchVideos({keyword, listID, username, orderBy, limit, offset}) {
+function initSearchVideosInPlaylist({keyword, listID, username, orderBy, limit, offset}) {
     return dispatch => {
         dispatch(request());
         searchService.searchVideoByTitleInPlaylist({keyword, listID, username, orderBy, limit, offset: 0})
@@ -59,7 +61,7 @@ function initSearchVideos({keyword, listID, username, orderBy, limit, offset}) {
     function failure(error) { return { type: searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_FAILURE, error }}
 }
 
-function searchVideos({keyword, listID, username, orderBy, limit, offset}) {
+function searchVideosInPlaylist({keyword, listID, username, orderBy, limit, offset}) {
     return dispatch => {
         dispatch(request());
         searchService.searchVideoByTitleInPlaylist({keyword, listID, username, orderBy, limit, offset})
@@ -74,4 +76,39 @@ function searchVideos({keyword, listID, username, orderBy, limit, offset}) {
     function request() { return { type: searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_REQUEST }}
     function success(data) { return { type: searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_SUCCESS, data }}
     function failure(error) { return { type: searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_FAILURE, error }}
+}
+
+function initSearchVideos({keyword, listID, orderBy, limit, offset}) {
+    return dispatch => {
+        dispatch(request());
+        searchService.searchVideoByTitleInPlaylist({keyword, listID, username: '', orderBy, limit, offset})
+            .then(response => {
+                    dispatch(success(response));
+                },
+                error =>{
+                    dispatch(failure(error));
+                })
+    }
+
+    function request() { return { type: searchConstants.SEARCH_VIDEOS_INIT }}
+    function success(data) { return { type: searchConstants.SEARCH_VIDEOS_SUCCESS, data }}
+    function failure(error) { return { type: searchConstants.SEARCH_VIDEOS_FAILURE, error }}
+}
+
+
+function searchVideos({keyword, listID, orderBy, limit, offset}) {
+    return dispatch => {
+        dispatch(request());
+        searchService.searchVideoByTitleInPlaylist({keyword, listID, username: '', orderBy, limit, offset})
+            .then(response => {
+                    dispatch(success(response));
+                },
+                error =>{
+                    dispatch(failure(error));
+                })
+    }
+
+    function request() { return { type: searchConstants.SEARCH_VIDEOS_REQUEST }}
+    function success(data) { return { type: searchConstants.SEARCH_VIDEOS_SUCCESS, data }}
+    function failure(error) { return { type: searchConstants.SEARCH_VIDEOS_FAILURE, error }}
 }

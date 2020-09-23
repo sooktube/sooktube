@@ -34,7 +34,7 @@ function SearchVideo({listID}) {
         items: result,
         hasMoreItems: hasMoreResults,
         ratio: 0.6,
-        action: searchActions.searchVideos({keyword, ...opts})
+        action: searchActions.searchVideosInPlaylist({keyword, ...opts})
     });
 
     function handleChange(e) {
@@ -44,7 +44,7 @@ function SearchVideo({listID}) {
 
     const updateSearch = useCallback(() => {
         if(keyword) {
-            dispatch(searchActions.initSearchVideos({keyword, ...opts}));
+            dispatch(searchActions.initSearchVideosInPlaylist({keyword, ...opts}));
         }
     }, [listID, keyword])
 
@@ -58,6 +58,7 @@ function SearchVideo({listID}) {
     return (
         <S.SearchVideoWrapper>
             <S.SearchInput name="keyword"
+                           type="search"
                            value={keyword}
                            onChange={handleChange}
                            placeholder="검색어를 입력하세요."/>

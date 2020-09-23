@@ -6,7 +6,6 @@ import { playlistService } from "../../../services";
 import { playlistActions } from "../../../actions";
 import { useSelector } from "react-redux";
 
-
 function PlaylistVideo({ listID }) {
     const currentUsername = useSelector(state => state.authentication.username);
 
@@ -38,7 +37,7 @@ function PlaylistVideo({ listID }) {
                                           isPublic={isPublic}
                                           username={username}
                                           copied={copied}/>
-                    <VideoList username={username}
+                    <VideoList username={currentUsername}
                                listID={listID}
                                playlist={1}
                                action={playlistActions.loadPlaylistVideos}

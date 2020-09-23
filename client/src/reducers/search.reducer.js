@@ -2,17 +2,21 @@ import immer from "immer";
 import { searchConstants } from "../constants";
 
 const initialState = {
-    //추천 영상 목록
+    //추천 영상
     recVideos: [],
     hasMoreRecVideos: true,
     showFallbackRecVideos: true,
     recOffset: 0,
-    //재생목록 내에서 검색 결과 목록
+    //재생목록 내에서 검색
     searchVideosInPlaylist: [],
     hasMoreSearchVideosInPlaylist: true,
     showFallbackSearchVideosInPlaylist: true,
-    searchOffsetInPlaylist: 0
-
+    searchOffsetInPlaylist: 0,
+    //비디오 검색
+    videos: [],
+    hasMoreVideos: true,
+    showFallbackVideos: true,
+    videosOffset: 0,
 };
 
 export function search(state = initialState, action) {
@@ -60,6 +64,28 @@ export function search(state = initialState, action) {
             }
             case searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_FAILURE: {
                 draft.showFallbackSearchVideosInPlaylist = false;
+                break;
+            }
+            case searchConstants.SEARCH_VIDEOS_INIT: {
+                draft.showFallbackVideos = true;
+                draft.hasMoreVideos = true;
+                draft.videos = [];
+                draft.videosOffset = 0;
+                break;
+            }
+            case searchConstants.SEARCH_VIDEOS_REQUEST: {
+                draft.showFallbackVideos = true;
+                break;
+            }
+            case searchConstants.SEARCH_VIDEOS_SUCCESS: {
+                draft.hasMoreVideos = (action.data.length === 20);
+                draft.videos.push(...action.data);
+                draft.videosOffset = draft.videosOffset + 20;
+                draft.showFallbackVideos = false;
+                break;
+            }
+            case searchConstants.SEARCH_VIDEOS_FAILURE: {
+                draft.showFallbackVideos = false;
                 break;
             }
             default:

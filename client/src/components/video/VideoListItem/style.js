@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {MAIN} from "../../../style/Main";
+import {MAIN} from "../../style/Main";
 import {IoIosHeart, IoMdHeartDislike} from "react-icons/all";
 import {Link} from 'react-router-dom';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from "./style";
 import {IoIosHeart} from "react-icons/all";
-import {history} from "../../../../helpers";
+import {history} from "../../../helpers";
 
 function VideoListItem({videoID, url, title, username, desc, date, like}){
 

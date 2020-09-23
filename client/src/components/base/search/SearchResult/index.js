@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import * as S from './style';
 import {useParams} from 'react-router-dom';
 import {searchService} from "../../../../services";
-import VideoList from "../../../video/VideoList";
+import VideoList from "../../../video/VideoListWithInfiniteScrolling";
 import PlaylistList from "../../../playlist/PlaylistList";
 
 function SearchResult({ query }) {

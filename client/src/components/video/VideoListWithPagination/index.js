@@ -5,7 +5,7 @@ import FallbackVideoList from "../../common/FallbackVideoList";
 import usePagination from "../../../hooks/usePagination";
 import { Pagination } from "@material-ui/lab";
 
-const VideoListItem = lazy(() => import("./VideoListItem"));
+const VideoListItem = lazy(() => import("../VideoListItem"));
 
 function VideoList({ action, total, items, showFallbackItems, username, orderBy }) {
     const dispatch = useDispatch();
