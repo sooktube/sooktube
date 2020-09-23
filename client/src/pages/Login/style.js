@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {MAIN} from "../../components/style/Main";
+import {Link} from "react-router-dom";
 
 export const MainBackground = styled.div`
     margin: 20px auto;
@@ -93,17 +94,16 @@ export const SubmitButton = styled.button`
 `;
 
 export const Regguide = styled.span`
-    color:#ffd43b;
-    padding:0;
-    font-size:2.5vh;
+    color: ${MAIN.DARK_TEXT_COLOR};
+    font-size:12px;
     margin-right:1em;
-    margin-left:1em;
 `;
 
-export const Regbutton = styled.span`
+export const RegLink = styled(Link)`
     padding:0;
     color: #071b6a;
-    font-size:2.5vh;
+    font-weight: bolder;
+    font-size:12px;
     margin-left:1em;
     margin-right:1em;
 `;

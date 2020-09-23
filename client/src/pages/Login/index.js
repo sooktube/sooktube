@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authAction } from '../../actions';
-import {LoginLogo, MainBackground, FormGroup1, FormGroup4, LoginBox, FormGroup2, FormGroup3, InvalidFeedback, SubmitButton, Regbutton, Regguide, InputA} from "./style";
+import {LoginLogo, MainBackground, RegLink, FormGroup1, FormGroup4, LoginBox, FormGroup2, FormGroup3, InvalidFeedback, SubmitButton, Regbutton, Regguide, InputA} from "./style";
 
 function Login() {
     const [inputs, setInputs] = useState({
@@ -69,8 +69,8 @@ function Login() {
                     </SubmitButton>
                 </FormGroup3>
                 <FormGroup4>
-                <Regguide>Don't have an account? </Regguide>
-                <Link to="/register"><Regbutton>Sign up</Regbutton></Link>
+                <Regguide> 아직 회원이 아니신가요? </Regguide>
+                <RegLink to="/register"> 회원가입 </RegLink>
                 </FormGroup4>
             </form>
             </LoginBox>
