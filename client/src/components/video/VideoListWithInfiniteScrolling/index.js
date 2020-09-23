@@ -44,7 +44,7 @@ function VideoList({ initAction, action, keyword, items, hasMoreItems, showFallb
     return (
         <S.VideoListWrapper>
             <Suspense fallback="">
-                {items.map(item =>
+                {keyword !== '' && items.map(item =>
                     <VideoListItem key={item.videoID}
                                    videoID={item.videoID}
                                    title={item.videoTitle}
@@ -54,8 +54,11 @@ function VideoList({ initAction, action, keyword, items, hasMoreItems, showFallb
                                    username={item.username}
                                    url={item.videoPath}/>
                 )}
+                {keyword !== '' && !showFallbackItems && items.length === 0 &&
+                    <S.NoResultComment> 검색 결과가 없습니다. </S.NoResultComment>
+                }
             </Suspense>
-            {showFallbackItems && <FallbackVideoList marginLeft={marginLeft}/>}
+            {keyword !== '' && showFallbackItems && <FallbackVideoList marginLeft={marginLeft}/>}
         </S.VideoListWrapper>
     );
 }

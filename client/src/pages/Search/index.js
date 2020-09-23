@@ -22,11 +22,6 @@ function Search() {
         setKeyword(e.target.value);
     }
 
-    function useQuery() {
-        return new URLSearchParams(useLocation().search);
-    }
-    const query = useQuery();
-
     return (
         <S.SearchWrapper>
             <Header/>
@@ -38,8 +33,8 @@ function Search() {
             <S.SearchResultContainer>
                 <SearchTypeToggleButton setKeyword={setKeyword}/>
                 {type === 'video'
-                    ? <VideoSearchResult query={query.get("query")}/>
-                    : <VideoSearchResult query={query.get("query")}/>
+                    ? <VideoSearchResult query={keyword}/>
+                    : <VideoSearchResult query={keyword}/>
                 }
             </S.SearchResultContainer>
         </S.SearchWrapper>
