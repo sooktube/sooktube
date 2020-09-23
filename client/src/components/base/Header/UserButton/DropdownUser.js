@@ -32,7 +32,7 @@ function DropdownUser({username}) {
                 {userDropdownVisible &&
                 <S.UserDropdownContent ref={contentRef}>
                     <S.DropdownItem> 로그인한 계정: {username}님 </S.DropdownItem>
-                    <S.StyledLink to={`/@${username}/video`}> 마이페이지 </S.StyledLink>
+                    <S.StyledLink to={`/@${username}/profile/video`}> 마이페이지 </S.StyledLink>
                     <S.DropdownButton onClick={handleClick}> 로그아웃 </S.DropdownButton>
                 </S.UserDropdownContent>
                 }

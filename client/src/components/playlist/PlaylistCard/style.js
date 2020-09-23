@@ -109,7 +109,7 @@ export const CardBottom = styled.div`
 
 export const DotIcon = styled(BsThreeDotsVertical)`
     width: 2vw;
-    height: 4vh;
+    height: 3.5vh;
     float:right;
     color: ${MAIN.BORDER_COLOR};
     &:hover {
@@ -121,7 +121,7 @@ export const DotIcon = styled(BsThreeDotsVertical)`
 export const CreateDropdownContent = styled.div`
     position: absolute;
     margin-top: 2em;
-    right: 2em;
+    right: 4em;
     z-index: 200;
     border-radius: 15px;
     box-shadow: -0.05px -0.05px 10px rgba(0,0,0,0.2) ;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {useParams} from "react-router-dom";
 import * as S from "./style";
 import DeleteVideo from "../../../pages/UploadVideo/DeleteVideo";
@@ -17,13 +17,15 @@ function VideoInfo(videoInfo) {
             <S.VideoDetail>
                 <S.VideoDate> {videoInfo.videoDate.substr(0,10)} </S.VideoDate>
                 <S.Separator> | </S.Separator>
-                <S.VideoUsername> {videoInfo.username} </S.VideoUsername>
+                <S.VideoUsername to={`/@${videoInfo.username}/profile/video`}>
+                    {videoInfo.username}
+                </S.VideoUsername>
                 <S.Separator> | </S.Separator>
                 {loginUsername === videoInfo.username &&
-                    <>
-                        <S.EditButton to={`/@${videoInfo.username}/video/update/${videoID}`}> 수정 </S.EditButton>
+                    <Fragment>
+                        <S.EditButton to={`/@${videoInfo.username}/update/video/${videoID}`}> 수정 </S.EditButton>
                         <DeleteVideo videoID={videoID}/>
-                    </>
+                    </Fragment>
                 }
                 <VideoLike  videoID={videoID}
                             likeCount={videoInfo.likeCount}

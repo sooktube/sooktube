@@ -35,11 +35,10 @@ function App() {
                 <Route path='/playlist/:listID' component={Playlist}/>
                 <Route exact path='/@:username/video/:videoID' component={Player}/>
                 <Route path='/@:username/video/:videoID/:tab' component={Player}/>
-                <PrivateRoute path='/@:username/video/:videoID/update' component={UpdateVideo}/>
-                <PrivateRoute path='/@:username/playlist/update/:listID' component={UpdatePlaylist}/>
+                <Route path='/@:username/update/video/:videoID' component={UpdateVideo}/>
+                <Route path='/@:username/update/playlist/:listID' component={UpdatePlaylist}/>
                 <PrivateRoute path='/copy/playlist/:listID' component={CopyPlaylist}/>
-                <Route exact path='/@:username' component={MyPage}/>
-                <Route path='/@:username/:tab' component={MyPage}/>
+                <Route path='/@:username/profile/:tab' component={MyPage}/>
                 <Redirect from="*" to="/" />
             </Switch>
             </GlobalLayoutStyle>

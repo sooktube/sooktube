@@ -1,12 +1,11 @@
 import styled from 'styled-components'
 import {MAIN} from "../../style/Main";
-import {RiChatUploadLine,BsThreeDotsVertical} from "react-icons/all";
+import {RiChatUploadLine, BsThreeDotsVertical, IoMdArrowDropdown} from "react-icons/all";
 
 export const CommentBox = styled.div`
-    width:60%;
+    width: 100%;
     margin-top:2%;
     background:#ffffff;
-    display:block;
     padding-top:1%;
 `;
 
@@ -34,7 +33,7 @@ export const UserProfile = styled.img`
 `;
 
 export const TextInput = styled.input`
-    font-size:2.5vh;
+    font-size: 12px;
     padding-bottom: 0.3em;
     width: 90%;
     margin-left: 1em;
@@ -94,14 +93,20 @@ export const Username = styled.div`
 
 export const Text = styled.div`
     color:black;
-    font-size:2.5vh;
+    font-size: 12px;
+`;
+
+export const ArrowDropdown = styled(IoMdArrowDropdown)`
+    width: 1.5em;
+    height: 1.7em;
 `;
 
 export const ReplyButton = styled.button`
     display:block;
     margin-top:1em;
-    font-size:2.4vh;
-    font-weight:550;
+    font-size: 12px;
+    font-weight: 550;
+    border: 0;
     color: ${MAIN.BASE_COLOR};
     background:transparent;
     &:focus{

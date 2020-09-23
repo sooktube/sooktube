@@ -9,7 +9,6 @@ function RelatedContentsInPlaylist({ videoID }) {
     useEffect(() => {
         videoService.getRelatedVideoListByUploader(videoID)
             .then(response => {
-                console.log(response);
                 setVideoList(response);
             })
     }, [videoID])

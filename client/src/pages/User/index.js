@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { useLocation, Switch, Route, useParams } from "react-router-dom";
-import {useSelector} from "react-redux";
 
 //component
 import Header from "../../components/base/Header";
@@ -21,16 +20,16 @@ function MyPage(){
         <main>
             <UserTabs username={username} tab={location}/>
             <Switch>
-                <Route exact path={`/@${username}/video`}>
+                <Route exact path={`/@${username}/profile/video`}>
                     <UploadedVideo username={username}/>
                 </Route>
-                <Route exact path={`/@${username}/playlist`}>
+                <Route exact path={`/@${username}/profile/playlist`}>
                     <UploadedPlaylist username={username}/>
                 </Route>
-                <Route path={`/@${username}/like/video`}>
+                <Route path={`/@${username}/profile/like/video`}>
                     <LikedVideo username={username}/>
                 </Route>
-                <Route path={`/@${username}/like/playlist`}>
+                <Route path={`/@${username}/profile/like/playlist`}>
                     <LikedPlaylist username={username}/>
                 </Route>
             </Switch>

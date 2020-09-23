@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 import {MAIN} from "../../style/Main";
-import {IoIosHeart, IoMdHeartDislike} from "react-icons/all";
-import {Link} from 'react-router-dom';
 
 export const VideoWrapper = styled.div`
     border-bottom: 1.7px solid #ced4da;
@@ -21,7 +19,7 @@ export const Video = styled.video`
 export const VideoTitle = styled.div`
     font-weight:bold;
     text-align: left;
-    font-size: 1.5rem;
+    font-size: 14px;
 `;
 
 export const VideoDescription = styled.div`
@@ -30,19 +28,19 @@ export const VideoDescription = styled.div`
 `;
 
 export const VideoInfo = styled.div`
-    font-size: 2vh;
+    font-size: 12px;
     margin-left: 1em;
     cursor: pointer;
     div {
-      margin-right: 1em;
+      margin-right: 0.5em
     }
     background-color:transparent;
 `;
 
 export const VideoDetail = styled.div`
-    font-size: 1rem;
+    font-size: 12px;
     display: flex;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
 `;
 
 

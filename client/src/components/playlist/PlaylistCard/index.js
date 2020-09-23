@@ -55,13 +55,13 @@ function PlaylistCard({ listID }) {
     useDropdownOutsideClick(contentRef, setCreateDropdownVisible);
 
     function EditClick(){
-        history.push(`/@${card.username}/playlist/update/${listID}`);
+        history.push(`/@${card.username}/update/playlist/${listID}`);
     }
 
     function DeleteClick(){
         playlistService.deletePlaylist(listID)
         .then(() => {
-            history.push(`/mypage`);
+            history.push(`/@${username}/profile/playlist`);
         })
     }
 

@@ -21,7 +21,7 @@ function Comment({videoID, commentID, length, index, username, userComment, prof
         videoID:null,
         username:'',
         userComment: '',
-        profileUrl:'',
+        profileUrl:null,
         parent:0
     });
 
@@ -89,12 +89,14 @@ function Comment({videoID, commentID, length, index, username, userComment, prof
 
     return(
         <S.CommentContainer>
-            <S.Photo src={profileUrl}/>
+            {profileUrl && <S.Photo src={profileUrl}/>}
             {edit && 
             <S.TextBox>
                 <S.Username>{username}</S.Username>
                 <S.Text>{userComment}</S.Text>
-            <S.ReplyButton onClick={ReplyClick}>REPLY {commentCount}</S.ReplyButton>
+            <S.ReplyButton onClick={ReplyClick}>
+                <S.ArrowDropdown/> REPLY {commentCount}
+            </S.ReplyButton>
                 {reply && <CommentReplyList userPic ={userPic} videoID={videoID} commentID={commentID}/>}
             </S.TextBox>}
             

@@ -2,7 +2,7 @@ import React from 'react';
 import * as S from "./style";
 import {history} from "../../../../helpers";
 import RecommendVideo from "../../RecommendVideo";
-import {playlistService} from "../../../../services/playlist.service"
+import {playlistService} from "../../../../services"
 import {useSelector} from "react-redux";
 
 
@@ -16,7 +16,7 @@ function VideoListItem({inVideoList, checkplaylist, videoID, url, title, usernam
     function DeleteClick(){
         playlistService.deleteVideoInPlaylist(username,listID, videoID)
         .then(()=>{
-            window.location.replace(`/playlist/${listID}`);
+            window.location.reload();
         })
     }
 
@@ -24,7 +24,7 @@ function VideoListItem({inVideoList, checkplaylist, videoID, url, title, usernam
         <S.VideoWrapper>
             <S.Video src={url} onClick={handleClick}/>
             <S.VideoInfo>
-                <S.VideoTitle>
+                <S.VideoTitle onClick={handleClick}>
                     {title}
                     <S.InVideoList checkplaylist={checkplaylist} count={recCount + disrecCount}/>
                 </S.VideoTitle>
