@@ -14,7 +14,7 @@ import Playlist from "./pages/Playlist";
 import UpdateVideo from "./pages/UploadVideo/UpdateVideo";
 import UpdatePlaylist from "./pages/UploadPlaylist/UpdatePlaylist";
 import MyPage from './pages/User';
-import Search from "./components/base/search";
+import Search from "./pages/search";
 import CopyPlaylist from "./pages/UploadPlaylist/CopyPlaylist";
 
 function App() {

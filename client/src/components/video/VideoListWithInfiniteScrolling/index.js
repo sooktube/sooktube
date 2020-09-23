@@ -1,29 +1,38 @@
-import React, { Suspense, useEffect, lazy, useState } from 'react';
+import React, {Suspense, useEffect, lazy, useState, useCallback} from 'react';
 import * as S from './style';
 import { useDispatch } from "react-redux";
 import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
 import FallbackVideoList from "../../playlist/FallbackVideoList";
+import debounce from "lodash.debounce";
 
 const VideoListItem = lazy(() => import("../VideoListItem"));
 
-function VideoList({ initAction, action, items, hasMoreItems, showFallbackItems, offset, limit, marginLeft, checkplaylist, username, listID, playlist, isPublic }) {
+function VideoList({ initAction, action, keyword, items, hasMoreItems, showFallbackItems, offset, marginLeft }) {
     const dispatch = useDispatch();
 
     const [opts, setOpts] = useState({
-        listID,
-        username,
         orderBy: "newest",
-        limit,
-        offset: offset
+        limit: 5,
+        offset,
+        keyword
     })
 
     useEffect(() => {
-        setOpts({...opts, offset})
-    }, [offset])
+        setOpts({...opts, offset, keyword})
+    }, [offset, keyword])
 
-    useEffect( () => {
-        dispatch(initAction(opts));
-    }, [listID]);
+    const updateSearch = useCallback(() => {
+        if(keyword) {
+            dispatch(initAction(opts));
+        }
+    }, [keyword])
+
+    const delayedSearch = useCallback(debounce(updateSearch, 500),[keyword]);
+
+    useEffect(() =>{
+        delayedSearch();
+        return delayedSearch.cancel;
+    }, [keyword])
 
     useInfiniteScroll({
         items,
@@ -35,23 +44,15 @@ function VideoList({ initAction, action, items, hasMoreItems, showFallbackItems,
     return (
         <S.VideoListWrapper>
             <Suspense fallback="">
-                {items.map(result =>
-                    <VideoListItem key={result.videoID}
-                                   checkplaylist={checkplaylist}
-                                   videoID={result.videoID}
-                                   url={result.videoPath}
-                                   title={result.videoTitle}
-                                   username={result.username}
-                                   date={result.videoDate.substr(0,10)}
-                                   recommended={result.recommended}
-                                   disrecommended={result.disrecommended}
-                                   recCount={result.recCount}
-                                   disrecCount={result.disrecCount}
-                                   inVideoList={result.inVideoList}
-                                   listUsername={username}
-                                   listID={listID}
-                                   isPublic={isPublic}
-                                   playlist={playlist}/>
+                {items.map(item =>
+                    <VideoListItem key={item.videoID}
+                                   videoID={item.videoID}
+                                   title={item.videoTitle}
+                                   desc={item.videoDesc}
+                                   date={item.videoDate.substr(0,10)}
+                                   like={item.like}
+                                   username={item.username}
+                                   url={item.videoPath}/>
                 )}
             </Suspense>
             {showFallbackItems && <FallbackVideoList marginLeft={marginLeft}/>}

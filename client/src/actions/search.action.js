@@ -78,10 +78,10 @@ function searchVideosInPlaylist({keyword, listID, username, orderBy, limit, offs
     function failure(error) { return { type: searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_FAILURE, error }}
 }
 
-function initSearchVideos({keyword, listID, orderBy, limit, offset}) {
+function initSearchVideos({keyword, orderBy, limit}) {
     return dispatch => {
         dispatch(request());
-        searchService.searchVideoByTitleInPlaylist({keyword, listID, username: '', orderBy, limit, offset})
+        searchService.searchVideoByTitleInPlaylist({keyword, listID: 1, username: 'none', orderBy, limit, offset: 0})
             .then(response => {
                     dispatch(success(response));
                 },
@@ -96,10 +96,10 @@ function initSearchVideos({keyword, listID, orderBy, limit, offset}) {
 }
 
 
-function searchVideos({keyword, listID, orderBy, limit, offset}) {
+function searchVideos({keyword, orderBy, limit, offset}) {
     return dispatch => {
         dispatch(request());
-        searchService.searchVideoByTitleInPlaylist({keyword, listID, username: '', orderBy, limit, offset})
+        searchService.searchVideoByTitleInPlaylist({keyword, listID: 1, username: 'none', orderBy, limit, offset})
             .then(response => {
                     dispatch(success(response));
                 },

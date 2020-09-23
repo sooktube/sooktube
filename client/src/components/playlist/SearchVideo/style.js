@@ -19,7 +19,8 @@ export const SearchInput = styled.input`
 	  background-image: url(${search});
 	  background-position: 0.5em 0.65em;
       background-size: 1em;
-      background-repeat: no-repeat;  
+      background-repeat: no-repeat;
+      outline: none;
 	}
 `;
 

@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import * as S from "./style";
-import {history} from "../../../helpers";
-import {Switch, Route, useRouteMatch, useParams, useLocation} from 'react-router-dom';
-import Header from "../Header";
-import SearchResult from "./SearchResult";
-import SearchTypeToggleButton from "./SearchTypeToggleButton";
+import { history } from "../../helpers";
+import {useRouteMatch, useLocation, Switch, Route, useParams} from 'react-router-dom';
+import Header from "../../components/base/Header";
+
+import SearchTypeToggleButton from "../../components/base/Search/SearchTypeToggleButton";
+import VideoSearchResult from "../../components/base/Search/VideoSearchResult";
 
 function Search() {
     const { url } = useRouteMatch();
+    const { type } = useParams();
     const [keyword, setKeyword] = useState('');
 
     useEffect(() => {
@@ -29,12 +31,16 @@ function Search() {
         <S.SearchWrapper>
             <Header/>
             <S.SearchInput name="keyword"
+                           type="search"
                            value={keyword}
                            onChange={handleChange}
                            placeholder="검색어를 입력하세요."/>
             <S.SearchResultContainer>
                 <SearchTypeToggleButton setKeyword={setKeyword}/>
-                <SearchResult query={query.get("query")}/>
+                {type === 'video'
+                    ? <VideoSearchResult query={query.get("query")}/>
+                    : <VideoSearchResult query={query.get("query")}/>
+                }
             </S.SearchResultContainer>
         </S.SearchWrapper>
     );

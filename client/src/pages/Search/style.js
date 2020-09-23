@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import search from "../../../../public/search.png";
+import search from "../../../public/search.png";
 
 export const SearchWrapper = styled.div`
-    overflow-y: auto;
+    overflow-x: hidden;
 `;
 
 export const SearchInput = styled.input`
@@ -17,6 +17,7 @@ export const SearchInput = styled.input`
 	  background-position: 1em 0.65em;
       background-size: 1em;
       background-repeat: no-repeat;  
+      outline: none;
 	}
 `;
 

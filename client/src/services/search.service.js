@@ -7,6 +7,7 @@ export const searchService = {
 };
 
 function searchVideoTitle({ keyword, listID, username, orderBy, limit, offset}) {
+    console.log("offset", offset);
     return axios({
         method: 'GET',
         url: `https://soktube.uc.r.appspot.com/api/video/search/title/${keyword}/listID/${listID}/user/${username}/${orderBy}?limit=${limit}&offset=${offset}`,

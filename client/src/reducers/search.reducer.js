@@ -78,9 +78,9 @@ export function search(state = initialState, action) {
                 break;
             }
             case searchConstants.SEARCH_VIDEOS_SUCCESS: {
-                draft.hasMoreVideos = (action.data.length === 20);
+                draft.hasMoreVideos = (action.data.length === 5);
                 draft.videos.push(...action.data);
-                draft.videosOffset = draft.videosOffset + 20;
+                draft.videosOffset = draft.videosOffset + 5;
                 draft.showFallbackVideos = false;
                 break;
             }
