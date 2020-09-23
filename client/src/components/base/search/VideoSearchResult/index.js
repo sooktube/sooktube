@@ -4,8 +4,6 @@ import VideoList from "../../../video/VideoListWithInfiniteScrolling";
 import {searchActions} from "../../../../actions";
 import {useSelector} from "react-redux";
 
-//function VideoList({ initAction, action, keyword, items, hasMoreItems, showFallbackItems, offset, limit, marginLeft })
-
 function VideoSearchResult({ query }) {
     const items = useSelector(state => state.search.videos);
     const hasMoreItems = useSelector(state => state.search.hasMoreVideos);

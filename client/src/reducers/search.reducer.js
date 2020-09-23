@@ -17,6 +17,11 @@ const initialState = {
     hasMoreVideos: true,
     showFallbackVideos: true,
     videosOffset: 0,
+    //재생목록 검색
+    playlists: [],
+    hasMorePlaylists: true,
+    showFallbackPlaylists: true,
+    playlistsOffset: 0,
 };
 
 export function search(state = initialState, action) {
@@ -86,6 +91,28 @@ export function search(state = initialState, action) {
             }
             case searchConstants.SEARCH_VIDEOS_FAILURE: {
                 draft.showFallbackVideos = false;
+                break;
+            }
+            case searchConstants.SEARCH_PLAYLISTS_INIT: {
+                draft.showFallbackPlaylists = true;
+                draft.hasMorePlaylists = true;
+                draft.playlists = [];
+                draft.playlistsOffset = 0;
+                break;
+            }
+            case searchConstants.SEARCH_PLAYLISTS_REQUEST: {
+                draft.showFallbackPlaylists = true;
+                break;
+            }
+            case searchConstants.SEARCH_PLAYLISTS_SUCCESS: {
+                draft.hasMorePlaylists = (action.data.length === 9);
+                draft.playlists.push(...action.data);
+                draft.playlistsOffset = draft.playlistsOffset + 9;
+                draft.showFallbackPlaylists = false;
+                break;
+            }
+            case searchConstants.SEARCH_PLAYLISTS_FAILURE: {
+                draft.showFallbackPlaylists = false;
                 break;
             }
             default:

@@ -6,6 +6,7 @@ import Header from "../../components/base/Header";
 
 import SearchTypeToggleButton from "../../components/base/Search/SearchTypeToggleButton";
 import VideoSearchResult from "../../components/base/Search/VideoSearchResult";
+import PlaylistSearchResult from "../../components/base/Search/PlaylistSearchResult";
 
 function Search() {
     const { url } = useRouteMatch();
@@ -34,7 +35,7 @@ function Search() {
                 <SearchTypeToggleButton setKeyword={setKeyword}/>
                 {type === 'video'
                     ? <VideoSearchResult query={keyword}/>
-                    : <VideoSearchResult query={keyword}/>
+                    : <PlaylistSearchResult query={keyword}/>
                 }
             </S.SearchResultContainer>
         </S.SearchWrapper>

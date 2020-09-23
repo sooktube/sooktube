@@ -6,12 +6,12 @@ export const SearchWrapper = styled.div`
 `;
 
 export const SearchInput = styled.input`
-	width: 90%;
+	width: 93%;
 	font-size: 1.5em;
 	padding:0.5em 0.5em 0.5em 2.5em;
 	border: 1.5px solid #e5e5e5;
 	border-radius: 15px;
-	margin: 2rem 5%;
+	margin: 2rem 0 2rem 7%;
 	&, &:focus, &:after {
 	  background-image: url(${search});
 	  background-position: 1em 0.65em;

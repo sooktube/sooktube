@@ -23,7 +23,7 @@ function searchVideoTitle({ keyword, listID, username, orderBy, limit, offset}) 
 function searchPlaylistTitle({keyword, orderBy, limit, offset}) {
     return axios({
         method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/list/search/name/${keyword}/${orderBy}?limit=100&offset=0`,
+        url: `https://soktube.uc.r.appspot.com/api/video/list/search/name/${keyword}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
             return response.data;

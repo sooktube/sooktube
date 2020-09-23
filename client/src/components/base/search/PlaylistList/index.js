@@ -1,24 +1,24 @@
 import React, {Suspense, useEffect, lazy, useState, useCallback} from 'react';
 import * as S from './style';
 import { useDispatch } from "react-redux";
-import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
-import FallbackVideoList from "../../common/FallbackVideoList";
+import useInfiniteScroll from "../../../../hooks/useInfiniteScroll";
+import FallbackCardList from "../../../common/FallbackCardList";
 import debounce from "lodash.debounce";
 
-const VideoListItem = lazy(() => import("../VideoListItem"));
+const PlaylistCard = lazy(() => import("../../../common/PlaylistCard"));
 
-function VideoList({ initAction, action, keyword, items, hasMoreItems, showFallbackItems, offset, marginLeft }) {
+function PlaylistList({ initAction, action, keyword, items, hasMoreItems, showFallbackItems, offset, marginLeft }) {
     const dispatch = useDispatch();
 
     const [opts, setOpts] = useState({
         orderBy: "newest",
-        limit: 5,
+        limit: 9,
         offset,
     })
 
     useEffect(() => {
         setOpts({...opts, offset})
-    }, [offset])
+    }, [offset, keyword])
 
     const updateSearch = useCallback(() => {
         if(keyword) {
@@ -44,22 +44,20 @@ function VideoList({ initAction, action, keyword, items, hasMoreItems, showFallb
         <>
             <Suspense fallback="">
                 {keyword && items.map(item =>
-                    <VideoListItem key={item.videoID}
-                                   videoID={item.videoID}
-                                   title={item.videoTitle}
-                                   desc={item.videoDesc}
-                                   date={item.videoDate.substr(0,10)}
-                                   like={item.like}
-                                   username={item.username}
-                                   url={item.videoPath}/>
+                    <PlaylistCard key={item.listID}
+                                  listID={item.listID}
+                                  listName={item.listName}
+                                  listDesc={item.listDesc}
+                                  like={item.like}
+                                  src={item.url}/>
                 )}
                 {keyword && !showFallbackItems && items.length === 0 &&
-                    <S.NoResultComment> 검색 결과가 없습니다. </S.NoResultComment>
+                <S.NoResultComment> 검색 결과가 없습니다. </S.NoResultComment>
                 }
             </Suspense>
-            {keyword && showFallbackItems && <FallbackVideoList marginLeft={marginLeft}/>}
+            {keyword && showFallbackItems && <FallbackCardList total={9}/>}
         </>
     );
 }
 
-export default VideoList;
+export default PlaylistList;
