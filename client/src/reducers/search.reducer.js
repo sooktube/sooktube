@@ -40,25 +40,25 @@ export function search(state = initialState, action) {
                 draft.showFallbackRecVideos = false;
                 break;
             }
-            case searchConstants.SEARCH_VIDEOS_INIT: {
+            case searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_INIT: {
                 draft.showFallbackSearchVideosInPlaylist = true;
                 draft.hasMoreSearchVideosInPlaylist = true;
                 draft.searchVideosInPlaylist = [];
                 draft.searchOffsetInPlaylist = 0;
                 break;
             }
-            case searchConstants.SEARCH_VIDEOS_REQUEST: {
+            case searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_REQUEST: {
                 draft.showFallbackSearchVideosInPlaylist = true;
                 break;
             }
-            case searchConstants.SEARCH_VIDEOS_SUCCESS: {
+            case searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_SUCCESS: {
                 draft.hasMoreSearchVideosInPlaylist = (action.data.length === 20);
                 draft.searchVideosInPlaylist.push(...action.data);
                 draft.searchOffsetInPlaylist = draft.searchOffsetInPlaylist + 20;
                 draft.showFallbackSearchVideosInPlaylist = false;
                 break;
             }
-            case searchConstants.SEARCH_VIDEOS_FAILURE: {
+            case searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_FAILURE: {
                 draft.showFallbackSearchVideosInPlaylist = false;
                 break;
             }

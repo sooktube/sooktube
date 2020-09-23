@@ -54,9 +54,9 @@ function initSearchVideos({keyword, listID, username, orderBy, limit, offset}) {
                 })
     }
 
-    function request() { return { type: searchConstants.SEARCH_VIDEOS_INIT }}
-    function success(data) { return { type: searchConstants.SEARCH_VIDEOS_SUCCESS, data }}
-    function failure(error) { return { type: searchConstants.SEARCH_VIDEOS_FAILURE, error }}
+    function request() { return { type: searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_INIT }}
+    function success(data) { return { type: searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_SUCCESS, data }}
+    function failure(error) { return { type: searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_FAILURE, error }}
 }
 
 function searchVideos({keyword, listID, username, orderBy, limit, offset}) {
@@ -71,7 +71,7 @@ function searchVideos({keyword, listID, username, orderBy, limit, offset}) {
                 })
     }
 
-    function request() { return { type: searchConstants.SEARCH_VIDEOS_REQUEST }}
-    function success(data) { return { type: searchConstants.SEARCH_VIDEOS_SUCCESS, data }}
-    function failure(error) { return { type: searchConstants.SEARCH_VIDEOS_FAILURE, error }}
+    function request() { return { type: searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_REQUEST }}
+    function success(data) { return { type: searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_SUCCESS, data }}
+    function failure(error) { return { type: searchConstants.SEARCH_VIDEOS_IN_PLAYLIST_FAILURE, error }}
 }

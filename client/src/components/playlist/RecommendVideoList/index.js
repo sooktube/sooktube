@@ -10,8 +10,6 @@ function RecommendVideoList({listID, username}) {
     const showFallbackRecVideos = useSelector(state => state.search.showFallbackRecVideos);
     const recOffset = useSelector(state => state.search.recOffset);
 
-    //initAction, action, items, hasMoreItems, showFallbackItems, offset, marginLeft, checkplaylist, username, listID, playlist, isPublic
-
     return (
         <Fragment>
             <div style={{
