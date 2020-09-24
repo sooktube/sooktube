@@ -26,7 +26,6 @@ export const LoginLogo = styled.div`
     color: ${MAIN.BASE_COLOR};
     font-weight:bold;
     margin-top:1em;
-    
 `;
 
 export const FormGroup1 = styled.div`
@@ -35,16 +34,15 @@ export const FormGroup1 = styled.div`
     margin-top:2em;
     margin-left:1em;
     margin-right:1em;
-    
+    margin-bottom: 1em;
 `;
 
 export const FormGroup2 = styled.div`
     position:static;
     padding:0;
-    margin-top:2em;
+    margin-top:0.5em;
     margin-left:1em;
     margin-right:1em;
-   
 `;
 
 export const FormGroup3 = styled.div`
@@ -97,6 +95,7 @@ export const Regguide = styled.span`
     color: ${MAIN.DARK_TEXT_COLOR};
     font-size:12px;
     margin-right:1em;
+    margin-top: 1rem;
 `;
 
 export const RegLink = styled(Link)`
@@ -104,6 +103,7 @@ export const RegLink = styled(Link)`
     color: #071b6a;
     font-weight: bolder;
     font-size:12px;
+    margin-top: 1rem;
     margin-left:1em;
     margin-right:1em;
 `;

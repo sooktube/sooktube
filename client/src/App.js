@@ -16,6 +16,7 @@ import UpdatePlaylist from "./pages/UploadPlaylist/UpdatePlaylist";
 import MyPage from './pages/User';
 import Search from "./pages/search";
 import CopyPlaylist from "./pages/UploadPlaylist/CopyPlaylist";
+import UserConfig from "./pages/UserConfig";
 
 function App() {
     return (
@@ -39,6 +40,7 @@ function App() {
                 <Route path='/@:username/update/playlist/:listID' component={UpdatePlaylist}/>
                 <PrivateRoute path='/copy/playlist/:listID' component={CopyPlaylist}/>
                 <Route path='/@:username/profile/:tab' component={MyPage}/>
+                <Route path='/@:username/config' component={UserConfig}/>
                 <Redirect from="*" to="/" />
             </Switch>
             </GlobalLayoutStyle>

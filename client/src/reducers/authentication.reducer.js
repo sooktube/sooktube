@@ -11,17 +11,34 @@ export function authentication(state = initialState, action) {
     case authConstants.LOGIN_REQUEST:
       return {
         loggingIn: true,
-        user: action.user,
       };
     case authConstants.LOGIN_SUCCESS:
       return {
         loggedIn: true,
-        user: action.user,
+        user: action.token,
         username: action.username,
-        profile: action.profile
+        profileURL: action.profileURL,
+        userID: action.userID,
       };
     case authConstants.LOGIN_FAILURE:
       return {};
+    case authConstants.EDIT_REQUEST:
+      return {
+        ...state,
+        loggedIn: true,
+      };
+    case authConstants.EDIT_SUCCESS:
+      return {
+        ...state,
+        profileURL: action.profileURL,
+        username: action.username,
+        profile: action.profile,
+      };
+    case authConstants.EDIT_FAILURE:
+      return {
+        ...state,
+        loggedIn: true,
+      };
     case authConstants.LOGOUT:
       return {};
     default:

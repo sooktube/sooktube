@@ -13,6 +13,8 @@ export const authService = {
     getProfilePicUploadUrl,
     UploadUserProfilePic,
     getProfileUrlByProfilepic,
+    getUserInfo,
+    updateUserInfo,
 };
 
 function login(user) {
@@ -168,6 +170,34 @@ function getProfileUrlByProfilepic(profilepic) {
     return axios({
         method: 'GET',
         url: `https://soktube.uc.r.appspot.com/api/profile/get/${profilepic}`
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}
+
+function getUserInfo(username){
+    return axios({
+        method: 'GET',
+        url: `https://soktube.uc.r.appspot.com/api/user/info/${username}`
+    })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        })
+}
+
+function updateUserInfo({ userID, username, password, profilepic }){
+    return axios({
+        method: 'PUT',
+        url: `https://soktube.uc.r.appspot.com/api/user/update/info/${userID}`,
+        headers: { "Content-Type": "application/json" },
+        data: JSON.stringify({ username, password, profilepic })
     })
         .then(response => {
             return response.data;
