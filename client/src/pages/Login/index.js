@@ -65,7 +65,10 @@ function Login() {
                 <FormGroup3>
                     <SubmitButton>
                         LOGIN
-                        {loggingIn && <span  className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
+                        {loggingIn && <span className="spinner-border spinner-border-sm mr-1"
+                                            style={{
+                                                margin: '0 0 2px 5px'
+                                            }}/>}
                     </SubmitButton>
                 </FormGroup3>
                 <FormGroup4>
