@@ -108,8 +108,7 @@ function getPlaylistInfoByListID(listID, username) {
         })
 }
 
-function getGTEQ0LT5VideoList({listID, username, orderBy, limit, offset}) {
-    return axios({
+function getGTEQ0LT5VideoList({listID, username, orderBy, limit, offset}) {return axios({
         method: 'GET',
         url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/0/LT/5/${listID}/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
@@ -127,6 +126,7 @@ function getGTEQ5VideoList({listID, username, orderBy, limit, offset}) {
         url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/5/${listID}/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
+            console.log(response.data);
             return response.data;
         })
         .catch(error => {

@@ -51,7 +51,7 @@ export const CreateDropdownContent = styled.div`
 `;
 
 export const UserDropdownMenu = styled.div`
-    font-size: 3vh;
+    font-size: 14px;
     float: right;
     position: relative;
     border: none;
@@ -62,7 +62,7 @@ export const UserDropdownMenu = styled.div`
 
 export const CreateDropdownMenu = styled.div`
     margin-right: 1em;
-    font-size: 3vh;
+    font-size: 14px;
     float: right;
     position: relative;
     border: none;
@@ -86,7 +86,7 @@ export const DropdownPlusBtn  = styled.div`
 export const StyledLink = styled(NavLink)`
     color: ${MAIN.TEXT_COLOR};
     padding: 1em 0.5em 1em 0.5em;
-    font-size: 2vh;
+    font-size: 12px;
     font-weight:bold;
     text-decoration: none;
     display: block;
@@ -101,7 +101,7 @@ export const StyledLink = styled(NavLink)`
 export const DropdownItem = styled.div`
     color: ${MAIN.TEXT_COLOR};
     padding: 1em 0.5em 1em 0.5em;
-    font-size: 2vh;
+    font-size: 12px;
     font-weight:bold;
     min-height: 2vh;
     text-decoration: none;

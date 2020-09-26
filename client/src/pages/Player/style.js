@@ -6,8 +6,8 @@ import {Link} from "react-router-dom";
 export const VideoWrapper = styled.div`
     background:#ffffff;
     border-radius: 20px;
-    margin-top: 2rem;
-    padding: 1rem 1.5rem;
+    margin: 2rem 0 4rem 0;
+    padding: 2rem 2rem;
     display: flex;
 `;
 

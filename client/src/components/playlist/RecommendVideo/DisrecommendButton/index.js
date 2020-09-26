@@ -51,6 +51,7 @@ function DisrecommendButton({inVideoList, videoID, username, disrecommended, dis
         }
     }
 
+    console.log(disrecommended);
     return (
         <S.DisrecommendWrapper>
             <S.Disrecommend on={disrecommended} onClick={toggleRecommend}/>

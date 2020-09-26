@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react';
 import * as S from './style';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {playlistService} from "../../../services";
 import dummy_card_image from '../../../../public/images/dummy_card_img.jpg';
 import LikePlaylistButton from "./LikePlaylistButton";
@@ -95,7 +96,11 @@ function PlaylistCard({ listID }) {
                 </S.CardDesc> 
                 <S.CardBottomWrapper>
                 <S.CardBottom>
-                    <S.CardAuthor> by {card.username} </S.CardAuthor>
+                    <S.CardAuthor>
+                        <Link to={`/@${card.username}/profile/playlist`}>
+                            by {card.username}
+                        </Link>
+                    </S.CardAuthor>
                     <S.EditWrapper>
                     {(card.username === username) && <S.DotIcon onClick={toggleDropdown}/> }
                     <LikePlaylistButton like={card.like} likeCount={card.likeCount}/>

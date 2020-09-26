@@ -13,7 +13,7 @@ function RecommendVideoList({listID, username}) {
     return (
         <Fragment>
             <div style={{
-                fontSize: '1.2em',
+                fontSize: '13px',
                 marginTop: '1em',
                 lineHeight: '1.2em',
                 color: `${MAIN.DARK_TEXT_COLOR}`

@@ -152,5 +152,8 @@ export const Separator = styled.div`
 export const CardAuthor = styled.div`
     font-family: Georgia, sans-serif;
     font-style: italic;
+    a, a:focus, a:active {
+      color: ${MAIN.DARK_TEXT_COLOR};    
+    }
 `;
 
