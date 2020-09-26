@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const VideoListWrapper = styled.main`
     padding: 0 1rem;
-    margin: 0;
     overflow-x: hidden;
-    border-radius: 15px;
     width: 100%;
+    margin-bottom: 4rem;
+    border-radius: 15px;
     background-color: #fff;
 `;
 

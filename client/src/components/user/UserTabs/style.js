@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
     margin: 2.4rem auto 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
     max-width: 100%;
     border-bottom: 1.3px solid darken(#f4f4f4, 10);
