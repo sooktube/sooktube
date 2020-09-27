@@ -39,7 +39,7 @@ function VideoListItem({inVideoList, checkplaylist, videoID, url, title, usernam
             <S.VideoLike>
                 {isPublic === 1 && <RecommendVideo videoID={videoID}
                                                    inVideoList={checkplaylist ? inVideoList : 1}
-                                                   username={username}
+                                                   username={currentUsername}
                                                    recommended={recommended}
                                                    recCount={recCount}
                                                    disrecommended={disrecommended}

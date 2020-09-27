@@ -42,7 +42,7 @@ function PlaylistCard({ listID }) {
                         ...card,
                         likeCount: response[1][0]
                     }))
-                    setOriginalListID(response);
+                    setOriginalListID(response[2]);
                     setLoading(false);
                 })
             })
@@ -66,10 +66,6 @@ function PlaylistCard({ listID }) {
         })
     }
 
-    function OriginalPage(){
-        window.location.replace(`/playlist/${originalListID}`);
-    }
-
     return (
         <>
         {loading
@@ -87,10 +83,10 @@ function PlaylistCard({ listID }) {
                 <S.Separator/>
                 <S.CardDesc>
                     {card.copied === 1 &&
-                        <>
-                        <S.OriginalPageText>Original Page Link</S.OriginalPageText>
-                        <S.OriginalLink onClick={OriginalPage}/>
-                        </>
+                        <a href={`playlist/${originalListID}`} target="_blank" rel="noopener noreferrer">
+                            <S.OriginalPageText>Original Page Link</S.OriginalPageText>
+                            <S.OriginalLink/>
+                        </a>
                     }
                 <div>{card.listDesc.length > 110 ? card.listDesc.slice(0,110)+'...' : card.listDesc} </div>
                 </S.CardDesc> 

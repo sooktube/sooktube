@@ -35,19 +35,19 @@ function VideoList({ initAction, action, items, hasMoreItems, showFallbackItems,
     return (
         <S.VideoListWrapper>
             <Suspense fallback="">
-                {items.map(result =>
-                    <VideoListItem key={result.videoID}
+                {items.map(item =>
+                    <VideoListItem key={item.videoID}
                                    checkplaylist={checkplaylist}
-                                   videoID={result.videoID}
-                                   url={result.videoPath}
-                                   title={result.videoTitle}
-                                   username={result.username}
-                                   date={result.videoDate.substr(0,10)}
-                                   recommended={result.recommended}
-                                   disrecommended={result.disrecommended}
-                                   recCount={result.recCount}
-                                   disrecCount={result.disrecCount}
-                                   inVideoList={result.inVideoList}
+                                   videoID={item.videoID}
+                                   url={item.videoPath}
+                                   title={item.videoTitle}
+                                   username={item.username}
+                                   date={item.videoDate.substr(0,10)}
+                                   recommended={item.recommended}
+                                   disrecommended={item.disrecommended}
+                                   recCount={item.recCount}
+                                   disrecCount={item.disrecCount}
+                                   inVideoList={item.inVideoList}
                                    listUsername={username}
                                    listID={listID}
                                    isPublic={isPublic}

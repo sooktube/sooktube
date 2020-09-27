@@ -11,7 +11,7 @@ function DisrecommendButton({inVideoList, videoID, username, disrecommended, dis
     async function toggleRecommend() {
         //이미 재생목록에 있던 영상을 비추천
         if(!loading && disrecommended === 0 && isInVideoList === 1) {
-            await setDisrecommend(1);
+            await setDisrecommend(-1);
             playlistService.disrecommendVideoInPlaylist({listID, videoID, username})
                 .then(response => {
                     setCount({
@@ -23,7 +23,7 @@ function DisrecommendButton({inVideoList, videoID, username, disrecommended, dis
         }
         //영상을 비추천하면서 재생목록에 새로 추가
         else if (!loading && disrecommended === 0 && isInVideoList === 0) {
-            await setDisrecommend(1);
+            await setDisrecommend(-1);
             playlistService.addVideoToPlaylist({listID, videoID, username})
                 .then(() => {
                     return playlistService.disrecommendVideoInPlaylist({listID, videoID, username})
@@ -38,7 +38,7 @@ function DisrecommendButton({inVideoList, videoID, username, disrecommended, dis
                 })
         }
         //이미 재생목록에 있던 영상을 비추천 취소
-        else if (!loading && disrecommended === 1 && isInVideoList === 1) {
+        else if (!loading && disrecommended === -1 && isInVideoList === 1) {
             await setDisrecommend(0);
             playlistService.cancelDisrecommendVideoInPlaylist({listID, videoID, username})
                 .then(response => {
@@ -51,7 +51,6 @@ function DisrecommendButton({inVideoList, videoID, username, disrecommended, dis
         }
     }
 
-    console.log(disrecommended);
     return (
         <S.DisrecommendWrapper>
             <S.Disrecommend on={disrecommended} onClick={toggleRecommend}/>

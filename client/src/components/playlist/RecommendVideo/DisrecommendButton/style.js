@@ -15,5 +15,5 @@ export const Disrecommend = styled(IoIosHeartDislike)`
     height: 25px;
     margin-right: 0.2em;
     cursor: pointer;
-    color: ${props => props.on === 1 ? '#71A6C6' : '#cecece'}
+    color: ${props => props.on === -1 ? '#71A6C6' : '#cecece'}
 `;

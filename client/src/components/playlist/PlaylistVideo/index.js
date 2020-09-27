@@ -35,7 +35,7 @@ function PlaylistVideo({ listID }) {
                 <Fragment>
                     <RecommendVideoButton listID={listID}
                                           isPublic={isPublic}
-                                          username={username}
+                                          username={currentUsername}
                                           copied={copied}/>
                     <VideoList username={currentUsername}
                                listID={listID}
