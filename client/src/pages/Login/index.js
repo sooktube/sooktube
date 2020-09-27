@@ -53,7 +53,7 @@ function Login() {
                 <FormGroup2>
                     <InputA
                         placeholder="Password"
-                        type="text"
+                        type="password"
                         value={password}
                         name="password"
                         onChange={handleChange}
