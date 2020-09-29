@@ -42,7 +42,7 @@ function UpdateVideo(){
                 console.log(response);
                 setInput(response);
             })
-    }, []);
+    }, [videoID]);
 
     useEffect(() => {
         if(input.videoFile) {

@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as S from "./style";
 import Comment from "./Comment";
 import {commentService} from "../../../services/comment.service";
-import {userService} from "../../../services/user.service";
+import {authService} from "../../../services/auth.service";
+import defaultProfileImg from "../../../../public/defaultProfile.png";
 
 function CommentBox({listID}){
     const currentUsername = useSelector(state => state.authentication.username);
@@ -11,12 +12,12 @@ function CommentBox({listID}){
     const dispatch = useDispatch();
 
     const [comment, setComment] = useState('');
-    const [userPic, setUserPic] = useState('');
+    const [userPic, setUserPic] = useState(defaultProfileImg);
     const [commentCount, setCommentCount] = useState(0);
     const [newText,setNewText] = useState({username:'',userComment:'',profileUrl:'',parent:null});
 
     useEffect(()=>{
-        userService.getUserProfilePic(currentUsername)
+        authService.getUserProfilePic(currentUsername)
             .then(response => {
                 setUserPic(response);
             })

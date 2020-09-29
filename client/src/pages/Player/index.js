@@ -43,7 +43,7 @@ function Player(){
         .then(response => {
             dispatch({type:'INIT',value:response});
         })    
-    },[])
+    },[videoID])
 
     return(
         <>

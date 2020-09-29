@@ -13,7 +13,7 @@ export const HeaderWrapper = styled.div`
 
 export const HeaderLogo = styled(NavLink)`
     font-weight: bold;
-    font-size: 4vh;
+    font-size: 24px;
     padding-top: 1vh;
     padding-bottom: 0.5em;
     letter-spacing: 0.2em;

@@ -9,17 +9,43 @@ export const TabsWrapper = styled.div`
 `;
 
 export const VideoTab = styled(Link)`
-    display: inline-block;
-    color: ${props => props.active === 1 ? '#71A6C6' : '#495057'};
-    border-bottom: ${props => props.active === 1 ? '2.5px solid #71A6C6' : 'none'};
-    transition: all 0.3s, transform 0.3s;
-    margin-right: 0.5em;
+    position: relative;
+    overflow: hidden;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    width: calc(100% / 2);
+    height: auto;
     padding-bottom: 0.5em;
-    font-size: 1.2rem;
-    font-weight: bold;
+    background: #fff;
+    transition: all 0.3s ease;
+    border-radius: 15px 15px 0 0;
+    bottom: ${props => props.active === 1 && 0};
+    z-index: ${props => props.active === 1 && 0};
+    border-bottom: ${props => props.active === 1 ? '2.5px solid #71A6C6' : '2.5px solid transparent'};
+    color:  ${props => props.active === 1 ? '#252b46' : '#9194a1'};    
+    
+    &:focus {
+        outline:none;
+        text-decoration: none;
+    }
+    
     &:hover {
-      color: #495057;
-      text-decoration: none;
+        outline:none;
+        text-decoration: none;
+        color: #252b46;
+    }
+    
+    &::before {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: 2;
     }
 `;
 

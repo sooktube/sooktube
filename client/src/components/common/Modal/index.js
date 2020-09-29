@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import Portal from "../Portal";
 import * as S from "./style";
 
 function Modal({ onClose, visible, children, width, max_width }) {
@@ -20,7 +21,7 @@ function Modal({ onClose, visible, children, width, max_width }) {
     }, [visible]);
 
     return (
-        <>
+        <Portal elementId="modal-root">
             <S.ModalOverlay visible={visible}/>
             <S.ModalWrapper visible={visible}
                             onClick={onMaskClick}>
@@ -29,7 +30,7 @@ function Modal({ onClose, visible, children, width, max_width }) {
                     {children}
                 </S.ModalInner>
             </S.ModalWrapper>
-        </>
+        </Portal>
     )
 }
 

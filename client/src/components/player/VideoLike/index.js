@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import LikeButton from "./LikeButton"
 import DislikeButton from "./DislikeButton";
 import {useSelector} from "react-redux";
@@ -19,28 +19,28 @@ function VideoLike({videoID, likeCount, dislikeCount, like, dislike}) {
     })
 
     //추천 버튼이나 비추천 버튼을 누르고 서버에서 처리하는 동안은 버튼 비활성화
-    function setLike(like) {
+    const setLike = useCallback(like => {
         setData({
             like,
             dislike: 0,
             loading: true
         })
-    }
+    },[]);
 
-    function setDislike(dislike) {
+    const setDislike = useCallback(dislike => {
         setData({
             dislike,
             like: 0,
             loading: true
         })
-    }
+    }, []);
 
-    function setLoading(loading) {
+    const setLoading = useCallback(loading => {
         setData(data => ({
             ...data,
             loading
         }))
-    }
+    },[]);
 
     return (
         <S.VideoLikeContainer>

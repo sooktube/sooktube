@@ -2,11 +2,11 @@ import React from 'react';
 import * as S from "./style";
 import {history} from "../../../../helpers";
 import RecommendVideo from "../../RecommendVideo";
-import {playlistService} from "../../../../services/playlist.service"
+import {playlistService} from "../../../../services"
 import {useSelector} from "react-redux";
 
 
-function VideoListItem({inVideoList, checkplaylist, videoID, url, title, username, date, recommended, disrecommended, recCount, disrecCount,listUsername, listID, playlist}){
+function VideoListItem({inVideoList, checkplaylist, videoID, url, title, username, date, recommended, disrecommended, recCount, disrecCount, listUsername, listID, playlist, isPublic}){
     const currentUsername = useSelector(state => state.authentication.username);
 
     function handleClick() {
@@ -16,7 +16,7 @@ function VideoListItem({inVideoList, checkplaylist, videoID, url, title, usernam
     function DeleteClick(){
         playlistService.deleteVideoInPlaylist(username,listID, videoID)
         .then(()=>{
-            window.location.replace(`/playlist/${listID}`);
+            window.location.reload();
         })
     }
 
@@ -24,7 +24,7 @@ function VideoListItem({inVideoList, checkplaylist, videoID, url, title, usernam
         <S.VideoWrapper>
             <S.Video src={url} onClick={handleClick}/>
             <S.VideoInfo>
-                <S.VideoTitle>
+                <S.VideoTitle onClick={handleClick}>
                     {title}
                     <S.InVideoList checkplaylist={checkplaylist} count={recCount + disrecCount}/>
                 </S.VideoTitle>
@@ -37,13 +37,13 @@ function VideoListItem({inVideoList, checkplaylist, videoID, url, title, usernam
                 </S.VideoDetail>
             </S.VideoInfo>
             <S.VideoLike>
-                <RecommendVideo videoID={videoID}
-                                inVideoList={checkplaylist ? inVideoList : 1}
-                                username={username}
-                                recommended={recommended}
-                                recCount={recCount}
-                                disrecommended={disrecommended}
-                                disrecCount={disrecCount}/>
+                {isPublic === 1 && <RecommendVideo videoID={videoID}
+                                                   inVideoList={checkplaylist ? inVideoList : 1}
+                                                   username={currentUsername}
+                                                   recommended={recommended}
+                                                   recCount={recCount}
+                                                   disrecommended={disrecommended}
+                                                   disrecCount={disrecCount}/>}
             </S.VideoLike>
         </S.VideoWrapper>
     );

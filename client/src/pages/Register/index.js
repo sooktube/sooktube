@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from '../../actions';
-import {userService} from "../../services";
+import { authAction } from '../../actions';
+import {authService} from "../../services";
 import * as S from "./style";
 import EmailValidator from 'email-validator';
 
@@ -35,7 +35,7 @@ function Register() {
     const registering = useSelector(state => state.registration.registering);
 
     useEffect(() => {
-        userService.logout();
+        authService.logout();
     }, []);
 
     function handleChange(e) {
@@ -45,7 +45,7 @@ function Register() {
 
     function checkDuplicateUserID() {
         if (validate.userID === true){
-            userService.checkUserID(user)
+            authService.checkUserID(user)
                 .then(response => {
                         if (response.data === "OK") setIsDuplicate(isDuplicate => ({...isDuplicate, userID: false}));
                         else setIsDuplicate(isDuplicate => ({...isDuplicate, userID: true}));
@@ -59,7 +59,7 @@ function Register() {
 
     function checkDuplicateUsername() {
         if (validate.username === true){
-            userService.checkUsername(user)
+            authService.checkUsername(user)
                 .then(response => {
                         if (response.data === "OK") setIsDuplicate(isDuplicate => ({...isDuplicate, username: false}));
                         else setIsDuplicate(isDuplicate => ({...isDuplicate, username: true}));
@@ -110,7 +110,7 @@ function Register() {
         if ((validate.username && validate.userID && validate.password)
             && (user.password === user.passwordChk)
             && (!isDuplicate.username && !isDuplicate.userID)){
-            dispatch(userActions.register(userSubmit));
+            dispatch(authAction.register(userSubmit));
         }
     }
 
@@ -119,13 +119,13 @@ function Register() {
         const imageFile = event.target.files[0];
         const filename = 'profile' + time + event.target.files[0].name;
         setUser({...user, profilepic : filename });
-        userService.getProfilePicUploadUrl(filename)
+        authService.getProfilePicUploadUrl(filename)
             .then(response => {
-                userService.UploadUserProfilePic({
+                authService.UploadUserProfilePic({
                     uploadURL : response,
                     imageFile : imageFile
                 }).then(() => {
-                    userService.getProfileUrlByProfilepic(filename)
+                    authService.getProfileUrlByProfilepic(filename)
                         .then(response => {
                             userImage = response;
                             setImageURL(userImage);

@@ -19,13 +19,14 @@ export const SearchInput = styled.input`
 	  background-image: url(${search});
 	  background-position: 0.5em 0.65em;
       background-size: 1em;
-      background-repeat: no-repeat;  
+      background-repeat: no-repeat;
+      outline: none;
 	}
 `;
 
 export const SearchComment = styled.div`
     div {
-        font-size: 1.2em;
+        font-size: 13px;
         margin-top: 1em;
         line-height: 1.2em;
         color: ${MAIN.DARK_TEXT_COLOR};
@@ -44,14 +45,8 @@ export const Dislike = styled(IoMdHeartDislike)`
     color: ${MAIN.BASE_COLOR};
 `
 
-export const SearchResult = styled.div`
-    width: 90%;
-    font-size: 1em;
-    margin: 1em auto;
-`;
-
 export const InvalidSearchFeedback = styled.div`
     margin-top: 1.5rem;
-    font-size: 1.2rem;
+    font-size: 13px;
     color: ${MAIN.DARK_TEXT_COLOR};
 `;

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from '../../actions';
-import {LoginLogo, MainBackground, FormGroup1, FormGroup4, LoginBox, FormGroup2, FormGroup3, InvalidFeedback, SubmitButton, Regbutton, Regguide, InputA} from "./style";
+import { authAction } from '../../actions';
+import {LoginLogo, MainBackground, RegLink, FormGroup1, FormGroup4, LoginBox, FormGroup2, FormGroup3, InvalidFeedback, SubmitButton, Regbutton, Regguide, InputA} from "./style";
 
 function Login() {
     const [inputs, setInputs] = useState({
@@ -17,7 +17,7 @@ function Login() {
 
     // reset login status
     useEffect(() => {
-        dispatch(userActions.logout());
+        dispatch(authAction.logout());
     }, []);
 
     function handleChange(e) {
@@ -30,7 +30,7 @@ function Login() {
 
         setSubmitted(true);
         if (userID && password) {
-            dispatch(userActions.login({userID, password}));
+            dispatch(authAction.login({userID, password}));
         }
     }
 
@@ -65,12 +65,15 @@ function Login() {
                 <FormGroup3>
                     <SubmitButton>
                         LOGIN
-                        {loggingIn && <span  className="spinner-border spinner-border-sm mr-1" style={{margin: '0 0 0 5px'}}/>}
+                        {loggingIn && <span className="spinner-border spinner-border-sm mr-1"
+                                            style={{
+                                                margin: '0 0 2px 5px'
+                                            }}/>}
                     </SubmitButton>
                 </FormGroup3>
                 <FormGroup4>
-                <Regguide>Don't have an account? </Regguide>
-                <Link to="/register"><Regbutton>Sign up</Regbutton></Link>
+                <Regguide> 아직 회원이 아니신가요? </Regguide>
+                <RegLink to="/register"> 회원가입 </RegLink>
                 </FormGroup4>
             </form>
             </LoginBox>

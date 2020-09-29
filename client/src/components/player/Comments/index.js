@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as S from "./style";
 import Comment from "./Comment";
-import {commentService} from "../../../services/comment.service";
-import {userService} from "../../../services/user.service";
+import {commentService} from "../../../services";
+import {authService} from "../../../services";
 
 function CommentBox({videoID}){
     const currentUsername = useSelector(state => state.authentication.username);
@@ -16,7 +16,7 @@ function CommentBox({videoID}){
     const [newText,setNewText] = useState({username:'',userComment:'',profileUrl:'',parent:null});
 
     useEffect(()=>{
-        userService.getUserProfilePic(currentUsername)
+        authService.getUserProfilePic(currentUsername)
             .then(response => {
                 setUserPic(response);
             })
@@ -54,7 +54,7 @@ function CommentBox({videoID}){
         <S.CommentBox>
             <S.CommentTitle>Comments  {commentCount}</S.CommentTitle>
             <S.AddCommentWrapper>
-                <S.UserProfile src={userPic}/>
+                {userPic && <S.UserProfile src={userPic}/>}
                 <S.TextInput placeholder="댓글 추가"
                              value={comment}
                              onChange={handleChange}/>
@@ -63,7 +63,7 @@ function CommentBox({videoID}){
             {comments.map((comment,index) =>
             (comment.parent === 0) &&
                 <Comment
-                    key={index}
+                    key={comment.commentID}
                     videoID = {videoID}
                     commentID = {comment.commentID}
                     length={comments.length}

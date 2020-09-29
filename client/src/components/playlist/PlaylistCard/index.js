@@ -1,11 +1,13 @@
 import React, {useEffect, useState, useRef} from 'react';
 import * as S from './style';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {playlistService} from "../../../services";
 import dummy_card_image from '../../../../public/images/dummy_card_img.jpg';
 import LikePlaylistButton from "./LikePlaylistButton";
 import useDropdownOutsideClick from "../../../hooks/useDropdownOutsideClick";
 import {history} from "../../../helpers";
+import FallbackPlaylistCard from "../FallbackPlaylistCard";
 
 function PlaylistCard({ listID }) {
     const username = useSelector(state => state.authentication.username);
@@ -30,22 +32,19 @@ function PlaylistCard({ listID }) {
         playlistService.getPlaylistInfoByListID(listID, username)
             .then(response => {
                 setCard(response);
-                return playlistService.getPlaylistImgByFileName(response.thumbnail)
-            })
-            .then(response => {
-                setThumbnailImgURL(response);
-                return playlistService.getLikeCountByListID(listID)
-            })
-            .then(response => {
-                setCard(card => ({
-                    ...card,
-                    likeCount: response[0]
-                }))
-                setLoading(false);
-            })
-        playlistService.getOriginalListID(listID)
-            .then(response => {
-                setOriginalListID(response);
+                Promise.all([
+                    playlistService.getPlaylistImgByFileName(response.thumbnail),
+                    playlistService.getLikeCountByListID(listID),
+                    playlistService.getOriginalListID(listID)
+                ]).then(response => {
+                    setThumbnailImgURL(response[0]);
+                    setCard(card => ({
+                        ...card,
+                        likeCount: response[1][0]
+                    }))
+                    setOriginalListID(response[2]);
+                    setLoading(false);
+                })
             })
     },[])
 
@@ -57,24 +56,21 @@ function PlaylistCard({ listID }) {
     useDropdownOutsideClick(contentRef, setCreateDropdownVisible);
 
     function EditClick(){
-        history.push(`/@${card.username}/playlist/update/${listID}`);
+        history.push(`/@${card.username}/update/playlist/${listID}`);
     }
 
     function DeleteClick(){
         playlistService.deletePlaylist(listID)
         .then(() => {
-            history.push(`/mypage`);
+            history.push(`/@${username}/profile/playlist`);
         })
-    }
-
-    function OriginalPage(){
-        window.location.replace(`/playlist/${originalListID}`);
     }
 
     return (
         <>
-        {!loading &&
-        <S.CardWrapper>
+        {loading
+        ? <FallbackPlaylistCard/>
+        : <S.CardWrapper>
             {thumbnailImgURL
                 ? <S.CardImage src={thumbnailImgURL} alt="card_thumbnail"/>
                 : <S.CardImage src={dummy_card_image} alt="no_image"/>
@@ -83,19 +79,24 @@ function PlaylistCard({ listID }) {
                 <S.CardTitle> 
                     <S.Text>{card.listName.length > 26 ? card.listName.slice(0,26)+'...' : card.listName}</S.Text> 
                 </S.CardTitle>
-                {(card.copied === 1) && <S.CardCopied> 복사본 </S.CardCopied>}
+                {card.copied === 1 && <S.CardCopied> 복사본 </S.CardCopied>}
                 <S.Separator/>
                 <S.CardDesc>
-                    {(card.copied === 1) && 
-                    <>
-                    <S.OriginalPageText>Original Page Link</S.OriginalPageText> 
-                    <S.OriginalLink onClick={OriginalPage}/>
-                    </>}
-                    <div>{card.listDesc.length > 110 ? card.listDesc.slice(0,110)+'...' : card.listDesc} </div>
+                    {card.copied === 1 &&
+                        <a href={`playlist/${originalListID}`} target="_blank" rel="noopener noreferrer">
+                            <S.OriginalPageText>Original Page Link</S.OriginalPageText>
+                            <S.OriginalLink/>
+                        </a>
+                    }
+                <div>{card.listDesc.length > 110 ? card.listDesc.slice(0,110)+'...' : card.listDesc} </div>
                 </S.CardDesc> 
                 <S.CardBottomWrapper>
                 <S.CardBottom>
-                    <S.CardAuthor> by {card.username} </S.CardAuthor>
+                    <S.CardAuthor>
+                        <Link to={`/@${card.username}/profile/playlist`}>
+                            by {card.username}
+                        </Link>
+                    </S.CardAuthor>
                     <S.EditWrapper>
                     {(card.username === username) && <S.DotIcon onClick={toggleDropdown}/> }
                     <LikePlaylistButton like={card.like} likeCount={card.likeCount}/>

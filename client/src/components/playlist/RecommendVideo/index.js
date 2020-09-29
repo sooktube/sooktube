@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import RecommendButton from "./RecommendButton";
 import DisrecommendButton from "./DisrecommendButton";
 
@@ -15,28 +15,28 @@ function RecommendVideo({videoID, inVideoList, username, recommended, recCount, 
     })
 
     //추천 버튼이나 비추천 버튼을 누르고 서버에서 처리하는 동안은 버튼 비활성화
-    function setRecommend(recommended) {
+    const setRecommend = useCallback((recommended) => {
         setData({
             recommended,
             disrecommended: 0,
             loading: true
         })
-    }
+    }, [data.recommended]);
 
-    function setDisrecommend(disrecommended) {
+    const setDisrecommend = useCallback((disrecommended) => {
         setData({
             disrecommended,
             recommended: 0,
             loading: true
         })
-    }
+    }, [data.disrecommended]);
 
-    function setLoading(loading) {
+    const setLoading = useCallback((loading) => {
         setData(data => ({
             ...data,
             loading
         }))
-    }
+    }, [data.loading]);
 
     return (
       <>

@@ -7,8 +7,6 @@ export const playlistService ={
     getPlaylistImgByFileName,
     UploadPlaylistInfo,
     getPlaylistInfoByListID,
-    getVideoListByListID,
-    searchVideoByTitle,
     getGTEQ0LT5VideoList,
     getGTEQ5VideoList,
     recommendVideoInPlaylist,
@@ -16,8 +14,6 @@ export const playlistService ={
     disrecommendVideoInPlaylist,
     cancelDisrecommendVideoInPlaylist,
     addVideoToPlaylist,
-    getPlaylistListByUsername,
-    getPlaylistListLikedByUsername,
     getLikeCountByListID,
     likePlaylist,
     cancelLikePlaylist,
@@ -112,34 +108,7 @@ function getPlaylistInfoByListID(listID, username) {
         })
 }
 
-function getVideoListByListID(listID) {
-    return axios({
-        method: 'GET',
-        url: 'https://soktube.appspot.com/api/video/list/newList/info'
-    })
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            return error;
-        })
-}
-
-function searchVideoByTitle({keyword, listID, username, orderBy, limit, offset}) {
-    return axios({
-        method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/video/search/title/${keyword}/listID/${listID}/user/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
-    })
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            return null;
-        })
-}
-
-function getGTEQ0LT5VideoList({listID, username, orderBy, limit, offset}) {
-    return axios({
+function getGTEQ0LT5VideoList({listID, username, orderBy, limit, offset}) {return axios({
         method: 'GET',
         url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/0/LT/5/${listID}/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
@@ -157,6 +126,7 @@ function getGTEQ5VideoList({listID, username, orderBy, limit, offset}) {
         url: `https://soktube.uc.r.appspot.com/api/video/list/desc/URL/GTEQ/5/${listID}/${username}/${orderBy}?limit=${limit}&offset=${offset}`,
     })
         .then(response => {
+            console.log(response.data);
             return response.data;
         })
         .catch(error => {
@@ -231,32 +201,6 @@ function addVideoToPlaylist({listID, videoID, username}) {
         .catch(error => {
             return error;
         })
-}
-
-function getPlaylistListByUsername({username, orderBy, limit, offset}) {
-    return axios({
-        method: 'GET',
-        url: `/api/video/list/by/username/${username}/newest?limit=100&offset=0`,
-    })
-      .then(response => {
-          return response.data;
-      })
-      .catch(error => {
-          return null;
-      })
-}
-
-function getPlaylistListLikedByUsername(username) {
-    return axios({
-        method: 'GET',
-        url: `https://soktube.uc.r.appspot.com/api/liked/list/byUser/${username}`,
-    })
-      .then(response => {
-          return response.data;
-      })
-      .catch(error => {
-          return null;
-      })
 }
 
 function getLikeCountByListID(listID) {

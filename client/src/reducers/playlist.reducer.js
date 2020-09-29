@@ -9,7 +9,11 @@ const initialState = {
   recentPlaylists: [],
   hasMoreRecentPlaylists: true,
   showFallbackRecentPlaylists: true,
-  recentOffset: 0
+  recentOffset: 0,
+  videos: [],
+  hasMoreVideos: true,
+  showFallbackVideos: true,
+  videoOffset: 0
 };
 
 export function playlist(state = initialState, action) {
@@ -43,6 +47,28 @@ export function playlist(state = initialState, action) {
       }
       case playlistConstants.LOAD_RECENT_PLAYLIST_FAILURE: {
         draft.showFallbackRecentPlaylists = false;
+        break;
+      }
+      case playlistConstants.LOAD_PLAYLIST_VIDEO_INIT: {
+        draft.showFallbackVideos = true;
+        draft.hasMoreVideos = true;
+        draft.videos.length = 0;
+        draft.videoOffset = 0;
+        break;
+      }
+      case playlistConstants.LOAD_PLAYLIST_VIDEO_REQUEST: {
+        draft.showFallbackVideos = true;
+        break;
+      }
+      case playlistConstants.LOAD_PLAYLIST_VIDEO_SUCCESS: {
+        draft.hasMoreVideos = (action.data.length === 5);
+        draft.videos.push(...action.data);
+        draft.videoOffset = draft.videoOffset + 5;
+        draft.showFallbackVideos = false;
+        break;
+      }
+      case playlistConstants.LOAD_PLAYLIST_VIDEO_FAILURE: {
+        draft.showFallbackVideos = false;
         break;
       }
       default:
