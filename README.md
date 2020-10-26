@@ -27,6 +27,11 @@
                   
          > 재생목록의 최초 생성자는 해당 재생목록에 포함된 영상을 삭제할 수 있는 권한을 가진다.
 
+<img width="960" alt="1  메인 화면" src="https://user-images.githubusercontent.com/36043024/97172795-e5bef480-17d2-11eb-962e-b40e664b8015.PNG">
+<img width="960" alt="6  재생목록" src="https://user-images.githubusercontent.com/36043024/97172815-ee172f80-17d2-11eb-931d-5f49706709d3.PNG">
+<img width="960" alt="7  재생목록 추천 영상" src="https://user-images.githubusercontent.com/36043024/97172834-f7a09780-17d2-11eb-9052-879beca64b93.PNG">
+<img width="960" alt="10  동영상" src="https://user-images.githubusercontent.com/36043024/97172853-fd967880-17d2-11eb-87ec-ce84807b6632.PNG">
+
 # 사용 기술
 
 1. FRONTEND - react
